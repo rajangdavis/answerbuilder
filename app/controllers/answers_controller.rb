@@ -37,6 +37,6 @@ class AnswersController < ApplicationController
 	private
 
 	  def answer_params   
-	    params.require(:answer).permit(:language, :series, :tagline, :title, :user_id)
+	    params.require(:answer).permit(:language, :series, :tagline, :title, :image, :user_id)
 	  end
 end

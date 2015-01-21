@@ -42,8 +42,16 @@
 </div>
 <div class="steps">
 	<% @steps.each do |step|%>
-		<strong><h2>STEP <%= step.number %></h2></strong><br>
-		<p class="lead"><%= step.step%></p>
+		<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<strong><h2>STEP <%= step.number %></h2></strong><br>
+				<p class="lead"><%= step.step%></p>
+			</div>
+			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+				<img class="img-responsive" src="<%= step.image%>">
+				<h2 class="text-danger">PICTURE <%=step.number%></h2>
+			</div>
+		</div>
 	<% end %>
 </div>
 <div class="text-center">
