@@ -34,8 +34,10 @@
 <script type="text/javascript">
 	var code_link = document.getElementsByClassName("code_spit");
 	console.log(code_link);
-	code_link[0].addEventListener("click", function(){
+	for (var i = 0; i < code_link.length; i++) {
+		code_link[i].addEventListener("click", function(){
 		console.log(code_link+' has been clicked');
 		alert("Still under development");
-	});
+		});
+	};
 </script>

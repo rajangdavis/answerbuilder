@@ -21,6 +21,8 @@ class AnswersController < ApplicationController
 
 	def edit
 		@answer = Answer.find(params[:id])
+		# @steps = Step.where(:answer_id => @answer)
+		# @step = Step.new
 	end
 
 	def update
@@ -35,6 +37,6 @@ class AnswersController < ApplicationController
 	private
 
 	  def answer_params   
-	    params.require(:answer).permit(:language, :series, :tagline, :title)
+	    params.require(:answer).permit(:language, :series, :tagline, :title, :user_id)
 	  end
 end

@@ -40,6 +40,36 @@
 <div class="tagline">
 	<p class="text-center lead"><%= @answer.tagline%></p>
 </div>
+
+<div>
+	<% unless @steps.blank? %>
+		<%= form_for(@answer) do |f| %>
+		    <%= f.hidden_field :language %>
+	  	    <%= f.hidden_field :series %>
+		    <%= f.hidden_field :title %>
+		    <%= f.hidden_field :tagline %>
+		    <%= f.hidden_field :user_id, :value => current_user.id %>
+			<%= f.submit "Save" %>
+		<% end %>
+	<% else %>
+		<h1 class="text-center">:)</h1>
+	<% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 	$("div.edit_form").hide();	
 
