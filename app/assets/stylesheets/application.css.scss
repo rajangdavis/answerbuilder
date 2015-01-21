@@ -19,18 +19,11 @@ body{
 	margin-bottom:20px;
 	background-attachment: fixed;
 	background-size: 100% 100%;
-	font-family: 'Lato', sans-serif;
-}
-
-a{
-	color:black !important;
 }
 
 /* Root Page CSS */
 
-div.comments{
-	padding: 10px;
-}
+
 div.signin{
 	margin-top:1%;
 }
@@ -43,5 +36,41 @@ input#password{
 	width:76% !important;
 }
 input.password{
-	min-width:72% !important;
+	min-width:73% !important;
+}
+div.answer_list{
+	border-bottom: 1px solid lightgrey;
+}
+div.title{
+	width:100%;
+	background:#FFC10A;
+	line-height: 90%;
+}
+.square{
+	background:#626466;
+	margin-right:5%;
+}
+.answer-title{
+	color:white !important;
+	margin-left:7%;
+}
+.answer-series{
+	color:white !important;
+	font-weight:200;
+	line-height:25%;
+
+}
+.series{
+	color:#C9CACC;
+	font-weight:100;
+}
+.tagline{
+	padding-top:16%;
+}
+.edit_form{
+	border-bottom: 1px solid lightgrey;
+	margin-bottom: 15px;
+}
+.jumbotron{
+	padding:0px !important;
 }

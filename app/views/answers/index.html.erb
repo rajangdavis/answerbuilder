@@ -1,19 +1,31 @@
-<% @answers.each do |answer| %>
-	<%=link_to answer.title, answer_path(answer) %>
-	<button href="#" class="code_spit">Spit out code</button>
-<% end %>
-
+<div class="answer_list">
+	<h2>Answers</h2>
+	<% @answers.each do |answer| %>
+		<%=link_to answer.title, edit_answer_path(answer) %>
+		<button href="#" class="code_spit">Spit out code</button><br><br>
+	<% end %>
+</div><br>
 <%= form_for(@answer) do |f| %>
-
-    <%= f.text_field :language, :placeholder => "Language" %><br />
-
-    <%= f.text_field :series, :placeholder => "Series" %><br />
-
-    <%= f.text_area :tagline, :placeholder => "Tagline" %><br />
-
-    <%= f.text_area :title, :placeholder => "Title" %><br />
- 
-    <%= f.submit %>
+	<h2>New Answer</h2>
+	<div class="form-group">
+		<%= f.label "Language:  " %>
+	    <%= f.select :language, options_for_select(%w[English Japanese German]) %>
+    </div>
+	<div class="form-group">
+		<%= f.label "Series:  " %>
+	    <%= f.select :series, options_for_select(%w[QC QT]) %>
+	</div>
+	<div class="form-group">
+		<%= f.label "Title:  "%><br />
+	    <%= f.text_area :title, :placeholder => "Title"%>
+	</div>
+	<div class="form-group">
+		<%= f.label "Tagline:  "%><br />
+	    <%= f.text_area :tagline, :placeholder => "Tagline"%>
+	</div>
+	
+	    <%= f.hidden_field :user_id, :value => current_user.id %>
+<%= f.submit %>
 
 
 <% end %><br>

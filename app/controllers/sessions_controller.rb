@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
   	def new
 		@user = User.new
 		@is_login = true
+		if current_user
+			redirect_to answers_path
+		end
 	end
 
 	def create

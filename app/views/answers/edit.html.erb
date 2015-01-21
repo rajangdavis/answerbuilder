@@ -1,0 +1,49 @@
+<%= link_to "Back", answers_path%> |
+<a href="#" class="edit_this">Edit</a>
+<div class="edit_form">
+	<%= form_for(@answer) do |f| %>
+		<h2>New Answer</h2>
+		<div class="form-group">
+			<%= f.label "Language:  " %>
+		    <%= f.select :language, options_for_select(%w[English Japanese German]) %>
+	    </div>
+		<div class="form-group">
+			<%= f.label "Series:  " %>
+		    <%= f.select :series, options_for_select(%w[QC QT]) %>
+		</div>
+		<div class="form-group">
+			<%= f.label "Title:  "%><br />
+		    <%= f.text_area :title, :placeholder => "Title"%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Tagline:  "%><br />
+		    <%= f.text_area :tagline, :placeholder => "Tagline"%>
+		</div>
+		
+		    <%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.submit %>
+
+
+	<% end %>
+	<br>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+	<div class="col-md-7 col-sm-8  col-xs-9 pull-left answer-title">
+		<h1><%= @answer.title%></h1>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-3 pull-right text-center square">
+		<div class="col-md-2 col-sm-2 col-xs-4"></div>
+		<h1 class="answer-series"><%= @answer.series%></h1><br>
+		<h2 class="series">SERIES</h2>
+	</div>
+</div>
+<div class="tagline">
+	<p class="text-center lead"><%= @answer.tagline%></p>
+</div>
+<script type="text/javascript">
+	$("div.edit_form").hide();	
+
+	$("a.edit_this").click(function(){
+		$("div.edit_form").toggle(1000);
+	});
+</script>
