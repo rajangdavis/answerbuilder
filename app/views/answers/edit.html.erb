@@ -40,19 +40,40 @@
 <div class="tagline">
 	<p class="text-center lead"><%= @answer.tagline%></p>
 </div>
+<div class="steps">
+	<% @steps.each do |step|%>
+		<strong><h2>STEP <%= step.number %></h2></strong><br>
+		<p class="lead"><%= step.step%></p>
+	<% end %>
+</div>
+<div class="text-center">
+	<a href="#" class="add_steps ">Add Steps to this How-to</a>
+</div>
+<div class="add_steps_form">
+		<%= form_for(@step,{method: :create}) do |f| %>
+		<h2>New Step</h2>
+		<div class="form-group">
+			<%= f.label "Step Type:  " %>
+		    <%= f.select :type, options_for_select(%w[Step Information Caution]) %>
+	    </div>
+		<div class="form-group">
+			<%= f.label "Step Number:  " %>
+		    <%= f.text_field :number%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Step Instruction:  "%><br />
+		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
+		</div>
+		    <%= f.text_area :image, :placeholder => "Space for DataURI" %>
+		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
+		<%= f.submit %>
 
+
+	<% end %>
+</div>
 <div>
-	<% unless @steps.blank? %>
-		<%= form_for(@answer) do |f| %>
-		    <%= f.hidden_field :language %>
-	  	    <%= f.hidden_field :series %>
-		    <%= f.hidden_field :title %>
-		    <%= f.hidden_field :tagline %>
-		    <%= f.hidden_field :user_id, :value => current_user.id %>
-			<%= f.submit "Save" %>
-		<% end %>
-	<% else %>
-		<h1 class="text-center">:)</h1>
+	<% if @steps.blank? %>
+		<h1 class="text-center">:) You haz no steps</h1>
 	<% end %>
 </div>
 
@@ -71,9 +92,13 @@
 
 
 <script type="text/javascript">
-	$("div.edit_form").hide();	
+	$("div.edit_form,div.add_steps_form").hide();	
 
 	$("a.edit_this").click(function(){
 		$("div.edit_form").toggle(1000);
+	});
+
+	$("a.add_steps").click(function(){
+		$("div.add_steps_form").toggle(1000);
 	});
 </script>

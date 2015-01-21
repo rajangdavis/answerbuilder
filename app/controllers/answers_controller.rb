@@ -21,8 +21,8 @@ class AnswersController < ApplicationController
 
 	def edit
 		@answer = Answer.find(params[:id])
-		# @steps = Step.where(:answer_id => @answer)
-		# @step = Step.new
+		@step = Step.new
+		@steps = Step.where(:answer_id => @answer.id).order(:number)
 	end
 
 	def update
