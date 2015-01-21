@@ -25,7 +25,7 @@ def create
     # respond_to do |format|
       if @user.save
           session[:user_id] = @user.id.to_s
-          redirect_to user_path(@user)       
+          redirect_to answers_path       
 
        else
         redirect_to root_path

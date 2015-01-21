@@ -1,6 +1,9 @@
 Answerbuild::Application.routes.draw do
   root "sessions#new" 
+  delete '/logout' => 'sessions#destroy', as: :logout
   resources :sessions
+  resources :users, except: :destroy
+  resources :answers, except: :destroy
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
