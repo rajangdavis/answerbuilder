@@ -1,1 +1,29 @@
-index.html.erb
+<% @answers.each do |answer| %>
+	<%=link_to answer.title, answer_path(answer) %>
+	<button href="#" class="code_spit">Spit out code</button>
+<% end %>
+
+<%= form_for(@answer) do |f| %>
+
+    <%= f.text_field :language, :placeholder => "Language" %><br />
+
+    <%= f.text_field :series, :placeholder => "Series" %><br />
+
+    <%= f.text_area :tagline, :placeholder => "Tagline" %><br />
+
+    <%= f.text_area :title, :placeholder => "Title" %><br />
+ 
+    <%= f.submit %>
+
+
+<% end %><br>
+    
+
+<script type="text/javascript">
+	var code_link = document.getElementsByClassName("code_spit");
+	console.log(code_link);
+	code_link[0].addEventListener("click", function(){
+		console.log(code_link+' has been clicked');
+		alert("Still under development");
+	});
+</script>
