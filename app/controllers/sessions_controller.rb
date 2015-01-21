@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  def new
+  	def new
 		@user = User.new
 		@is_login = true
 	end
