@@ -116,11 +116,12 @@
 <script type="text/javascript">
 	$(document).ready(function() {  
 		var lead = document.getElementsByClassName("lead");
-		for (var i = 0; i < lead.length; i++){
-		var leadArray = Array();
-		leadArray[i] = lead[i].text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>');
-   		 // $(".lead").html(content);
-   		};
+		$(lead).each(function(index){
+			var changes = [];
+			// Create code to do key value pair swaps for the different colors and typography
+			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>');
+			$(this).html(content);
+		})
 	});
 
 	$("div.edit_form,div.add_steps_form").hide();	
