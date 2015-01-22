@@ -114,17 +114,31 @@
 
 
 <script type="text/javascript">
-
+	var changes = {
+				"red": "red",
+				"blue": "blue",
+				"green": "green",
+				"yellow":"yellow",
+				"orange":"orange",
+				"lgreen": "lgreen",
+				"bold":"strong",
+				"i": "em",
+				"u":"u"
+			};
+			$.each(changes, function(key, value){
+				console.log(key+" : "+value);
+				//content1 = $(this).text().replace(/\[key\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>');
+			});
 	$(document).ready(function() {  
 		$("p.lead").each(function(index){
-			var changes = [];
+			
 			// Create code to do key value pair swaps for the different colors and typography
 			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>');
+			//console.log(content1);
 			$(this).html(content);	
 		});
 		$("em.red").each(function(){
 			var pLead = $(this).prev();
-			console.log(pLead);
 			$(this).appendTo(pLead);
 		});
 	});
