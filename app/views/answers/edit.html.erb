@@ -57,9 +57,10 @@
 		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 		</div>
 		<div class="form-group">
-		  <input name="file" type="file" size="50">
+			<input type="file" id="imageLoader" name="imageLoader" />
+    		<canvas id="imageCanvas"></canvas> 
   	    </div>
-		    <%= f.text_area :image, :placeholder => "Space for DataURI" %>
+		    <%= f.hidden_field :image%>
 		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
 		<%= f.submit %>
 
@@ -72,11 +73,10 @@
 			<div class="col-md-6 col-sm-6 col-xs-6">
 				<strong><h2>STEP <%= step.number %></h2></strong>
 				<%= link_to "Edit Step", edit_step_path(step)%>
-				<p class="lead"><%= step.step%>
+				<p class="lead"><%= step.step%></p>
 				<% if step.image!=""%>
-					<em class="red">(picture <%= step.number %>)</em>
+					<em class="lead red"> (picture <%= step.number %>)</em>
 				<% end %>
-				</p>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<img class="img-responsive" src="<%= step.image%>">
@@ -114,14 +114,19 @@
 
 
 <script type="text/javascript">
+
 	$(document).ready(function() {  
-		var lead = document.getElementsByClassName("lead");
-		$(lead).each(function(index){
+		$("p.lead").each(function(index){
 			var changes = [];
 			// Create code to do key value pair swaps for the different colors and typography
 			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>');
-			$(this).html(content);
-		})
+			$(this).html(content);	
+		});
+		$("em.red").each(function(){
+			var pLead = $(this).prev();
+			console.log(pLead);
+			$(this).appendTo(pLead);
+		});
 	});
 
 	$("div.edit_form,div.add_steps_form").hide();	
@@ -133,11 +138,27 @@
 	$("a.add_steps").click(function(){
 		$("div.add_steps_form").toggle(1000);
 	});
+	var canvas = new fabric.Canvas('imageCanvas', {
+    	backgroundColor: 'rgb(240,240,240)'
+	});
 
-	for (var i = 0; i < <%=@steps.count+1%>; i++) {
-		$("div.edit_steps_form").hide();
-		$("a."+i).click(function(){
-			$("div."+$(this).attr("class").replace("edit_step ","")).toggle(1000);
-		});
-	};
+	var imageLoader = document.getElementById('imageLoader');
+	imageLoader.addEventListener('change', handleImage, false);
+
+	function handleImage(e) {
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = new Image();
+        img.onload = function () {
+            var imgInstance = new fabric.Image(img, {
+                scaleX: 1,
+                scaleY: 1
+            })
+            canvas.add(imgInstance);
+        	}
+	        img.src = event.target.result;
+	        $("#step_image").val(img.src);
+	    }
+	    reader.readAsDataURL(e.target.files[0]);
+	}
 </script>

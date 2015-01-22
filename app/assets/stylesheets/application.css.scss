@@ -79,6 +79,15 @@ div.title{
 	background:white;
 	border: 1px solid lightgrey;
 }
+/* canvas CSS for uploading images */
+.canvas-container{
+	display:none !important;
+}
+
+#imageCanvas{
+	display:none;
+}
+
 
 /* color classes for coloring fonts */
 .red{

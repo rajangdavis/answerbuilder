@@ -12,6 +12,38 @@
 		<%= f.label "Step Instruction:  "%><br />
 	    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 	</div>
-	    <%= f.text_area :image, :placeholder => "Space for DataURI" %><br>
+	<div class="form-group">
+		<input type="file" id="imageLoader" name="imageLoader" />
+    	<canvas id="imageCanvas"></canvas> 
+    	<%= f.hidden_field :image %>
+  	</div>
 	<%= f.submit %>
 <% end %>
+
+<script type="text/javascript">
+
+	var canvas = new fabric.Canvas('imageCanvas', {
+    	backgroundColor: 'rgb(240,240,240)'
+	});
+
+	var imageLoader = document.getElementById('imageLoader');
+	imageLoader.addEventListener('change', handleImage, false);
+
+	function handleImage(e) {
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = new Image();
+        img.onload = function () {
+            var imgInstance = new fabric.Image(img, {
+                scaleX: 1,
+                scaleY: 1
+            })
+            canvas.add(imgInstance);
+        	}
+	        img.src = event.target.result;
+
+	        $("#step_image").val(img.src);
+	    }
+	    reader.readAsDataURL(e.target.files[0]);
+	}
+</script>
