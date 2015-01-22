@@ -1,5 +1,6 @@
 <%= link_to "Back", answers_path%> |
-<a href="#" class="edit_this">Edit</a>
+<a href="#" class="edit_this">Edit</a> |
+<a href="#" class="add_steps ">Add Step</a>
 <div class="edit_form">
 	<%= form_for(@answer) do |f| %>
 		<h2>New Answer</h2>
@@ -40,23 +41,6 @@
 <div class="tagline">
 	<p class="text-center lead"><%= @answer.tagline%></p>
 </div>
-<div class="steps">
-	<% @steps.each do |step|%>
-		<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-			<div class="col-md-6 col-sm-6 col-xs-6">
-				<strong><h2>STEP <%= step.number %></h2></strong><br>
-				<p class="lead"><%= step.step%></p>
-			</div>
-			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-				<img class="img-responsive" src="<%= step.image%>">
-				<h2 class="text-danger">PICTURE <%=step.number%></h2>
-			</div>
-		</div>
-	<% end %>
-</div>
-<div class="text-center">
-	<a href="#" class="add_steps ">Add Steps to this How-to</a>
-</div>
 <div class="add_steps_form">
 		<%= form_for(@step,{method: :create}) do |f| %>
 		<h2>New Step</h2>
@@ -72,6 +56,9 @@
 			<%= f.label "Step Instruction:  "%><br />
 		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 		</div>
+		<div class="form-group">
+		  <input name="file" type="file" size="50">
+  	    </div>
 		    <%= f.text_area :image, :placeholder => "Space for DataURI" %>
 		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
 		<%= f.submit %>
@@ -79,6 +66,33 @@
 
 	<% end %>
 </div>
+<div class="steps">
+	<% @steps.each do |step|%>
+		<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<strong><h2>STEP <%= step.number %></h2></strong>
+				<%= link_to "Edit Step", edit_step_path(step)%>
+				<p class="lead"><%= step.step%>
+				<% if step.image!=""%>
+					<em class="red">(picture <%= step.number %>)</em>
+				<% end %>
+				</p>
+			</div>
+			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+				<img class="img-responsive" src="<%= step.image%>">
+				<% if step.image!=""%>
+					<h2 class="red">PICTURE <%=step.number%></h2>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
+	
+	
+<div class="text-center">
+	
+</div>
+
 <div>
 	<% if @steps.blank? %>
 		<h1 class="text-center">:) You haz no steps</h1>
@@ -100,6 +114,15 @@
 
 
 <script type="text/javascript">
+	$(document).ready(function() {  
+		var lead = document.getElementsByClassName("lead");
+		for (var i = 0; i < lead.length; i++){
+		var leadArray = Array();
+		leadArray[i] = lead[i].text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>');
+   		 // $(".lead").html(content);
+   		};
+	});
+
 	$("div.edit_form,div.add_steps_form").hide();	
 
 	$("a.edit_this").click(function(){
@@ -109,4 +132,11 @@
 	$("a.add_steps").click(function(){
 		$("div.add_steps_form").toggle(1000);
 	});
+
+	for (var i = 0; i < <%=@steps.count+1%>; i++) {
+		$("div.edit_steps_form").hide();
+		$("a."+i).click(function(){
+			$("div."+$(this).attr("class").replace("edit_step ","")).toggle(1000);
+		});
+	};
 </script>

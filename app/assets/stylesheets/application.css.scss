@@ -72,3 +72,15 @@ div.title{
 .jumbotron{
 	padding:0px !important;
 }
+.fixed{
+	position:fixed;
+	top:50px;
+	right:0px;
+	background:white;
+	border: 1px solid lightgrey;
+}
+
+/* color classes for coloring fonts */
+.red{
+	color: #D22128!important;
+}
