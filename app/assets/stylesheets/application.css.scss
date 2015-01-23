@@ -46,10 +46,7 @@ div.title{
 	background:#FFC10A;
 	line-height: 90%;
 }
-.square{
-	background:#626466;
-	margin-right:5%;
-}
+
 .answer-title{
 	color:white !important;
 	margin-left:7%;
@@ -59,10 +56,6 @@ div.title{
 	font-weight:200;
 	line-height:25%;
 
-}
-.series{
-	color:#C9CACC;
-	font-weight:100;
 }
 
 .edit_form{
@@ -82,6 +75,9 @@ div.title{
 .img-responsive{
 margin:0 auto;	
 }
+.note{
+	float:left;
+}
 
 /* canvas CSS for uploading images */
 .canvas-container{
@@ -91,9 +87,27 @@ margin:0 auto;
 #imageCanvas{
 	display:none;
 }
-
+/* classes for the different step types */
+.information{
+	background:#C6C8CA;
+}
 
 /* color classes for coloring fonts */
 .red{
 	color: #D22128!important;
+}
+.blue{
+	color: blue!important;
+}
+.green{
+	color: green!important;
+}
+.yellow{
+	color: yellow!important;
+}
+.orange{
+	color: orange!important;
+}
+.lgreen{
+	color: lightgreen!important;
 }

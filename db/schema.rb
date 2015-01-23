@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20150121200558) do
 
   create_table "steps", force: true do |t|
     t.integer  "number"
-    t.string   "step"
+    t.text     "step"
     t.text     "image"
     t.string   "image_size"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "answer_id"
-    t.string   "type"
+    t.string   "step_type"
   end
 
   add_index "steps", ["answer_id"], name: "index_answer_id", using: :btree

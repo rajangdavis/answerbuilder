@@ -37,6 +37,7 @@ class StepsController < ApplicationController
 
   def destroy
     @step = Step.find(params[:id])
+
     @step.destroy
     redirect_to(:back)
   end
@@ -45,7 +46,7 @@ class StepsController < ApplicationController
   private
 
   def step_params   
-    params.require(:step).permit(:type, :number, :step, :answer_id, :image)
+    params.require(:step).permit(:step_type, :number, :step, :answer_id, :image)
   end
 
 end
