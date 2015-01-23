@@ -1,8 +1,8 @@
 <div class="answer_list">
 	<h2>Answers</h2>
 	<% @answers.each do |answer| %>
-		<%=link_to answer.title, edit_answer_path(answer) %>
-		<button href="#" class="code_spit">Spit out code</button><br><br>
+		<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
+		<%=link_to "Get Code", code_path(answer) %>
 	<% end %>
 </div><br>
 <%= form_for(@answer) do |f| %>

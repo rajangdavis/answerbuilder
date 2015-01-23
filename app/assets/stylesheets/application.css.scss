@@ -111,3 +111,12 @@ margin:0 auto;
 .lgreen{
 	color: lightgreen!important;
 }
+/* css for code spitter outer*/
+code{
+	display:none;
+}
+textarea.code{
+	width:100%;
+	height:1000px;
+	overflow:hidden;
+}

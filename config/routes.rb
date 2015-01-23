@@ -5,6 +5,8 @@ Answerbuild::Application.routes.draw do
   resources :users, except: :destroy
   resources :answers, except: :destroy
   resources :steps
+
+  get 'answers/:id/code' => 'answers#code', as: :code
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

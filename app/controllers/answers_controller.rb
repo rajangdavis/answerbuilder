@@ -4,6 +4,12 @@ class AnswersController < ApplicationController
 		@answer = Answer.new
 	end
 	
+	def code
+  		@answer = Answer.find(params[:id])
+  		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
+
+  	end
+
 	def new
 		@answer = Answer.new
 		create
