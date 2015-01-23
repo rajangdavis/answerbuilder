@@ -1,8 +1,10 @@
 <div class="answer_list">
 	<h2>Answers</h2>
 	<% @answers.each do |answer| %>
-		<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
-		<%=link_to "Get Code", code_path(answer) %>
+		<% if answer.user_id== current_user.id%>
+			<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
+			<%=link_to "Get Code", code_path(answer) %>
+		<% end %>		
 	<% end %>
 </div><br>
 <%= form_for(@answer) do |f| %>

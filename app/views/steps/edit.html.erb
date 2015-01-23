@@ -2,7 +2,7 @@
 	<h2>Edit Step</h2>
 	<div class="form-group">
 		<%= f.label "Step Type:  " %>
-	    <%= f.select :step_type, options_for_select(%w[Step Information Caution]) %>
+	    <%= f.select :step_type, options_for_select(%w[Step Information Caution], f.object.step_type) %>
     </div>
 	<div class="form-group">
 		<%= f.label "Step Number:  " %>
