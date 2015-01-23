@@ -13,6 +13,10 @@
 	    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 	</div>
 	<div class="form-group">
+		<%= f.label "Step/Pictures offset  "%><br />
+	    <%= f.text_field :offset%>
+	</div>
+	<div class="form-group">
 		<input type="file" id="imageLoader" name="imageLoader" />
     	<canvas id="imageCanvas"></canvas> 
     	<%= f.hidden_field :image %>

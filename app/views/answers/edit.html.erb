@@ -60,6 +60,10 @@
 		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 		</div>
 		<div class="form-group">
+			<%= f.label "Step/Pictures offset  "%><br />
+	    	<%= f.text_field :offset, :value => 0%>
+		</div>
+		<div class="form-group">
 			<input type="file" id="imageLoader" name="imageLoader" />
     		<canvas id="imageCanvas"></canvas> 
   	    </div>
@@ -81,13 +85,13 @@
 				<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 				<p class="lead"><%= step.step%></p>
 				<% if step.image!=""%>
-					<em class="lead red"> (picture <%= step.number %>)</em>
+					<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
 				<% end %>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<img class="img-responsive" src="<%= step.image%>">
 				<% if step.image!=""%>
-					<h2 class="red">PICTURE <%=step.number%></h2>
+					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 				<% end %>
 			</div>
 		</div>
@@ -104,13 +108,13 @@
 					
 					
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number %>)</em>
+						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<img class="img-responsive" src="<%= step.image%>">
 					<% if step.image!=""%>
-						<h2 class="red">PICTURE <%=step.number%></h2>
+						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
 			</div>
