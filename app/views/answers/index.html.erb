@@ -1,10 +1,9 @@
 <div class="answer_list">
 	<h2>Answers</h2>
 	<% @answers.each do |answer| %>
-		<% if answer.user_id== current_user.id%>
-			<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
-			<%=link_to "Get Code", code_path(answer) %>
-		<% end %>		
+		<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
+		<%=link_to "Get Code", code_path(answer) %> | 
+		<%= link_to "Duplicate", create_from_existing_path(answer)%><br>
 	<% end %>
 </div><br>
 <%= form_for(@answer) do |f| %>

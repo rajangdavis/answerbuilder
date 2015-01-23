@@ -75,7 +75,7 @@ div.title{
 .img-responsive{
 margin:0 auto;	
 }
-.note{
+.note, .caution{
 	float:left;
 }
 
@@ -88,7 +88,7 @@ margin:0 auto;
 	display:none;
 }
 /* classes for the different step types */
-.information{
+.information,.cautiondiv{
 	background:#C6C8CA;
 }
 
@@ -111,6 +111,13 @@ margin:0 auto;
 .lgreen{
 	color: lightgreen!important;
 }
+/* css for text areas for creating steps */
+
+#step_step{
+	width:95%;
+	height:20em;
+}
+
 /* css for code spitter outer*/
 code{
 	display:none;

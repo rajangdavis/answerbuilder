@@ -3,7 +3,13 @@ class AnswersController < ApplicationController
 		@answers = Answer.all
 		@answer = Answer.new
 	end
-	
+	def create_from_existing
+	 	@existing_answer = Answer.find(params[:id])
+	 	#create new object with attributes of existing record 
+	 	@answer = Answer.new(@existing_post.attributes) 
+	 	redirect_to edit_answer_path(@answer)
+	end	
+
 	def code
   		@answer = Answer.find(params[:id])
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)

@@ -7,6 +7,7 @@ Answerbuild::Application.routes.draw do
   resources :steps
 
   get 'answers/:id/code' => 'answers#code', as: :code
+  post 'answers' => 'answers#create_from_existing', as: :create_from_existing
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

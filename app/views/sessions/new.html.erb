@@ -25,16 +25,3 @@
     <br>
   <div class="col-md-4"></div>
   </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-4 form-group divform">
-<%= form_for(@user) do |f| %>
-  <br>
-  <%= f.text_field :username, :placeholder =>"Username" , :class => "form-control"%><br>
-  <%= f.password_field :password, :placeholder =>"Password" , :class => "form-control"%><br>
-    <div class="form-inline">
-      <%= f.password_field :password_confirmation, :placeholder =>"Password Confirmation" , :class => "form-control password"%>
-      <%= f.submit "Sign up", :class => "btn btn-default pull-right"%>
-    </div>
-  </div>  
-  <div class="col-md-4"></div>
-<% end %>
