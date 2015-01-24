@@ -1,5 +1,6 @@
 <%= link_to "Back", :back%> |
-<%= link_to "Edit", edit_answer_path(@answer)%>
+<%= link_to "Edit", edit_answer_path(@answer)%> |
+<%= link_to "Preview", preview_path(@answer)%>
 <textarea class="code"></textarea>
 <code>
 <div  class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
@@ -25,8 +26,6 @@
 		<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 			<div class="col-md-6 col-sm-6 col-xs-6">
 				<strong><h2 class="answer">STEP <%= step.number %></h2></strong>
-				<%= link_to "Edit Step", edit_step_path(step)%> |
-				<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 				<p class="lead"><%= step.step%></p>
 				<% if step.image!=""%>
 					<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
