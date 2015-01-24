@@ -2,8 +2,7 @@
 	<h2>Answers</h2>
 	<% @answers.each do |answer| %>
 		<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
-		<%=link_to "Get Code", code_path(answer) %> | 
-		<%= link_to "Duplicate", create_from_existing_path(answer)%><br>
+		<%=link_to "Get Code", code_path(answer) %><br>
 	<% end %>
 </div><br>
 <%= form_for(@answer) do |f| %>
