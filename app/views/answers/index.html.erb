@@ -14,7 +14,7 @@
     </div>
 	<div class="form-group">
 		<%= f.label "Series:  " %>
-	    <%= f.select :series, options_for_select(%w[QC QT]) %>
+	    <%= f.select :series, options_for_select(%w[QC QT None]) %>
 	</div>
 	<div class="form-group">
 		<%= f.label "Title:  "%><br />
@@ -30,15 +30,3 @@
 
 
 <% end %><br>
-    
-
-<script type="text/javascript">
-	var code_link = document.getElementsByClassName("code_spit");
-	console.log(code_link);
-	for (var i = 0; i < code_link.length; i++) {
-		code_link[i].addEventListener("click", function(){
-		console.log(code_link+' has been clicked');
-		alert("Still under development");
-		});
-	};
-</script>
