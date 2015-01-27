@@ -1,7 +1,7 @@
 <%= link_to "Home", answers_path %> |
 <%= link_to "Edit", edit_answer_path(@answer)%> |
 <%= link_to "Get Code", code_path(@answer)%>
-<code></code>
+
 <div  class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
 	<div class="col-md-7 col-sm-8  col-xs-9 pull-left answer-title">
 		<h1 class="answer"><%= @answer.title%></h1>
@@ -81,6 +81,6 @@
 </div>
 
 
-<script type="text/javascript" src="/code.js">
+<script type="text/javascript" src="/code.js"></script>
 	
 	
