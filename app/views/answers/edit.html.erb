@@ -83,7 +83,7 @@
 			
 		<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 			<div class="col-md-6 col-sm-6 col-xs-6">
-				<strong><h2>STEP <%= step.number %></h2></strong>
+				<h2><strong>STEP <%= step.number %></strong></h2>
 				<%= link_to "Edit Step", edit_step_path(step)%> |
 				<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 				<p class="lead"><%= step.step%></p>
