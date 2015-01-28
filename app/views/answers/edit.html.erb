@@ -5,14 +5,14 @@
 <%= link_to "Preview", preview_path(@answer)%>
 <div class="edit_form">
 	<%= form_for(@answer) do |f| %>
-		<h2>New Answer</h2>
+		<h2>Edit Answer</h2>
 		<div class="form-group">
 			<%= f.label "Language:  " %>
-		    <%= f.select :language, options_for_select(%w[English Japanese German]) %>
+		    <%= f.select :language, options_for_select(%w[English Japanese German], f.object.language) %>
 	    </div>
 		<div class="form-group">
 			<%= f.label "Series:  " %>
-		    <%= f.select :series, options_for_select(%w[QC QT None]) %>
+		    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series )%>
 		</div>
 		<div class="form-group">
 			<%= f.label "Title:  "%><br />
@@ -30,19 +30,27 @@
 	<% end %>
 	<br>
 </div>
-<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
-	<div class="col-md-7 col-sm-8  col-xs-9 pull-left answer-title">
-		<h1 class="answer"><%= @answer.title%></h1>
+<% if @answer.series=="None"%>
+	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+		<div class="col-md-12 col-sm-12 col-xs-12 pull-left answer-title">
+			<h1 class="answer"><%= @answer.title%></h1>
+		</div>
 	</div>
-	<div class="col-md-2 col-sm-2 col-xs-3 pull-right text-center">
-		<div class="col-md-2 col-sm-2 col-xs-4"></div>
-		<% if @answer.series=="QT"%>
-			<img class="qtIcon img-responsive" src="">
-		<% elsif @answer.series=="QC"%>
-			<img class="qcIcon img-responsive" src="">
-		<% end %>
+<% else %>
+	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+		<div class="col-md-7 col-sm-8  col-xs-9 pull-left answer-title">
+			<h1 class="answer"><%= @answer.title%></h1>
+		</div>
+		<div class="col-md-2 col-sm-2 col-xs-3 pull-right text-center">
+			<div class="col-md-2 col-sm-2 col-xs-4"></div>
+			<% if @answer.series=="QT"%>
+				<img class="qtIcon img-responsive" src="">
+			<% elsif @answer.series=="QC"%>
+				<img class="qcIcon img-responsive" src="">
+			<% end %>
+		</div>
 	</div>
-</div>
+<% end %>
 <div class="tagline">
 	<p class="text-center lead"><%= @answer.tagline%></p>
 </div>
