@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
 	end
 	
 	def preview
+		@preview = true
 	 	@answer = Answer.find(params[:id])
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
 	end	
