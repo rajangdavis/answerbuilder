@@ -44,9 +44,9 @@
 		<div class="col-md-2 col-sm-2 col-xs-3 pull-right text-center">
 			<div class="col-md-2 col-sm-2 col-xs-4"></div>
 			<% if @answer.series=="QT"%>
-				<img class="qtIcon img-responsive" src="">
+				<img class="qtIcon img-responsive" src="//i.imgur.com/O4AEPmF.png">
 			<% elsif @answer.series=="QC"%>
-				<img class="qcIcon img-responsive" src="">
+				<img class="qcIcon img-responsive" src="//i.imgur.com/LNcBXLp.jpg">
 			<% end %>
 		</div>
 	</div>
@@ -64,7 +64,7 @@
 	    </div>
 		<div class="form-group">
 			<%= f.label "Step Number:  " %>
-		    <%= f.text_field :number%>
+		    <%= f.text_field :number, :value => 0%>
 		</div>
 		<div class="form-group">
 			<%= f.label "Step Instruction:  "%><br />
@@ -76,6 +76,7 @@
 		</div>
 		<div class="form-group">
 			<input type="file" id="imageLoader" name="imageLoader" />
+			<p class="success green">Image successfully uploaded!</p>
     		<canvas id="imageCanvas"></canvas> 
   	    </div>
 		    <%= f.hidden_field :image%>
@@ -112,7 +113,7 @@
 					<%= link_to "Edit Step", edit_step_path(step)%> |
 					<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 					<div class="col-md-4 col-sm-5 col-xs-6">
-						<img class="note img-responsive" src="">
+						<img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png">
 					</div>
 						
 					<h2><strong>NOTE: </strong><span class="lead"><%= step.step%></span></h2>
@@ -135,7 +136,7 @@
 					<%= link_to "Edit Step", edit_step_path(step)%> |
 					<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 					<div class="col-md-3 col-sm-4 col-xs-5">
-						<img class="caution img-responsive" src="">
+						<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
 					</div>
 					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					<% if step.image!=""%>
@@ -164,4 +165,83 @@
 	<% end %>
 </div>
 
-<script type="text/javascript" src="/edit_answer.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$("p.success").hide();
+    $("p.lead,span.lead").each(function () {
+        // Create code to do key value pair swaps for the different colors and typography
+        var content = $(this).text().replace(/\[red\]/g, '<span class="red">').replace(/\[\/red\]/g, '</span>').replace(/\[blue\]/g, '<span class="blue">').replace(/\[\/blue\]/g, '</span>').replace(/\[green\]/g, '<span class="green">').replace(/\[\/green\]/g, '</span>').replace(/\[yellow\]/g, '<span class="yellow">').replace(/\[\/yellow\]/g, '</span>').replace(/\[orange\]/g, '<span class="orange">').replace(/\[\/orange\]/g, '</span>').replace(/\[lgreen\]/g, '<span class="lgreen">').replace(/\[\/lgreen\]/g, '</span>').replace(/\[bold\]/g, '<strong>').replace(/\[\/bold\]/g, '</strong>').replace(/\[i\]/g, '<em>').replace(/\[\/i\]/g, '</em>').replace(/\[u\]/g, '<u>').replace(/\[\/u\]/g, '</u>').replace(/\[br\]/g, '<br>');
+        //console.log(content1);
+        $(this).html(content);
+    });
+    $("em.red").each(function () {
+        var pLead = $(this).prev();
+        $(this).appendTo(pLead);
+    });
+
+
+$("div.edit_form,div.add_steps_form").hide();
+
+$("a.edit_this").click(function () {
+    $("div.edit_form").toggle(1000);
+});
+
+$("a.add_steps").click(function () {
+    $("div.add_steps_form").toggle(1000);
+});
+
+//script for uploading images and converting them into dataURI
+var canvas = new fabric.Canvas('imageCanvas', {
+    backgroundColor: 'rgb(240,240,240)'
+});
+
+var imageLoader = document.getElementById('imageLoader');
+imageLoader.addEventListener('change', handleImage, false);
+
+function handleImage(e) {
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = new Image();
+        img.onload = function () {
+            var imgInstance = new fabric.Image(img, {
+                scaleX: 1,
+                scaleY: 1
+            });
+            canvas.add(imgInstance);
+        };
+        img.src = event.target.result;
+
+        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
+
+        
+$.ajax({
+            url: 'https://api.imgur.com/3/image',
+            type: 'post',
+            headers: {
+                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+
+            },
+            data: {
+                image: finalURI,
+                type: 'base64'
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                   
+                    $("#step_image").val(response.data.link.replace('http://',''));
+                    $("p.success").show();
+                }
+                else{
+                	alert(response);
+                }
+            }
+        });
+        
+    };
+    reader.readAsDataURL(e.target.files[0]);
+};
+
+
+});
+</script>
