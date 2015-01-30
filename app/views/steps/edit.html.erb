@@ -19,6 +19,7 @@
 	<div class="form-group">
 		<input type="file" id="imageLoader" name="imageLoader" />
 		<input type="button" class="imgClear"value="Click Here to clear the image">
+    	<p class="success green">Image successfully uploaded!</p>
     	<canvas id="imageCanvas"></canvas> 
     	<%= f.hidden_field :image %>
   	</div>
@@ -26,7 +27,7 @@
 <% end %>
 
 <script type="text/javascript">
-
+	$("p.success").hide();
 	var canvas = new fabric.Canvas('imageCanvas', {
     	backgroundColor: 'rgb(240,240,240)'
 	});
@@ -51,8 +52,36 @@
         	}
 	        img.src = event.target.result;
 
-	        $("#step_image").val(img.src);
-	    }
+	        
+        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
+
+        
+		$.ajax({
+            url: 'https://api.imgur.com/3/image',
+            type: 'post',
+            headers: {
+                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+
+            },
+            data: {
+                image: finalURI,
+                type: 'base64'
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                   
+                    $("#step_image").val(response.data.link.replace('http://',''));
+                    $("p.success").show();
+                }
+                else{
+                	alert(response);
+                }
+            }
+        });
+        
+    };
+	    
 	    reader.readAsDataURL(e.target.files[0]);
 	}
 </script>

@@ -17,9 +17,9 @@
 		<div class="col-md-2 col-sm-2 col-xs-3 pull-right text-center">
 			<div class="col-md-2 col-sm-2 col-xs-4"></div>
 			<% if @answer.series=="QT"%>
-				<img class="qtIcon img-responsive" src="">
+				<img class="qtIcon img-responsive" src="//i.imgur.com/O4AEPmF.png">
 			<% elsif @answer.series=="QC"%>
-				<img class="qcIcon img-responsive" src="">
+				<img class="qcIcon img-responsive" src="//i.imgur.com/LNcBXLp.jpg">
 			<% end %>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<a href="#img-<%= step.id%>" class="pop">
-					<img id="img-<%= step.id%>"class="img-responsive" src="<%= step.image%>">
+					<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 				</a>
 				<% if step.image!=""%>
 					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
@@ -52,7 +52,7 @@
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 				<div class="col-md-5 col-sm-5 col-xs-5 information">
 					<div class="col-md-4 col-sm-5 col-xs-6">
-						<img class="note img-responsive" src="">
+						<img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png">
 					</div>
 						
 					<h2 class="answer"><strong>NOTE: </strong><span class="lead"><%= step.step%></span></h2>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
-						<img id="img-<%= step.id%>"class="img-responsive" src="<%= step.image%>">
+						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 					</a>
 					<% if step.image!=""%>
 						<h2 class="answer red">PICTURE <%=step.number+step.offset%></h2>
@@ -75,7 +75,7 @@
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 				<div class="col-md-6 col-sm-6 col-xs-6 cautiondiv">
 					<div class="col-md-2 col-sm-3 col-xs-4">
-						<img class="caution img-responsive" src="">
+						<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
 					</div>
 					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					<% if step.image!=""%>
@@ -84,7 +84,7 @@
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
-						<img id="img-<%= step.id%>"class="img-responsive" src="<%= step.image%>">
+						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 					</a>
 					<% if step.image!=""%>
 						<h2 class="red">PICTURE <%=step.number%></h2>
