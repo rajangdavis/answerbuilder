@@ -4,7 +4,7 @@
 # Examples:
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-Answer.create(language: ‘English’, series:’QT’, tagline: 'Your DVR is set to record video whenever motion is detected 24/7. You can create your own schedule.', title: 'Motion Detection Schedule')
+Answer.create(language: 'English', series:'QT', tagline: 'Your DVR is set to record video whenever motion is detected 24/7. You can create your own schedule.', title: 'Motion Detection Schedule')
 Step.create(number: 1,step_type:'Step' ,step:'Right-click with the mouse to open the [bold]Control Bar[/bold] at the bottom left of the screen.' ,image:'i.imgur.com/4miCe0n.png' ,offet: 0,answer_id:1 )
 Step.create(number: 2,step_type:'Step' ,step:'Click on the [bold]Main Menu[/bold].' ,image:'i.imgur.com/JmcFbei.png' ,offet: 0,answer_id:1 )
 Step.create(number: 3,step_type:'Step' ,step:'Click on [bold]Setup[/bold].' ,image:'i.imgur.com/YewRFF6.png' ,offet: 0,answer_id:1 )
