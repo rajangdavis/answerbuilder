@@ -1,16 +1,17 @@
-<div class="answer_list">
+<div class="answer_list col-md-6">
 	<h2>Answers</h2>
 	<% @answers.each do |answer| %>
 		<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
 		<%=link_to "Get Code", code_path(answer) %> | 
 		<%=link_to "Preview", preview_path(answer) %><br>
 	<% end %>
-</div><br>
+</div>
+<div class="new_answer col-md-6">
 <%= form_for(@answer) do |f| %>
-	<h2>New Answer</h2>
+	<h2>Create a New Answer</h2>
 	<div class="form-group">
 		<%= f.label "Language:  " %>
-	    <%= f.select :language, options_for_select(%w[English Japanese German]) %>
+	    <%= f.select :language, options_for_select(%w[English Japanese German Portuguese]) %>
     </div>
 	<div class="form-group">
 		<%= f.label "Series:  " %>
@@ -29,4 +30,4 @@
 <%= f.submit %>
 
 
-<% end %><br>
+<% end %></div>

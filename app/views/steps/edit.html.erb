@@ -10,6 +10,18 @@
 	</div>
 	<div class="form-group">
 		<%= f.label "Step Instruction:  "%><br />
+        <div class="form-group color-options">
+            <strong><a class="bold">Bold</a></strong> | 
+            <em><a class="i">Italic</a></em> | 
+            <u><a class="u">Underline</a></u> | 
+            <a class="red">Red</a> | 
+            <a class="blue">Blue</a> | 
+            <a class="green">Green</a> | 
+            <a class="lgreen">Light Green</a> | 
+            <a class="yellow">Yellow</a> |
+            <a class="orange">Orange</a> |
+            <a class="br"> Add a Break</a>
+        </div>
 	    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 	</div>
 	<div class="form-group">
@@ -27,7 +39,17 @@
 <% end %>
 
 <script type="text/javascript">
+
 	$("p.success").hide();
+    $('.color-options a').click(function(){
+        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
+        var isBold = $(this)[0].className+']'
+        if ($(this)[0].className=='br'){
+            $('#step_step').val($('#step_step').val()+'['+isBold);
+        } else{
+             $('#step_step').val($('#step_step').val()+'['+notBold);
+        }
+    });
 	var canvas = new fabric.Canvas('imageCanvas', {
     	backgroundColor: 'rgb(240,240,240)'
 	});
@@ -84,4 +106,5 @@
 	    
 	    reader.readAsDataURL(e.target.files[0]);
 	}
+
 </script>

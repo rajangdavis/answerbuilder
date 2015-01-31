@@ -100,10 +100,15 @@ $(".pop").on("click", function() {
    $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
 });
 $('button.download').click(function(){
-	$('div a.pop img').each(function () {
+	var imgArray = $('img.img-responsive:not(img.note):not(img.caution):not(img.qcIcon):not(img.qtIcon):not(:last)');
+	
+        		
+
+	$(imgArray).each(function (i) {
+		
         var $this = $(this);
-        $this.wrap('<a class="temp" href="' + $this.attr('src') + '" download />');
-        $this.click();
+        $this.wrap('<a class="temp" href="' + $this.attr('src') + '" download="'+i+'.png" />');
+        $this.click();   
     });
 });
 </script>

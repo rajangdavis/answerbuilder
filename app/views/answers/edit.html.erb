@@ -68,6 +68,18 @@
 		</div>
 		<div class="form-group">
 			<%= f.label "Step Instruction:  "%><br />
+			<div class="form-group color-options">
+	            <strong><a class="bold">Bold</a></strong> | 
+	            <em><a class="i">Italic</a></em> | 
+	            <u><a class="u">Underline</a></u> | 
+	            <a class="red">Red</a> | 
+	            <a class="blue">Blue</a> | 
+	            <a class="green">Green</a> | 
+	            <a class="lgreen">Light Green</a> | 
+	            <a class="yellow">Yellow</a> |
+	            <a class="orange">Orange</a> |
+	            <a class="br"> Add a Break</a>
+        	</div>
 		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 		</div>
 		<div class="form-group">
@@ -189,6 +201,15 @@ $("a.edit_this").click(function () {
 $("a.add_steps").click(function () {
     $("div.add_steps_form").toggle(1000);
 });
+$('.color-options a').click(function(){
+        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
+        var isBold = $(this)[0].className+']'
+        if ($(this)[0].className=='br'){
+            $('#step_step').val($('#step_step').val()+'['+isBold);
+        } else{
+             $('#step_step').val($('#step_step').val()+'['+notBold);
+        }
+    });
 
 //script for uploading images and converting them into dataURI
 var canvas = new fabric.Canvas('imageCanvas', {
@@ -213,34 +234,34 @@ function handleImage(e) {
 
         finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
 
-        
-$.ajax({
-            url: 'https://api.imgur.com/3/image',
-            type: 'post',
-            headers: {
-                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+// Ajax call to upload images to imgur for hosting        
+	$.ajax({
+	            url: 'https://api.imgur.com/3/image',
+	            type: 'post',
+	            headers: {
+	                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
 
-            },
-            data: {
-                image: finalURI,
-                type: 'base64'
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.success) {
-                   
-                    $("#step_image").val(response.data.link.replace('http://',''));
-                    $("p.success").show();
-                }
-                else{
-                	alert(response);
-                }
-            }
-        });
-        
-    };
-    reader.readAsDataURL(e.target.files[0]);
-};
+	            },
+	            data: {
+	                image: finalURI,
+	                type: 'base64'
+	            },
+	            dataType: 'json',
+	            success: function (response) {
+	                if (response.success) {
+	                   
+	                    $("#step_image").val(response.data.link.replace('http://',''));
+	                    $("p.success").show();
+	                }
+	                else{
+	                	alert(response);
+	                }
+	            }
+	        });
+	        
+	    };
+	    reader.readAsDataURL(e.target.files[0]);
+	};
 
 
 });

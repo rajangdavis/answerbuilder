@@ -38,8 +38,10 @@ input#password{
 input.password{
 	min-width:73% !important;
 }
-div.answer_list{
-	border-bottom: 1px solid lightgrey;
+
+div.new_answer{
+	border-left: 1px solid lightgrey;
+	min-height: 760px;
 }
 div.title{
 	width:100%;
@@ -104,6 +106,7 @@ margin:0 auto;
 }
 .yellow{
 	color: yellow!important;
+	background:lightgrey;
 }
 .orange{
 	color: orange!important;
@@ -126,4 +129,13 @@ textarea.code{
 	width:100%;
 	height:1000px;
 
+}
+
+/* color options for code */
+
+.color-options a.bold,a.i,a.u,a.br{
+	color:black
+}
+.color-options a:hover{
+	cursor:pointer;
 }
