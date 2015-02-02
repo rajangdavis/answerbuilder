@@ -103,20 +103,20 @@ $(".pop").on("click", function() {
    
    $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
    var pic_real_width, pic_real_height;
-	$("<img/>") // Make in memory copy of image to avoid css issues
-	    .attr("src", $('.pop').find("img").attr('src'))
-	    .load(function() {
-	        pic_real_width = this.width;   // Note: $(this).width() will not
-	        pic_real_height = this.height; // work for in memory images.
-	        console.log(pic_real_width);
-	        if(pic_real_width > 1050){
-	        	$('div.modal-content img,div.modal-dialog').width(pic_real_width/1.3);
-	        	$('div.modal-content').width(pic_real_width/1.27);
-	        }
-	        else{
-  				$('div.modal-content').width(pic_real_width*1.05);
-  			}
-	    });
+	// $("<img/>") // Make in memory copy of image to avoid css issues
+	//     .attr("src", $('.pop').find("img").attr('src'))
+	//     .load(function() {
+	//         pic_real_width = this.width;   // Note: $(this).width() will not
+	//         pic_real_height = this.height; // work for in memory images.
+	//         console.log(pic_real_width);
+	//         if(pic_real_width > 1050){
+	//         	$('div.modal-content img,div.modal-dialog').width(pic_real_width/1.3);
+	//         	$('div.modal-content').width(pic_real_width/1.27);
+	//         }
+	//         else{
+ //  				$('div.modal-content').width(pic_real_width*1.05);
+ //  			}
+	//     });
    
 });
 $('button.download').click(function(){
