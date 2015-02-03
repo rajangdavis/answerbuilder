@@ -45,10 +45,10 @@
 					<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 				</a>
 				<% if step.image!=""%>
-					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+					<h2 class="inst red">PICTURE <%=step.number+step.offset%></h2>
 				<% end %>
 			</div>
-		</div>
+		</div><br>
 		<% elsif step.step_type=="Information"%>
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 				<div class="col-md-5 col-sm-5 col-xs-5 information">
@@ -71,7 +71,7 @@
 						<h2 class="inst answer red">PICTURE <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
-			</div>
+			</div><br>
 		<% elsif step.step_type=="Caution"%>
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 				<div class="col-md-6 col-sm-6 col-xs-6 cautiondiv">
@@ -88,10 +88,10 @@
 						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 					</a>
 					<% if step.image!=""%>
-						<h2 class="red">PICTURE <%=step.number%></h2>
+						<h2 class="inst red">PICTURE <%=step.number%></h2>
 					<% end %>
 				</div>
-			</div>
+			</div><br>
 		<% end %>
 	<% end %>
 </div>
