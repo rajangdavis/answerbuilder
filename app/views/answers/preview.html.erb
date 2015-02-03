@@ -40,7 +40,7 @@
 					<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 				</a>
 				<% if step.image!=""%>
-					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+					<h2 class="answer red">PICTURE <%=step.number+step.offset%></h2>
 				<% end %>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
 					</div>
-					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
+					<h2 class="strong"><answer>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					<% if step.image!=""%>
 						<em class="lead red"> (picture <%= step.number %>)</em>
 					<% end %>
@@ -83,7 +83,7 @@
 						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 					</a>
 					<% if step.image!=""%>
-						<h2 class="red">PICTURE <%=step.number%></h2>
+						<h2 class="answer red">PICTURE <%=step.number%></h2>
 					<% end %>
 				</div>
 			</div>
@@ -136,8 +136,7 @@ $('button.download').click(function(){
   <div class="modal-dialog">
     <div class="modal-content ">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+     	 <h4 class="modal-title" id="myModalLabel">Image preview</h4>
       </div>
       <div class="modal-body">
         <img src="" id="imagepreview" class="img-responsive" >

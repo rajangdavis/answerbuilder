@@ -71,15 +71,18 @@
 			<div class="form-group color-options">
 	            <strong><a class="bold">Bold</a></strong> | 
 	            <em><a class="i">Italic</a></em> | 
-	            <u><a class="u">Underline</a></u> | 
+	            <u><a class="u">Underline</a></u> |
 	            <a class="red">Red</a> | 
 	            <a class="blue">Blue</a> | 
 	            <a class="green">Green</a> | 
 	            <a class="lgreen">Light Green</a> | 
 	            <a class="yellow">Yellow</a> |
 	            <a class="orange">Orange</a> |
-	            <a class="br"> Add a Break</a>
-        	</div>
+	            <a class="br"> Add a Break</a> |
+	            <a class="cat">Caution</a> |
+	            <a class="note" style="float:none">Information</a>
+	        </div><br>
+	            <a class="addLink">Add Link</a>
 		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 		</div>
 		<div class="form-group">
@@ -180,10 +183,16 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$("p.success").hide();
+	var href = 
+	console.log(href);
     $("p.lead,span.lead").each(function () {
+
+    	
         // Create code to do key value pair swaps for the different colors and typography
-        var content = $(this).text().replace(/\[red\]/g, '<span class="red">').replace(/\[\/red\]/g, '</span>').replace(/\[blue\]/g, '<span class="blue">').replace(/\[\/blue\]/g, '</span>').replace(/\[green\]/g, '<span class="green">').replace(/\[\/green\]/g, '</span>').replace(/\[yellow\]/g, '<span class="yellow">').replace(/\[\/yellow\]/g, '</span>').replace(/\[orange\]/g, '<span class="orange">').replace(/\[\/orange\]/g, '</span>').replace(/\[lgreen\]/g, '<span class="lgreen">').replace(/\[\/lgreen\]/g, '</span>').replace(/\[bold\]/g, '<strong>').replace(/\[\/bold\]/g, '</strong>').replace(/\[i\]/g, '<em>').replace(/\[\/i\]/g, '</em>').replace(/\[u\]/g, '<u>').replace(/\[\/u\]/g, '</u>').replace(/\[br\]/g, '<br>');
-        //console.log(content1);
+        var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="col-md-6 col-sm-6 col-xs-6 information"><div class="col-md-6 col-sm-6 col-xs-6"><img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png"></div><h2 class="inst answer"><strong>NOTE: </strong><span class="inst lead">').replace(/\[\/note\]/g,'</span></h2></div>').replace(/\[cat\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 cautiondiv"><div class="col-md-3 col-sm-5 col-xs-7"><img class="caution img-responsive" src="//i.imgur.com/ejvODER.png"></div><h2><strong>CAUTION: </strong><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div>');
+        
+
+
         $(this).html(content);
     });
     $("em.red").each(function () {
@@ -262,7 +271,33 @@ function handleImage(e) {
 	    };
 	    reader.readAsDataURL(e.target.files[0]);
 	};
+		$(".addLink").on("click", function() {
+		   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
+		   
+		   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
 
+		   $('button.submit').click(function(){
+		    $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
+		     $('input.href,input.text').val("");
+		   });
+		});
 
 });
 </script>
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content ">
+      <div class="modal-header">
+         <h4 class="modal-title" id="myModalLabel">Add Link</h4>
+      </div>
+      <div class="modal-body">
+        <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
+        <input class="text" placeholder="Insert Link Text"><br><br>
+        <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

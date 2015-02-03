@@ -13,15 +13,18 @@
         <div class="form-group color-options">
             <strong><a class="bold">Bold</a></strong> | 
             <em><a class="i">Italic</a></em> | 
-            <u><a class="u">Underline</a></u> | 
+            <u><a class="u">Underline</a></u> |
             <a class="red">Red</a> | 
             <a class="blue">Blue</a> | 
             <a class="green">Green</a> | 
             <a class="lgreen">Light Green</a> | 
             <a class="yellow">Yellow</a> |
             <a class="orange">Orange</a> |
-            <a class="br"> Add a Break</a>
-        </div>
+            <a class="br"> Add a Break</a> |
+            <a class="cat">Caution</a> |
+            <a class="note" style="float:none">Information</a>
+        </div><br>
+            <a class="addLink">Add Link</a>
 	    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
 	</div>
 	<div class="form-group">
@@ -106,5 +109,33 @@
 	    
 	    reader.readAsDataURL(e.target.files[0]);
 	}
+    $(".addLink").on("click", function() {
+   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
+   
+   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
 
+   $('button.submit').click(function(){
+    $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
+        $('input.href,input.text').val("");
+   });
+
+
+});
 </script>
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content ">
+      <div class="modal-header">
+         <h4 class="modal-title" id="myModalLabel">Add Link</h4>
+      </div>
+      <div class="modal-body">
+        <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
+        <input class="text" placeholder="Insert Link Text"><br><br>
+        <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
