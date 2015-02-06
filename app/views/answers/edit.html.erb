@@ -155,13 +155,13 @@
 					</div>
 					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number %>)</em>
+						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<img class="img-responsive" src="//<%= step.image%>">
 					<% if step.image!=""%>
-						<h2 class="red">PICTURE <%=step.number%></h2>
+						<h2 class="red">PICTURE <%= step.number+step.offset %></h2>
 					<% end %>
 				</div>
 			</div>
