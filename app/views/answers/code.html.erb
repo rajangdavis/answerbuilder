@@ -25,9 +25,11 @@
 		</div>
 	</div>
 <% end %>
-<div class="tagline">
-	<p class="text-center lead"><%= @answer.tagline%></p>
-</div>
+<%if @answer.tagline!=""%>
+	<div class="tagline">
+		<p class="text-center lead"><%= @answer.tagline%></p>
+	</div>
+<% end %>
 <div class="steps">
 	<% @steps.each do |step|%>
 		<% if step.step_type=="Step"%>
