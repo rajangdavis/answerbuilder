@@ -26,7 +26,7 @@
 	//script to copy code of documents
 		var codeHTML = $("code").length;
 		if(codeHTML){
-			$("textarea.code").html(codeHTML);
+			$("textarea.code").html($("code")[0].innerHTML);
 			console.log('This exists');
 		};
 	});
