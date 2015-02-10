@@ -38,10 +38,10 @@
 	</div>
 <% else %>
 	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
-		<div class="col-md-7 col-sm-8  col-xs-9 pull-left answer-title">
+		<div class="col-md-10 col-sm-10  col-xs-9 pull-right answer-title">
 			<h1 class="answer"><%= @answer.title%></h1>
 		</div>
-		<div class="col-md-2 col-sm-2 col-xs-3 pull-right text-center">
+		<div class="col-md-2 col-sm-2 col-xs-3 pull-left text-center">
 			<div class="col-md-2 col-sm-2 col-xs-4"></div>
 			<% if @answer.series=="QT"%>
 				<img class="qtIcon img-responsive" src="//i.imgur.com/O4AEPmF.png">
@@ -189,7 +189,7 @@ $(document).ready(function () {
 
     	
         // Create code to do key value pair swaps for the different colors and typography
-        var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="col-md-6 col-sm-6 col-xs-6 information"><div class="col-md-6 col-sm-6 col-xs-6"><img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png"></div><h2 class="inst answer"><strong>NOTE: </strong><span class="inst lead">').replace(/\[\/note\]/g,'</span></h2></div>').replace(/\[cat\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 cautiondiv"><div class="col-md-3 col-sm-5 col-xs-7"><img class="caution img-responsive" src="//i.imgur.com/ejvODER.png"></div><h2><strong>CAUTION: </strong><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div>');
+        var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 information"><div class="col-md-3 col-sm-5 col-xs-7"><img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png"></div><h2 class="inst answer"><strong>NOTE: </strong><span class="inst lead">').replace(/\[\/note\]/g,'</span></h2></div>').replace(/\[cat\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 cautiondiv"><div class="col-md-3 col-sm-5 col-xs-7"><img class="caution img-responsive" src="//i.imgur.com/ejvODER.png"></div><h2><strong>CAUTION: </strong><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div>');
         
 
 
