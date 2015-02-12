@@ -47,7 +47,7 @@
 		</div><br>
 		<% elsif step.step_type=="Information"%>
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-				<div class="col-md-6 col-sm-6 col-xs-6 information">
+				<div class="inst col-md-5 col-sm-5 col-xs-5 information">
 					<div class="col-md-2 col-sm-2 col-xs-2">
 						<img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png">
 					</div>
@@ -56,7 +56,7 @@
 					</div>
 					
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+						<em class="inst lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -70,7 +70,7 @@
 			</div><br>
 		<% elsif step.step_type=="Caution"%>
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-				<div class="col-md-6 col-sm-6 col-xs-6 cautiondiv">
+				<div class="inst col-md-5 col-sm-5 col-xs-5 cautiondiv">
 					<div class="col-md-2 col-sm-2 col-xs-2">
 						<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
 					</div>
@@ -78,7 +78,7 @@
 						<h2 class="answer"><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					</div>
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+						<em class="inst lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 
 				</div>
