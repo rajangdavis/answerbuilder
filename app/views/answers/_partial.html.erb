@@ -49,7 +49,7 @@
 			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
 				<div class="inst col-md-5 col-sm-5 col-xs-5 information">
 					<div class="col-md-12 col-sm-12 col-xs-12">	
-						<h2 class="answer"><strong>NOTE: </strong><span class="lead"><%= step.step%></span></h2>
+						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
 					</div>
 					
 					<% if step.image!=""%>
@@ -69,7 +69,7 @@
 			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
 				<div class="inst col-md-5 col-sm-5 col-xs-5 cautiondiv">
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h2 class="answer"><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
+						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
 					</div>
 					<% if step.image!=""%>
 						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
