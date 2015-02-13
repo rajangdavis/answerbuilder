@@ -7,7 +7,7 @@
 			$(this).html(content);	
 		});
 		$("em.red").each(function(){
-			var pLead = $(this).prev();
+			var pLead = $(this).prev('p.lead,span.lead,div.information,div.caution');
 			$(this).appendTo(pLead);
 		});
 
