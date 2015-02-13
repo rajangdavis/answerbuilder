@@ -10,6 +10,9 @@
 			var pLead = $(this).prev('p.lead,span.lead,div.information,div.caution');
 			$(this).appendTo(pLead);
 		});
+		$('div.information').next('.lead').each(function(){
+			$(this).attr('class','lead red inst');
+		});
 
 	$("div.edit_form,div.add_steps_form").hide();	
 
