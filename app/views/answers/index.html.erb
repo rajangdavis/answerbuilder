@@ -5,6 +5,7 @@
       <button type="button" class="btn btn-default" id="QT">QT Series</button>
       <button type="button" class="btn btn-default" id="None">Other</button>
     </div>
+    <hr>
 	<div class="answerList">
 		<% @answers.each do |answer| %>
 			<div class="<%= answer.series %>">
@@ -15,7 +16,6 @@
 		<% end %>
 	</div>
 </div>
-<hr>
 <div class="new_answer col-md-6">
 <%= form_for(@answer) do |f| %>
 	<h2>Create a New Answer</h2>
