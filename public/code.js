@@ -10,7 +10,7 @@
 			var pLead = $(this).prev('p.lead,span.lead,div.information,div.caution');
 			$(this).appendTo(pLead);
 		});
-		$('div.information').next('.lead').each(function(){
+		$('div.information, div.caution').next('p.lead:not(p.clear)').each(function(){
 			$(this).attr('class','lead red inst');
 		});
 
