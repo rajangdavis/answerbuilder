@@ -1,10 +1,19 @@
 <div class="answer_list col-md-6">
 	<h2>Answers</h2>
-	<% @answers.each do |answer| %>
-		<span class="lead"><%=link_to answer.title, edit_answer_path(answer) %> | </span>
-		<%=link_to "Get Code", code_path(answer) %> | 
-		<%=link_to "Preview", preview_path(answer) %><br>
-	<% end %>
+	<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+      <button type="button" class="btn btn-default" id="QC">QC Series</button>
+      <button type="button" class="btn btn-default" id="QT">QT Series</button>
+      <button type="button" class="btn btn-default" id="None">Other</button>
+    </div>
+	<div class="answerList">
+		<% @answers.each do |answer| %>
+			<div class="<%= answer.series %>">
+				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
+				<%=link_to "Get Code", code_path(answer) %> | 
+				<%=link_to "Preview", preview_path(answer) %><br>
+			</div>
+		<% end %>
+	</div>
 </div>
 <div class="new_answer col-md-6">
 <%= form_for(@answer) do |f| %>
@@ -31,3 +40,13 @@
 
 
 <% end %></div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('button.btn').click(function(){
+			var buttonClass = $(this).attr('id');
+			$('div.answerList div.'+buttonClass).show();
+			$('div.answerList div:not(.'+buttonClass+')').hide();
+		});
+	});
+</script>
