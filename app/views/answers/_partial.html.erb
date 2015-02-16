@@ -33,7 +33,7 @@
 				<h2 class="inst answer"><strong>STEP <%= step.number %></strong></h2>
 				<p class="inst lead"><%= step.step%></p>
 				<% if step.image!=""%>
-					<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+					<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 				<% end %>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -53,7 +53,7 @@
 					</div>
 					
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -72,7 +72,7 @@
 						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
 					</div>
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 
 				</div>

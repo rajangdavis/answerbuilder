@@ -112,7 +112,7 @@
 				<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 				<p class="lead"><%= step.step%></p>
 				<% if step.image!=""%>
-					<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+					<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 				<% end %>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -135,7 +135,7 @@
 					
 					
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -155,7 +155,7 @@
 					</div>
 					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					<% if step.image!=""%>
-						<em class="lead red"> (picture <%= step.number+step.offset %>)</em>
+						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
