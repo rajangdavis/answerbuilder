@@ -262,9 +262,10 @@ function handleImage(e) {
 	                    $("#step_image").val(response.data.link.replace('http://',''));
 	                    $("p.success").show();
 	                }
-	                else{
-	                	alert(response);
-	                }
+	            },
+	            error: function (request, status, error) {
+	            console.log(error);
+	            console.log(JSON.parse(request.responseText));
 	            }
 	        });
 	        
