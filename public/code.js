@@ -9,6 +9,7 @@
 		$("em.red").each(function(){
 			var pLead = $(this).prev('p.lead,span.lead,div.information,div.caution,p.clear');
 			$(this).appendTo(pLead);
+			
 		});
 		$('div.information,div.caution,p.clear').next('em.lead:not(p.clear)').each(function(){
 			$(this).attr('class','lead red inst');
