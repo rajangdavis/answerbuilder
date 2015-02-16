@@ -12,7 +12,7 @@
 			
 		});
 		$('div.information,div.caution,p.clear').next('em.lead:not(p.clear)').each(function(){
-			$(this).attr('class','lead red inst');
+			$(this).attr('class','clear lead red inst');
 		});
 
 	$("div.edit_form,div.add_steps_form").hide();	
