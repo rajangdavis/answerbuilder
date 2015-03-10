@@ -11,7 +11,7 @@
 			$(this).appendTo(pLead);
 			
 		});
-		$('div.information,div.caution,p.clear').next('em.lead:not(p.clear)').each(function(){
+		$('div.information,div.caution,div.cautiondiv,p.clear').next('em.lead:not(p.clear)').each(function(){
 			$(this).attr('class','clear lead red inst');
 		});
 
