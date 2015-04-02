@@ -1,14 +1,22 @@
 <div class="answer_list col-md-6">
 	<h2>Answers</h2>
+	<h4>Sort by series</h4>
 	<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
       <button type="button" class="btn btn-default" id="QC">QC Series</button>
       <button type="button" class="btn btn-default" id="QT">QT Series</button>
       <button type="button" class="btn btn-default" id="None">Other</button>
     </div>
+    <h4>Sort by language</h4>
+    <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+      <button type="button" class="btn btn-default" id="English">English</button>
+      <button type="button" class="btn btn-default" id="German">German</button>
+      <button type="button" class="btn btn-default" id="Portuguese">Portuguese</button>
+      <button type="button" class="btn btn-default" id="Japanese">Japanese</button>
+    </div>
     <hr>
 	<div class="answerList">
 		<% @answers.each do |answer| %>
-			<div class="<%= answer.series %>">
+			<div class="<%= answer.series %> <%= answer.language %>">
 				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
 				<%=link_to "Get Code", code_path(answer) %> | 
 				<%=link_to "Preview", preview_path(answer) %><br>

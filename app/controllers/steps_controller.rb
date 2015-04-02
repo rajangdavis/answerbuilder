@@ -15,6 +15,10 @@ class StepsController < ApplicationController
     redirect_to edit_step_path(:step)
   end
 
+  def index2
+    @steps= Step.all
+  end
+
   def update
     
     @step = Step.find(params[:id])
