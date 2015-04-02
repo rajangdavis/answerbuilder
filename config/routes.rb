@@ -8,7 +8,7 @@ Answerbuild::Application.routes.draw do
 
   get 'answers/:id/code' => 'answers#code', as: :code
   get 'answers/:id/preview' => 'answers#preview', as: :preview
-  get 'steps' => 'steps#index2',as: :imagedump
+  get 'stepss' => 'steps#index2',as: :imagedump
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

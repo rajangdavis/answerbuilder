@@ -16,6 +16,7 @@ class StepsController < ApplicationController
   end
 
   def index2
+    @answers=Answer.all
     @steps= Step.all
   end
 
