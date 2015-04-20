@@ -5,12 +5,11 @@
 		</div>
 	</div>
 <% else %>
-	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+	<div class="col-md-12 col-sm-12 col-xs-8 title jumbotron">
 		<div class="col-md-10 col-sm-10 col-xs-10 pull-right answer-title">
 			<h1 class="inst answer"><%= @answer.title%></h1>
 		</div>
-		<div class="col-md-2 col-sm-2 col-xs-3 pull-left text-center">
-			<div class="col-md-2 col-sm-2 col-xs-4"></div>
+		<div class="col-md-2 col-sm-2 col-xs-4 pull-left text-center">
 			<% if @answer.series=="QT"%>
 				<img class="qtIcon img-responsive" src="//i.imgur.com/O4AEPmF.png">
 			<% elsif @answer.series=="QC"%>
