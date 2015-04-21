@@ -15,11 +15,6 @@ class AnswersController < ApplicationController
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
 
   	end
-  	def code2
-  		@answer = Answer.find(params[:id])
-  		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
-
-  	end
 
 	def new
 		@answer = Answer.new

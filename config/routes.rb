@@ -7,7 +7,6 @@ Answerbuild::Application.routes.draw do
   resources :steps
 
   get 'answers/:id/code' => 'answers#code', as: :code
-  get 'answers/:id/code2' => 'answers#code2', as: :code2
   get 'answers/:id/preview' => 'answers#preview', as: :preview
   get 'stepss' => 'steps#index2',as: :imagedump
   # The priority is based upon order of creation: first created -> highest priority.
