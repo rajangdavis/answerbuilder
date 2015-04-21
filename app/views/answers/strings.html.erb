@@ -1,9 +1,10 @@
 <div class="container">
 <h4>Sort by series</h4>
-<div class="btn-group btn-group-lg text-center" role="group" aria-label="Large button group">
+<div class="btn-group btn-group-lg text-center navbar-fixed-top" role="group" aria-label="Large button group">
   <button type="button" class="btn btn-default" id="QC">QC Series</button>
   <button type="button" class="btn btn-default" id="QT">QT Series</button>
   <button type="button" class="btn btn-default" id="None">Other</button>
+  <button type="button" class="btn btn-default" id="formatCode">Set to formatted code</button>
 </div>
 <hr><br><br>
 <div class="answerList">
@@ -31,7 +32,7 @@
 	          	<%if step.answer_id == answer.id%>
 	          	<tr>
 	          		<td><%=step.number+step.offset%></td>
-	          		<td><p class="string"><%=step.step%></p></td>
+	          		<td><p class="raw"><%=step.step%></p></td>
 	        	</tr>
 	          	<% end %>
 	          <% end %>
@@ -40,15 +41,29 @@
 	</div>
 <% end %>
 </div>
-<script type="text/javascript" src="/code.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		$('button.btn').click(function(){
+		$('button.btn:not(#rawCode,#formatCode)').click(function(){
 			var buttonClass = $(this).attr('id');
 			$('div.answerList div.'+buttonClass+', div.answerList div.'+buttonClass+' hr').show();
 			$('div.answerList div:not(.'+buttonClass+'),div.answerList div:not(.'+buttonClass+') hr').hide();
 		});
 		$('a.hideNav').length? $(".navbar").hide() : console.log('');
+		$('#formatCode').click(function(){
+			$('p.raw').toggleClass("string");
+			$("p.string").each(function(){
+			
+			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<br><br>').replace(/\[\/note\]/g,'<br><br>').replace(/\[cat\]/g,'<br><br>').replace(/\[\/cat\]/g,'<br><br>').replace(/\[p\]/g,'').replace(/\[\/p\]/g,'');
+			
+			$(this).html(content);	
+			});
+			$("#formatCode").attr("id","rawCode");
+			$('#rawCode').html("Set to raw code").click(function(){
+				window.location = "/strings";
+			});
+		});
 	});
 </script>	
+<script type="text/javascript" src="/code.js"></script>

@@ -6,12 +6,7 @@
 			
 			$(this).html(content);	
 		});
-	$("p.string").each(function(){
-			
-			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<br><br>').replace(/\[\/note\]/g,'<br><br>').replace(/\[cat\]/g,'<br><br>').replace(/\[\/cat\]/g,'<br><br>').replace(/\[p\]/g,'').replace(/\[\/p\]/g,'');
-			
-			$(this).html(content);	
-		});
+	
 		$("em.red").each(function(){
 			var pLead = $(this).prev('p.lead,span.lead,div.information,div.caution,p.clear');
 			$(this).appendTo(pLead);
