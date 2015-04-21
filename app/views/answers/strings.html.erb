@@ -14,7 +14,7 @@
 			<strong>TAGLINE:</strong><p class="string"><%=answer.tagline%></p><br>
 		<% end %>
 	<strong>LINK:</strong> 
-	<% if answer.series!="" %>
+	<% if answer.series!="None" %>
 		<%=link_to answer.title+" for the "+answer.series+" Series", preview_path(answer.id) , target: "_blank"%>
 	<% else %>
 		<%=link_to answer.title, preview_path(answer.id) , target: "_blank"%>
