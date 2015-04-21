@@ -1,0 +1,49 @@
+<h4>Sort by series</h4>
+<div class="btn-group btn-group-lg text-center" role="group" aria-label="Large button group">
+  <button type="button" class="btn btn-default" id="QC">QC Series</button>
+  <button type="button" class="btn btn-default" id="QT">QT Series</button>
+  <button type="button" class="btn btn-default" id="None">Other</button>
+</div>
+<hr><br><br>
+<div class="answerList">
+<% @answers.each do |answer|%>
+	<div class="<%= answer.series%> <%= answer.language%>">
+	<strong>TITLE:</strong> <%=answer.title%><br>
+		<%if answer.tagline!=""%>
+			<strong>TAGLINE:</strong> <%=answer.tagline%><br>
+		<% end %>
+	<strong>LINK:</strong> <%=link_to answer.title+" for the "+answer.series+" Series", preview_path(answer.id)%>
+	<table class="table">
+	      <thead>
+	        <tr>
+	        	<th>#</th>
+	        	<th>Step Info</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	          <% @steps.each do |step|%>
+	          	<%if step.answer_id == answer.id%>
+	          	<tr>
+	          		<td><%=@number+=1%></td>
+	          		<td><p class="string"><%=step.step%></p></td>
+	        	</tr>
+	          	<% end %>
+	          <% end %>
+	      </tbody>
+	    </table>
+	</div><hr>
+<% end %>
+</div>
+
+<script type="text/javascript" src="/code.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('button.btn').click(function(){
+			var buttonClass = $(this).attr('id');
+			$('div.answerList div.'+buttonClass).show();
+			$('div.answerList div:not(.'+buttonClass+')').hide();
+		});
+		$('a.hideNav').length? $(".navbar").hide() : console.log('');
+	});
+</script>	

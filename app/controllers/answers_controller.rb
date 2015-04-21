@@ -13,7 +13,14 @@ class AnswersController < ApplicationController
 	def code
   		@answer = Answer.find(params[:id])
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
-
+  	end
+  	def strings
+  		@preview = true
+  		@answers = Answer.where(:language => "English")
+  		@steps = Step.all.sort
+  		@answers.each do |answer|
+  			@number = 0
+  		end
   	end
 
 	def new

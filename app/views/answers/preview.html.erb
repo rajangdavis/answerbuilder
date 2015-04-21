@@ -6,6 +6,9 @@
 $('a.hideNav').click(function(){
 	$('nav').hide();
 });
+<% if !current_user%>
+$('a.hideNav').length? $(".navbar").hide() : console.log('');
+<% end %>
 $("body").css('margin-top','0px');
 $(".pop").on("click", function() {
    $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
