@@ -13,7 +13,12 @@
 		<%if answer.tagline!=""%>
 			<strong>TAGLINE:</strong> <%=answer.tagline%><br>
 		<% end %>
-	<strong>LINK:</strong> <%=link_to answer.title+" for the "+answer.series+" Series", preview_path(answer.id) , target: "_blank"%>
+	<strong>LINK:</strong> 
+	<% if answer.series!="" %>
+		<%=link_to answer.title+" for the "+answer.series+" Series", preview_path(answer.id) , target: "_blank"%>
+	<% else %>
+		<%=link_to answer.title, preview_path(answer.id) , target: "_blank"%>
+	<% end %>
 	<table class="table">
 	      <thead>
 	        <tr>
