@@ -7,7 +7,7 @@ $('a.hideNav').click(function(){
 	$('nav').hide();
 });
 <% if !current_user%>
-$('a.hideNav').length? $(".navbar").hide() : console.log('');
+$('a.hideNav').length? $(".navbar,button.download").hide() : console.log('');
 <% end %>
 $("body").css('margin-top','0px');
 $(".pop").on("click", function() {
