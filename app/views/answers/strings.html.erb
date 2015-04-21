@@ -11,7 +11,7 @@
 	<div class="<%= answer.series%> <%= answer.language%>">
 	<strong>TITLE:</strong> <%=answer.title%><br>
 		<%if answer.tagline!=""%>
-			<strong>TAGLINE:</strong> <%=answer.tagline%><br>
+			<strong>TAGLINE:</strong><p class="string"><%=answer.tagline%></p><br>
 		<% end %>
 	<strong>LINK:</strong> 
 	<% if answer.series!="" %>
