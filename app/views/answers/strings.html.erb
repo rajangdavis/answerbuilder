@@ -42,8 +42,8 @@
 		
 		$('button.btn').click(function(){
 			var buttonClass = $(this).attr('id');
-			$('div.answerList div.'+buttonClass).show();
-			$('div.answerList div:not(.'+buttonClass+')').hide();
+			$('div.answerList div.'+buttonClass+', div.answerList div.'+buttonClass+' hr').show();
+			$('div.answerList div:not(.'+buttonClass+'),div.answerList div:not(.'+buttonClass+') hr').hide();
 		});
 		$('a.hideNav').length? $(".navbar").hide() : console.log('');
 	});
