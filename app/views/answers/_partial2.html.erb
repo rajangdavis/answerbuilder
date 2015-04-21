@@ -33,21 +33,18 @@
 				<p class="inst lead"><%= step.step%></p>
 
 		<% elsif step.step_type=="Information"%>
-			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
-				<div class="inst col-md-5 col-sm-5 col-xs-5 information">
-					<div class="col-md-12 col-sm-12 col-xs-12">	
-						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
-					</div>
+			<div class="inst col-md-5 col-sm-5 col-xs-5 information">
+				<div class="col-md-12 col-sm-12 col-xs-12">	
+					<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
+				</div>
 		<% elsif step.step_type=="Caution"%>
-			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
-				<div class="inst col-md-5 col-sm-5 col-xs-5 cautiondiv">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
-					</div>
-				<% if step.image!=""%>
-					<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-				<% end %>
-
+			<div class="inst col-md-5 col-sm-5 col-xs-5 cautiondiv">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
+				</div>
+			<% if step.image!=""%>
+				<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+			<% end %>
 			</div>
 		<% end %>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
