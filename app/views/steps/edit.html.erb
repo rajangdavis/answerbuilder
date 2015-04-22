@@ -102,8 +102,8 @@
                 }
             },
             error: function (request, status, error) {
+            window.alert(JSON.parse(request.responseText)["data"]["error"]);
             console.log(error);
-            console.log(JSON.parse(request.responseText));
             }
         });
         
