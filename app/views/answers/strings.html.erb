@@ -10,9 +10,9 @@
 <div class="answerList">
 <% @answers.each do |answer|%>
 	<div class="<%= answer.series%> <%= answer.language%>">
-	<strong>TITLE:</strong> <%=answer.title%><br>
-		<%if answer.tagline!=""%>
-			<strong>TAGLINE:</strong><p class="string"><%=answer.tagline%></p><br>
+	<strong class="h1">TITLE:</strong> <%=answer.title%><br>
+		<h1 class="inline"><%if answer.tagline!=""%></h1>
+			<strong class="h1">TAGLINE:</strong><p class="string h1 inline"><%=answer.tagline%></p><br>
 		<% end %>
 	<strong>LINK:</strong> 
 	<% if answer.series!="None" %>
