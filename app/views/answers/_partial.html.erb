@@ -43,7 +43,11 @@
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<a href="#img-<%= step.id%>" class="pop">
-					<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+					<% if step.image!=""%>
+						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+					<% elsif step.image_upload!=""%>
+						<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s.to_s) %>
+					<% end %>
 				</a>
 				<% if step.image!=""%>
 					<h2 class="answer red"><% if @answer.language=="English"%>
@@ -75,7 +79,11 @@
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
-						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+						<% if step.image!=""%>
+							<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+						<% elsif step.image_upload!=""%>
+							<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
+						<% end %>
 					</a>
 					<% if step.image!=""%>
 						<h2 class="answer red"><% if @answer.language=="English"%>
@@ -107,7 +115,11 @@
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
-						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+						<% if step.image!=""%>
+							<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+						<% elsif step.image_upload!=""%>
+							<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
+						<% end %>
 					</a>
 					<% if step.image!=""%>
 						<h2 class="answer red"><% if @answer.language=="English"%>
