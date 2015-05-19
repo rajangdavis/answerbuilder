@@ -27,7 +27,7 @@ var canvas = new fabric.Canvas('imageCanvas', {
 });
 
 var imageLoader = document.getElementById('imageLoader');
-imageLoader.addEventListener('change', handleImage, false);
+imageLoader.length? imageLoader.addEventListener('change', handleImage, false):console.log();
 
 function handleImage(e) {
     var reader = new FileReader();

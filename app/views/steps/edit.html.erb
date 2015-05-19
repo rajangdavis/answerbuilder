@@ -1,4 +1,4 @@
-<%= form_for(@step) do |f| %>
+<%= form_for(@step, multipart: true) do |f| %>
 	<h2>Edit Step</h2>
 	<div class="form-group">
 		<%= f.label "Step Type:  " %>
@@ -32,13 +32,14 @@
 		<%= f.label "Step/Pictures offset  "%><br />
 	    <%= f.text_field :offset%>
 	</div>
-	<div class="form-group">
-		<input type="file" id="imageLoader" name="imageLoader" />
-		<input type="button" class="imgClear"value="Click Here to clear the image">
-    	<p class="success green">Image successfully uploaded!</p>
-    	<canvas id="imageCanvas"></canvas> 
-    	<%= f.hidden_field :image %>
-  	</div>
+    <div class="form-group">
+        <%= f.label :image_upload %>
+        <%= f.file_field :image_upload %>
+        <%= f.hidden_field :image %>
+        <% if @step.image!=nil%>
+          <input type="button" class="imgClear" value="Click Here to clear the image">
+        <% end %>
+    </div>
 	<%= f.submit %>
 <% end %>
 
@@ -54,63 +55,63 @@
              $('#step_step').val($('#step_step').val()+'['+notBold);
         }
     });
-	var canvas = new fabric.Canvas('imageCanvas', {
-    	backgroundColor: 'rgb(240,240,240)'
-	});
+	// var canvas = new fabric.Canvas('imageCanvas', {
+ //    	backgroundColor: 'rgb(240,240,240)'
+	// });
 
 	$("input.imgClear").click(function(){
 		$("#step_image").val("");
 	});
 
-	var imageLoader = document.getElementById('imageLoader');
-	imageLoader.addEventListener('change', handleImage, false);
+	// var imageLoader = document.getElementById('imageLoader');
+	// imageLoader.length? imageLoader.addEventListener('change', handleImage, false):console.log();
 
-	function handleImage(e) {
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        var img = new Image();
-        img.onload = function () {
-            var imgInstance = new fabric.Image(img, {
-                scaleX: 1,
-                scaleY: 1
-            })
-            canvas.add(imgInstance);
-        	}
-	        img.src = event.target.result;
+	// function handleImage(e) {
+ //    var reader = new FileReader();
+ //    reader.onload = function (event) {
+ //        var img = new Image();
+ //        img.onload = function () {
+ //            var imgInstance = new fabric.Image(img, {
+ //                scaleX: 1,
+ //                scaleY: 1
+ //            })
+ //            canvas.add(imgInstance);
+ //        	}
+	//         img.src = event.target.result;
 
 	        
-        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
+ //        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
 
         
-		$.ajax({
-            url: 'https://api.imgur.com/3/image',
-            type: 'post',
-            headers: {
-                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+	// 	$.ajax({
+ //            url: 'https://api.imgur.com/3/image',
+ //            type: 'post',
+ //            headers: {
+ //                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
 
-            },
-            data: {
-                image: finalURI,
-                type: 'base64'
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.success) {
+ //            },
+ //            data: {
+ //                image: finalURI,
+ //                type: 'base64'
+ //            },
+ //            dataType: 'json',
+ //            success: function (response) {
+ //                if (response.success) {
                    
-                    $("#step_image").val(response.data.link.replace('http://',''));
-                    $("p.success").show();
-                }
-            },
-            error: function (request, status, error) {
-            window.alert(JSON.parse(request.responseText)["data"]["error"]);
-            console.log(error);
-            }
-        });
+ //                    $("#step_image").val(response.data.link.replace('http://',''));
+ //                    $("p.success").show();
+ //                }
+ //            },
+ //            error: function (request, status, error) {
+ //            window.alert(JSON.parse(request.responseText)["data"]["error"]);
+ //            console.log(error);
+ //            }
+ //        });
         
-    };
+ //    };
 	    
-	    reader.readAsDataURL(e.target.files[0]);
-	}
+	//     reader.readAsDataURL(e.target.files[0]);
+	// }
     $(".addLink").on("click", function() {
    $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
    

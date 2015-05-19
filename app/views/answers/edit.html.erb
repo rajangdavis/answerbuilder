@@ -44,9 +44,9 @@
 		<div class="col-md-2 col-sm-2 col-xs-3 pull-left text-center">
 			<div class="col-md-2 col-sm-2 col-xs-4"></div>
 			<% if @answer.series=="QT"%>
-				<img class="qtIcon img-responsive" src="//i.imgur.com/O4AEPmF.png">
+				<img class="qtIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/O4AEPmF.png">
 			<% elsif @answer.series=="QC"%>
-				<img class="qcIcon img-responsive" src="//i.imgur.com/LNcBXLp.jpg">
+				<img class="qcIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/LNcBXLp.jpg">
 			<% end %>
 		</div>
 	</div>
@@ -90,12 +90,11 @@
 			<%= f.label "Step/Pictures offset  "%><br />
 	    	<%= f.text_field :offset, :value => 0%>
 		</div>
-		<div class="form-group">
-			<input type="file" id="imageLoader" name="imageLoader" />
-			<p class="success green">Image successfully uploaded!</p>
-    		<canvas id="imageCanvas"></canvas> 
+  	    <div class="form-group">
+			<%= f.label :image_upload %>
+    		<%= f.file_field :image_upload %>
+    		<%= f.hidden_field :image %>
   	    </div>
-		    <%= f.hidden_field :image%>
 		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
 		<%= f.submit %>
 
@@ -114,11 +113,19 @@
 				<p class="lead"><%= step.step%></p>
 				<% if step.image!=""%>
 					<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+				<% elsif step.image_upload!=""%>
+					<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 				<% end %>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-				<img class="img-responsive" src="//<%= step.image%>">
-				<% if step.image!=""%>
+				<% if step.image!=""%>	
+					<img class="img-responsive" src="//<%= step.image%>">
+				<% elsif step.image_upload!=""%>
+					<%= image_tag(step.image_upload, :class => "img-responsive") %>
+				<% end %>
+				<% if step.image=""%>
+					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+				<% elsif step.image_upload!=""%>
 					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 				<% end %>
 			</div>
@@ -137,11 +144,19 @@
 					
 					<% if step.image!=""%>
 						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
+						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-					<img class="img-responsive" src="//<%= step.image%>">
-					<% if step.image!=""%>
+					<% if step.image!=""%>	
+						<img class="img-responsive" src="//<%= step.image%>">
+					<% elsif step.image_upload!=""%>
+						<%= image_tag(step.image_upload, :class => "img-responsive") %>
+					<% end %>
+					<% if step.image=""%>
+						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
 						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
@@ -157,12 +172,20 @@
 					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
 					<% if step.image!=""%>
 						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
+						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-					<img class="img-responsive" src="//<%= step.image%>">
-					<% if step.image!=""%>
-						<h2 class="red">PICTURE <%= step.number+step.offset %></h2>
+					<% if step.image!=""%>	
+						<img class="img-responsive" src="//<%= step.image%>">
+					<% elsif step.image_upload!=""%>
+						<%= image_tag(step.image_upload, :class => "img-responsive") %>
+					<% end %>
+					<% if step.image=""%>
+						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
+						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
 			</div>
@@ -221,58 +244,58 @@ $('.color-options a').click(function(){
         }
     });
 
-//script for uploading images and converting them into dataURI
-var canvas = new fabric.Canvas('imageCanvas', {
-    backgroundColor: 'rgb(240,240,240)'
-});
+// //script for uploading images and converting them into dataURI
+// var canvas = new fabric.Canvas('imageCanvas', {
+//     backgroundColor: 'rgb(240,240,240)'
+// });
 
-var imageLoader = document.getElementById('imageLoader');
-imageLoader.addEventListener('change', handleImage, false);
+// var imageLoader = document.getElementById('imageLoader');
+// imageLoader? imageLoader.addEventListener('change', handleImage, false):console.log();
 
-function handleImage(e) {
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        var img = new Image();
-        img.onload = function () {
-            var imgInstance = new fabric.Image(img, {
-                scaleX: 1,
-                scaleY: 1
-            });
-            canvas.add(imgInstance);
-        };
-        img.src = event.target.result;
+// function handleImage(e) {
+//     var reader = new FileReader();
+//     reader.onload = function (event) {
+//         var img = new Image();
+//         img.onload = function () {
+//             var imgInstance = new fabric.Image(img, {
+//                 scaleX: 1,
+//                 scaleY: 1
+//             });
+//             canvas.add(imgInstance);
+//         };
+//         img.src = event.target.result;
 
-        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
+//         finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
 
-// Ajax call to upload images to imgur for hosting        
-	$.ajax({
-	            url: 'https://api.imgur.com/3/image',
-	            type: 'post',
-	            headers: {
-	                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+// // Ajax call to upload images to imgur for hosting        
+// 	$.ajax({
+// 	            url: 'https://api.imgur.com/3/image',
+// 	            type: 'post',
+// 	            headers: {
+// 	                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
 
-	            },
-	            data: {
-	                image: finalURI,
-	                type: 'base64'
-	            },
-	            dataType: 'json',
-	            success: function (response) {
-	                if (response.success) {
+// 	            },
+// 	            data: {
+// 	                image: finalURI,
+// 	                type: 'base64'
+// 	            },
+// 	            dataType: 'json',
+// 	            success: function (response) {
+// 	                if (response.success) {
 	                   
-	                    $("#step_image").val(response.data.link.replace('http://',''));
-	                    $("p.success").show();
-	                }
-	            },
-	            error: function (request, status, error) {
-	            console.log(error);
-	            window.alert(JSON.parse(request.responseText)["data"]["error"]);
-	            }
-	        });
+// 	                    $("#step_image").val(response.data.link.replace('http://',''));
+// 	                    $("p.success").show();
+// 	                }
+// 	            },
+// 	            error: function (request, status, error) {
+// 	            console.log(error);
+// 	            window.alert(JSON.parse(request.responseText)["data"]["error"]);
+// 	            }
+// 	        });
 	        
-	    };
-	    reader.readAsDataURL(e.target.files[0]);
-	};
+// 	    };
+// 	    reader.readAsDataURL(e.target.files[0]);
+// 	};
 		$(".addLink").on("click", function() {
 		   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
 		   

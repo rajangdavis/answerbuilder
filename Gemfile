@@ -8,6 +8,10 @@ gem 'rails_12factor'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+gem 'paperclip'
+
+gem 'aws-sdk'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 

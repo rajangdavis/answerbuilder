@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123013714) do
+ActiveRecord::Schema.define(version: 20150518184453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,10 @@ ActiveRecord::Schema.define(version: 20150123013714) do
     t.integer  "answer_id"
     t.string   "step_type"
     t.integer  "offset"
+    t.string   "image_upload_file_name"
+    t.string   "image_upload_content_type"
+    t.integer  "image_upload_file_size"
+    t.datetime "image_upload_updated_at"
   end
 
   add_index "steps", ["answer_id"], name: "index_answer_id", using: :btree
