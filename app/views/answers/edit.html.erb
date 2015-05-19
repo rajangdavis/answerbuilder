@@ -1,8 +1,10 @@
+<div class="fixed">
 <%= link_to "Back", answers_path%> |
 <a href="#" class="edit_this">Edit</a> |
 <a href="#" class="add_steps ">Add Step</a> |
 <%= link_to "Get Code", code_path(@answer)%> |
 <%= link_to "Preview", preview_path(@answer)%>
+</div>
 <div class="edit_form">
 	<%= form_for(@answer) do |f| %>
 		<h2>Edit Answer</h2>
