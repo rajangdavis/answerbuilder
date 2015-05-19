@@ -1,37 +1,3 @@
-<div class="fixed">
-<%= link_to "Back", answers_path%> |
-<a href="#" class="edit_this">Edit</a> |
-<a href="#" class="add_steps ">Add Step</a> |
-<%= link_to "Get Code", code_path(@answer)%> |
-<%= link_to "Preview", preview_path(@answer)%>
-</div>
-<div class="edit_form">
-	<%= form_for(@answer) do |f| %>
-		<h2>Edit Answer</h2>
-		<div class="form-group">
-			<%= f.label "Language:  " %>
-		    <%= f.select :language, options_for_select(%w[English Japanese German], f.object.language) %>
-	    </div>
-		<div class="form-group">
-			<%= f.label "Series:  " %>
-		    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series )%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Title:  "%><br />
-		    <%= f.text_area :title, :placeholder => "Title"%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Tagline:  "%><br />
-		    <%= f.text_area :tagline, :placeholder => "Tagline"%>
-		</div>
-		
-		    <%= f.hidden_field :user_id, :value => current_user.id %>
-		<%= f.submit %>
-
-
-	<% end %>
-	<br>
-</div>
 <% if @answer.series=="None"%>
 	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
 		<div class="col-md-12 col-sm-12 col-xs-12 text-center answer-title">
@@ -55,53 +21,6 @@
 <% end %>
 <div class="tagline">
 	<p class="text-center lead"><%= @answer.tagline%></p>
-</div>
-
-<div class="add_steps_form">
-		<%= form_for(@step,{method: :create}) do |f| %>
-		<h2 >New Step</h2>
-		<div class="form-group">
-			<%= f.label "Step Type:  " %>
-		    <%= f.select :step_type, options_for_select(%w[Step Information Caution]) %>
-	    </div>
-		<div class="form-group">
-			<%= f.label "Step Number:  " %>
-		    <%= f.text_field :number, :value => 0%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Step Instruction:  "%><br />
-			<div class="form-group color-options">
-	            <strong><a class="bold">Bold</a></strong> | 
-	            <em><a class="i">Italic</a></em> | 
-	            <u><a class="u">Underline</a></u> |
-	            <a class="red">Red</a> | 
-	            <a class="blue">Blue</a> | 
-	            <a class="green">Green</a> | 
-	            <a class="lgreen">Light Green</a> | 
-	            <a class="yellow">Yellow</a> |
-	            <a class="orange">Orange</a> |
-	            <a class="br"> Add a Break</a> |
-	            <a class="cat">Caution</a> |
-	            <a class="note" style="float:none">Information</a> | 
-	            <a class="addLink">Add Link</a>
-	        </div><br>
-	            
-		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Step/Pictures offset  "%><br />
-	    	<%= f.text_field :offset, :value => 0%>
-		</div>
-  	    <div class="form-group">
-			<%= f.label :image_upload %>
-    		<%= f.file_field :image_upload %>
-    		<%= f.hidden_field :image %>
-  	    </div>
-		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
-		<%= f.submit %>
-
-
-	<% end %>
 </div>
 <div class="steps">
 	<% @steps.each do |step|%>
@@ -196,8 +115,83 @@
 </div>
 	
 	
-<div class="text-center">
-	
+<div>
+	<%= link_to "Back", answers_path%> |
+	<a href="#" class="edit_this">Edit</a> |
+	<a href="#" class="add_steps ">Add Step</a> |
+	<%= link_to "Get Code", code_path(@answer)%> |
+	<%= link_to "Preview", preview_path(@answer)%>
+</div>
+<div class="edit_form">
+	<%= form_for(@answer) do |f| %>
+		<h2>Edit Answer</h2>
+		<div class="form-group">
+			<%= f.label "Language:  " %>
+		    <%= f.select :language, options_for_select(%w[English Japanese German], f.object.language) %>
+	    </div>
+		<div class="form-group">
+			<%= f.label "Series:  " %>
+		    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series )%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Title:  "%><br />
+		    <%= f.text_area :title, :placeholder => "Title"%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Tagline:  "%><br />
+		    <%= f.text_area :tagline, :placeholder => "Tagline"%>
+		</div>
+		
+		    <%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.submit %>
+
+
+	<% end %>
+	<br>
+</div>
+<div class="add_steps_form">
+	<%= form_for(@step,{method: :create}) do |f| %>
+		<h2 >New Step</h2>
+		<div class="form-group">
+			<%= f.label "Step Type:  " %>
+		    <%= f.select :step_type, options_for_select(%w[Step Information Caution]) %>
+	    </div>
+		<div class="form-group">
+			<%= f.label "Step Number:  " %>
+		    <%= f.text_field :number, :value => 0%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Step Instruction:  "%><br />
+			<div class="form-group color-options">
+	            <strong><a class="bold">Bold</a></strong> | 
+	            <em><a class="i">Italic</a></em> | 
+	            <u><a class="u">Underline</a></u> |
+	            <a class="red">Red</a> | 
+	            <a class="blue">Blue</a> | 
+	            <a class="green">Green</a> | 
+	            <a class="lgreen">Light Green</a> | 
+	            <a class="yellow">Yellow</a> |
+	            <a class="orange">Orange</a> |
+	            <a class="br"> Add a Break</a> |
+	            <a class="cat">Caution</a> |
+	            <a class="note" style="float:none">Information</a> | 
+	            <a class="addLink">Add Link</a>
+	        </div><br>
+	            
+		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Step/Pictures offset  "%><br />
+	    	<%= f.text_field :offset, :value => 0%>
+		</div>
+  	    <div class="form-group">
+			<%= f.label :image_upload %>
+    		<%= f.file_field :image_upload %>
+    		<%= f.hidden_field :image %>
+  	    </div>
+		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
+		<%= f.submit %>
+	<% end %>
 </div>
 
 <div>
