@@ -37,6 +37,8 @@
 				<p class="inst lead"><%= step.step%></p>
 				<% if step.image!=""%>
 					<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>
+				<% elsif step.image_upload!=""%>
+					<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
 				<% end %>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -44,6 +46,12 @@
 					<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
 				</a>
 				<% if step.image!=""%>
+					<h2 class="answer red"><% if @answer.language=="English"%>
+						PICTURE
+						<% elsif @answer.language=="German"%>
+						BILD
+						<%end %> <%=step.number+step.offset%></h2>
+				<% elsif step.image_upload!=""%>
 					<h2 class="answer red"><% if @answer.language=="English"%>
 						PICTURE
 						<% elsif @answer.language=="German"%>
@@ -60,7 +68,9 @@
 					</div>
 					
 					<% if step.image!=""%>
-						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end %> <%= step.number+step.offset %>)</em>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
@@ -69,10 +79,16 @@
 					</a>
 					<% if step.image!=""%>
 						<h2 class="answer red"><% if @answer.language=="English"%>
-						PICTURE
-						<% elsif @answer.language=="German"%>
-						BILD
-						<%end %> <%=step.number+step.offset%></h2>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
+						<h2 class="answer red"><% if @answer.language=="English"%>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
 			</div><br>
@@ -83,7 +99,9 @@
 						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
 					</div>
 					<% if step.image!=""%>
-						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end %> <%= step.number+step.offset %>)</em>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
 					<% end %>
 
 				</div>
@@ -93,10 +111,16 @@
 					</a>
 					<% if step.image!=""%>
 						<h2 class="answer red"><% if @answer.language=="English"%>
-						PICTURE
-						<% elsif @answer.language=="German"%>
-						BILD
-						<%end %> <%=step.number+step.offset%></h2>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
+						<h2 class="answer red"><% if @answer.language=="English"%>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
 			</div><br>
