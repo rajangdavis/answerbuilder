@@ -40,9 +40,9 @@
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<% if step.image!=""%>	
-					<img class="img-responsive" src="//<%= step.image%>">
+					<img class="img-responsive" id= "<%=step.id%>" src="//<%= step.image%>">
 				<% elsif step.image_upload!=""%>
-					<%= image_tag(step.image_upload, :class => "img-responsive") %>
+					<%= image_tag(step.image_upload, :class => "img-responsive", :id => step.id) %>
 				<% end %>
 				<% if step.image=""%>
 					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>

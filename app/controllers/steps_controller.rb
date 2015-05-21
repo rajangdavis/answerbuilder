@@ -24,7 +24,7 @@ class StepsController < ApplicationController
     
     @step = Step.find(params[:id])
     if @step.update(step_params)
-      redirect_to edit_answer_path(@step.answer_id)
+      redirect_to edit_answer_path(@step.answer_id)+"#"+@step.id.to_s
     else
       redirect_to :back
     end
