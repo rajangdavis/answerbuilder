@@ -4,6 +4,8 @@
 	<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
       <button type="button" class="btn btn-default" id="QC">QC Series</button>
       <button type="button" class="btn btn-default" id="QT">QT Series</button>
+      <button type="button" class="btn btn-default" id="QS">QS Series</button>
+      <button type="button" class="btn btn-default" id="QR">QR Series</button>
       <button type="button" class="btn btn-default" id="None">Other</button>
     </div>
     <h4>Sort by language</h4>
@@ -12,6 +14,7 @@
       <button type="button" class="btn btn-default" id="German">German</button>
       <button type="button" class="btn btn-default" id="Portuguese">Portuguese</button>
       <button type="button" class="btn btn-default" id="Japanese">Japanese</button>
+      <button type="button" class="btn btn-default" id="Spanish">Spanish</button>
     </div>
     <hr>
 	<div class="answerList">
@@ -29,11 +32,11 @@
 	<h2>Create a New Answer</h2>
 	<div class="form-group">
 		<%= f.label "Language:  " %>
-	    <%= f.select :language, options_for_select(%w[English Japanese German Portuguese]) %>
+	    <%= f.select :language, options_for_select(%w[English Japanese German Portuguese Spanish]) %>
     </div>
 	<div class="form-group">
 		<%= f.label "Series:  " %>
-	    <%= f.select :series, options_for_select(%w[QC QT None]) %>
+	    <%= f.select :series, options_for_select(%w[QC QT QS QR None]) %>
 	</div>
 	<div class="form-group">
 		<%= f.label "Title:  "%><br />
@@ -53,9 +56,9 @@
 	$(document).ready(function(){
 
 		$('button.btn').click(function(){
-			var buttonClass = $(this).attr('id');
-			$('div.answerList div.'+buttonClass).show();
-			$('div.answerList div:not(.'+buttonClass+')').hide();
+			var buttonClass = "."+$(this).attr('id')+" ";
+			$('div.answerList '+buttonClass).show();
+			$('div.answerList div:not('+buttonClass+')').hide();
 		});
 	});
 </script>
