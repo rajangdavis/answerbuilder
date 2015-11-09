@@ -1,6 +1,6 @@
 <div class="container">
 	<% @answers.each do |ans|%>
-		<label>Title: </label><%=ans.series%> <%=ans.title%><br>
+		<label>Title: </label><%=link_to ans.series+" "+ans.title, preview_path(ans)%><br>
 		<% if ans.tagline != '' %>
 			<label>Tagline: </label><%=ans.tagline%><br>
 		<% end %>
@@ -23,5 +23,6 @@
 			          <% end %>
 			      </tbody>
 			</table>
+			<hr>
 	<% end %>
 </div>
