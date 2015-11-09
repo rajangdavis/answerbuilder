@@ -18,11 +18,16 @@ class AnswersController < ApplicationController
   		@preview = true
   		@answers = Answer.where(:language => "English")
   		@steps = Step.all.sort
-  		@answers.each do |answer|
-  			@number = 0
-  		end
   	end
 
+  	def csv 
+  		@hideMe = true
+  		@answers = Answer.where(:language => "English")
+		  respond_to do |format|
+		  	format.html
+		    format.csv { send_data @answers.to_csv }
+		  end
+  	end
 	def new
 		@answer = Answer.new
 		create

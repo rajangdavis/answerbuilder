@@ -1,0 +1,10 @@
+<% @answers.each do |ans|%>
+	<label>Series: </label><%=ans.series%><br>
+	<label>Title: </label><%=ans.title%><br>
+	<label>Tagline: </label><%=ans.tagline%><br>
+	<% ans.steps.each do |step|%>
+		<%=step.step_type%>
+		<%=step.number%>
+		<%=step.step%>
+	<% end %>
+<% end %>
