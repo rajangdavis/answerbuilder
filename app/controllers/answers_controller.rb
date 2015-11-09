@@ -21,8 +21,13 @@ class AnswersController < ApplicationController
   	end
 
   	def csv 
+  		if params[:series]
+  		  @answers = Answer.where(:language => "English").where(:series => params[:series]).order("created_at DESC")
+	    else
+	      @answers = Answer.where(:language => "English")
+	    end
   		@hideMe = true
-  		@answers = Answer.where(:language => "English")
+  		
 		  respond_to do |format|
 		  	format.html
 		    format.csv { send_data @answers.to_csv }
