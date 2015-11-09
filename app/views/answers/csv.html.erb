@@ -1,25 +1,27 @@
-<% @answers.each do |ans|%>
-	<label>Title: </label><%=ans.series%> <%=ans.title%><br>
-	<% if ans.tagline != '' %>
-		<label>Tagline: </label><%=ans.tagline%><br>
-	<% end %>
-	<table class="table">
-		      <thead>
-		        <tr>
-		        	<th>Step Type</th>
-		        	<th>Number</th>
-		        	<th>Step Instructions</th>
-		        </tr>
-		      </thead>
-		      <tbody>
-		          <% ans.steps.each do |step|%>
-		          	<tr>
-		          		<td><%=step.number%></td>
-		          		<td><span class="raw"><%=step.step%></span></td>
-		          		<td><span class="raw"><%=step.step_type%></span></td>
-		        	</tr>
+<div class="container">
+	<% @answers.each do |ans|%>
+		<label>Title: </label><%=ans.series%> <%=ans.title%><br>
+		<% if ans.tagline != '' %>
+			<label>Tagline: </label><%=ans.tagline%><br>
+		<% end %>
+		<table class="table">
+			      <thead>
+			        <tr>
+			        	<th>Step Type</th>
+			        	<th>Number</th>
+			        	<th>Step Instructions</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			          <% ans.steps.each do |step|%>
+			          	<tr>
+			          		<td><%=step.number%></td>
+			          		<td><span class="raw"><%=step.step%></span></td>
+			          		<td><span class="raw"><%=step.step_type%></span></td>
+			        	</tr>
 
-		          <% end %>
-		      </tbody>
-		</table>
-<% end %>
+			          <% end %>
+			      </tbody>
+			</table>
+	<% end %>
+</div>
