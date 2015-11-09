@@ -1,10 +1,25 @@
 <% @answers.each do |ans|%>
-	<label>Series: </label><%=ans.series%><br>
-	<label>Title: </label><%=ans.title%><br>
-	<label>Tagline: </label><%=ans.tagline%><br>
-	<% ans.steps.each do |step|%>
-		<%=step.step_type%>
-		<%=step.number%>
-		<%=step.step%>
+	<label>Title: </label><%=ans.series%> <%=ans.title%><br>
+	<% if ans.tagline != '' %>
+		<label>Tagline: </label><%=ans.tagline%><br>
 	<% end %>
+	<table class="table">
+		      <thead>
+		        <tr>
+		        	<th>Step Type</th>
+		        	<th>Number</th>
+		        	<th>Step Instructions</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		          <% ans.steps.each do |step|%>
+		          	<tr>
+		          		<td><%=step.number%></td>
+		          		<td><span class="raw"><%=step.step%></span></td>
+		          		<td><span class="raw"><%=step.step_type%></span></td>
+		        	</tr>
+
+		          <% end %>
+		      </tbody>
+		</table>
 <% end %>
