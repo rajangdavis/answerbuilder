@@ -1,15 +1,14 @@
 <div class="container">
 	<% @answers.each do |ans|%>
 		<label>Title: </label><%=link_to ans.series+" "+ans.title, preview_path(ans)%><br>
-		<% if ans.tagline != '' %>
-			<label>Tagline: </label><%=ans.tagline%><br>
-		<% end %>
+		<label>Tagline: </label><%= if ans.tagline!='' then ans.tagline else '(blank)' end%><br>
 		<table class="table">
 			      <thead>
 			        <tr>
 			        	<th>Step Type</th>
 			        	<th>Number</th>
 			        	<th>Step Instructions</th>
+			        	<th>Image Link</th>
 			        </tr>
 			      </thead>
 			      <tbody>
@@ -18,6 +17,7 @@
 			          		<td><%=step.number%></td>
 			          		<td><span class="raw"><%=step.step%></span></td>
 			          		<td><span class="raw"><%=step.step_type%></span></td>
+			          		<td><span class="raw"><%= if step.image_upload !='' then step.image_upload else step.image end %></span></td>
 			        	</tr>
 
 			          <% end %>

@@ -8,6 +8,8 @@ gem 'rails_12factor'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+gem 'rabl'
+
 gem 'paperclip'
 
 gem 'aws-sdk'

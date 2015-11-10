@@ -33,6 +33,15 @@ class AnswersController < ApplicationController
 		    format.csv { send_data @answers.to_csv }
 		  end
   	end
+
+  	def json 
+  		@answers = Answer.where(:language => "English").order("series DESC")
+  	end
+
+  	def export
+  		@answers = Answer.where(:language => "English").order("series DESC")
+  	end
+
 	def new
 		@answer = Answer.new
 		create
