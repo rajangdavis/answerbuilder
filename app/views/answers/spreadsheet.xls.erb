@@ -30,7 +30,8 @@
         <Cell><Data ss:Type="String">Step Type</Data></Cell>
         <Cell><Data ss:Type="String">Image Link</Data></Cell>
       </Row>
-      <% answer.steps.each do |step| %>
+      <% @steps.sort_by(&:number).each do |step| %>
+      <% if step.answer_id = answer.id%>
       <Row>
         <Cell><Data ss:Type="Number"><%= step.number%></Data></Cell>
         <Cell><Data ss:Type="Number"><%= step.offset%></Data></Cell>
@@ -38,6 +39,7 @@
         <Cell><Data ss:Type="String"><%= step.step_type%></Data></Cell>
         <Cell><Data ss:Type="String"><%= if step.image != '' then step.image else step.image_upload end %></Data></Cell>
       </Row>
+      <% end %>
       <% end %>
     <% end %>
     </Table>
