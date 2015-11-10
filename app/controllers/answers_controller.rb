@@ -35,7 +35,7 @@ class AnswersController < ApplicationController
   	end
 
   	def spreadsheet
-  		@answers = Answer.find(190)
+  		@answers = Answer.where(:id => 198)
   		respond_to do |format|
   			format.xls
   		end
