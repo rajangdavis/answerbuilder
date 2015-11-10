@@ -35,7 +35,7 @@ class AnswersController < ApplicationController
   	end
 
   	def spreadsheet
-  		@answers = Answer.find(:all, :limit => 10)
+  		@answers = Answer.find(:all, :limit => 6)
   		@steps = Step.find(:all, :order => 'number')
   		respond_to do |format|
   			format.xls
