@@ -27,3 +27,10 @@
 	<% end %>
 </div>
 <script type="text/javascript" src="http://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<script type="text/javascript">
+	$(window).load(function(){
+		$('table th:first-of-type').each(function(){
+			$(this).click()
+		})
+	})
+</script>
