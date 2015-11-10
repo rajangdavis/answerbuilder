@@ -7,11 +7,4 @@ class Step < ActiveRecord::Base
 		true_step_number = self.number - self.offset
 		true_step_number
 	end	
-	def img
-		if self.image_upload == "/image_uploads/original/missing.png"
-			self.image
-		else
-			self.image_upload 
-		end
-	end
 end
