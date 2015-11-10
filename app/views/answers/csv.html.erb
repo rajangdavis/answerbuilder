@@ -17,7 +17,7 @@
 			          		<td><%=step.step_number%></td>
 			          		<td><span class="raw"><%=step.step%></span></td>
 			          		<td><span class="raw"><%=step.step_type%></span></td>
-			          		<td><span class="raw"><%= if step.image ='' then step.image_upload else step.image end %></span></td>
+			          		<td><span class="raw"><%= step.img %></span></td>
 			        	</tr>
 
 			          <% end %>
