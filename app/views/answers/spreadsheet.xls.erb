@@ -5,7 +5,7 @@
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
   <% @answers.each do |answer| %>
-  <Worksheet ss:Name="<%=if answer.series != 'None' then answer.series + ' ' + answer.title else answer.title end%>">
+  <Worksheet ss:Name="<%=if answer.series != 'None' then (answer.series + ' ' + answer.title).truncate(20) else answer.title.truncate(20) end%>">
     <Table>
       <Row>
         <Cell><Data ss:Type="String">Title</Data></Cell>
