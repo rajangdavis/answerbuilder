@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <% @answers.each do |answer| %>
+  <Worksheet ss:Name="<%=if answer.series != 'None' then answer.series + ' ' + answer.title else answer.title end%>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Title</Data></Cell>
+        <Cell><Data ss:Type="String">Series</Data></Cell>
+        <Cell><Data ss:Type="String">Tagline</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String"><%= answer.title%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= answer.series%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= answer.tagline%></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Number</Data></Cell>
+        <Cell><Data ss:Type="String">Step Instructions</Data></Cell>
+        <Cell><Data ss:Type="String">Step Type</Data></Cell>
+        <Cell><Data ss:Type="String">Image Link</Data></Cell>
+      </Row>
+      <% answer.steps.each do |step| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= step.step_number%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= step.step%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= step.step_type%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= if step.image != '' then step.image else step.image_upload end %></Data></Cell>
+      </Row>
+      <% end %>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

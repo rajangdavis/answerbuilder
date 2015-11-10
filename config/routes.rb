@@ -11,6 +11,7 @@ Answerbuild::Application.routes.draw do
   get 'csv' => 'answers#csv', as: :csv
   get 'export' => 'answers#export', as: :export
   get 'json' => 'answers#json', as: :json
+  get 'spreadsheet' => 'answers#spreadsheet', as: :spreadsheet
   get 'answers/:id/preview' => 'answers#preview', as: :preview
   get 'stepss' => 'steps#index2',as: :imagedump
   # The priority is based upon order of creation: first created -> highest priority.

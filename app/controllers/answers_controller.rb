@@ -34,6 +34,13 @@ class AnswersController < ApplicationController
 		  end
   	end
 
+  	def spreadsheet
+  		@answers = Answer.where(:language => "English")
+  		respond_to do |format|
+  			format.xls
+  		end
+  	end
+
   	def json 
   		@answers = Answer.where(:language => "English").order("series DESC")
   	end
