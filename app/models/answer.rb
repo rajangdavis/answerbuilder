@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
 	has_many :steps
 
 	def self.steps
-		Steps.where("answer @> ARRAY[?]::integer[]", self.id)
+		Steps.where("answer @> ARRAY[?]::integer[]", self.id).sort_by(&:step_number)
 	end
 
 	def self.to_csv(options = {})
