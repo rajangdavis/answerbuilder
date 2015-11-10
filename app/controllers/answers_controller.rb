@@ -35,7 +35,7 @@ class AnswersController < ApplicationController
   	end
 
   	def spreadsheet
-  		@answers = Answer.where(:language => "English")
+  		@answers = Answer.find(:all, :order => "id desc", :limit => 5).reverse
   		respond_to do |format|
   			format.xls
   		end
