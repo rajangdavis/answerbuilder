@@ -30,7 +30,7 @@
         <Cell><Data ss:Type="String">Step Type</Data></Cell>
         <Cell><Data ss:Type="String">Image Link</Data></Cell>
       </Row>
-      <% @steps.sort_by(&:number).each do |step| %>
+      <% @steps.each do |step| %>
       <% if step.answer_id == answer.id%>
       <Row>
         <Cell><Data ss:Type="Number"><%= step.number%></Data></Cell>

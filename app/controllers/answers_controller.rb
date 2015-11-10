@@ -36,7 +36,7 @@ class AnswersController < ApplicationController
 
   	def spreadsheet
   		@answers = Answer.where(:id => 198)
-  		@steps = Step.all
+  		@steps = Step.find(:all, :order => 'number')
   		respond_to do |format|
   			format.xls
   		end
