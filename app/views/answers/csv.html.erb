@@ -2,7 +2,7 @@
 	<% @answers.each do |ans|%>
 		<label>Title: </label><%=link_to ans.series+" "+ans.title, preview_path(ans)%><br>
 		<label>Tagline: </label><%= if ans.tagline!='' then ans.tagline else '(blank)' end%><br>
-		<table class="table">
+		<table class="table sortable">
 			      <thead>
 			        <tr>
 			        	<th>Number</th>
@@ -26,3 +26,4 @@
 			<hr>
 	<% end %>
 </div>
+<script type="text/javascript" src="http://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>

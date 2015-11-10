@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
 
 	def self.steps
 		steps = Steps.where("answer @> ARRAY[?]::integer[]", self.id)
+		steps.reverse
 	end
 
 	def self.to_csv(options = {})
