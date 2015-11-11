@@ -1,0 +1,33 @@
+<%=Rails.configuration.database_configuration["development"]["database"]%>
+<div class="container">
+	<div class="text-center padding">
+		<h1>Translation Tool</h1>
+	</div>
+	<div class="container border-top">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding">
+			<div class="btn-group centered text-center">
+				<h4>English Text Format</h4>
+				<button class="btn btn-default active">Unformatted Text</button>
+				<button class="btn btn-default">Formatted Text</button>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding border-left">
+			<div class="btn-group centered text-center">
+				<h4>Foreign Language Select</h4>
+				<button class="btn btn-default active">German</button>
+				<button class="btn btn-default">Japanese</button>
+				<button class="btn btn-default">French</button>
+			</div>
+		</div>
+	</div>
+	<div class="border-top col-lg-12 col-md-12 col-sm-12 col-xs-12 padding">
+		Test
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.btn-group button').click( function() {
+		    $(this).addClass('active').siblings().removeClass('active');
+		});
+	})
+</script>

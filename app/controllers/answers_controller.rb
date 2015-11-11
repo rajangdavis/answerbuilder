@@ -20,18 +20,8 @@ class AnswersController < ApplicationController
   		@steps = Step.all.sort
   	end
 
-  	def csv 
-  		if params[:series]
-  		  @answers = Answer.where(:language => "English").where(:series => params[:series]).order("created_at DESC")
-	    else
-	      @answers = Answer.where(:language => "English")
-	    end
-  		@hideMe = true
-  		
-		  respond_to do |format|
-		  	format.html
-		    format.csv { send_data @answers.to_csv }
-		  end
+  	def translate
+  		@answer = Answer.find(params[:id])
   	end
 
   	def spreadsheet
@@ -40,14 +30,6 @@ class AnswersController < ApplicationController
   		respond_to do |format|
   			format.xls
   		end
-  	end
-
-  	def json 
-  		@answers = Answer.where(:language => "English").order("series DESC")
-  	end
-
-  	def export
-  		@answers = Answer.where(:language => "English").order("series DESC")
   	end
 
 	def new

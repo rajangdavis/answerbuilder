@@ -11,11 +11,13 @@
     <hr>
 	<div class="answerList">
 		<% @answers.each do |answer| %>
-			<div class="<%= answer.series %> <%= answer.language %>">
+			<div class="<%= answer.series %> <%= answer.language %> small">
 				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
 				<%=link_to "Get Code", code_path(answer) %> | 
 				<%=link_to "Preview", preview_path(answer) %> |
-				<a href="/spreadsheet.xls?id=<%=answer.id%>" download="<%=answer.title%>.xls">Export</a><br>
+				<a href="/spreadsheet.xls?id=<%=answer.id%>" download="<%=answer.title%>.xls">Export</a> | 
+				<%=link_to "Translate", translate_path(answer)%>
+				<br>
 			</div>
 		<% end %>
 	</div>
