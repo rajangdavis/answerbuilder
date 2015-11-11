@@ -23,7 +23,7 @@
 				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
 				<%=link_to "Get Code", code_path(answer) %> | 
 				<%=link_to "Preview", preview_path(answer) %> |
-				<a href="/spreadsheet.xls?id=<%=answer.id%>">Export</a><br>
+				<a href="/spreadsheet.xls?id=<%=answer.id%>" download="<%=answer.title%>.xls">Export</a><br>
 			</div>
 		<% end %>
 	</div>
