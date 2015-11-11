@@ -125,9 +125,9 @@
 <div class="edit_form">
 	<%= form_for(@answer) do |f| %>
 		<h2>Edit Answer</h2>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<%= f.label "Language:  " %>
-		    <%= f.select :language, options_for_select(%w[English Japanese German], f.object.language) %>
+		    <%= f.select :language, options_for_select(%w[English], f.object.language) %>
 	    </div>
 		<div class="form-group">
 			<%= f.label "Series:  " %>

@@ -8,14 +8,6 @@
       <button type="button" class="btn btn-default" id="QR">QR Series</button>
       <button type="button" class="btn btn-default" id="None">Other</button>
     </div>
-    <h4>Sort by language</h4>
-    <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
-      <button type="button" class="btn btn-default" id="English">English</button>
-      <button type="button" class="btn btn-default" id="German">German</button>
-      <button type="button" class="btn btn-default" id="Portuguese">Portuguese</button>
-      <button type="button" class="btn btn-default" id="Japanese">Japanese</button>
-      <button type="button" class="btn btn-default" id="Spanish">Spanish</button>
-    </div>
     <hr>
 	<div class="answerList">
 		<% @answers.each do |answer| %>
@@ -31,9 +23,9 @@
 <div class="new_answer col-md-6">
 <%= form_for(@answer) do |f| %>
 	<h2>Create a New Answer</h2>
-	<div class="form-group">
+	<div class="form-group hidden">
 		<%= f.label "Language:  " %>
-	    <%= f.select :language, options_for_select(%w[English Japanese German Portuguese Spanish]) %>
+	    <%= f.select :language, options_for_select(%w[English]) %>
     </div>
 	<div class="form-group">
 		<%= f.label "Series:  " %>
