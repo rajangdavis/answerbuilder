@@ -22,7 +22,8 @@
 			<div class="<%= answer.series %> <%= answer.language %>">
 				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
 				<%=link_to "Get Code", code_path(answer) %> | 
-				<%=link_to "Preview", preview_path(answer) %><br>
+				<%=link_to "Preview", preview_path(answer) %> |
+				<a href="/spreadsheet.xls?id=<%=answer.id%>">Export</a><br>
 			</div>
 		<% end %>
 	</div>
