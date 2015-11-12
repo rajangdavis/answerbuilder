@@ -1,14 +1,12 @@
-<%= render 'partial' %>
-
-<button class="download">download pictures</button>
+<div class="rn_AnswerDetail answerContainer">
+  <%= render 'partial' %>
+</div>
 <script type="text/javascript" src="/code.js"></script>
 <script type="text/javascript">
 $('a.hideNav').click(function(){
 	$('nav').hide();
 });
-<% if !current_user%>
-$('a.hideNav').length? $(".navbar,button.download").hide() : console.log('');
-<% end %>
+$(".navbar,button.download").hide();
 $("body").css('margin-top','0px');
 $(".pop").on("click", function() {
    $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link

@@ -2,7 +2,9 @@
 <html>
 <head>
   <title>Answerbuild</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700,300,500|Roboto+Condensed:400,300,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="//qsee.custhelp.com/euf/assets/themes/qsee/bootstrap3.css">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
@@ -13,18 +15,18 @@
 </head>
 <% if !@hideMe%>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<ul class="nav nav-pills" role="tablist">
+<ul class="nav nav-pills container" role="tablist">
   <% if current_user %>
   <li role="presentation pull-right"><a href="/answers"><img src='//i.imgur.com/2S6kiqI.png'></a></li>
 	<li role="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
   <% end %>
     <%if @preview==true%>
-      <li role="presentation pull-right"><a href="#" class="hideNav">Hide this</a></li>
+      <li role="presentation pull-left"><a href="#" class="hideNav">Hide this</a></li>
     <% end %>
 </ul>
     </nav>
 <% end %>
-   <div>
+   <div class="animated fadeIn">
 <%= yield %>
    </div> 
 </body>

@@ -1,59 +1,69 @@
-<div class="answer_list col-md-6">
-	<h2>Answers</h2>
-	<h4>Sort by series</h4>
-	<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
-      <button type="button" class="btn btn-default" id="QC">QC Series</button>
-      <button type="button" class="btn btn-default" id="QT">QT Series</button>
-      <button type="button" class="btn btn-default" id="QS">QS Series</button>
-      <button type="button" class="btn btn-default" id="QR">QR Series</button>
-      <button type="button" class="btn btn-default" id="None">Other</button>
-    </div>
-    <hr>
-	<div class="answerList">
-		<% @answers.each do |answer| %>
-			<div class="<%= answer.series %> <%= answer.language %> small">
-				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
-				<%=link_to "Get Code", code_path(answer) %> | 
-				<%=link_to "Preview", preview_path(answer) %> |
-				<a href="/spreadsheet.xls?id=<%=answer.id%>" download="<%=answer.title%>.xls">Export</a> | 
-				<%=link_to "Translate", translate_path(answer)%>
-				<br>
-			</div>
-		<% end %>
+<style type="text/css">
+	body{
+		background:lightgrey;
+	}
+</style>
+<div class="container">
+
+	<div class="answer_list col-md-8">
+		<h2 class="text-center">Answers</h2>
+		<div class="btn-group btn-group-lg centered5" role="group" aria-label="Large button group">
+	      <button type="button" class="btn btn-default" id="QC">QC Series</button>
+	      <button type="button" class="btn btn-default" id="QT">QT Series</button>
+	      <button type="button" class="btn btn-default" id="QS">QS Series</button>
+	      <button type="button" class="btn btn-default" id="QR">QR Series</button>
+	      <button type="button" class="btn btn-default" id="None">Other</button>
+	    </div>
+		<div class="answerList padding">
+			<% @answers.each do |answer| %>
+				<div class="<%= answer.series %> small bordered">
+					<span class="icon "><i class="icon <%= answer.series %>"></i></span>
+					<span class="small"><%=link_to answer.title, edit_answer_path(answer) %></span>
+					<span class="pull-right btn-group">
+					<%=link_to "Get Code", code_path(answer), :class => "small btn btn-default btn-modified"%> 
+					<%=link_to "Preview", preview_path(answer), :class => "small btn btn-default btn-modified"%>
+					<a href="/spreadsheet.xls?id=<%=answer.id%>" class="small btn btn-default btn-modified" download="<%=answer.title%>.xls">Export</a> 
+					<%=link_to "Translate", translate_path(answer), :class => "small btn btn-default btn-modified"%>
+					</span>
+					<br>
+				</div>
+			<% end %>
+		</div>
 	</div>
+	<div class="new_answer col-md-4 fixed">
+	<%= form_for(@answer) do |f| %>
+		<h2 class="text-center">Create a New Answer</h2>
+		<div class="form-group hidden">
+			<%= f.label "Language:  " %>
+		    <%= f.select :language, options_for_select(%w[English]) , :class => "form-control"%>
+	    </div>
+		<div class="form-group">
+			<%= f.label "Series:  " %>
+		    <%= f.select :series, options_for_select(%w[QC QT QS QR None]),{}, {:class => "form-control"}%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Title:  "%><br />
+		    <%= f.text_area :title, :placeholder => "Title", :class => "form-control"%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Tagline:  "%><br />
+		    <%= f.text_area :tagline, :placeholder => "Tagline", :class => "form-control"%>
+		</div>
+		
+		    <%= f.hidden_field :user_id, :value => current_user.id %>
+	<%= f.submit %>
+
+
+	<% end %></div>
 </div>
-<div class="new_answer col-md-6">
-<%= form_for(@answer) do |f| %>
-	<h2>Create a New Answer</h2>
-	<div class="form-group hidden">
-		<%= f.label "Language:  " %>
-	    <%= f.select :language, options_for_select(%w[English]) %>
-    </div>
-	<div class="form-group">
-		<%= f.label "Series:  " %>
-	    <%= f.select :series, options_for_select(%w[QC QT QS QR None]) %>
-	</div>
-	<div class="form-group">
-		<%= f.label "Title:  "%><br />
-	    <%= f.text_area :title, :placeholder => "Title"%>
-	</div>
-	<div class="form-group">
-		<%= f.label "Tagline:  "%><br />
-	    <%= f.text_area :tagline, :placeholder => "Tagline"%>
-	</div>
-	
-	    <%= f.hidden_field :user_id, :value => current_user.id %>
-<%= f.submit %>
-
-
-<% end %></div>
 <script type="text/javascript">
 	$(document).ready(function(){
 
 		$('button.btn').click(function(){
-			var buttonClass = "."+$(this).attr('id')+" ";
+			var buttonClass = "."+$(this).attr('id');
 			$('div.answerList '+buttonClass).show();
 			$('div.answerList div:not('+buttonClass+')').hide();
+			$('div.answerList '+buttonClass+':last').parent().parent().css('border-bottom','3px solid lightgrey')
 		});
 	});
 </script>

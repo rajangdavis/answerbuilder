@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
 	def index
-		@answers = Answer.all
+		@answers = Answer.find(:all, :order => 'series DESC')
 		@answer = Answer.new
 	end
 	
