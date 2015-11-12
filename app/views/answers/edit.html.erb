@@ -114,9 +114,7 @@
 			<% end %>
 		<% end %>
 	</div>
-		
-		
-	<div class="links container">
+	<div class="links container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 		<%= link_to "Back", answers_path%> |
 		<a href="javascript:void(0)" class="edit_this">Edit</a> |
 		<a href="javascript:void(0)" class="add_steps ">Add Step</a> |
@@ -204,10 +202,12 @@
 
 	<script type="text/javascript">
 	$(document).ready(function () {
-
+		function scrollTo(elemSelector){
+			$('html, body').animate({
+		        scrollTop: $(elemSelector).offset().top-80
+		    }, 1000)
+		};
 		$("p.success").hide();
-		var href = 
-		console.log(href);
 	    $("p.lead,span.lead").each(function () {
 
 	    	
