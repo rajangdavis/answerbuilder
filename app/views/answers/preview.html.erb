@@ -29,18 +29,39 @@ $(".pop").on("click", function() {
 	//     });
    
 });
-$('button.download').click(function(){
-	var imgArray = $('img.img-responsive:not(img.note):not(img.caution):not(img.qcIcon):not(img.qtIcon):not(:last)');
-	
-        		
 
-	$(imgArray).each(function (i) {
-		
-        var $this = $(this);
-        $this.wrap('<a class="temp" href="' + $this.attr('src') + '" download="'+i+'.png" />');
-        $this.click();   
-    });
-});
+
+ function adjustTitle(){
+        //Check if there is a series icon
+        if($('.qcIcon,.qtIcon').length){
+            //set variables for scope
+            
+            var modH;
+            
+            var winW;
+            
+            //set a timer to constantly check the page every 500 milliseconds
+            
+            window.setInterval(function(){
+            
+                //set variable to get the height of the icon, took out 'var' for global scope
+
+                modH = $('.qcIcon,.qtIcon').height();
+
+                //set variable to get the width of the screen, took out 'var' for global scope
+            
+                winW = $(window).width();
+                
+                //if the window-size is less than 767 pixels, make the margin-top of the title a 3rd of the icon size
+                    //set the font size of the title to be 1.75 times the height of the icon
+                //else this other arbitrary calculation --- honestly, I just mashed in numbers til it looked alright...
+
+                winW>767?$("h1.inst.answer").css("margin-top",((modH/3))+"px").css("font-size",(modH*1.75)+"%"):
+                $("h1.inst.answer").css("margin-top",((modH/4.5))+"px").css("font-size",(modH*1.8)+"%");
+                },500);
+        };
+    };
+    adjustTitle();
 </script>
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
