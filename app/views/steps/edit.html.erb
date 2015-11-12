@@ -1,143 +1,145 @@
-<%= form_for(@step, multipart: true) do |f| %>
-	<h2>Edit Step</h2>
-	<div class="form-group">
-		<%= f.label "Step Type:  " %>
-	    <%= f.select :step_type, options_for_select(%w[Step Information Caution], f.object.step_type) %>
-    </div>
-	<div class="form-group">
-		<%= f.label "Step Number:  " %>
-	    <%= f.text_field :number%>
-	</div>
-	<div class="form-group">
-		<%= f.label "Step Instruction:  "%><br />
-        <div class="form-group color-options">
-            <strong><a class="bold">Bold</a></strong> | 
-            <em><a class="i">Italic</a></em> | 
-            <u><a class="u">Underline</a></u> |
-            <a class="red">Red</a> | 
-            <a class="blue">Blue</a> | 
-            <a class="green">Green</a> | 
-            <a class="lgreen">Light Green</a> | 
-            <a class="yellow">Yellow</a> |
-            <a class="orange">Orange</a> |
-            <a class="br"> Add a Break</a> |
-            <a class="cat">Caution</a> |
-            <a class="note" style="float:none">Information</a> |
-            <a class="addLink">Add Link</a>
-        </div><br>
-            
-	    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
-	</div>
-	<div class="form-group">
-		<%= f.label "Step/Pictures offset  "%><br />
-	    <%= f.text_field :offset%>
-	</div>
+<div class="container">
+  <%= form_for(@step, multipart: true) do |f| %>
+    <h2>Edit Step</h2>
     <div class="form-group">
-        <%= f.label :image_upload %>
-        <%= f.file_field :image_upload %>
-        <%= f.hidden_field :image %>
-        <% if @step.image!=nil%>
-          <input type="button" class="imgClear" value="Click Here to clear the image">
-        <% end %>
+      <%= f.label "Step Type:  " %>
+        <%= f.select :step_type, options_for_select(%w[Step Information Caution], f.object.step_type) %>
+      </div>
+    <div class="form-group">
+      <%= f.label "Step Number:  " %>
+        <%= f.text_field :number%>
     </div>
-	<%= f.submit %>
-<% end %>
+    <div class="form-group">
+      <%= f.label "Step Instruction:  "%><br />
+          <div class="form-group color-options">
+              <strong><a class="bold">Bold</a></strong> | 
+              <em><a class="i">Italic</a></em> | 
+              <u><a class="u">Underline</a></u> |
+              <a class="red">Red</a> | 
+              <a class="blue">Blue</a> | 
+              <a class="green">Green</a> | 
+              <a class="lgreen">Light Green</a> | 
+              <a class="yellow">Yellow</a> |
+              <a class="orange">Orange</a> |
+              <a class="br"> Add a Break</a> |
+              <a class="cat">Caution</a> |
+              <a class="note" style="float:none">Information</a> |
+              <a class="addLink">Add Link</a>
+          </div><br>
+              
+        <%= f.text_area :step, :placeholder => "Write your instructions here"%>
+    </div>
+    <div class="form-group">
+      <%= f.label "Step/Pictures offset  "%><br />
+        <%= f.text_field :offset%>
+    </div>
+      <div class="form-group">
+          <%= f.label :image_upload %>
+          <%= f.file_field :image_upload %>
+          <%= f.hidden_field :image %>
+          <% if @step.image!=nil%>
+            <input type="button" class="imgClear" value="Click Here to clear the image">
+          <% end %>
+      </div>
+    <%= f.submit %>
+  <% end %>
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-	$("p.success").hide();
-    $('.color-options a').click(function(){
-        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
-        var isBold = $(this)[0].className+']'
-        if ($(this)[0].className=='br'){
-            $('#step_step').val($('#step_step').val()+'['+isBold);
-        } else{
-             $('#step_step').val($('#step_step').val()+'['+notBold);
-        }
+    $("p.success").hide();
+      $('.color-options a').click(function(){
+          var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
+          var isBold = $(this)[0].className+']'
+          if ($(this)[0].className=='br'){
+              $('#step_step').val($('#step_step').val()+'['+isBold);
+          } else{
+               $('#step_step').val($('#step_step').val()+'['+notBold);
+          }
+      });
+    // var canvas = new fabric.Canvas('imageCanvas', {
+   //     backgroundColor: 'rgb(240,240,240)'
+    // });
+
+    $("input.imgClear").click(function(){
+      $("#step_image").val("");
     });
-	// var canvas = new fabric.Canvas('imageCanvas', {
- //    	backgroundColor: 'rgb(240,240,240)'
-	// });
 
-	$("input.imgClear").click(function(){
-		$("#step_image").val("");
-	});
+    // var imageLoader = document.getElementById('imageLoader');
+    // imageLoader.length? imageLoader.addEventListener('change', handleImage, false):console.log();
 
-	// var imageLoader = document.getElementById('imageLoader');
-	// imageLoader.length? imageLoader.addEventListener('change', handleImage, false):console.log();
+    // function handleImage(e) {
+   //    var reader = new FileReader();
+   //    reader.onload = function (event) {
+   //        var img = new Image();
+   //        img.onload = function () {
+   //            var imgInstance = new fabric.Image(img, {
+   //                scaleX: 1,
+   //                scaleY: 1
+   //            })
+   //            canvas.add(imgInstance);
+   //         }
+    //         img.src = event.target.result;
 
-	// function handleImage(e) {
- //    var reader = new FileReader();
- //    reader.onload = function (event) {
- //        var img = new Image();
- //        img.onload = function () {
- //            var imgInstance = new fabric.Image(img, {
- //                scaleX: 1,
- //                scaleY: 1
- //            })
- //            canvas.add(imgInstance);
- //        	}
-	//         img.src = event.target.result;
+            
+   //        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
 
-	        
- //        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
+          
+    //  $.ajax({
+   //            url: 'https://api.imgur.com/3/image',
+   //            type: 'post',
+   //            headers: {
+   //                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
 
+   //            },
+   //            data: {
+   //                image: finalURI,
+   //                type: 'base64'
+   //            },
+   //            dataType: 'json',
+   //            success: function (response) {
+   //                if (response.success) {
+                     
+   //                    $("#step_image").val(response.data.link.replace('http://',''));
+   //                    $("p.success").show();
+   //                }
+   //            },
+   //            error: function (request, status, error) {
+   //            window.alert(JSON.parse(request.responseText)["data"]["error"]);
+   //            console.log(error);
+   //            }
+   //        });
+          
+   //    };
         
-	// 	$.ajax({
- //            url: 'https://api.imgur.com/3/image',
- //            type: 'post',
- //            headers: {
- //                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+    //     reader.readAsDataURL(e.target.files[0]);
+    // }
+      $(".addLink").on("click", function() {
+     $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
+     
+     $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
 
- //            },
- //            data: {
- //                image: finalURI,
- //                type: 'base64'
- //            },
- //            dataType: 'json',
- //            success: function (response) {
- //                if (response.success) {
-                   
- //                    $("#step_image").val(response.data.link.replace('http://',''));
- //                    $("p.success").show();
- //                }
- //            },
- //            error: function (request, status, error) {
- //            window.alert(JSON.parse(request.responseText)["data"]["error"]);
- //            console.log(error);
- //            }
- //        });
-        
- //    };
-	    
-	//     reader.readAsDataURL(e.target.files[0]);
-	// }
-    $(".addLink").on("click", function() {
-   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
-   
-   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
-
-   $('button.submit').click(function(){
-    $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
-        $('input.href,input.text').val("");
-   });
+     $('button.submit').click(function(){
+      $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
+          $('input.href,input.text').val("");
+     });
 
 
-});
-</script>
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content ">
-      <div class="modal-header">
-         <h4 class="modal-title" id="myModalLabel">Add Link</h4>
-      </div>
-      <div class="modal-body">
-        <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
-        <input class="text" placeholder="Insert Link Text"><br><br>
-        <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  });
+  </script>
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content ">
+        <div class="modal-header">
+           <h4 class="modal-title" id="myModalLabel">Add Link</h4>
+        </div>
+        <div class="modal-body">
+          <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
+          <input class="text" placeholder="Insert Link Text"><br><br>
+          <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

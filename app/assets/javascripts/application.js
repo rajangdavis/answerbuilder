@@ -15,3 +15,9 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+function scrollTo(elemSelector){
+	$('html, body').animate({
+        scrollTop: $(elemSelector).offset().top-80
+    }, 1000);
+}

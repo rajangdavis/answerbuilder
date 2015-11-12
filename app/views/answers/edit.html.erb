@@ -116,50 +116,50 @@
 	</div>
 		
 		
-	<div>
+	<div class="links container">
 		<%= link_to "Back", answers_path%> |
-		<a href="#" class="edit_this">Edit</a> |
-		<a href="#" class="add_steps ">Add Step</a> |
+		<a href="javascript:void(0)" class="edit_this">Edit</a> |
+		<a href="javascript:void(0)" class="add_steps ">Add Step</a> |
 		<%= link_to "Get Code", code_path(@answer)%> |
 		<%= link_to "Preview", preview_path(@answer)%>
 	</div>
-	<div class="edit_form">
+	<div class="edit_form  container">
 		<%= form_for(@answer) do |f| %>
 			<h2>Edit Answer</h2>
 			<div class="form-group hidden">
 				<%= f.label "Language:  " %>
-			    <%= f.select :language, options_for_select(%w[English], f.object.language) %>
+			    <%= f.select :language, options_for_select(%w[English], f.object.language),{},{:class=>'form-control'} %>
 		    </div>
 			<div class="form-group">
 				<%= f.label "Series:  " %>
-			    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series )%>
+			    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series ),{},{:class=>'form-control'} %>
 			</div>
 			<div class="form-group">
 				<%= f.label "Title:  "%><br />
-			    <%= f.text_area :title, :placeholder => "Title"%>
+			    <%= f.text_area :title, :placeholder => "Title",:class => "form-control"%>
 			</div>
 			<div class="form-group">
 				<%= f.label "Tagline:  "%><br />
-			    <%= f.text_area :tagline, :placeholder => "Tagline"%>
+			    <%= f.text_area :tagline, :placeholder => "Tagline",:class => "form-control"%>
 			</div>
 			
 			    <%= f.hidden_field :user_id, :value => current_user.id %>
-			<%= f.submit %>
+			<%= f.submit "Update Answer", :class => "btn btn-default" %>
 
 
 		<% end %>
 		<br>
 	</div>
-	<div class="add_steps_form">
+	<div class="add_steps_form container ">
 		<%= form_for(@step,{method: :create}) do |f| %>
 			<h2 >New Step</h2>
 			<div class="form-group">
 				<%= f.label "Step Type:  " %>
-			    <%= f.select :step_type, options_for_select(%w[Step Information Caution]) %>
+			    <%= f.select :step_type, options_for_select(%w[Step Information Caution]),{},{:class => "form-control"} %>
 		    </div>
 			<div class="form-group">
 				<%= f.label "Step Number:  " %>
-			    <%= f.text_field :number, :value => 0%>
+			    <%= f.text_field :number, :value => 0, :class => "form-control"%>
 			</div>
 			<div class="form-group">
 				<%= f.label "Step Instruction:  "%><br />
@@ -179,20 +179,21 @@
 		            <a class="addLink">Add Link</a>
 		        </div><br>
 		            
-			    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
+			    <%= f.text_area :step, :placeholder => "Write your instructions here", :class => "form-control"%>
 			</div>
 			<div class="form-group">
 				<%= f.label "Step/Pictures offset  "%><br />
-		    	<%= f.text_field :offset, :value => 0%>
+		    	<%= f.text_field :offset, :value => 0, :class => "form-control"%>
 			</div>
 	  	    <div class="form-group">
 				<%= f.label :image_upload %>
-	    		<%= f.file_field :image_upload %>
+	    		<%= f.file_field :image_upload, :class => "form-control"%>
 	    		<%= f.hidden_field :image %>
 	  	    </div>
 			    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
-			<%= f.submit %>
+			<%= f.submit "Create Step", :class => "form-control"%>
 		<% end %>
+		<br><br><br>
 	</div>
 
 	<div>
@@ -203,6 +204,7 @@
 
 	<script type="text/javascript">
 	$(document).ready(function () {
+
 		$("p.success").hide();
 		var href = 
 		console.log(href);
@@ -226,10 +228,15 @@
 
 	$("a.edit_this").click(function () {
 	    $("div.edit_form").toggle(1000);
+	    $("div.add_steps_form").hide();
+	    scrollTo("div.edit_form");
 	});
 
 	$("a.add_steps").click(function () {
+		$("div.edit_form").hide();
 	    $("div.add_steps_form").toggle(1000);
+	    scrollTo("div.add_steps_form");	
+
 	});
 	$('.color-options a').click(function(){
 	        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
