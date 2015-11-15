@@ -86,15 +86,9 @@ div.divform{
 	border-radius:8px;
 	box-shadow: 0px 3px 5px #888888;
 }
-input#password{
-	width:76% !important;
-}
-input.password{
-	min-width:73% !important;
-}
 
 div.new_answer{
-	min-height: 760px;
+	min-height: 100vh;
 	padding:90px;
     box-shadow: -3px -1px 5px #888888;
 }
@@ -168,7 +162,7 @@ margin:0 auto;
 	color: orange!important;
 }
 .lgreen{
-	color: lightgreen!important;
+	color: #07FF06!important;
 }
 /* css for text areas for creating steps */
 
@@ -222,6 +216,9 @@ hr{
 }
 .padding{
 	padding:25px 0px 30px 0px;
+}
+.margin{
+	margin:25px 0px 30px 0px;
 }
 .bordered{
 	border-top: 3px solid white;
@@ -287,6 +284,17 @@ span.pull-right.btn-group{
 	overflow:hidden;
 }
 .links{
-	padding:80px 0px 50px 0px;
-	font-size:20px;
+ padding: 10px 0px 65px 0px;
+ font-size: 20px;
+ position: fixed;
+ width: 100%;
+ bottom: -20px;
+ left: 0%;
+ height: 5px;
+ background: lightgrey;
+ box-shadow: 0px -2px 3px #888888;
+}
+.login-btn{
+	border: 0;
+    background: transparent;
 }

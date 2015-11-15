@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
 	def index
-		@answers = Answer.find(:all, :order => 'series DESC')
+		@answers = Answer.find(:all, :order => 'title ASC')
 		@answer = Answer.new
 	end
 	
@@ -51,6 +51,7 @@ class AnswersController < ApplicationController
 		@answer = Answer.find(params[:id])
 		@step = Step.new
 		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
+		@steps_count = @steps.length
 	end
 
 	def update

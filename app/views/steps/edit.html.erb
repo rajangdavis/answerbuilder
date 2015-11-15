@@ -3,11 +3,11 @@
     <h2>Edit Step</h2>
     <div class="form-group">
       <%= f.label "Step Type:  " %>
-        <%= f.select :step_type, options_for_select(%w[Step Information Caution], f.object.step_type) %>
+        <%= f.select :step_type, options_for_select(%w[Step Information Caution], f.object.step_type),{},{:class => "form-control"}%>
       </div>
     <div class="form-group">
       <%= f.label "Step Number:  " %>
-        <%= f.text_field :number%>
+        <%= f.text_field :number, :class => "form-control"%>
     </div>
     <div class="form-group">
       <%= f.label "Step Instruction:  "%><br />
@@ -27,21 +27,21 @@
               <a class="addLink">Add Link</a>
           </div><br>
               
-        <%= f.text_area :step, :placeholder => "Write your instructions here"%>
+        <%= f.text_area :step, :placeholder => "Write your instructions here",:class => "form-control"%>
     </div>
     <div class="form-group">
       <%= f.label "Step/Pictures offset  "%><br />
-        <%= f.text_field :offset%>
+        <%= f.text_field :offset,:class => "form-control"%>
     </div>
       <div class="form-group">
           <%= f.label :image_upload %>
-          <%= f.file_field :image_upload %>
+          <%= f.file_field :image_upload, :class => "form-control"%>
           <%= f.hidden_field :image %>
           <% if @step.image!=nil%>
-            <input type="button" class="imgClear" value="Click Here to clear the image">
+            <input type="button" class="imgClear btn btn-default" value="Click Here to clear the image">
           <% end %>
       </div>
-    <%= f.submit %>
+    <%= f.submit "Update Step", :class => "btn btn-default" %>
   <% end %>
 
   <script type="text/javascript">

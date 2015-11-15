@@ -29,7 +29,7 @@
 				
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
 				<div class="col-md-6 col-sm-6 col-xs-6">
-					<h2><strong>STEP <%= step.number %></strong></h2>
+					<h2 class="inst answer"><strong>STEP <%= step.number %></strong></h2>
 					<%= link_to "Edit Step", edit_step_path(step)%> |
 					<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
 					<p class="lead"><%= step.step%></p>
@@ -130,7 +130,7 @@
 		    </div>
 			<div class="form-group">
 				<%= f.label "Series:  " %>
-			    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series ),{},{:class=>'form-control'} %>
+			    <%= f.select :series, options_for_select(%w[QC QT QS QR None], f.object.series ),{},{:class=>'form-control'} %>
 			</div>
 			<div class="form-group">
 				<%= f.label "Title:  "%><br />
@@ -157,7 +157,7 @@
 		    </div>
 			<div class="form-group">
 				<%= f.label "Step Number:  " %>
-			    <%= f.text_field :number, :value => 0, :class => "form-control"%>
+			    <%= f.text_field :number, :value => @steps_count+1, :class => "form-control"%>
 			</div>
 			<div class="form-group">
 				<%= f.label "Step Instruction:  "%><br />

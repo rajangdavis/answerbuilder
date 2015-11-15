@@ -6,15 +6,15 @@
 <div class="container">
 
 	<div class="answer_list col-md-8">
-		<h2 class="text-center">Answers</h2>
-		<div class="btn-group btn-group-lg centered5" role="group" aria-label="Large button group">
+		<h2 class="">Answers</h2>
+		<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
 	      <button type="button" class="btn btn-default" id="QC">QC Series</button>
 	      <button type="button" class="btn btn-default" id="QT">QT Series</button>
 	      <button type="button" class="btn btn-default" id="QS">QS Series</button>
 	      <button type="button" class="btn btn-default" id="QR">QR Series</button>
 	      <button type="button" class="btn btn-default" id="None">Other</button>
 	    </div>
-		<div class="answerList padding">
+		<div class="answerList margin">
 			<% @answers.each do |answer| %>
 				<div class="<%= answer.series %> small bordered">
 					<span class="icon "><i class="icon <%= answer.series %>"></i></span>
@@ -23,7 +23,7 @@
 					<%=link_to "Get Code", code_path(answer), :class => "small btn btn-default btn-modified"%> 
 					<%=link_to "Preview", preview_path(answer), :class => "small btn btn-default btn-modified"%>
 					<a href="/spreadsheet.xls?id=<%=answer.id%>" class="small btn btn-default btn-modified" download="<%=answer.title%>.xls">Export</a> 
-					<%=link_to "Translate", translate_path(answer), :class => "small btn btn-default btn-modified",:disabled => true%>
+					<%=link_to "Translate", translate_path(answer), :class => "small btn btn-default btn-modified",:disabled => false%>
 					</span>
 					<br>
 				</div>
@@ -32,7 +32,7 @@
 	</div>
 	<div class="new_answer col-md-4 fixed">
 	<%= form_for(@answer) do |f| %>
-		<h2 class="text-center">Create a New Answer</h2>
+		<h2 class="">Create a New Answer</h2>
 		<div class="form-group hidden">
 			<%= f.label "Language:  " %>
 		    <%= f.select :language, options_for_select(%w[English]) , :class => "form-control"%>
@@ -51,7 +51,7 @@
 		</div>
 		
 		    <%= f.hidden_field :user_id, :value => current_user.id %>
-	<%= f.submit %>
+	<%= f.submit "Create Answer", :class => "btn btn-default" %>
 
 
 	<% end %></div>
