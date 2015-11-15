@@ -18,12 +18,11 @@
 			<% @answers.each do |answer| %>
 				<div class="<%= answer.series %> small bordered">
 					<span class="icon "><i class="icon <%= answer.series %>"></i></span>
-					<span class="small"><%=link_to answer.title, edit_answer_path(answer) %></span>
+					<span class="small edit_answer_link"><%=link_to answer.title, edit_answer_path(answer) %></span>
 					<span class="pull-right btn-group">
 					<%=link_to "Get Code", code_path(answer), :class => "small btn btn-default btn-modified"%> 
 					<%=link_to "Preview", preview_path(answer), :class => "small btn btn-default btn-modified"%>
 					<a href="/spreadsheet.xls?id=<%=answer.id%>" class="small btn btn-default btn-modified" download="<%=answer.title%>.xls">Export</a> 
-					<%=link_to "Translate", translate_path(answer), :class => "small btn btn-default btn-modified",:disabled => false%>
 					</span>
 					<br>
 				</div>

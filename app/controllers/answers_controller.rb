@@ -4,6 +4,10 @@ class AnswersController < ApplicationController
 		@answer = Answer.new
 	end
 	
+	def translate_index
+		@answers = Answer.find(:all, :order => 'title ASC')
+	end
+
 	def preview
 		@preview = true
 	 	@answer = Answer.find(params[:id])

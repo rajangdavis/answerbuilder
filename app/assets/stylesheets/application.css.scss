@@ -60,8 +60,8 @@ nav>ul>li:first-of-type{
 
 .animated{
 	
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
@@ -297,4 +297,16 @@ span.pull-right.btn-group{
 .login-btn{
 	border: 0;
     background: transparent;
+}
+span.small a{
+	font-weight:500;
+}
+.edit_answer_links{
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 392px;
+	background: white;
+	white-space: nowrap;
+	overflow: hidden;
+	vertical-align: top;
 }

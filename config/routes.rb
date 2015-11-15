@@ -9,6 +9,7 @@ Answerbuild::Application.routes.draw do
   get 'answers/:id/code' => 'answers#code', as: :code
   get 'strings' => 'answers#strings', as: :strings
   get 'translate/:id' => 'answers#translate', as: :translate
+  get 'translation_portal' => 'answers#translate_index', as: :translate_index
   get 'spreadsheet' => 'answers#spreadsheet', as: :spreadsheet
   get 'answers/:id/preview' => 'answers#preview', as: :preview
   get 'stepss' => 'steps#index2',as: :imagedump
