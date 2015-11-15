@@ -19,7 +19,7 @@
   <% if current_user %>
   <li role="presentation pull-right"><a href="/answers"><img src='//i.imgur.com/2S6kiqI.png'></a></li>
 	<li role="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
-  <li role="presentation pull-left"><%= link_to "Translations Portal", translate_index_path %></li>
+  <!-- <li role="presentation pull-left"><%= link_to "Translations Portal", translate_index_path %></li> -->
   <% end %>
 </ul>
     </nav>

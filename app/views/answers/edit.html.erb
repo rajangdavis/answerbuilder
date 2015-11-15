@@ -115,6 +115,7 @@
 		<% end %>
 	</div>
 	<div class="links container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+		<span class="pointer-hide">X Hide</span>
 		<%= link_to "Back", answers_path%> |
 		<a href="javascript:void(0)" class="edit_this">Edit</a> |
 		<a href="javascript:void(0)" class="add_steps ">Add Step</a> |
@@ -199,9 +200,10 @@
 			<h1 class="text-center">:) You haz no steps</h1>
 		<% end %>
 	</div>
-
+	<span class="pointer-show">+ Show</span>
 	<script type="text/javascript">
 	$(document).ready(function () {
+		$('.pointer-show').hide();
 		function scrollTo(elemSelector){
 			$('html, body').animate({
 		        scrollTop: $(elemSelector).offset().top-80
@@ -247,7 +249,17 @@
 	             $('#step_step').val($('#step_step').val()+'['+notBold);
 	        }
 	    });
+	$('.pointer-hide,.pointer-show').click(function(){
+		var links = $('.links.container')[0];
+		if(links.style.display == "none"){ 
+			$('.links.container').show(500);
+			$('.pointer-show').hide(500);
 
+		}else{
+			$('.links.container').hide(500);
+			$('.pointer-show').show(500);
+		}
+	})
 	// //script for uploading images and converting them into dataURI
 	// var canvas = new fabric.Canvas('imageCanvas', {
 	//     backgroundColor: 'rgb(240,240,240)'
