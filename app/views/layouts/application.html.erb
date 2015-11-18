@@ -13,19 +13,23 @@
   
   <%= csrf_meta_tags %>
 </head>
+<body>
 <% if !@hideMe%>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <ul class="nav nav-pills container" role="tablist">
   <% if current_user %>
-  <li role="presentation pull-right"><a href="/answers"><img src='//i.imgur.com/2S6kiqI.png'></a></li>
+  <li role="presentation pull-right">
+    <a href="<%= if current_user.role=='ADMIN' then '/answers' else '/translation_portal' end%>">
+      <img src='//i.imgur.com/2S6kiqI.png'>
+    </a>
+  </li>
 	<li role="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
   <!-- <li role="presentation pull-left"><%= link_to "Translations Portal", translate_index_path %></li> -->
   <% end %>
 </ul>
     </nav>
 <% end %>
-   <div class="animated fadeIn">
 <%= yield %>
-   </div> 
+
 </body>
 </html>

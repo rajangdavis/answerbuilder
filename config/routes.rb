@@ -12,6 +12,7 @@ Answerbuild::Application.routes.draw do
   get 'translation_portal' => 'answers#translate_index', as: :translate_index
   get 'spreadsheet' => 'answers#spreadsheet', as: :spreadsheet
   get 'answers/:id/preview' => 'answers#preview', as: :preview
+  get 'answers/:id/preview_jp' => 'answers#preview_jp', as: :preview_jp
   get 'stepss' => 'steps#index2',as: :imagedump
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -24,7 +24,8 @@ class StepsController < ApplicationController
     
     @step = Step.find(params[:id])
     if @step.update(step_params)
-      redirect_to edit_answer_path(@step.answer_id)+"#"+@step.id.to_s
+      flash[:notice] = "Step successfully updated!"
+      redirect_to :back
     else
       redirect_to :back
     end
@@ -51,7 +52,7 @@ class StepsController < ApplicationController
   private
 
   def step_params   
-    params.require(:step).permit(:step_type, :number, :step, :answer_id, :image, :offset, :image_upload)
+    params.require(:step).permit(:step_type, :number, :step, :answer_id, :image, :offset, :image_upload, :step_jp, :image_upload_jp)
   end
 
 end

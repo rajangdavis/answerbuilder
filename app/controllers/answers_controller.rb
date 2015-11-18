@@ -5,10 +5,16 @@ class AnswersController < ApplicationController
 	end
 	
 	def translate_index
-		@answers = Answer.find(:all, :order => 'title ASC')
+		@answers = Answer.where(:translation_needed =>'YES')
 	end
 
 	def preview
+		@preview = true
+	 	@answer = Answer.find(params[:id])
+  		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
+	end	
+
+	def preview_jp
 		@preview = true
 	 	@answer = Answer.find(params[:id])
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
@@ -26,6 +32,7 @@ class AnswersController < ApplicationController
 
   	def translate
   		@answer = Answer.find(params[:id])
+  		@steps = Step.where(:answer_id => @answer.id)
   	end
 
   	def spreadsheet
@@ -61,6 +68,7 @@ class AnswersController < ApplicationController
 	def update
 		@answer = Answer.find(params[:id])
 	    if @answer.update(answer_params)
+	    	flash[:notice] = "Answer successfully updated"
 	      redirect_to :back
 	    else
 	      redirect_to :back
@@ -70,6 +78,6 @@ class AnswersController < ApplicationController
 	private
 
 	  def answer_params   
-	    params.require(:answer).permit(:language, :series, :tagline, :title, :image, :user_id, :image_upload)
+	    params.require(:answer).permit(:language, :series, :tagline, :title, :image, :user_id, :image_upload, :translation_needed, :translation_status, :title_jp, :tagline_jp)
 	  end
 end
