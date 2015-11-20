@@ -1,4 +1,11 @@
 <div class="container">
+  <%=link_to "Go back to answer", edit_answer_path(@step.answer_id)%>
+  <% if flash[:notice] %>
+  <div class="notice text-center green">
+    <%= flash[:notice] %>
+    <span class="btn btn-default hide_notice">X</span>
+  </div>
+  <% end %>
   <%= form_for(@step, multipart: true) do |f| %>
     <h2>Edit Step</h2>
     <div class="form-group">
@@ -35,7 +42,11 @@
     </div>
       <div class="form-group">
           <%= f.label :image_upload %>
-          <%= f.file_field :image_upload, :class => "form-control"%>
+          <%= f.file_field :image_upload, :class => "form-control"%><br>
+          <%if @step.translatable%>
+            <%= f.label "Japanese Image Upload" %>
+            <%= f.file_field :image_upload_jp, :class => "form-control"%>
+          <% end %>
           <%= f.hidden_field :image %>
           <% if @step.image!=nil%>
             <input type="button" class="imgClear btn btn-default" value="Click Here to clear the image">

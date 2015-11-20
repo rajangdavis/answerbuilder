@@ -10,4 +10,13 @@ class Step < ActiveRecord::Base
 		true_step_number = self.number - self.offset
 		true_step_number
 	end	
+
+	def translatable
+		ans = Answer.find(self.answer_id)
+		if ans.translation_needed == "NO"
+			false
+		else
+			true
+		end
+	end
 end

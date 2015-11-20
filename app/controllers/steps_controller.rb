@@ -26,8 +26,6 @@ class StepsController < ApplicationController
     if @step.update(step_params)
       flash[:notice] = "Step successfully updated!"
       redirect_to :back
-    else
-      redirect_to :back
     end
   end
 

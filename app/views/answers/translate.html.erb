@@ -34,7 +34,9 @@
 			    	<tr class="bordered">
 				    	<td><span class="strong"><%= if step.step_type =='Step' then step.number end%></span></td>
 				    	<td class="ans_step_text"><span class="pull-left ans_step_text"><%= step.step%></span><br>
-				    		<img class="img-responsive" src="<%= if step.image.blank? then step.image_upload else "//"+step.image end%>"><br>
+				    		<% if step.image_upload.exists? || !step.image.blank?%>
+				    		<img jpn-src="<%= step.image_upload_jp%>" class="img-responsive step" src="<%= if step.image.blank? then step.image_upload else "//"+step.image end%>"><br>
+				    		<% end %>
 				    	</td>
 			    	</tr>
 				<% end %>
@@ -95,7 +97,8 @@
 		<span class="pointer-hide">X Hide</span>
 		<%= link_to "Back", translate_index_path%> |
 		<%= link_to "Preview", preview_jp_path(@answer)%> | 
-		<span class="format pointer">Toggle Formatting</span>
+		<span class="format pointer">Toggle Formatting</span> | 
+		<span class="pic_swap pointer">Toggle Pictures</span>
 	</div>
 	<span class="pointer-show">+ Show</span>
 </div>
@@ -122,10 +125,30 @@
 				$(this).height(tarHeight-14);
 			});
 		}
-		setTimeout(reshape,500)
-		if($('.notice').length > 0){
-			$('.hide_notice').click(function(){$('.notice').slideToggle(500)})
-		}
+		$('img.img-responsive.step').each(function(){
+				var $this = $(this);
+				var origSrc = $this.attr('src').match(/imgur/g) ?  location.protocol + $this.attr('src') : $this.attr('src');
+
+				var jpSrc = $this.attr('jpn-src');
+			$('.pic_swap').click(function(){
+				if($this[0].src==origSrc){
+					$this.fadeOut(350);
+					setTimeout(function(){
+						$this[0].src = jpSrc;
+						$this.fadeIn(250)
+						setTimeout(reshape,200);
+					},351)
+				}else{
+					$this.fadeOut(350);
+					setTimeout(function(){
+						$this[0].src = origSrc;
+						$this.fadeIn(250)
+						setTimeout(reshape,200);
+					},351)
+				}
+			})
+		});
+		setTimeout(reshape,500);
 			$('span.ans_step_text').each(function(){
 				var orig = $(this).text();
 				var $this = $(this);

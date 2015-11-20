@@ -15,3 +15,9 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(function(){
+	if($('.notice').length > 0){
+		$('.hide_notice').click(function(){$('.notice').slideToggle(500)})
+	}
+})

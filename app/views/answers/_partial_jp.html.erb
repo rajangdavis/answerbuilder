@@ -44,7 +44,7 @@
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<a href="#img-<%= step.id%>" class="pop">
 					<% if step.image_upload.exists?%>
-						<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s.to_s) %>
+						<%= image_tag(step.image_upload_jp, :class => "img-responsive", :id => "img-"+step.id.to_s.to_s) %>
 					<% end %>
 				</a>
 				<% if step.image_upload.exists?%>
@@ -69,7 +69,7 @@
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
 						<% if step.image_upload.exists?%>
-							<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
+							<%= image_tag(step.image_upload_jp, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
 						<% end %>
 					</a>
 					<% if step.image_upload.exists?%>
@@ -95,7 +95,7 @@
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
 						<% if step.image_upload.exists?%>
-							<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
+							<%= image_tag(step.image_upload_jp, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
 						<% end %>
 					</a>
 					<% if step.image_upload.exists?%>
