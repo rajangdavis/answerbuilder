@@ -37,17 +37,17 @@
 						SCHRITT
 						<%end%><%= step.number %></strong></h2>
 				<p class="inst lead"><%= step.step_jp%></p>
-				<% if step.image_upload.exists?%>
+				<% if step.image_upload_jp.exists?%>
 					<em class="clear lead red"> (<% if @answer.language=="English"%>図<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
 				<% end %>
 			</div>
 			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 				<a href="#img-<%= step.id%>" class="pop">
-					<% if step.image_upload.exists?%>
+					<% if step.image_upload_jp.exists?%>
 						<%= image_tag(step.image_upload_jp, :class => "img-responsive", :id => "img-"+step.id.to_s.to_s) %>
 					<% end %>
 				</a>
-				<% if step.image_upload.exists?%>
+				<% if step.image_upload_jp.exists?%>
 					<h2 class="answer red"><% if @answer.language=="English"%>
 						図
 						<% elsif @answer.language=="German"%>
@@ -62,17 +62,17 @@
 					<div class="col-md-12 col-sm-12 col-xs-12">	
 						<h2 class="answer"><span class="lead"><%= step.step_jp%></span></h2>
 					</div>
-					<% if step.image_upload.exists?%>
+					<% if step.image_upload_jp.exists?%>
 						<em class="clear lead red"> (<% if @answer.language=="English"%>図<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
-						<% if step.image_upload.exists?%>
+						<% if step.image_upload_jp.exists?%>
 							<%= image_tag(step.image_upload_jp, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
 						<% end %>
 					</a>
-					<% if step.image_upload.exists?%>
+					<% if step.image_upload_jp.exists?%>
 						<h2 class="answer red"><% if @answer.language=="English"%>
 							図
 							<% elsif @answer.language=="German"%>
@@ -87,18 +87,18 @@
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<h2 class="answer"><span class="lead"><%= step.step_jp%></span></h2>
 					</div>
-					<% if step.image_upload.exists?%>
+					<% if step.image_upload_jp.exists?%>
 						<em class="clear lead red"> (<% if @answer.language=="English"%>図<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
 					<% end %>
 
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
 					<a href="#img-<%= step.id%>" class="pop">
-						<% if step.image_upload.exists?%>
+						<% if step.image_upload_jp.exists?%>
 							<%= image_tag(step.image_upload_jp, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
 						<% end %>
 					</a>
-					<% if step.image_upload.exists?%>
+					<% if step.image_upload_jp.exists?%>
 						<h2 class="answer red"><% if @answer.language=="English"%>
 							図
 							<% elsif @answer.language=="German"%>
