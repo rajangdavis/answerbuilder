@@ -23,8 +23,8 @@
       <img src='//i.imgur.com/2S6kiqI.png'>
     </a>
   </li>
-	<li role="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
-  <li role="presentation pull-left"><%= link_to "Translations Portal", translate_index_path %></li>
+  <li role="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
+  <li role="presentation pull-left"><%= if current_user.role=='ADMIN' then link_to "Translations Portal", translate_index_path end%></li>
   <% end %>
 </ul>
     </nav>
