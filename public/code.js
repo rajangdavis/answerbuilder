@@ -29,9 +29,13 @@
 
 	
 	//script to copy code of documents
-		var codeHTML = $("code").length;
-		if(codeHTML){
-			$("textarea.code").html($("code")[0].innerHTML);
-			console.log('This exists');
-		};
+		function getCode(className){
+			var codeHTML = $("code."+className).length;
+			if(codeHTML){
+				$("textarea.code").html($("code."+className)[0].innerHTML);
+			};
+		}
+		getCode('English');
+		$('img.English').click(function(){getCode('English')});
+		$('img.Japanese').click(function(){getCode('Japanese')});
 	});

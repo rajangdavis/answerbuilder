@@ -20,7 +20,7 @@
 		</div>
 	</div>
 <% end %>
-<%if @answer.tagline_jp!=""%>
+<%if !@answer.tagline_jp.blank?%>
 	<div class="tagline">
 		<p class="text-center lead"><%= @answer.tagline_jp%></p>
 	</div>
