@@ -7,6 +7,10 @@
     <div class="container-fluid">
         <a class="strong" href="//2.sendvid.com/jcd25zwy.mp4" target="_new">Not sure what to do? Click here to learn how to use this app</a>
     </div>
+    <div class="text-center">
+        <span>Total Word Count:</span>
+        <span class="word_count"></span>
+    </div>
 	<table class="table margin sortable">
     <thead>
       <tr>
@@ -31,3 +35,14 @@
   </table>
 </div>
 <script type="text/javascript" src="/sort.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var count = 0;
+
+        $('.bordered td:nth-of-type(3)').each(function(){
+            count += parseInt($(this).text())
+        })
+
+        $('.word_count').html(count)
+    })
+</script>
