@@ -16,6 +16,19 @@ class Answer < ActiveRecord::Base
 		count
 	end
 
+	def clean_word_count
+		count = 0
+
+		clean_tagline = HTML::FullSanitizer.new.sanitize(self.tagline)
+		count += clean_tagline.split.size
+		count += self.title.split.size
+		self.steps.each do |step|
+			clean_step = HTML::FullSanitizer.new.sanitize(step.step)
+			count += clean_step.split.size
+		end
+		count
+	end
+
 	def self.to_csv(options = {})
 	  CSV.generate(options) do |csv|
 	    csv << column_names

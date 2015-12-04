@@ -8,7 +8,7 @@
         <a class="strong" href="//2.sendvid.com/jcd25zwy.mp4" target="_new">Not sure what to do? Click here to learn how to use this app</a>
     </div>
     <div class="text-center">
-        <span>Total Word Count:</span>
+        <span>Total Word Count (no HTML):</span>
         <span class="word_count"></span>
     </div>
 	<table class="table margin sortable">
@@ -17,6 +17,7 @@
         <th>Series</th>
         <th>Title</th>
         <th>Word Count</th>
+        <th>Word Count (no HTML)</th>
         <th>Status</th>
         <th>Preview Japanese Answer</th>
       </tr>
@@ -27,6 +28,7 @@
 	    	<td><span class="icon "><i class="icon <%= answer.series %>"></i></span></td>
 	    	<td><span class="edit_answer_link"><%=link_to answer.title, translate_path(answer) %></span></td>
 	    	<td><%= answer.word_count%></td>
+            <td><%= answer.clean_word_count%></td>
 	    	<td><span class="<%=answer.translation_status%>"><%=answer.translation_status%></span></td>
             <td><%=link_to "Click here to preview", preview_jp_path(answer)%></td>
     	</tr>
@@ -39,7 +41,7 @@
     $(document).ready(function(){
         var count = 0;
 
-        $('.bordered td:nth-of-type(3)').each(function(){
+        $('.bordered td:nth-of-type(4)').each(function(){
             count += parseInt($(this).text())
         })
 
