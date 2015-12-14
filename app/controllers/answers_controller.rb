@@ -14,6 +14,15 @@ class AnswersController < ApplicationController
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
 	end	
 
+	def show
+		@answer = Answer.find(params[:id])
+	end
+
+	def answer
+		@preview = true
+		@answer = Answer.find(params[:id])
+	end
+
 	def preview_jp
 		@preview = true
 	 	@answer = Answer.find(params[:id])

@@ -4,7 +4,19 @@ class Answer < ActiveRecord::Base
 
 	def self.steps
 		steps = Steps.where("answer @> ARRAY[?]::integer[]", self.id)
+		steps = steps.order(:number,:updated_at)
 	end
+
+	def pojo
+		steps = []
+		reverse = self.steps.reverse!
+		reverse.each do |step|
+			steps.push({:number => step.number, :step_type => step.step_type, :offset => step.offset, :step => step.clean_step, :image => step.image_upload})
+		end
+		answer = {:series => self.series, :title => self.title, :tagline => self.tagline, :steps => steps}
+		answer
+	end
+
 
 	def word_count
 		count = 0

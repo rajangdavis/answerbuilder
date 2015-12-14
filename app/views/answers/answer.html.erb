@@ -1,0 +1,6 @@
+<div class="container" ng-app="answer" ng-controller="answer as answer">
+	<div ng-init="answer = <%= @answer.pojo.to_json %>">{{answer.series}}</div>
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="/answer.js"></script>
