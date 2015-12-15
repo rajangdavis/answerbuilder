@@ -3,15 +3,15 @@ class Answer < ActiveRecord::Base
 	has_many :steps
 
 	def self.steps
-		steps = Steps.where("answer @> ARRAY[?]::integer[]", self.id)
-		steps = steps.order(:number,:updated_at)
+		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
 	end
 
 	def pojo
 		steps = []
-		reverse = self.steps.reverse!
-		reverse.each do |step|
-			steps.push({:number => step.number, :step_type => step.step_type, :offset => step.offset, :step => step.clean_step, :image => step.image_upload})
+		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
+		@steps.each do |step|
+			steps.push({:number => step.step_number, :step_type => step.step_type, :step => step.step, 
+			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
 		end
 		answer = {:series => self.series, :title => self.title, :tagline => self.tagline, :steps => steps}
 		answer

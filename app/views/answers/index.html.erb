@@ -23,6 +23,7 @@
 						<img class="pointer Japanese pull-left" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
 					<% end %>	
 					<%=link_to "Get Code", code_path(answer), :class => "small btn btn-default btn-modified"%> 
+					<%=link_to "Angular Preview", angular_path(answer), :class => "small btn btn-default btn-modified"%> 
 					<%=link_to "Preview", preview_path(answer), :class => "small btn btn-default btn-modified"%>
 					<a href="/spreadsheet.xls?id=<%=answer.id%>" class="small btn btn-default btn-modified" download="<%=answer.title%>.xls">Export</a> 
 					</span>

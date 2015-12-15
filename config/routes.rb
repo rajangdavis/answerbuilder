@@ -7,7 +7,7 @@ Answerbuild::Application.routes.draw do
   resources :steps
 
   get 'answers/:id/code' => 'answers#code', as: :code
-  get 'answers/:id/answer' => 'answers#answer'
+  get 'answers/:id/answer' => 'answers#answer', as: :angular
   get 'strings' => 'answers#strings', as: :strings
   get 'translate/:id' => 'answers#translate', as: :translate
   get 'translation_portal' => 'answers#translate_index', as: :translate_index
