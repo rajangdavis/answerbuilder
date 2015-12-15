@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 	end
 	
 	def translate_index
-		@answers = Answer.where(:translation_needed =>'YES')
+		@answers = Answer.where("translation_needed Like'%YES%'")
 	end
 
 	def preview

@@ -143,7 +143,7 @@
 			</div>
 			<div class="form-group">
 				<%= f.label "Translation Needed?  " %>
-			    <%= f.select :translation_needed, options_for_select(%w[YES NO], f.object.translation_needed ),{},{:class=>'form-control'} %>
+			    <%= f.select :translation_needed, options_for_select(['YES (PICTURES NEEDED)','YES (PICTURES COMPLETE)','NO'], f.object.translation_needed ),{},{:class=>'form-control'} %>
 			</div>
 			    <%= f.hidden_field :user_id, :value => current_user.id %>
 			<%= f.submit "Update Answer", :class => "btn btn-default" %>
