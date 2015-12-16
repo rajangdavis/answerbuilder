@@ -1,44 +1,43 @@
 var app = angular.module('answer',[])
 .controller('answer', function($timeout,$scope){
 	var self = this;
-	this.fadeImage = function(src){
-		self.picture = undefined;
-		$timeout(function(){
-			self.picture = src;			
-			var img = document.querySelectorAll('[img-height]')[0];
-			var gutter = (400 - img.height)/8;
-			img.style.margin = gutter+'px auto';
-		},200)
-	}
-	this.changeStep = function(inst){
-		
-	}
-})
-.directive('scrollToMe', function(){
-	return {
-		link: function($scope, element, iAttrs, controller) {
-			element[0].addEventListener('click',function(){
-				// element[0].scrollIntoView()
-			});
-		}
-	};
+	self.instruction = undefined;
+	self.picture = undefined;
+	self.currentIndex = 0;
+
+	// self.fadeImage = function(src,step){
+	// 	self.picture = undefined;
+	// 	$timeout(function(){
+	// 		self.inst = step;
+	// 		self.picture = src;			
+	// 		var img = document.querySelectorAll('[img-height]')[0];
+	// 		var gutter = (400 - img.height)/8;
+	// 		img.style.margin = gutter+'px auto';
+	// 	},200)
+	// 	// $scope.$apply();
+	// }
+	self.setCurrentStepIndex = function (index) {
+        self.currentIndex = index;
+    };
+
+    self.isCurrentStepIndex = function (index) {
+        return self.currentIndex === index;
+    };
+    self.prevStep = function (scope) {
+        self.currentIndex = (self.currentIndex < scope.length - 1) ? ++self.currentIndex : 0;
+    };
+
+    self.nextStep = function (scope) {
+        self.currentIndex = (self.currentIndex > 0) ? --self.currentIndex : scope.length - 1;
+    };
 })
 .directive('imgHeight', function($timeout){
 	return {
-		link: function($scope, element, iAttrs) {
-			element[0].style.maxHeight = '400px';
-			element[0].style.display = 'block';
+		link: function($scope, elem, attrs){
+			
 			$timeout(function(){
-				var gutter = (500 - element[0].height)/8;
-				element[0].style.margin = gutter+'px auto';
-			},100);
+				console.log(elem[0].height)
+			},200)
 		}
-	};
+	}
 })
-.directive('stepsList', function(){
-	return {
-		link: function($scope, element, iAttrs, controller) {
-			element[0].style.minHeight = '500px';
-		}
-	};
-});

@@ -26,7 +26,7 @@ a{
 }
 
 ::-webkit-scrollbar {
-    display:none;
+	display:none;
 }
 
 .navbar-default{
@@ -142,14 +142,7 @@ margin:0 auto;
 .information,.cautiondiv{
 	background:#C6C8CA;
 }
-.cautiondiv_new{
-	padding: 7px;
-    margin: -5px 5px 0px -10px;
-    overflow:hidden;
-}
-.information_new{
-	overflow:hidden;
-}
+
 /* color classes for coloring fonts */
 .red,.NOT.STARTED{
 	color: #D22128!important;
@@ -374,4 +367,79 @@ textarea,input, select{
 }
 .img-container{
 	height:400px;
+}
+/* New answer CSS */
+.title_bar .icon{
+	margin-top:2px;
+}
+.fixed_nav{
+	position: relative;
+	bottom:-15px;
+}
+.title_bar{
+	border:1px solid black;
+	height:50px;
+	right:16px;
+	padding-right:16px;
+	position:relative;
+	width:calc(100% + 32px)
+}
+.title_bar .icon i{
+	font-size: 31px;
+}
+.answer_container{
+	min-height:85vh;
+	max-height:100vh;
+	border:1px solid blue;
+}
+.step_counter{
+	border: 1px solid purple;
+    display: block;
+    width: 22%;
+    left: -15px;
+    position: relative;
+    text-align: center;
+}
+.step_container{
+	height:140px;
+	top:-36px;
+	overflow:scroll;
+	overflow-x:hidden;
+    border: 1px solid orange;
+}
+.img_container{
+	height:50vh;
+	border:1px solid red;
+}
+.img_container img{
+	border:1px solid grey;
+}
+.nav_container{
+	border:1px solid grey;
+	position:relative;
+	bottom:0px;
+}
+.img_height{
+	max-height:49vh;
+}
+.arrow:first-of-type{
+	position:relative;
+	left:-45px;
+}
+.arrow:last-of-type{
+	position:relative;
+	right:-45px;
+}
+.cautiondiv_new{
+	padding: 7px;
+    margin: -5px 5px 0px -10px;
+    overflow:hidden;
+}
+.information_new{
+	overflow:hidden;
+}
+.information_new i{
+	-webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+	-moz-animation: neon2 1.5s ease-in-out infinite alternate;
+	animation: neon2 1.5s ease-in-out infinite alternate;
 }
