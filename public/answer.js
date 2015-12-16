@@ -1,16 +1,27 @@
 var app = angular.module('answer',[])
-.controller('answer', function($timeout){
+.controller('answer', function($timeout,$scope){
+	var self = this;
 	this.fadeImage = function(src){
-		var temp_src = src;
-		this.picture = undefined;
-		var self = this;
+		self.picture = undefined;
 		$timeout(function(){
-			self.picture = temp_src;
+			self.picture = src;			
 			var img = document.querySelectorAll('[img-height]')[0];
 			var gutter = (400 - img.height)/8;
 			img.style.margin = gutter+'px auto';
-		},100)
+		},200)
 	}
+	this.changeStep = function(inst){
+		
+	}
+})
+.directive('scrollToMe', function(){
+	return {
+		link: function($scope, element, iAttrs, controller) {
+			element[0].addEventListener('click',function(){
+				// element[0].scrollIntoView()
+			});
+		}
+	};
 })
 .directive('imgHeight', function($timeout){
 	return {
@@ -27,7 +38,7 @@ var app = angular.module('answer',[])
 .directive('stepsList', function(){
 	return {
 		link: function($scope, element, iAttrs, controller) {
-			element[0].style.height = '500px';
+			element[0].style.minHeight = '500px';
 		}
 	};
 });

@@ -2,33 +2,37 @@
     data-no-turbolink="true"
   <% end %>
 <div class="container" ng-app="answer" ng-controller="answer as answer_scope">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " ng-init="answer = <%= @answer.pojo.to_json %>">
-		<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right" ng-init="answer_scope.fadeImage()">
-			<span class="icon">
-				<i class="icon {{answer.series}}" ng-if="answer.series!=='None'"></i>
-			</span>
-			<span class="title">{{answer.title}}</span>
-			<div class="img-container" ng-init="answer_scope.picture = answer.steps[0].image">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border-black" ng-init="answer = <%= @answer.pojo.to_json %>">
+		<div class="title-bar col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right border-black" >
+			<div class="img-container" ng-init="answer_scope.picture = answer.steps[0].image;answer_scope.instruction = answer.steps[0].step">
 				<img class="img-responsive" img-height ng-class="{'fading-In': answer_scope.picture!== undefined}" ng-src="{{answer_scope.picture}}">
+				<span class="step lead">{{answer_scope.instruction}}</span>
 				<i class="fa fa-caret-left pull-left fa-4x choose"></i>
 				<i class="fa fa-caret-right pull-right fa-4x choose"></i>
 			</div>
 		</div>
-		<div class="steps col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left" steps-list>
+		<div class="steps col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left border-black" steps-list>
 			<table class="table striped">
 				<thead>
-					<tr><h3>Steps</h3></tr>
+					<tr>
+						<th>
+						<span class="icon">
+							<i class="icon {{answer.series}}" ng-if="answer.series!=='None'"></i>
+						</span>
+						</th>
+						<th><span class="title">{{answer.title}}</span></th>
+					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="step in answer.steps">
-						<td>
-							<span ng-if="step.step_type == 'Step'">{{step.number}}</span>
+					<tr ng-repeat="step in answer.steps" id="{{'step'+($index+1)}}">
+						<td class="text-center">
+							<span class="h5" ng-if="step.step_type == 'Step'">{{step.number}}</span>
 							<span ng-if="step.step_type == 'Caution'"><i class="fa fa-exclamation-triangle"></i></span>
-							<span ng-if="step.step_type == 'Information'"><i class="fa fa-info-circle"></i></span>
+							<span ng-if="step.step_type == 'Information'"><i class="fa fa-info-circle fa-2x"></i></span>
 							
 						</td>
 						<td>
-							<a href="javascript:void(0)" ng-click="answer_scope.fadeImage(step.image)">
+							<a href="javascript:void(0)"  ng-click="answer_scope.fadeImage(step.image,step.step)" scroll-to-me>
 								<span class="step" >{{step.step}}</span>
 							</a>
 						</td>
@@ -42,7 +46,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {  
 		$('.step').each(function(){
-			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="inst col-md-10 col-sm-10 col-xs-10 information"><div class="col-md-12 col-sm-12 col-xs-12"><h2 class="answer"><span class="lead">').replace(/\[\/note\]/g,'</span></h2></div></div>').replace(/\[cat\]/g,'<div class="inst col-md-10 col-sm-10 col-xs-10 cautiondiv"><div class="col-md-12 col-sm-12 col-xs-12"><h2 class="answer"><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div></div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
+			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="inst information_new"><i class="pull-left fa fa-3x fa-info-circle"></i><span information_text>').replace(/\[\/note\]/g,'</span></div>').replace(/\[cat\]/g,'<div class="inst cautiondiv_new"><i class="pull-left fa fa-3x fa-exclamation-triangle"></i>').replace(/\[\/cat\]/g,'</div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
 		$(this).html(content)
 		})
 	});

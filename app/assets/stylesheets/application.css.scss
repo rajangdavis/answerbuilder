@@ -142,7 +142,14 @@ margin:0 auto;
 .information,.cautiondiv{
 	background:#C6C8CA;
 }
-
+.cautiondiv_new{
+	padding: 7px;
+    margin: -5px 5px 0px -10px;
+    overflow:hidden;
+}
+.information_new{
+	overflow:hidden;
+}
 /* color classes for coloring fonts */
 .red,.NOT.STARTED{
 	color: #D22128!important;
@@ -230,6 +237,9 @@ hr{
 }
 .bordered:last-of-type{
 	border-bottom:3px solid white;
+}
+.border-black{
+	border:1px solid black;
 }
 .fixed{
 	position:fixed;

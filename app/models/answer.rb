@@ -10,7 +10,7 @@ class Answer < ActiveRecord::Base
 		steps = []
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
 		@steps.each do |step|
-			steps.push({:number => step.step_number, :step_type => step.step_type, :step => step.step, 
+			steps.push({:number => step.number, :step_type => step.step_type, :step => step.step, 
 			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
 		end
 		answer = {:series => self.series, :title => self.title, :tagline => self.tagline, :steps => steps}
