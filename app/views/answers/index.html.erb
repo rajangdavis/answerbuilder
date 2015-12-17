@@ -37,6 +37,7 @@
 	</div>
 	<div class="new_answer col-md-4 fixed">
 	<%= form_for(@answer) do |f| %>
+		<a id="hide_new_form" class="hidden-lg hidden-md col-sm-12 col-xs-12">X hide</a>
 		<h2 class="">Create a New Answer</h2>
 		<div class="form-group hidden">
 			<%= f.label "Language:  " %>
@@ -71,5 +72,8 @@
 			$('div.answerList div:not('+buttonClass+')').hide();
 			$('div.answerList '+buttonClass+':last').parent().parent().css('border-bottom','3px solid lightgrey')
 		});
+		$('#hide_new_form').click(function(){
+			$('.new_answer').hide(500)
+		})
 	});
 </script>
