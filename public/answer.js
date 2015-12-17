@@ -1,4 +1,4 @@
-var app = angular.module('answer',['ngTouch'])
+var app = angular.module('answer',['swipe'])
 .controller('answer', function($timeout,$scope){
 	var self = this;
 	self.instruction = undefined;
