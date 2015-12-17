@@ -1,7 +1,7 @@
 <% content_for(:body_attributes) do %>
     data-no-turbolink="true"
   <% end %>
-<div ng-app="answer" ng-swipe-left="answer_scope.prevStep(answer_scope.answer.steps)" ng-swipe-right="answer_scope.nextStep(answer_scope.answer.steps)" class="container" ng-controller="answer as answer_scope" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
+<div ng-app="answer" ng-keyup="console.log(e)" class="container" ng-controller="answer as answer_scope" ng-swipe-left="answer_scope.prevStep(answer_scope.answer.steps)" ng-swipe-right="answer_scope.nextStep(answer_scope.answer.steps)" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
 	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
 	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 answer_container">
 		<div class="title_bar">
@@ -24,7 +24,7 @@
 				<div class="step_counter">
 					<span  ng-if="step_type = 'Step'">{{answer_scope.currentIndex+1}} / {{answer_scope.answer.steps.length}}</span>	
 				</div>
-                <span class="step fading-In lead">{{step.step}}</span>
+                <span class="step fading-In">{{step.step}}</span>
 	        </div>
 	    </nav>
 	</div>

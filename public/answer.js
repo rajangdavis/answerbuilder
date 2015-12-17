@@ -19,6 +19,17 @@ var app = angular.module('answer',['swipe'])
     self.nextStep = function (scope) {
         self.currentIndex = (self.currentIndex > 0) ? --self.currentIndex : scope.length - 1;
     };
+    self.key = function($event){
+        console.log($event.keyCode);
+        if ($event.keyCode == 38)
+            alert("up arrow");
+        else if ($event.keyCode == 39)
+            alert("right arrow");
+        else if ($event.keyCode == 40)
+            alert("down arrow");
+        else if ($event.keyCode == 37)
+            alert("left arrow");
+    }
 })
 .directive('imgHeight', function($timeout){
 	return {

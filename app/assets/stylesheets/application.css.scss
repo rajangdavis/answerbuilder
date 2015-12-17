@@ -368,16 +368,17 @@ textarea,input, select{
 .img-container{
 	height:400px;
 }
+
+
 /* New answer CSS */
 .title_bar .icon{
 	margin-top:2px;
 }
 .fixed_nav{
 	position: relative;
-	bottom:-15px;
 }
 .title_bar{
-	border:1px solid black;
+	
 	height:50px;
 	right:16px;
 	padding-right:16px;
@@ -388,12 +389,11 @@ textarea,input, select{
 	font-size: 31px;
 }
 .answer_container{
-	min-height:85vh;
-	max-height:100vh;
-	border:1px solid blue;
+	height:550px;
+	border:1px solid;
 }
 .step_counter{
-	border: 1px solid purple;
+	
     display: block;
     width: 22%;
     left: -15px;
@@ -401,15 +401,16 @@ textarea,input, select{
     text-align: center;
 }
 .step_container{
-	height:140px;
+	height:153px;
 	top:-36px;
 	overflow:scroll;
 	overflow-x:hidden;
-    border: 1px solid orange;
+	-webkit-overflow-scrolling: touch;    
 }
 .img_holder{
-	border:1px solid yellow;
-	height:50vh;
+	text-align:center;	
+	border:1px solid;
+	height:325px;
 }
 
 .img_container{
@@ -419,15 +420,15 @@ textarea,input, select{
 }
 
 .img_container img{
-	border:1px solid grey;
+	
 }
 .nav_container{
-	border:1px solid grey;
+	
 	position:relative;
 	bottom:0px;
 }
 .img_height{
-	max-height:49vh;
+	max-height:300px;
 }
 .arrow:first-of-type{
 	position:relative;
