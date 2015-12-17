@@ -15,7 +15,7 @@
   <%= csrf_meta_tags %>
 </head>
 <% if controller.controller_name == 'answers' %>
-  <body data-no-turbolink>
+  <body data-no-turbolink class="<%= if !@hideMe then 'preview' end%>">
 <% else %>
   <body >
 <% end %>
