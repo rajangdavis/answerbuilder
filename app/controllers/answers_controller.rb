@@ -19,7 +19,7 @@ class AnswersController < ApplicationController
 	end
 
 	def answer
-		@preview = true
+		@hideMe = true
 		@answer = Answer.find(params[:id])
 	end
 
