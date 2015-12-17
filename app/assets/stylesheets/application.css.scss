@@ -407,10 +407,17 @@ textarea,input, select{
 	overflow-x:hidden;
     border: 1px solid orange;
 }
-.img_container{
+.img_holder{
+	border:1px solid yellow;
 	height:50vh;
-	border:1px solid red;
 }
+
+.img_container{
+	
+	display: inline-block;
+    vertical-align: middle;
+}
+
 .img_container img{
 	border:1px solid grey;
 }

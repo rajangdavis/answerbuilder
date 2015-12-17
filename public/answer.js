@@ -1,21 +1,10 @@
-var app = angular.module('answer',[])
+var app = angular.module('answer',['ngTouch'])
 .controller('answer', function($timeout,$scope){
 	var self = this;
 	self.instruction = undefined;
 	self.picture = undefined;
 	self.currentIndex = 0;
 
-	// self.fadeImage = function(src,step){
-	// 	self.picture = undefined;
-	// 	$timeout(function(){
-	// 		self.inst = step;
-	// 		self.picture = src;			
-	// 		var img = document.querySelectorAll('[img-height]')[0];
-	// 		var gutter = (400 - img.height)/8;
-	// 		img.style.margin = gutter+'px auto';
-	// 	},200)
-	// 	// $scope.$apply();
-	// }
 	self.setCurrentStepIndex = function (index) {
         self.currentIndex = index;
     };
@@ -36,8 +25,9 @@ var app = angular.module('answer',[])
 		link: function($scope, elem, attrs){
 			
 			$timeout(function(){
-				console.log(elem[0].height)
-			},200)
+				var trueHeight = elem[0].clientHeight;
+				console.log(trueHeight);
+			},500)
 		}
 	}
 })
