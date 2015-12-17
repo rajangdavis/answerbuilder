@@ -26,6 +26,11 @@ class AnswersController < ApplicationController
 		@answer = Answer.find(params[:id])
 	end
 
+	def answer_jp
+		@hideMe = true
+		@answer = Answer.find(params[:id])
+	end
+
 	def preview_jp
 		@preview = true
 	 	@answer = Answer.find(params[:id])

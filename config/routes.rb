@@ -8,6 +8,7 @@ Answerbuild::Application.routes.draw do
 
   get 'answers/:id/code' => 'answers#code', as: :code
   get 'answers/:id/answer' => 'answers#answer', as: :angular
+  get 'answers/:id/answer_jp' => 'answers#answer_jp', as: :angular_jp
   get 'strings' => 'answers#strings', as: :strings
   get 'translate/:id' => 'answers#translate', as: :translate
   get 'translation_portal' => 'answers#translate_index', as: :translate_index

@@ -1,0 +1,46 @@
+<% content_for(:body_attributes) do %>
+    data-no-turbolink="true"
+<% end %>
+<% if @answer.translation_needed = "YES"%>
+<div ng-app="answer" class="container" ng-controller="answer as answer_scope" ng-swipe-left="answer_scope.prevStep(answer_scope.answer.steps)" ng-swipe-right="answer_scope.nextStep(answer_scope.answer.steps)" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
+	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 answer_container">
+		<div class="title_bar" ng-class="{centered_text:answer_scope.answer.series=='None'}">
+			<span class="icon pull-left" ng-if="answer_scope.answer.series!=='None'">
+				<i class="icon {{answer_scope.answer.series}}"></i>
+			</span>
+			<span class="title">{{answer_scope.answer.title_jp}}</span>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 img_holder" >
+			<div class="img_container fading-In" ng-repeat="step in answer_scope.answer.steps">
+				<img img-height  class="img-responsive img_height" ng-hide="!answer_scope.isCurrentStepIndex($index)" ng-src="{{step.image_jp}}">
+			</div>
+		</div>
+		<nav class="fixed_nav container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container text-center ">
+				<a href="javascript:void(0)" ng-hide="answer_scope.currentIndex==0" class="arrow fading-In pull-left" ng-click="answer_scope.nextStep(answer_scope.answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
+				<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="answer_scope.prevStep(answer_scope.answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
+			</div>
+	        <div class="step_container col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="step in answer_scope.answer.steps" ng-hide="!answer_scope.isCurrentStepIndex($index)">
+				<div class="step_counter">
+					<span  ng-if="step_type = 'Step'">{{answer_scope.currentIndex+1}} / {{answer_scope.answer.steps.length}}</span>	
+				</div>
+                <span class="step fading-In">{{step.step_jp}}</span>
+	        </div>
+	    </nav>
+	</div>
+	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+</div>
+<script type="text/javascript" src="/swipe.js"></script>
+<script type="text/javascript" src="/answer.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {  
+		$('.step').each(function(){
+			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="inst information_new"><i class="pull-left fa fa-3x fa-info-circle"></i><span information_text>').replace(/\[\/note\]/g,'</span></div>').replace(/\[cat\]/g,'<div class="inst cautiondiv_new"><i class="pull-left fa fa-3x fa-exclamation-triangle"></i>').replace(/\[\/cat\]/g,'</div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
+		$(this).html(content)
+		})
+	});
+</script>
+<% else %>
+This answer is not set up to be translated into Japanese.
+<% end %>
