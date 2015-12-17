@@ -75,9 +75,7 @@
 			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
 				<div class="inst col-md-6 col-sm-6 col-xs-6 cautiondiv_new">
 					<i class="pull-left fa fa-3x fa-exclamation-triangle"></i>
-					<h2 class="answer">
-						<br><span class="step_jp"><%= step.step_jp%></span><br>
-					</h2>
+					<br><span class="step_jp"><%= step.step_jp%></span><br>
 					<% if step.image_upload_jp.exists?%>
 						<em class="clear lead red"> (図 <%= step.number+step.offset %>)</em>				
 					<% end %>
