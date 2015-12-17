@@ -31,7 +31,7 @@
 					<h2 class="inst answer">
 						<strong>ステップ <%= step.number %></strong>
 					</h2>
-					<p class="inst lead"><%= step.step_jp%></p>
+					<br><p class="inst"><%= step.step_jp%></p><br>
 					<% if step.image_upload_jp.exists?%>
 						<em class="clear lead red"> (図 <%= step.number+step.offset %>)</em>				
 					<% end %>
@@ -53,9 +53,7 @@
 			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
 				<div class="inst col-md-6 col-sm-6 col-xs-6 information_new">
 					<i class="pull-left fa fa-3x fa-info-circle"></i>
-					<span class="lead">	
-						<%= step.step_jp%>
-					</span>
+					<br><span class="><%= step.step_jp%></span><br>
 					<% if step.image_upload_jp!=""%>
 						<em class="clear lead red"> (図 <%= step.number+step.offset %>)</em>				
 					<% end %>
@@ -78,7 +76,7 @@
 				<div class="inst col-md-6 col-sm-6 col-xs-6 cautiondiv_new">
 					<i class="pull-left fa fa-3x fa-exclamation-triangle"></i>
 					<h2 class="answer">
-						<span class="lead"><%= step.step_jp%></span>
+						<br><span class="><%= step.step_jp%></span><br>
 					</h2>
 					<% if step.image_upload_jp.exists?%>
 						<em class="clear lead red"> (図 <%= step.number+step.offset %>)</em>				
