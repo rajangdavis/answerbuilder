@@ -1,34 +1,81 @@
 <% content_for(:body_attributes) do %>
     data-no-turbolink="true"
   <% end %>
-<div ng-app="answer" class="container" ng-controller="answer as answer_scope" ng-swipe-left="answer_scope.prevStep(answer_scope.answer.steps)" ng-swipe-right="answer_scope.nextStep(answer_scope.answer.steps)" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
-	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 answer_container">
-		<div class="title_bar" ng-class="{centered_text:answer_scope.answer.series=='None'}">
-			<span class="icon pull-left" ng-if="answer_scope.answer.series!=='None'">
-				<i class="icon {{answer_scope.answer.series}}"></i>
-			</span>
-			<span class="title">{{answer_scope.answer.title}}</span>
-		</div>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 img_holder" >
-			<div class="img_container fading-In" ng-repeat="step in answer_scope.answer.steps">
-				<img img-height  class="img-responsive img_height" ng-hide="!answer_scope.isCurrentStepIndex($index)" ng-src="{{step.image}}">
+<div ng-app="answer">
+	<div class="container" ng-controller="answer as answer_scope" ng-swipe-left="answer_scope.prevStep(answer_scope.answer.steps)" ng-swipe-right="answer_scope.nextStep(answer_scope.answer.steps)" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
+		<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 answer_container">
+			<div class="title_bar" ng-class="{centered_text:answer_scope.answer.series=='None'}">
+				<span class="icon pull-left" ng-if="answer_scope.answer.series!=='None'">
+					<i class="icon {{answer_scope.answer.series}}"></i>
+				</span>
+				<span class="title">{{answer_scope.answer.title}}</span>
 			</div>
-		</div>
-		<nav class="fixed_nav container">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container text-center ">
-				<a href="javascript:void(0)" ng-hide="answer_scope.currentIndex==0" class="arrow fading-In pull-left" ng-click="answer_scope.nextStep(answer_scope.answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
-				<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="answer_scope.prevStep(answer_scope.answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
-			</div>
-	        <div class="step_container col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="step in answer_scope.answer.steps" ng-hide="!answer_scope.isCurrentStepIndex($index)">
-				<div class="step_counter">
-					<span  ng-if="step_type = 'Step'">{{answer_scope.currentIndex+1}} / {{answer_scope.answer.steps.length}}</span>	
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 img_holder" >
+				<div class="img_container fading-In" ng-repeat="step in answer_scope.answer.steps">
+					<img img-height  class="img-responsive img_height" ng-hide="!answer_scope.isCurrentStepIndex($index)" ng-src="{{step.image}}">
 				</div>
-                <span class="step fading-In">{{step.step}}</span>
-	        </div>
-	    </nav>
+			</div>
+			<nav class="fixed_nav container">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container text-center ">
+					<a href="javascript:void(0)" ng-hide="answer_scope.currentIndex==0" class="arrow fading-In pull-left" ng-click="answer_scope.nextStep(answer_scope.answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
+					<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="answer_scope.prevStep(answer_scope.answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
+				</div>
+		        <div class="step_container col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="step in answer_scope.answer.steps" ng-hide="!answer_scope.isCurrentStepIndex($index)">
+					<div class="step_counter">
+						<span  ng-if="step_type = 'Step'">{{answer_scope.currentIndex+1}} / {{answer_scope.answer.steps.length}}</span>	
+					</div>
+	                <span class="step fading-In">{{step.step}}</span>
+		        </div>
+		    </nav>
+		</div>
+		<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
 	</div>
-	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+
+	<!-- This is  where the Old app starts-->
+	<br><br><br><br>
+	<div class="container" ng-controller="answer as answer_scope">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border-black" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
+			<div class="title-bar col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right border-black" >
+				<div class="img_container fading-In" ng-repeat="step in answer_scope.answer.steps">
+					<img class="img-responsive" ng-hide="!answer_scope.isCurrentStepIndex($index)" ng-src="{{step.image}}">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container text-center ">
+					<a href="javascript:void(0)" ng-hide="answer_scope.currentIndex==0" class="arrow fading-In pull-left" ng-click="answer_scope.nextStep(answer_scope.answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
+					<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="answer_scope.prevStep(answer_scope.answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
+				</div>
+			</div>
+			<div class="steps col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left border-black" steps-list>
+				<table class="table striped">
+					<thead>
+						<tr>
+							<th>
+							<span class="icon">
+								<i class="icon {{answer_scope.answer.series}}" ng-if="answer_scope.answer.series!=='None'"></i>
+							</span>
+							</th>
+							<th><span class="title">{{answer_scope.answer.title}}</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="step in answer_scope.answer.steps" id="{{'step'+($index+1)}}">
+							<td class="text-center">
+								<span class="h5" ng-if="step.step_type == 'Step'">{{step.number}}</span>
+								<span ng-if="step.step_type == 'Caution'"><i class="fa fa-exclamation-triangle"></i></span>
+								<span ng-if="step.step_type == 'Information'"><i class="fa fa-info-circle fa-2x"></i></span>
+								
+							</td>
+							<td>
+								<a href="javascript:void(0)"  ng-click="answer_scope.fadeImage(step.image,step.step)" scroll-to-me>
+									<span class="step" >{{step.step}}</span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript" src="/swipe.js"></script>
 <script type="text/javascript" src="/answer.js"></script>

@@ -1,0 +1,159 @@
+
+
+<% if @answer.series=="None"%>
+	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center answer-title">
+			<h1 class="inst answer"><%= @answer.title%></h1>
+		</div>
+	</div>
+<% else %>
+	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+		<div class="col-md-10 col-sm-10 col-xs-8 pull-right answer-title">
+			<h1 class="inst answer"><%= @answer.title%></h1>
+		</div>
+		<div class="col-md-2 col-sm-2 col-xs-4 pull-left">
+			<% if @answer.series=="QT"%>
+				<img class="qtIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/O4AEPmF.png">
+			<% elsif @answer.series=="QC"%>
+				<img class="qcIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/LNcBXLp.jpg">
+			<% end %>
+		</div>
+	</div>
+<% end %>
+<%if @answer.tagline!=""%>
+	<div class="tagline">
+		<p class="text-center lead"><%= @answer.tagline%></p>
+	</div>
+<% end %>
+<div class="steps">
+	<% @steps.each do |step|%>
+		<% if step.step_type=="Step"%>
+			
+		<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<h2 class="inst answer"><strong><% if @answer.language=="English"%>
+						STEP 
+						<% elsif @answer.language=="German"%>
+						SCHRITT
+						<%end%><%= step.number %></strong></h2>
+				<p class="inst lead"><%= step.step%></p>
+				<% if step.image!=""%>
+					<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>
+				<% elsif step.image_upload!=""%>
+					<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
+				<% end %>
+			</div>
+			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+				<a href="#img-<%= step.id%>" class="pop">
+					<% if step.image!=""%>
+						<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+					<% elsif step.image_upload!=""%>
+						<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s.to_s) %>
+					<% end %>
+				</a>
+				<% if step.image!=""%>
+					<h2 class="answer red"><% if @answer.language=="English"%>
+						PICTURE
+						<% elsif @answer.language=="German"%>
+						BILD
+						<%end %> <%=step.number+step.offset%></h2>
+				<% elsif step.image_upload!=""%>
+					<h2 class="answer red"><% if @answer.language=="English"%>
+						PICTURE
+						<% elsif @answer.language=="German"%>
+						BILD
+						<%end %> <%=step.number+step.offset%></h2>
+				<% end %>
+			</div>
+		</div><br>
+		<% elsif step.step_type=="Information"%>
+			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
+				<div class="inst col-md-6 col-sm-6 col-xs-6 information_new">
+					<i class="pull-left fa fa-3x fa-info-circle"></i>
+					<span class="lead">	
+						<%= step.step%>
+					</span>
+					
+					<% if step.image!=""%>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
+					<% end %>
+				</div>
+				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+					<a href="#img-<%= step.id%>" class="pop">
+						<% if step.image!=""%>
+							<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+						<% elsif step.image_upload!=""%>
+							<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
+						<% end %>
+					</a>
+					<% if step.image!=""%>
+						<h2 class="answer red"><% if @answer.language=="English"%>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
+						<h2 class="answer red"><% if @answer.language=="English"%>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
+					<% end %>
+				</div>
+			</div><br>
+		<% elsif step.step_type=="Caution"%>
+			<div class="step-instructions col-md-12 col-sm-12 col-xs-12">
+				<div class="inst col-md-5 col-sm-5 col-xs-5 cautiondiv">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<h2 class="answer"><span class="lead"><%= step.step%></span></h2>
+					</div>
+					<% if step.image!=""%>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
+						<em class="clear lead red"> (<% if @answer.language=="English"%>picture<% elsif @answer.language=="German"%>bild<%end%> <%= step.number+step.offset %>)</em>				
+					<% end %>
+
+				</div>
+				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+					<a href="#img-<%= step.id%>" class="pop">
+						<% if step.image!=""%>
+							<img id="img-<%= step.id%>"class="img-responsive" src="//<%= step.image%>">
+						<% elsif step.image_upload!=""%>
+							<%= image_tag(step.image_upload, :class => "img-responsive", :id => "img-"+step.id.to_s) %>
+						<% end %>
+					</a>
+					<% if step.image!=""%>
+						<h2 class="answer red"><% if @answer.language=="English"%>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
+						<h2 class="answer red"><% if @answer.language=="English"%>
+							PICTURE
+							<% elsif @answer.language=="German"%>
+							BILD
+							<%end %> <%=step.number+step.offset%></h2>
+					<% end %>
+				</div>
+			</div><br>
+		<% end %>
+	<% end %>
+</div>
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h4 class="modal-title" id="myModalLabel">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview" class="img-responsive" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

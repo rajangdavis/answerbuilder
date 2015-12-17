@@ -13,6 +13,11 @@ class AnswersController < ApplicationController
 
 	def preview
 		@preview = true
+		if params['new']
+			@partial2 = true
+		else
+			@partial2 = false
+		end
 	 	@answer = Answer.find(params[:id])
   		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
 	end	

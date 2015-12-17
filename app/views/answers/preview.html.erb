@@ -1,7 +1,11 @@
 <div class="rn_AnswerDetail answerContainer">
-  <%= render 'partial' %>
+  <%= if @partial2==true then render 'partial2' else render 'partial' end%>
 </div>
-<script type="text/javascript" src="/code.js"></script>
+<% if @partial2==true %>
+    <script type="text/javascript" src="/code2.js"></script>
+<% else %>
+    <script type="text/javascript" src="/code.js"></script>
+<% end%>
 <script type="text/javascript">
 function scrollTop(elemSelector){
   $('html, body').animate({
