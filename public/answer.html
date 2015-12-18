@@ -1,0 +1,33 @@
+<a ui-sref='start'>Start   >  </a>
+<a ui-sref='devices({dev_id: dev_id})'>{{manual[dev_id].device}}   >  </a>
+<a ui-sref='categories({dev_id: dev_id,cat_id: cat_id})'>{{manual[dev_id].categories[cat_id].category}}</a>
+<br><br>
+<div class="container" ng-init="setCurrentStepIndex(0)">
+	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 answer_container" ng-repeat='(iden,answer) in manual[dev_id].categories[cat_id].answers[ans_id]'>
+		<div class="title_bar" ng-class="{centered_text:answer.series=='None'}">
+			<span class="icon pull-left" ng-if="answer.series!=='None'">
+				<i class="icon {{answer.series}}"></i>
+			</span>
+			<span class="title">{{answer.title}}</span>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 img_holder" >
+			<div class="img_container fading-In" ng-repeat="step in answer.steps">
+				<img img-height  class="img-responsive img_height" ng-hide="!isCurrentStepIndex($index)" ng-src="{{step.image}}">
+			</div>
+		</div>
+		<nav class="fixed_nav container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container text-center ">
+				<a href="javascript:void(0)" ng-hide="currentIndex==0" class="arrow fading-In pull-left" ng-click="nextStep(answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
+				<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="prevStep(answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
+			</div>
+	        <div class="step_container col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="step in answer.steps" ng-hide="!isCurrentStepIndex($index)">
+				<div class="step_counter">
+					<span  ng-if="step_type = 'Step'">{{currentIndex+1}} / {{answer.steps.length}}</span>	
+				</div>
+                <span class="step fading-In">{{step.step}}</span>
+	        </div>
+	    </nav>
+	</div>
+	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+</div>	

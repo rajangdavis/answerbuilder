@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QT Manual</title>
+	<link href="//fonts.googleapis.com/css?family=Roboto:400,700,300,500|Roboto+Condensed:400,300,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="//qsee.custhelp.com/euf/assets/themes/qsee/bootstrap3.css">
+	<link href="/assets/application.css?body=1" media="all" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" ng-app="manual" ng-controller="manual" ng-init="initialize()">
+	<div ng-show="manual.length !=undefined" class="fading-In">
+		<ui-view></ui-view>
+	</div>
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="manual.js"></script>
+
+</body>
+</html>

@@ -1,13 +1,11 @@
 var app = angular.module('manual',['ui.router'])
-.controller('manual',function($http,$scope,$timeout){
+.controller('manual',function($http,$scope,$timeout,$rootScope){
 	$scope.manual;
-	$scope.categories = [];
-	$scope.answersList = [];
-	$scope.currentCategory;
+	$scope.currentIndex = 0;
 	$scope.initialize = function(){
 		$http({
 		  method: 'GET',
-		  url: '//qseecode.herokuapp.com/qtpojo.json'
+		  url: '/qtpojo.json'
 		}).then(function successCallback(response) {
 		    $scope.manual = response.data;
 		    console.log($scope.manual);
@@ -15,41 +13,85 @@ var app = angular.module('manual',['ui.router'])
 		    console.log(response);
 		  });
 	}
-	$scope.scc = function(value){
+	$scope.setCurrentStepIndex = function (index) {
+        $scope.currentIndex = index;
+    };
 
-	}
+    $scope.isCurrentStepIndex = function (index) {
+        return $scope.currentIndex === index;
+    };
+    $scope.prevStep = function (scope) {
+        $scope.currentIndex = ($scope.currentIndex < scope.length - 1) ? ++$scope.currentIndex : 0;
+    };
+
+    $scope.nextStep = function (scope) {
+        $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : scope.length - 1;
+    };
+    $rootScope.previousState;
+	$rootScope.currentState;
+	$rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+	    $rootScope.previousState = from.name;
+	    $rootScope.currentState = to.name;
+	    console.log('Previous state:'+$rootScope.previousState)
+	    console.log('Current state:'+$rootScope.currentState)
+	});
 })
 .config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise("/");
 
   $stateProvider
-    .state('manual', {
+    .state('start', {
       url: "/",
-      template:"<div ng-repeat='(i,method) in manual'>"+ 
-      				"<a ui-sref='categories({id: i})'>{{method.device}}</a>"+
+      template:"<div ng-repeat='(dev_id,method) in manual'>"+ 
+      				"<a ui-sref='devices({dev_id: dev_id})'>{{method.device}}</a>"+
       			"</div>"
     })
-    .state('categories', {
-      url: "/categories/:id",
-      template:"<h1>{{manual[id].device}}</h1>"+
-      			"<div ng-repeat='(i,category) in manual[id].categories'>"+ 
-      				"<a ui-sref='topics({id: i,cat_id: id})'>{{category.category}}</a>"+
-      			"</div>",
+    .state('devices', {
+      url: "/devices/:dev_id",
+      template: "<a ui-sref='start'>Start   >  </a>"+
+      			"<a ui-sref='devices({dev_id: dev_id})'>{{manual[dev_id].device}}</a>"+
+      			"<br><br>"+
+      			"<div ng-repeat='(cat_id,category) in manual[dev_id].categories'>"+ 
+      				"<a ui-sref='categories({dev_id: dev_id,cat_id: cat_id})'>{{category.category}}</a>"+
+      			"</div>",	
       controller:function($scope,$stateParams){
-      	$scope.id = $stateParams.id;
+      	$scope.dev_id = $stateParams.dev_id;
       }
     })
-    .state('topics', {
-      url: "/categories/:cat_id/topics/:id",
-      template:"<h1>{{manual[id].device}}</h1>"+
-      		   "<h2>{{manual[id].categories[cat_id].category}}</h2>"+
-      			"<div ng-repeat='answer in manual[id].categories[cat_id].answers[0]'>"+ 
-      				"<a ui-sref=''>{{answer.title}}</a>"+
+    .state('categories', {
+      url: "/devices/:dev_id/categories/:cat_id",
+      template:"<a ui-sref='start'>Start   >  </a>"+
+      		   "<a ui-sref='devices({dev_id: dev_id})'>{{manual[dev_id].device}}</a>  >  "+
+      		   "<a ui-sref='categories({dev_id: dev_id,cat_id: cat_id})'>{{manual[dev_id].categories[cat_id].category}}</a>"+
+      		   "<br><br>"+
+      			"<div ng-repeat='answers in manual[dev_id].categories[cat_id].answers'>"+ 
+      				"<a ui-sref='answer({dev_id: dev_id, cat_id: cat_id, ans_id: ans_id})'"+
+      				"ng-repeat='(ans_id,answer) in answers'>{{answer.title}}</a>"+
       			"</div>",
-      controller:function($scope,$stateParams){
-      	$scope.id = $stateParams.id;
+      controller:function($scope,$stateParams,$timeout,$state,$rootScope){
+      	$scope.dev_id = $stateParams.dev_id;
       	$scope.cat_id = $stateParams.cat_id;
+      	var answer_length;
+      	$timeout(function(){
+      		answer_length = $scope.manual[$scope.dev_id].categories[$scope.cat_id ].answers.length;
+      		if(answer_length==1){
+      			if($rootScope.previousState!='answer'){
+      				$state.go('answer',{'dev_id': $scope.dev_id, 'cat_id': $scope.cat_id, 'ans_id': 0});
+      			}else{
+      				$state.go('devices',{'dev_id': $scope.dev_id});
+      			}
+      		}
+      	})
+      }
+    })
+    .state('answer', {
+      url: "/devices/:cat_id/categories/:dev_id/answer/:ans_id",
+      templateUrl:'answer.html',
+      controller:function($scope,$stateParams){
+      	$scope.dev_id = $stateParams.dev_id;
+      	$scope.cat_id = $stateParams.cat_id;
+      	$scope.ans_id = $stateParams.ans_id;
       }
     })
 });

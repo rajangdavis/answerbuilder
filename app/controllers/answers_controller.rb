@@ -11,10 +11,6 @@ class AnswersController < ApplicationController
 		@answers = Answer.where("translation_needed Like'%YES%'")
 	end
 
-	def manual
-		@hideMe = true
-	end
-
 	def qtpojo
 		@qtpojo = []
 		@qtpojo.push(
@@ -22,72 +18,87 @@ class AnswersController < ApplicationController
 			"categories"=>[
 				{"category"=>"Firmware Upgrade",
 				 "answers"=>[
-				 	{"Generic Firmware Instructions for NVR/DVR"=>Answer.find(140).pojo }]
+				 	{0=>Answer.find(140).pojo }]
 				}, 
 				{"category"=>"Setup a Schedule",
 				 "answers"=>[
-				 	{"24/7 Recording"=>Answer.find(109).pojo}, 
-				  	{"Motion Detection"=>Answer.find(107).pojo}, 
-				  	{"Sensitivity & Zones"=>Answer.find(221).pojo }]
+				 	{0=>Answer.find(109).pojo}, 
+				  	{1=>Answer.find(107).pojo}, 
+				  	{2=>Answer.find(221).pojo }]
 				},
 				{"category"=>"Email Notification",
 				 "answers"=>[
-				 	{"Email Notification Instructions"=>Answer.find(194).pojo }]
-				}]
+				 	{0=>Answer.find(194).pojo }]
+				},
+				{"category"=>"Playback",
+				 "answers"=>[
+				 	{0=>Answer.find(225).pojo}]
 				}, 
-			# 	3=>"Playback","answers"=>[{ 
-			# 	  	"Playback Instructions"=>Answer.find(225).pojo 
-			# 	  	}], 
-			# 	4=>"Backup","answers"=>[{ 
-			# 	  	"Backup Instructions"=>Answer.find(228).pojo 
-			# 	  	}], 
-			# 	5=>"Audio / Mic Setup","answers"=>[{ 
-			# 	  	"Instructions for DVR"=>Answer.find(232).pojo, 
-			# 	  	"Instructions for NVR"=>Answer.find(231).pojo 
-			# 	  	}], 
-			#   	6=>"PTZ Setup","answers"=>[{ 
-			#   	  	"Add PTZ"=>Answer.find(233).pojo, 
-			#   	  	"Configure Cruise"=>Answer.find(135).pojo }] 
-			#   	}]
-			# },
-			{"device" => "Instructions using the Browser","categories"=>[{ 
-				0=>"Firmware Upgrade","answers"=>[{ 
-					"Generic Firmware Instructions for Browser"=>Answer.find(121).pojo, 
-					"Uninstall Plug-ins for PC"=>Answer.find(117).pojo, 
-					"Uninstall Plug-ins for OSX"=>Answer.find(13).pojo }], 
-				1=>"Setup a Schedule","answers"=>[{ 
-				 	"24/7 Recording"=>Answer.find(223).pojo, 
-				 	"Motion Detection"=>Answer.find(222).pojo, 
-				 	"Sensitivity & Zones"=>Answer.find(224).pojo
-				 	 }], 
-				2=>"Email Notification","answers"=>[{ 
-				 	"Email Notification Instructions for the browser"=>Answer.find(195).pojo}], 
-				3=>"Playback","answers"=>[{ 
-				 	"Windows via Browser"=>Answer.find(226).pojo 
-				 	}], 
-				4=>"Backup","answers"=>[{ 
-				 	"Windows via Browser"=>Answer.find(229).pojo, 
-				 	"OSX via Browser"=>Answer.find(230).pojo 
-				 	}], 
-				5=>"PTZ Setup","answers"=>[{ 
-					"Add PTZ"=>Answer.find(236).pojo, 
-				 	"Configure Cruise"=>Answer.find(238).pojo 
-				 	}] 
-				}]
-			}, 
-			{"device" => "Instructions using the Mobile App", "categories"=>[ {
-				0=>"Email Notification","answers"=>[{ 
-					"iPhone Email Notification Instructions"=>Answer.find(199).pojo, 
-					"iPad Email Notification Instructions"=>Answer.find(196).pojo, 
-					"Android Phone Email Notification Instructions"=>Answer.find(197).pojo, 
-					"Android Tablet Email Notification Instructions"=>Answer.find(196).pojo }], 
-				1=>"Playback","answers"=>[{ 
-				 	"iPhone Playback Instructions"=>Answer.find(44).pojo, 
-				 	"iPad Playback Instructions"=>Answer.find(46).pojo, 
-				 	"Android Phone Playback Instructions"=>Answer.find(43).pojo, 
-				 	"Android Tablet Playback Instructions"=>Answer.find(52).pojo }] 
-				}]
-		})
+				{"category"=>"Backup",
+				 "answers"=>[
+				 	{0=>Answer.find(228).pojo}]
+				}, 
+				{"category"=>"Audio / Mic Setup",
+				 "answers"=>[
+				 	{0=>Answer.find(232).pojo}, 
+				  	{1=>Answer.find(231).pojo}]
+				}, 
+			  	{"category"=>"PTZ Setup",
+			  	 "answers"=>[
+			  		{0=>Answer.find(233).pojo}, 
+			  	  	{1=>Answer.find(135).pojo }] 
+			  	}]
+			})
+			# {"device" => "Instructions using the Browser",
+			#  "categories"=>[{ 
+			# 	{"category"=>"Firmware Upgrade",
+			# 	 "answers"=>[{ 
+			# 		"Generic Firmware Instructions for Browser"=>Answer.find(121).pojo, 
+			# 		"Uninstall Plug-ins for PC"=>Answer.find(117).pojo, 
+			# 		"Uninstall Plug-ins for OSX"=>Answer.find(13).pojo }]
+			# 	}, 
+			# 	{"category"=>"Setup a Schedule",
+			# 	 "answers"=>[{ 
+			# 	 	"24/7 Recording"=>Answer.find(223).pojo, 
+			# 	 	"Motion Detection"=>Answer.find(222).pojo, 
+			# 	 	"Sensitivity & Zones"=>Answer.find(224).pojo
+			# 	 	 }]
+			# 	}, 
+			# 	{"category"=>"Email Notification","answers"=>[{ 
+			# 	 	"Email Notification Instructions for the browser"=>Answer.find(195).pojo}]
+			# 	}, 
+			# 	{"category"=>"Playback","answers"=>[{ 
+			# 	 	"Windows via Browser"=>Answer.find(226).pojo 
+			# 	 	}]
+			# 	}, 
+			# 	{"category"=>"Backup",
+			# 	 "answers"=>[{ 
+			# 	 	"Windows via Browser"=>Answer.find(229).pojo, 
+			# 	 	"OSX via Browser"=>Answer.find(230).pojo 
+			# 	 	}]
+			# 	}, 
+			# 	{"category"=>"PTZ Setup",
+			# 	 "answers"=>[{ 
+			# 		"Add PTZ"=>Answer.find(236).pojo, 
+			# 	 	"Configure Cruise"=>Answer.find(238).pojo 
+			# 		}] 
+			# 	}
+				
+			# }
+			# {"device" => "Instructions using the Mobile App", "categories"=>[ {
+			# 	{"category"=>"Email Notification","answers"=>[{ 
+			# 		"iPhone Email Notification Instructions"=>Answer.find(199).pojo, 
+			# 		"iPad Email Notification Instructions"=>Answer.find(196).pojo, 
+			# 		"Android Phone Email Notification Instructions"=>Answer.find(197).pojo, 
+			# 		"Android Tablet Email Notification Instructions"=>Answer.find(196).pojo }], 
+			# 	},
+			# 	{"category"=>"Playback","answers"=>[{ 
+			# 	 	"iPhone Playback Instructions"=>Answer.find(44).pojo, 
+			# 	 	"iPad Playback Instructions"=>Answer.find(46).pojo, 
+			# 	 	"Android Phone Playback Instructions"=>Answer.find(43).pojo, 
+			# 	 	"Android Tablet Playback Instructions"=>Answer.find(52).pojo }] 
+			# 	}
+			# }]
 		render json: @qtpojo
 	end
 
