@@ -33,15 +33,23 @@ var app = angular.module('manual',['ui.router'])
     .state('categories', {
       url: "/categories/:id",
       template:"<h1>{{manual[id].device}}</h1>"+
-      			"<div ng-repeat='(i,category) in manual[id].categories[0]'>"+ 
-      				"<a >{{category}}</a>"+
+      			"<div ng-repeat='(i,category) in manual[id].categories'>"+ 
+      				"<a ui-sref='topics({id: i,cat_id: id})'>{{category.category}}</a>"+
       			"</div>",
       controller:function($scope,$stateParams){
       	$scope.id = $stateParams.id;
       }
     })
-    .state('state2', {
-      url: "/state2",
-      template:""
+    .state('topics', {
+      url: "/categories/:cat_id/topics/:id",
+      template:"<h1>{{manual[id].device}}</h1>"+
+      		   "<h2>{{manual[id].categories[cat_id].category}}</h2>"+
+      			"<div ng-repeat='answer in manual[id].categories[cat_id].answers[0]'>"+ 
+      				"<a ui-sref=''>{{answer.title}}</a>"+
+      			"</div>",
+      controller:function($scope,$stateParams){
+      	$scope.id = $stateParams.id;
+      	$scope.cat_id = $stateParams.cat_id;
+      }
     })
 });
