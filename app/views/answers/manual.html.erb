@@ -1,6 +1,10 @@
-<div class="container" ng-app="manual" ng-controller="manual as manual_scope">
-	<div ng-show="manual_scope.manual.length !=undefined" class="fading-In">
-		{{manual_scope.manual}}
+<% content_for(:body_attributes) do %>
+    data-no-turbolink="true"
+  <% end %>
+<div class="container" ng-app="manual" ng-controller="manual" ng-init="initialize()">
+	<div ng-show="manual.length !=undefined" class="fading-In">
+		<ui-view></ui-view>
 	</div>
 </div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="/manual.js"></script>
