@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
 	end
 
 	def manual
-		
+		@hideMe = true
 	end
 
 	def qtpojo
