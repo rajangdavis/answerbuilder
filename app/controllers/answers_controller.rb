@@ -20,59 +20,56 @@ class AnswersController < ApplicationController
 		@qtpojo.push(
 			{"Instructions using the NVR/DVR"=>[{
 				"Firmware Upgrade"=>[{ 
-					"Generic Firmware Instructions for NVR/DVR"=>"Answer.find(  ).pojo" }], 
+					"Generic Firmware Instructions for NVR/DVR"=>Answer.find(140).pojo }], 
 				"Setup a Schedule"=>[{ 
-				  	"24/7 Recording"=>"Answer.find(  ).pojo", 
-				  	"Motion Detection"=>"Answer.find(  ).pojo", 
-				  	"Sensitivity & Zones"=>"Answer.find(  ).pojo" }], 
+				  	"24/7 Recording"=>Answer.find(109).pojo, 
+				  	"Motion Detection"=>Answer.find(107).pojo, 
+				  	"Sensitivity & Zones"=>Answer.find(221).pojo }], 
 				"Email Notification"=>[{ 
-				  	"Email Notification Instructions"=>"Answer.find(  ).pojo" }], 
+				  	"Email Notification Instructions"=>Answer.find(194).pojo }], 
 				"Playback"=>[{ 
-				  	"Playback Instructions"=>"Answer.find(  ).pojo" }], 
+				  	"Playback Instructions"=>Answer.find(225).pojo }], 
 				"Backup"=>[{ 
-				  	"Backup Instructions"=>"Answer.find(  ).pojo" }], 
+				  	"Backup Instructions"=>Answer.find(228).pojo }], 
 				"Audio / Mic Setup"=>[{ 
-				  	"Instructions for DVR"=>"Answer.find(  ).pojo", 
-				  	"Instructions for NVR"=>"Answer.find(  ).pojo" }], 
+				  	"Instructions for DVR"=>Answer.find(232).pojo, 
+				  	"Instructions for NVR"=>Answer.find(231).pojo }], 
 			  	"PTZ Setup"=>[{ 
-			  	  	"Add PTZ"=>"Answer.find(  ).pojo", 
-			  	  	"Configure Presets"=>"Answer.find(  ).pojo", 
-			  	  	"Configure Cruise"=>"Answer.find(  ).pojo" }] 
+			  	  	"Add PTZ"=>Answer.find(233).pojo, 
+			  	  	"Configure Cruise"=>Answer.find(135).pojo }] 
 			  	}]
 			}, 
 			{"Instructions using the Browser"=>[{ 
 				"Firmware Upgrade"=>[{ 
-					"Generic Firmware Instructions for Browser"=>"Answer.find(  ).pojo", 
-					"Uninstall Plug-ins for PC"=>"Answer.find(  ).pojo", 
-					"Uninstall Plug-ins for OSX"=>"Answer.find(  ).pojo" }], 
+					"Generic Firmware Instructions for Browser"=>Answer.find(121).pojo, 
+					"Uninstall Plug-ins for PC"=>Answer.find(117).pojo, 
+					"Uninstall Plug-ins for OSX"=>Answer.find(13).pojo }], 
 				"Setup a Schedule"=>[{ 
-				 	"24/7 Recording"=>"Answer.find(  ).pojo", 
-				 	"Motion Detection"=>"Answer.find(  ).pojo", 
-				 	"Sensitivity & Zones"=>"Answer.find(  ).pojo" }], 
+				 	"24/7 Recording"=>Answer.find(223).pojo, 
+				 	"Motion Detection"=>Answer.find(222).pojo, 
+				 	"Sensitivity & Zones"=>Answer.find(224).pojo }], 
 				"Email Notification"=>[{ 
-				 	"Email Notification Instructions"=>"Answer.find(  ).pojo" }], 
+				 	"Email Notification Instructions for the browser"=>Answer.find(195).pojo}], 
 				"Playback"=>[{ 
-				 	"Windows via Browser"=>"Answer.find(  ).pojo", 
-				 	"OSX via Browser"=>"Answer.find(  ).pojo" }], 
+				 	"Windows via Browser"=>Answer.find(226).pojo }], 
 				"Backup"=>[{ 
-				 	"Windows via Browser"=>"Answer.find(  ).pojo", 
-				 	"OSX via Browser"=>"Answer.find(  ).pojo" }], 
-				"PTZ Setup"=>[{ "Add PTZ"=>"Answer.find(  ).pojo", 
-				 	"Configure Presets"=>"Answer.find(  ).pojo", 
-				 	"Configure Cruise"=>"Answer.find(  ).pojo" }] 
+				 	"Windows via Browser"=>Answer.find(229).pojo, 
+				 	"OSX via Browser"=>Answer.find(230).pojo }], 
+				"PTZ Setup"=>[{ "Add PTZ"=>Answer.find(236).pojo, 
+				 	"Configure Cruise"=>Answer.find(238).pojo }] 
 				}]
 			}, 
 			{"Instructions using the Mobile App"=>[ {
 				"Email Notification"=>[{ 
-					"iPhone Email Notification Instructions"=>"Answer.find(  ).pojo", 
-					"iPad Email Notification Instructions"=>"Answer.find(  ).pojo", 
-					"Android Phone Email Notification Instructions"=>"Answer.find(  ).pojo", 
-					"Android Tablet Email Notification Instructions"=>"Answer.find(  ).pojo" }], 
+					"iPhone Email Notification Instructions"=>Answer.find(199).pojo, 
+					"iPad Email Notification Instructions"=>Answer.find(196).pojo, 
+					"Android Phone Email Notification Instructions"=>Answer.find(197).pojo, 
+					"Android Tablet Email Notification Instructions"=>Answer.find(196).pojo }], 
 				"Playback"=>[{ 
-				 	"iPhone Playback Instructions"=>"Answer.find(  ).pojo", 
-				 	"iPad Playback Instructions"=>"Answer.find(  ).pojo", 
-				 	"Android Phone Playback Instructions"=>"Answer.find(  ).pojo", 
-				 	"Android Tablet Playback Instructions"=>"Answer.find(  ).pojo" }] 
+				 	"iPhone Playback Instructions"=>Answer.find(44).pojo, 
+				 	"iPad Playback Instructions"=>Answer.find(46).pojo, 
+				 	"Android Phone Playback Instructions"=>Answer.find(43).pojo, 
+				 	"Android Tablet Playback Instructions"=>Answer.find(52).pojo }] 
 				}]
 		})
 		render json: @qtpojo
