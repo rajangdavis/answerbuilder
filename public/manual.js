@@ -33,8 +33,8 @@ var app = angular.module('manual',['ui.router'])
     .state('categories', {
       url: "/categories/:id",
       template:"<h1>{{manual[id].device}}</h1>"+
-      			"<div ng-repeat='(i,category) in manual[id].categories'>"+ 
-      				"<a >{{}}</a>"+
+      			"<div ng-repeat='(i,category) in manual[id].categories[0]'>"+ 
+      				"<a >{{category}}</a>"+
       			"</div>",
       controller:function($scope,$stateParams){
       	$scope.id = $stateParams.id;

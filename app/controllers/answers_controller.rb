@@ -17,32 +17,39 @@ class AnswersController < ApplicationController
 
 	def qtpojo
 		@qtpojo = []
-		@qtpojo.push({"device" => "Instructions using the NVR/DVR",
-			"categories"=>[{
-				0=>"Firmware Upgrade","answers"=>[{ 
-					"Generic Firmware Instructions for NVR/DVR"=>Answer.find(140).pojo }], 
-				1=>"Setup a Schedule","answers"=>[{ 
-				  	"24/7 Recording"=>Answer.find(109).pojo, 
-				  	"Motion Detection"=>Answer.find(107).pojo, 
-				  	"Sensitivity & Zones"=>Answer.find(221).pojo
-				  	 }], 
-				2=>"Email Notification","answers"=>[{ 
-				  	"Email Notification Instructions"=>Answer.find(194).pojo }], 
-				3=>"Playback","answers"=>[{ 
-				  	"Playback Instructions"=>Answer.find(225).pojo 
-				  	}], 
-				4=>"Backup","answers"=>[{ 
-				  	"Backup Instructions"=>Answer.find(228).pojo 
-				  	}], 
-				5=>"Audio / Mic Setup","answers"=>[{ 
-				  	"Instructions for DVR"=>Answer.find(232).pojo, 
-				  	"Instructions for NVR"=>Answer.find(231).pojo 
-				  	}], 
-			  	6=>"PTZ Setup","answers"=>[{ 
-			  	  	"Add PTZ"=>Answer.find(233).pojo, 
-			  	  	"Configure Cruise"=>Answer.find(135).pojo }] 
-			  	}]
-			},
+		@qtpojo.push(
+			{"device" => "Instructions using the NVR/DVR",
+			"categories"=>[
+				{"category"=>"Firmware Upgrade",
+				 "answers"=>[
+				 	{"Generic Firmware Instructions for NVR/DVR"=>Answer.find(140).pojo }]
+				}, 
+				{"category"=>"Setup a Schedule",
+				 "answers"=>[
+				 	{"24/7 Recording"=>Answer.find(109).pojo}, 
+				  	{"Motion Detection"=>Answer.find(107).pojo}, 
+				  	{"Sensitivity & Zones"=>Answer.find(221).pojo }]
+				},
+				{"category"=>"Email Notification",
+				 "answers"=>[
+				 	{"Email Notification Instructions"=>Answer.find(194).pojo }]
+				}]
+				}, 
+			# 	3=>"Playback","answers"=>[{ 
+			# 	  	"Playback Instructions"=>Answer.find(225).pojo 
+			# 	  	}], 
+			# 	4=>"Backup","answers"=>[{ 
+			# 	  	"Backup Instructions"=>Answer.find(228).pojo 
+			# 	  	}], 
+			# 	5=>"Audio / Mic Setup","answers"=>[{ 
+			# 	  	"Instructions for DVR"=>Answer.find(232).pojo, 
+			# 	  	"Instructions for NVR"=>Answer.find(231).pojo 
+			# 	  	}], 
+			#   	6=>"PTZ Setup","answers"=>[{ 
+			#   	  	"Add PTZ"=>Answer.find(233).pojo, 
+			#   	  	"Configure Cruise"=>Answer.find(135).pojo }] 
+			#   	}]
+			# },
 			{"device" => "Instructions using the Browser","categories"=>[{ 
 				0=>"Firmware Upgrade","answers"=>[{ 
 					"Generic Firmware Instructions for Browser"=>Answer.find(121).pojo, 
