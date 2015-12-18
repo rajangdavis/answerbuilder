@@ -1,29 +1,30 @@
 var app = angular.module('manual',['ui.router'])
 .controller('manual',function($http,$scope){
-	$scope.manual = undefined;
-	$scope.categories = undefined;
-	$scope.answersList = undefined;
-	$scope.currentCategory = undefined;
+	$scope.manual = [];
+	$scope.categories = [];
+	$scope.answersList = [];
+	$scope.currentCategory = [];
 	$scope.initialize = function(){
 		$http({
 		  method: 'GET',
 		  url: '//qseecode.herokuapp.com/qtpojo.json'
 		}).then(function successCallback(response) {
 		    $scope.manual = response.data;
-		    for (var i = 0; i < $scope.manual.length; i++) {
-		    	for (var k in $scope.manual[i]) {
-			        if ($scope.manual[i].hasOwnProperty(k)) {
-			           $scope.categories = $scope.manual[i][k];
-			           for (var l = 0; l < $scope.categories.length; l++) {
-			           		for (var j in $scope.categories[l]) {
-						        if ($scope.categories[l].hasOwnProperty(j)) {
-						           $scope.answersList = $scope.categories[l][j];
-						        }
-						    }
-			           };
-			        }
-			    }
-		    };
+		    console.log($scope.manual);
+		    // for (var i = 0; i < $scope.manual.length; i++) {
+		    // 	for (var k in $scope.manual[i]) {
+			   //      if ($scope.manual[i].hasOwnProperty(k)) {
+			   //         $scope.categories = $scope.manual[i][k];
+			   //         for (var l = 0; l < $scope.categories.length; l++) {
+			   //         		for (var j in $scope.categories[l]) {
+						//         if ($scope.categories[l].hasOwnProperty(j)) {
+						//            $scope.answersList = $scope.categories[l][j];
+						//         }
+						//     }
+			   //         };
+			   //      }
+			   //  }
+		    // };
 		    
 		  }, function errorCallback(response) {
 		    console.log(response);
@@ -49,7 +50,11 @@ var app = angular.module('manual',['ui.router'])
     .state('categories', {
       url: "/categories/:id",
       template:"<h1>{{currentCategory}}</h2>"+
-      "",
+		        "<div ng-repeat='(c_values,c_instructions) in categories '>"+ 
+		      		"<div ng-repeat='(c__value,c__instruction) in c_instructions '>"+ 
+		      			"<a ng-click='scc(c__value)'>{{c__value}}</a>"+
+		      		"</div>"+
+		      	"</div>",
       controller:function($scope,$stateParams){
       	$scope.id = $stateParams.id;
       }
