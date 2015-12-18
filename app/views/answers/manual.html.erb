@@ -1,4 +1,8 @@
 <div class="container" ng-app="manual" ng-controller="manual as manual_scope">
-
+	<div ng-show="manual_scope.manual.length !=undefined" class="fading-In">
+		<span ng-repeat="(key,value) in manual_scope.manual">
+			{{value}}
+		</span>
+	</div>
 </div>
 <script type="text/javascript" src="/manual.js"></script>

@@ -17,8 +17,8 @@ class AnswersController < ApplicationController
 
 	def qtpojo
 		@qtpojo = []
-		@qtpojo.push(
-			{"Instructions using the NVR/DVR"=>[{
+		@qtpojo.push({"instructions":
+			[{"Instructions using the NVR/DVR"=>[{
 				"Firmware Upgrade"=>[{ 
 					"Generic Firmware Instructions for NVR/DVR"=>Answer.find(140).pojo }], 
 				"Setup a Schedule"=>[{ 
@@ -71,7 +71,7 @@ class AnswersController < ApplicationController
 				 	"Android Phone Playback Instructions"=>Answer.find(43).pojo, 
 				 	"Android Tablet Playback Instructions"=>Answer.find(52).pojo }] 
 				}]
-		})
+		}]})
 		render json: @qtpojo
 	end
 
