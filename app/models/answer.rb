@@ -10,19 +10,10 @@ class Answer < ActiveRecord::Base
 		steps = []
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
 		@steps.each do |step|
-			if self.translation_needed="YES"
-				steps.push({:number => step.number, :step_type => step.step_type, :step => step.step, 
-				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end,:step_jp => step.step_jp,:image_jp => step.image_upload_jp})
-			else
-				steps.push({:number => step.number, :step_type => step.step_type, :step => step.step, 
-				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
-			end
+			steps.push({:number => step.number, :step_type => step.step_type, :step => step.step, 
+			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
 		end
-		if self.translation_needed="YES"
-			answer = {:series => self.series, :title => self.title, :tagline => self.tagline, :steps => steps, :title_jp => self.title_jp, :tagline_jp => self.tagline_jp}
-		else
-			answer = {:series => self.series, :title => self.title, :tagline => self.tagline, :steps => steps}
-		end
+		answer = {:series => self.series, :title => self.title, :tagline => self.tagline, :steps => steps}
 		answer
 	end
 

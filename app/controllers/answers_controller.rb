@@ -11,6 +11,73 @@ class AnswersController < ApplicationController
 		@answers = Answer.where("translation_needed Like'%YES%'")
 	end
 
+	def manual
+		
+	end
+
+	def qtpojo
+		@qtpojo = []
+		@qtpojo.push(
+			{"Instructions using the NVR/DVR"=>[{
+				"Firmware Upgrade"=>[{ 
+					"Generic Firmware Instructions for NVR/DVR"=>"Answer.find(  ).pojo" }], 
+				"Setup a Schedule"=>[{ 
+				  	"24/7 Recording"=>"Answer.find(  ).pojo", 
+				  	"Motion Detection"=>"Answer.find(  ).pojo", 
+				  	"Sensitivity & Zones"=>"Answer.find(  ).pojo" }], 
+				"Email Notification"=>[{ 
+				  	"Email Notification Instructions"=>"Answer.find(  ).pojo" }], 
+				"Playback"=>[{ 
+				  	"Playback Instructions"=>"Answer.find(  ).pojo" }], 
+				"Backup"=>[{ 
+				  	"Backup Instructions"=>"Answer.find(  ).pojo" }], 
+				"Audio / Mic Setup"=>[{ 
+				  	"Instructions for DVR"=>"Answer.find(  ).pojo", 
+				  	"Instructions for NVR"=>"Answer.find(  ).pojo" }], 
+			  	"PTZ Setup"=>[{ 
+			  	  	"Add PTZ"=>"Answer.find(  ).pojo", 
+			  	  	"Configure Presets"=>"Answer.find(  ).pojo", 
+			  	  	"Configure Cruise"=>"Answer.find(  ).pojo" }] 
+			  	}]
+			}, 
+			{"Instructions using the Browser"=>[{ 
+				"Firmware Upgrade"=>[{ 
+					"Generic Firmware Instructions for Browser"=>"Answer.find(  ).pojo", 
+					"Uninstall Plug-ins for PC"=>"Answer.find(  ).pojo", 
+					"Uninstall Plug-ins for OSX"=>"Answer.find(  ).pojo" }], 
+				"Setup a Schedule"=>[{ 
+				 	"24/7 Recording"=>"Answer.find(  ).pojo", 
+				 	"Motion Detection"=>"Answer.find(  ).pojo", 
+				 	"Sensitivity & Zones"=>"Answer.find(  ).pojo" }], 
+				"Email Notification"=>[{ 
+				 	"Email Notification Instructions"=>"Answer.find(  ).pojo" }], 
+				"Playback"=>[{ 
+				 	"Windows via Browser"=>"Answer.find(  ).pojo", 
+				 	"OSX via Browser"=>"Answer.find(  ).pojo" }], 
+				"Backup"=>[{ 
+				 	"Windows via Browser"=>"Answer.find(  ).pojo", 
+				 	"OSX via Browser"=>"Answer.find(  ).pojo" }], 
+				"PTZ Setup"=>[{ "Add PTZ"=>"Answer.find(  ).pojo", 
+				 	"Configure Presets"=>"Answer.find(  ).pojo", 
+				 	"Configure Cruise"=>"Answer.find(  ).pojo" }] 
+				}]
+			}, 
+			{"Instructions using the Mobile App"=>[ {
+				"Email Notification"=>[{ 
+					"iPhone Email Notification Instructions"=>"Answer.find(  ).pojo", 
+					"iPad Email Notification Instructions"=>"Answer.find(  ).pojo", 
+					"Android Phone Email Notification Instructions"=>"Answer.find(  ).pojo", 
+					"Android Tablet Email Notification Instructions"=>"Answer.find(  ).pojo" }], 
+				"Playback"=>[{ 
+				 	"iPhone Playback Instructions"=>"Answer.find(  ).pojo", 
+				 	"iPad Playback Instructions"=>"Answer.find(  ).pojo", 
+				 	"Android Phone Playback Instructions"=>"Answer.find(  ).pojo", 
+				 	"Android Tablet Playback Instructions"=>"Answer.find(  ).pojo" }] 
+				}]
+		})
+		render json: @qtpojo
+	end
+
 	def preview
 		@preview = true
 		if params['new']

@@ -16,6 +16,8 @@ Answerbuild::Application.routes.draw do
   get 'answers/:id/preview' => 'answers#preview', as: :preview
   get 'answers/:id/preview_jp' => 'answers#preview_jp', as: :preview_jp
   get 'stepss' => 'steps#index2',as: :imagedump
+  get 'qtpojo' => 'answers#qtpojo'
+  get 'qtmanual' => 'answers#manual'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

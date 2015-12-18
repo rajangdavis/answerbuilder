@@ -31,7 +31,6 @@
             <td><%= answer.clean_word_count%></td>
 	    	<td><span class="<%=answer.translation_status%>"><%=answer.translation_status%></span></td>
             <td><%=link_to "Click here to preview", preview_jp_path(answer)%></td>
-            <td><%=link_to "<i class='fa fa-tint'></i>".html_safe, angular_jp_path(answer), :class => "small btn btn-default btn-modified"%></td>
     	</tr>
     	<% end %>
     </tbody>
