@@ -406,9 +406,11 @@ textarea,input, select{
 .step_container{
 	height:153px;
 	top:-36px;
+	-webkit-overflow-scrolling: touch;    
+}
+.step_contained{
 	overflow:scroll;
 	overflow-x:hidden;
-	-webkit-overflow-scrolling: touch;    
 }
 .img_holder{
 	text-align:center;	

@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+
 	def index
 		if !current_user
 			redirect_to root_path
@@ -46,59 +47,57 @@ class AnswersController < ApplicationController
 			  	{"category"=>"PTZ Setup",
 			  	 "answers"=>[
 			  		{0=>Answer.find(233).pojo}, 
-			  	  	{1=>Answer.find(135).pojo }] 
+			  	  	{1=>Answer.find(235).pojo }] 
 			  	}]
+			},
+			{"device" => "Instructions using the Browser",
+			 "categories"=>[
+				{"category"=>"Firmware Upgrade",
+				 "answers"=>[
+				 	{0=>Answer.find(121).pojo}, 
+					{1=>Answer.find(117).pojo}, 
+					{2=>Answer.find(13).pojo }]
+				}, 
+				{"category"=>"Setup a Schedule",
+				 "answers"=>[
+				 	{0=>Answer.find(223).pojo}, 
+				 	{1=>Answer.find(222).pojo}, 
+				 	{2=>Answer.find(224).pojo}]
+				}, 
+				{"category"=>"Email Notification","answers"=>[
+					{0=>Answer.find(195).pojo}]
+				}, 
+				{"category"=>"Playback","answers"=>[
+					{0=>Answer.find(226).pojo }]
+				}, 
+				{"category"=>"Backup",
+				 "answers"=>[ 
+				 	{0=>Answer.find(229).pojo}, 
+				 	{1=>Answer.find(230).pojo }]
+				}, 
+				{"category"=>"PTZ Setup",
+				 "answers"=>[ 
+					{0=>Answer.find(236).pojo}, 
+				 	{1=>Answer.find(238).pojo}] 
+				}]
+			},
+			{"device" => "Instructions using the Mobile App", 
+				"categories"=>[
+				{"category"=>"Email Notification",
+				 "answers"=>[
+				 	{0=>Answer.find(199).pojo}, 
+					{1=>Answer.find(196).pojo}, 
+					{2=>Answer.find(197).pojo}, 
+					{3=>Answer.find(196).pojo}]
+				},
+				{"category"=>"Playback",
+				"answers"=>[
+				 	{0=>Answer.find(44).pojo}, 
+				 	{1=>Answer.find(46).pojo}, 
+				 	{2=>Answer.find(43).pojo}, 
+				 	{3=>Answer.find(52).pojo}] 	
+				}]
 			})
-			# {"device" => "Instructions using the Browser",
-			#  "categories"=>[{ 
-			# 	{"category"=>"Firmware Upgrade",
-			# 	 "answers"=>[{ 
-			# 		"Generic Firmware Instructions for Browser"=>Answer.find(121).pojo, 
-			# 		"Uninstall Plug-ins for PC"=>Answer.find(117).pojo, 
-			# 		"Uninstall Plug-ins for OSX"=>Answer.find(13).pojo }]
-			# 	}, 
-			# 	{"category"=>"Setup a Schedule",
-			# 	 "answers"=>[{ 
-			# 	 	"24/7 Recording"=>Answer.find(223).pojo, 
-			# 	 	"Motion Detection"=>Answer.find(222).pojo, 
-			# 	 	"Sensitivity & Zones"=>Answer.find(224).pojo
-			# 	 	 }]
-			# 	}, 
-			# 	{"category"=>"Email Notification","answers"=>[{ 
-			# 	 	"Email Notification Instructions for the browser"=>Answer.find(195).pojo}]
-			# 	}, 
-			# 	{"category"=>"Playback","answers"=>[{ 
-			# 	 	"Windows via Browser"=>Answer.find(226).pojo 
-			# 	 	}]
-			# 	}, 
-			# 	{"category"=>"Backup",
-			# 	 "answers"=>[{ 
-			# 	 	"Windows via Browser"=>Answer.find(229).pojo, 
-			# 	 	"OSX via Browser"=>Answer.find(230).pojo 
-			# 	 	}]
-			# 	}, 
-			# 	{"category"=>"PTZ Setup",
-			# 	 "answers"=>[{ 
-			# 		"Add PTZ"=>Answer.find(236).pojo, 
-			# 	 	"Configure Cruise"=>Answer.find(238).pojo 
-			# 		}] 
-			# 	}
-				
-			# }
-			# {"device" => "Instructions using the Mobile App", "categories"=>[ {
-			# 	{"category"=>"Email Notification","answers"=>[{ 
-			# 		"iPhone Email Notification Instructions"=>Answer.find(199).pojo, 
-			# 		"iPad Email Notification Instructions"=>Answer.find(196).pojo, 
-			# 		"Android Phone Email Notification Instructions"=>Answer.find(197).pojo, 
-			# 		"Android Tablet Email Notification Instructions"=>Answer.find(196).pojo }], 
-			# 	},
-			# 	{"category"=>"Playback","answers"=>[{ 
-			# 	 	"iPhone Playback Instructions"=>Answer.find(44).pojo, 
-			# 	 	"iPad Playback Instructions"=>Answer.find(46).pojo, 
-			# 	 	"Android Phone Playback Instructions"=>Answer.find(43).pojo, 
-			# 	 	"Android Tablet Playback Instructions"=>Answer.find(52).pojo }] 
-			# 	}
-			# }]
 		render json: @qtpojo
 	end
 

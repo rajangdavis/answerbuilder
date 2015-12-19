@@ -1,39 +1,58 @@
-var app = angular.module('manual',['ui.router'])
-.controller('manual',function($http,$scope,$timeout,$rootScope){
+var app = angular.module('manual',['ui.router','ngSanitize'])
+.controller('manual',function($http,$scope,$timeout,$rootScope,$sce){
 	$scope.manual;
-	$scope.currentIndex = 0;
+	$scope.currentIndex = {'index':0};
 	$scope.initialize = function(){
 		$http({
 		  method: 'GET',
 		  url: '/qtpojo.json'
 		}).then(function successCallback(response) {
 		    $scope.manual = response.data;
-		    console.log($scope.manual);
 		  }, function errorCallback(response) {
 		    console.log(response);
 		  });
 	}
+
+  function ObjectLength( object ) {
+      var length = 0;
+      for( var key in object ) {
+          if( object.hasOwnProperty(key) ) {
+              ++length;
+          }
+      }
+      return length;
+  };
+
+  $scope.shouldBeHidden = false;
+
 	$scope.setCurrentStepIndex = function (index) {
-        $scope.currentIndex = index;
+        $scope.currentIndex.index = index;
     };
 
+  $scope.answer_length = 0;
+
     $scope.isCurrentStepIndex = function (index) {
-        return $scope.currentIndex === index;
+        $scope.answer_length = ObjectLength($scope.currentIndex) - 1;
+        return $scope.currentIndex.index === index;
     };
     $scope.prevStep = function (scope) {
-        $scope.currentIndex = ($scope.currentIndex < scope.length - 1) ? ++$scope.currentIndex : 0;
+        $scope.currentIndex.index = ($scope.currentIndex.index < scope.length - 1) ? ++$scope.currentIndex.index : 0;       
     };
 
     $scope.nextStep = function (scope) {
-        $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : scope.length - 1;
+        $scope.currentIndex.index = ($scope.currentIndex.index > 0) ? --$scope.currentIndex.index : scope.length - 1;
     };
+
+    $scope.htmlSafe = function(string){
+    	return $sce.trustAsHtml(string)
+    }
+
+
     $rootScope.previousState;
 	$rootScope.currentState;
 	$rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
 	    $rootScope.previousState = from.name;
 	    $rootScope.currentState = to.name;
-	    console.log('Previous state:'+$rootScope.previousState)
-	    console.log('Current state:'+$rootScope.currentState)
 	});
 })
 .config(function($stateProvider, $urlRouterProvider) {
