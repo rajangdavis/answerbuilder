@@ -181,7 +181,7 @@ class AnswersController < ApplicationController
 		@answer = Answer.find(params[:id])
 	    if @answer.update(answer_params)
 	    	flash[:notice] = "Answer successfully updated"
-	      redirect_to edit_answer_path(@answer)
+	      	redirect_to edit_answer_path(@answer)
 	    else
 	      redirect_to :back
 	    end

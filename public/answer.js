@@ -1,8 +1,6 @@
-var app = angular.module('answer',['swipe'])
+var app = angular.module('answer',['ngSanitize'])
 .controller('answer', function($timeout,$scope){
 	var self = this;
-	self.instruction = undefined;
-	self.picture = undefined;
 	self.currentIndex = 0;
 
 	self.setCurrentStepIndex = function (index) {
@@ -16,29 +14,39 @@ var app = angular.module('answer',['swipe'])
         self.currentIndex = (self.currentIndex < scope.length - 1) ? ++self.currentIndex : 0;
     };
 
-    self.nextStep = function (scope) {
+    self.nextStep = function (scope,element) {
         self.currentIndex = (self.currentIndex > 0) ? --self.currentIndex : scope.length - 1;
     };
-    self.key = function($event){
-        console.log($event.keyCode);
-        if ($event.keyCode == 38)
-            alert("up arrow");
-        else if ($event.keyCode == 39)
-            alert("right arrow");
-        else if ($event.keyCode == 40)
-            alert("down arrow");
-        else if ($event.keyCode == 37)
-            alert("left arrow");
+})
+.directive('imgHeight', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+          $timeout(function(){
+          var imageHeight = element[0].clientHeight;
+          var marginOpt1 = (496 - imageHeight)/2;
+            if(imageHeight<496 && imageHeight>0){
+              element[0].style.margin = marginOpt1+"px auto";
+              element[0].style.display = 'block';
+            }else if(imageHeight==496){
+              element[0].style.height = (imageHeight*.97)+"px"; 
+            }
+          },500); 
+        }
+    };
+})
+.directive('stepHeight', function($timeout){
+    return {
+        controller: 'answer',
+        link: function(scope, elem, attrs){
+            var self = this;
+            $timeout(function(){
+                var how_many_steps= scope.answer_scope.answer.steps.length;
+                var ideal_height = 600/how_many_steps;
+                if(how_many_steps < 7){
+                    elem[0].style.minHeight = ideal_height + 'px';
+                }
+            },500)
+        }
     }
-})
-.directive('imgHeight', function($timeout){
-	return {
-		link: function($scope, elem, attrs){
-			
-			$timeout(function(){
-				var trueHeight = elem[0].clientHeight;
-				console.log(trueHeight);
-			},500)
-		}
-	}
-})
+});

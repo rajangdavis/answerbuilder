@@ -13,10 +13,7 @@ class Answer < ActiveRecord::Base
 			steps.push({:number => step.number, :step_type => step.step_type, :step => step.clean_step, 
 			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
 		end
-		if !self.tagline.blank?
-			steps.unshift(:number => 0,:step => self.clean_tagline)
-		end
-		answer = {:series => self.series, :title => self.title, :steps => steps}
+		answer = {:series => self.series, :title => self.title, :steps => steps, :tagline => self.clean_tagline}
 		answer
 	end
 
