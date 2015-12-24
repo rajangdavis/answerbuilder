@@ -461,8 +461,9 @@ textarea,input, select{
     margin: -5px 5px 0px -10px;
     overflow:hidden;
 }
-.information_new{
-	
+.information_new i{
+	position:relative;
+	top:7px;
 }
 .information_new::-webkit-scrollbar,.cautiondiv_new ::-webkit-scrollbar{
 	display:none;
@@ -519,10 +520,14 @@ textarea,input, select{
 .active_step{
 	background-color: rgb(234, 234, 234);
 	transition:.5s;
+	min-height:163px !important;
 }
 
 .step-row:not(:last-child){
-	border-bottom:2px solid rgb(234, 234, 234);
+	border-bottom: 2px inset #B9B9B9; 
+}
+.step-row-dashed{
+	border-bottom: 5px dashed #B9B9B9 !important; 	
 }
 .title-right h1{
 	padding: 0% 0% 1% 3%;
@@ -563,30 +568,15 @@ textarea,input, select{
 	max-height:600px;
 }
 .steps.container{
-	overflow-y:hidden;
-}
-.steps.container:hover{
-	transition:.5s;
 	overflow-y:scroll;
+	background: #DEDEDE;
 }
 
-.steps.container::-webkit-scrollbar {
-    width: 5px;
+@media(min-width:768px){
+	.steps.container::-webkit-scrollbar {
+	    width: 5px;
+	}
 }
-
-.steps.container::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
-}
-
-.steps.container::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-
-
-
-
 .container-fluid.border-grey{
 	border:2px solid rgb(201, 202, 204);
 }
@@ -598,6 +588,6 @@ textarea,input, select{
 }
 .step-row{
 	transition:.5s;
-	min-height:90px;
+	min-height:73px;
 	display:block;
 }

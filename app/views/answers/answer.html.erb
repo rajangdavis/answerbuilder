@@ -1,7 +1,8 @@
 <% content_for(:body_attributes) do %>
     data-no-turbolink="true"
   <% end %>
-<div ng-app="answer">
+
+<div ng-app="answer" style="font-size:150%">
 	<div class="container-fluid" ng-controller="answer as answer_scope">
 		
 				
@@ -23,30 +24,28 @@
 				<strong ng-bind-html="answer_scope.answer.tagline"></strong>
 			</div>
 			<div class=" container-fluid border-grey">
-				<div class="title-bar col-lg-5 col-md-5 col-sm-12 col-xs-12 pull-right border-grey container" >
+				<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right border-grey container" >
 					<div class="img_container" ng-repeat="step in answer_scope.answer.steps">
 						<img img-height class="img-responsive" ng-class="{'hidden-image': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" ng-src="{{step.image}}">
 					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container_new text-center ">
-						<a href="javascript:void(0)" ng-hide="answer_scope.currentIndex==0" class="arrow_new fading-In pull-left" ng-click="answer_scope.nextStep(answer_scope.answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
-						<a href="javascript:void(0)" class="arrow_new fading-In pull-right" ng-click="answer_scope.prevStep(answer_scope.answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
-					</div>
 				</div>
-				<div class="steps col-lg-7 col-md-7 col-sm-12 col-xs-12 pull-left border-grey container">
+				<div class="steps col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left border-grey container">
 					<table class="table">
 						<tbody>
-							<tr class="step-row pointer" ng-class="{active_step: answer_scope.currentIndex == $index}" ng-repeat="step in answer_scope.answer.steps" id="{{'step'+($index+1)}}" ng-click="answer_scope.currentIndex = $index" step-height >
+							<tr class="step-row pointer" ng-repeat="step in answer_scope.answer.steps" ng-class="{active_step: answer_scope.currentIndex == $index,'step-row-dashed': answer_scope.isLast(answer_scope.answer.steps,step.true_number+1)}" id="{{'step'+($index+1)}}" ng-click="answer_scope.rotateArr($index)" step-height >
 								<td class="text-left no-grey border-grey">
 									<strong class="pop-step" ng-if="step.step_type == 'Step'">
-										<span>STEP {{step.number}}</span>
+										<span>STEP </span><span>{{step.number}}</span>
 									</strong>
 									<strong ng-if="step.step_type == 'Caution'">
-										<span><i class="fa fa-exclamation-triangle"></i></span>
+										<span ng-hide="answer_scope.isCurrentStepIndex($index)"><i class="fa fa-exclamation-triangle"></i></span>
+										<span  ng-hide="!answer_scope.isCurrentStepIndex($index)" class="text-center">WARNING!</span>
 									</strong>
 									<strong ng-if="step.step_type == 'Information'">
-										<span><i class="fa fa-info-circle fa-2x"></i></span>
+										<span ng-hide="answer_scope.isCurrentStepIndex($index)"><i class="fa fa-info-circle fa-2x"></i></span>
+										<span ng-hide="!answer_scope.isCurrentStepIndex($index)"  class="text-center">IMPORTANT!</span>
 									</strong>
-										<br><span class="step" >{{step.step}}</span>
+										<br><span ng-class="{'hidden': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" class="step" >{{step.step}}</span>
 								</td>
 							</tr>
 						</tbody>

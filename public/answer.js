@@ -2,21 +2,37 @@ var app = angular.module('answer',['ngSanitize'])
 .controller('answer', function($timeout,$scope){
 	var self = this;
 	self.currentIndex = 0;
+    self.absIndex = 0;
 
-	self.setCurrentStepIndex = function (index) {
-        self.currentIndex = index;
-    };
+
+
+    self.rotateArr = function(i){
+        if(i!=0){
+            self.answer.steps = self.answer.steps.slice(i).concat(self.answer.steps.slice(0, i));
+        }
+        document.querySelectorAll('.steps.container')[0].scrollTop = 0;
+    }
+
+    self.isLast = function(arr,i){
+        var len = arr.length;
+        var index = i;
+        return len == index ? true : false
+    }
 
     self.isCurrentStepIndex = function (index) {
         return self.currentIndex === index;
     };
-    self.prevStep = function (scope) {
-        self.currentIndex = (self.currentIndex < scope.length - 1) ? ++self.currentIndex : 0;
-    };
+	// self.setCurrentStepIndex = function (index) {
+ //        self.currentIndex = index;
+ //        // setTimeout(self.rotateArr(index),200)
+ //    };
+ //    self.prevStep = function (scope) {
+ //        self.currentIndex = (self.currentIndex < scope.length - 1) ? ++self.currentIndex : 0;
+ //    };
 
-    self.nextStep = function (scope,element) {
-        self.currentIndex = (self.currentIndex > 0) ? --self.currentIndex : scope.length - 1;
-    };
+ //    self.nextStep = function (scope) {
+ //        self.currentIndex = (self.currentIndex > 0) ? --self.currentIndex : scope.length - 1;
+ //    };
 })
 .directive('imgHeight', function($timeout) {
     return {
@@ -24,11 +40,11 @@ var app = angular.module('answer',['ngSanitize'])
         link: function(scope, element) {
           $timeout(function(){
           var imageHeight = element[0].clientHeight;
-          var marginOpt1 = (496 - imageHeight)/2;
-            if(imageHeight<496 && imageHeight>0){
+          var marginOpt1 = (600 - imageHeight)/2;
+            if(imageHeight<600 && imageHeight>0){
               element[0].style.margin = marginOpt1+"px auto";
               element[0].style.display = 'block';
-            }else if(imageHeight==496){
+            }else if(imageHeight==600){
               element[0].style.height = (imageHeight*.97)+"px"; 
             }
           },500); 

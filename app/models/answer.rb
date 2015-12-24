@@ -9,8 +9,8 @@ class Answer < ActiveRecord::Base
 	def pojo
 		steps = []
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
-		@steps.each do |step|
-			steps.push({:number => step.number, :step_type => step.step_type, :step => step.clean_step, 
+		@steps.each_with_index do |step,i|
+			steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.clean_step, 
 			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
 		end
 		answer = {:series => self.series, :title => self.title, :steps => steps, :tagline => self.clean_tagline}
