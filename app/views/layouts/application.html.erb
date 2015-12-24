@@ -14,7 +14,7 @@
   
   <%= csrf_meta_tags %>
 </head>
-<% if action_name == 'manual'%>
+<% if action_name == 'manual' || 'answer'%>
   <body data-no-turbolink="true" class="<%= if !@hideMe then 'preview' end%>">
 <% else %>
   <body >

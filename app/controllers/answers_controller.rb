@@ -2,8 +2,13 @@ class AnswersController < ApplicationController
 
 	def index
 		if !current_user
-			redirect_to root_path
+			redirect_to index2_path
 		end
+		@answers = Answer.find(:all, :order => 'title ASC')
+		@answer = Answer.new
+	end
+
+	def index2
 		@answers = Answer.find(:all, :order => 'title ASC')
 		@answer = Answer.new
 	end

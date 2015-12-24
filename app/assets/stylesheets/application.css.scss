@@ -577,11 +577,28 @@ textarea,input, select{
 	    width: 5px;
 	}
 }
+.invisible{
+	visibility:hidden;
+}
 .container-fluid.border-grey{
 	border:2px solid rgb(201, 202, 204);
 }
 .qsee-bottom-right{
-	background:rgb(114, 116, 119);
+	position:absolute;
+	right:0;
+	border-top-left-radius: 30px;
+	height:118px;
+	line-height:118px;
+	width:25%;
+	background-color:rgb(114, 116, 119);
+}
+.qsee-bottom-right:before{
+	content: '';
+	background:url('http://i.imgur.com/2S6kiqI.png') 50px 50px;
+	background-repeat: no-repeat;
+	height:100%;
+	width:61.0805%;
+	position:absolute;
 }
 .step-row.pointer:hover{
 	text-decoration:none;
@@ -590,4 +607,8 @@ textarea,input, select{
 	transition:.5s;
 	min-height:73px;
 	display:block;
+}
+.right-corner{
+	position:absolute;
+	right:10px;
 }

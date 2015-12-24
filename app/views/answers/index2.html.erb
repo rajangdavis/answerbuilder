@@ -1,0 +1,44 @@
+<style type="text/css">
+	body{
+		background:lightgrey;
+	}
+</style>
+<div class="container">
+	<div class="answer_list">
+		<h2 class="">Answers</h2>
+		<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+	      <button type="button" class="btn btn-default" id="QC">QC Series</button>
+	      <button type="button" class="btn btn-default" id="QT">QT Series</button>
+	      <button type="button" class="btn btn-default" id="QS">QS Series</button>
+	      <button type="button" class="btn btn-default" id="QR">QR Series</button>
+	      <button type="button" class="btn btn-default" id="None">Other</button>
+	    </div>
+		<div class="answerList margin">
+			<% @answers.each do |answer| %>
+				<div class="<%= answer.series %> small bordered">
+					<span class="icon "><i class="icon <%= answer.series %>"></i></span>
+					<span class="small edit_answer_link"><%=link_to answer.title, angular_path(answer) %></span>
+					<span class=" btn-group">
+					<% if answer.translation_needed.start_with?("YES")%>
+						<img class="pointer Japanese pull-left" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
+						<% if answer.translation_needed.end_with?('COMPLETE)')%>
+							<i class="fa fa-file-image-o pull-left"></i>
+						<% end %>
+					<% end %>	
+					</span>
+					<br>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('button.btn').click(function(){
+			var buttonClass = "."+$(this).attr('id');
+			$('div.answerList '+buttonClass).show();
+			$('div.answerList div:not('+buttonClass+')').hide();
+			$('div.answerList '+buttonClass+':last').parent().parent().css('border-bottom','3px solid lightgrey')
+		});
+	});
+</script>
