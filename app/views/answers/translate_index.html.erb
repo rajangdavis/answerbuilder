@@ -14,22 +14,22 @@
 	<table class="table margin sortable">
     <thead>
       <tr>
-        <th>Series</th>
         <th>Title</th>
         <th>Word Count</th>
         <th>Word Count (no HTML)</th>
-        <th>Status</th>
+        <th>Translation Status</th>
+        <th>Image Status</th>
         <th>Preview Japanese Answer</th>
       </tr>
     </thead>
     <tbody>
     	<% @answers.each do |answer| %>
     	<tr class="bordered">
-	    	<td><span class="icon "><i class="icon <%= answer.series %>"></i></span></td>
 	    	<td><span class="edit_answer_link"><%=link_to answer.title, translate_path(answer) %></span></td>
 	    	<td><%= answer.word_count%></td>
             <td><%= answer.clean_word_count%></td>
 	    	<td><span class="<%=answer.translation_status%>"><%=answer.translation_status%></span></td>
+            <td><span class="<%=answer.translation_needed.gsub(/[()]/,'').gsub(/YES PICTURES/,'')%>"><%=answer.translation_needed.gsub(/[()]/,'').gsub(/YES PICTURES/,'')%></span></td>
             <td><%=link_to "Click here to preview", preview_jp_path(answer)%></td>
     	</tr>
     	<% end %>
