@@ -9,17 +9,32 @@
 				<div class="text-center">
 					<span class="h1">{{answer_scope.answer.series}}</span>
 					<br>
-					<span class="h6">SERIES</span>
+					<span class="h6">
+						{{ answer_scope.language == 'en'? 'SERIES' : 'シリーズ'}}
+					</span>
 				</div>
 			</div>
 			<div class="title-right">
-				<h1 class="text-uppercase">{{answer_scope.answer.title}}</h1>
+				<h1 class="text-uppercase">
+					<span ng-show="answer_scope.language =='en'" ng-bind-html=" answer_scope.answer.title"></span>
+					<% if @answer.translation_needed =~ /COMPLETE/ %>
+					<span ng-hide="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.title_jp"></span>
+					<% end %>
+				</h1>
 			</div>
 		</div>
+		<% if @answer.translation_needed =~ /COMPLETE/ %>
+			<button ng-click="answer_scope.changeLanguage()">change language</button>
+		<% end %>
 		<br><br>
 		<div class="container-more answer-container" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
 			<div class="clearfix text-uppercase h6 tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
-				<strong ng-bind-html="answer_scope.answer.tagline"></strong>
+				<strong>
+					<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
+					<% if @answer.translation_needed =~ /COMPLETE/ %>
+					<span ng-hide="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline_jp"></span>
+					<% end %>
+				</strong>
 			</div>
 			<div class=" container-fluid border-grey">
 				<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right border-grey container" >
@@ -27,7 +42,7 @@
 						{{answer_scope.absIndex}} / {{answer_scope.answer.steps.length}}
 					</div>
 					<div class="img_container" ng-repeat="step in answer_scope.answer.steps">
-						<img img-height class="img-responsive" ng-class="{'hidden-image': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" ng-src="{{step.image}}">
+						<img img-height class="img-responsive" ng-class="{'hidden-image': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" ng-src="{{answer_scope.language == 'en'? step.image : step.image_jp}}">
 					</div>
 				</div>
 				<div class="steps col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left border-grey container">
@@ -36,17 +51,27 @@
 							<tr class="step-row pointer" ng-repeat="step in answer_scope.answer.steps" ng-class="{active_step: answer_scope.currentIndex == $index,'step-row-dashed': answer_scope.isLast(answer_scope.answer.steps,step.true_number+1)}" id="{{'step'+($index+1)}}" ng-click="answer_scope.rotateArr($index,step.true_number+1)" step-height >
 								<td class="text-left no-grey border-grey">
 									<strong class="pop-step" ng-if="step.step_type == 'Step'">
-										<span>STEP </span><span>{{step.number}}</span>
+										<span>{{answer_scope.language == 'en'? 'STEP' : 'ステップ'}}</span>
+										<span>{{step.number}}</span>
 									</strong>
 									<strong ng-if="step.step_type == 'Caution'">
 										<span ng-hide="answer_scope.isCurrentStepIndex($index)"><i class="fa fa-exclamation-triangle"></i></span>
-										<span  ng-hide="!answer_scope.isCurrentStepIndex($index)" class="text-center">WARNING!</span>
+										<span  ng-hide="!answer_scope.isCurrentStepIndex($index)" class="text-center">
+											{{answer_scope.language == 'en' ? 'WARNING!' : '警告！'}}
+										</span>
 									</strong>
 									<strong ng-if="step.step_type == 'Information'">
 										<span ng-hide="answer_scope.isCurrentStepIndex($index)"><i class="fa fa-info-circle fa-2x"></i></span>
-										<span ng-hide="!answer_scope.isCurrentStepIndex($index)"  class="text-center">IMPORTANT!</span>
+										<span ng-hide="!answer_scope.isCurrentStepIndex($index)"  class="text-center">
+											{{answer_scope.language == 'en' ? 'IMPORTANT!' : '重要!'}}
+										</span>
 									</strong>
-										<br><span ng-class="{'hidden': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" class="step" >{{step.step}}</span>
+										<br>
+										<span ng-class="{'hidden': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" class="step" >		<span ng-show="answer_scope.language=='en'" ng-bind-html="step.step"></span>
+											<% if @answer.translation_needed =~ /COMPLETE/ %>
+											<span ng-hide="answer_scope.language=='en'" ng-bind-html="step.step_jp"></span>
+											<% end%>
+										</span>
 								</td>
 							</tr>
 						</tbody>
@@ -56,6 +81,7 @@
 		</div>
 		<br><br><br><br><br>
 		<br><br><br><br><br>
+		<br><br>
 		<div class="hidden-lg hidden-md">
 			<br><br><br><br><br>
 			<br><br><br><br><br>
@@ -70,12 +96,3 @@
 </div>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/answer.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {  
-		$('body').css('margin-top','0px');
-		$('.step').each(function(){
-			var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="inst information_new"><i class="pull-left fa fa-3x fa-info-circle"></i><span information_text>').replace(/\[\/note\]/g,'</span></div>').replace(/\[cat\]/g,'<div class="inst cautiondiv_new"><i class="pull-left fa fa-3x fa-exclamation-triangle"></i>').replace(/\[\/cat\]/g,'</div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
-		$(this).html(content)
-		})
-	});
-</script>

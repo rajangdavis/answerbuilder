@@ -1,10 +1,10 @@
 var app = angular.module('answer',['ngSanitize'])
-.controller('answer', function($timeout,$scope){
+.controller('answer', function($timeout){
 	var self = this;
 	self.currentIndex = 0;
     self.absIndex = 1;
     self.stepLength = 0;
-
+    self.language = 'en';
 
     self.rotateArr = function(i,tn){
         self.absIndex = tn;
@@ -23,6 +23,10 @@ var app = angular.module('answer',['ngSanitize'])
     self.isCurrentStepIndex = function (index) {
         return self.currentIndex === index;
     };
+
+    self.changeLanguage = function(){
+        self.language = self.language == 'en'? 'jp' : 'en';
+    }
 })
 .directive('imgHeight', function($timeout) {
     return {

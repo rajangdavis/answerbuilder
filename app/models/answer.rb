@@ -11,15 +11,31 @@ class Answer < ActiveRecord::Base
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
 		@steps.each_with_index do |step,i|
 			steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.clean_step, 
-			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end})
+			:step_jp => if step.step_jp.blank? then nil else step.clean_step_jp end, 
+			:image_jp => step.image_upload_jp,
+			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
+			})
 		end
-		answer = {:series => self.series, :title => self.title, :steps => steps, :tagline => self.clean_tagline}
+		answer = {
+			:series => self.series, :title => self.title, :steps => steps, :tagline => self.clean_tagline,
+			:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp
+		}
 		answer
 	end
 
 	def clean_tagline
 		clean_tagline = self.tagline.gsub(/\[red\]/,'<span class="red">').gsub(/\[red\]/,'<span class="red">').gsub(/\[\/red\]/,'</span>').gsub(/\[blue\]/,'<span class="blue">').gsub(/\[\/blue\]/,'</span>').gsub(/\[green\]/,'<span class="green">').gsub(/\[\/reen\]/,'</span>').gsub(/\[yellow\]/,'<span class="yellow">').gsub(/\[\/yellow\]/,'</span>').gsub(/\[orange\]/,'<span class="orange">').gsub(/\[\/orange\]/,'</span>').gsub(/\[lgreen\]/,'<span class="lgreen">').gsub(/\[\/lgreen\]/,'</span>').gsub(/\[bold\]/,'<strong>').gsub(/\[\/bold\]/,'</strong>').gsub(/\[i\]/,'<em>').gsub(/\[\/i\]/,'</em>').gsub(/\[u\]/,'<u>').gsub(/\[\/u\]/,'</u>').gsub(/\[br\]/,'<br>').gsub(/\[note\]/,'<div class="inst information_new"><i class="pull-left fa fa-3x fa-info-circle"></i><span information_text>').gsub(/\[\/note\]/,'</span></div>').gsub(/\[cat\]/,'<div class="inst cautiondiv_new"><i class="pull-left fa fa-3x fa-exclamation-triangle"></i>').gsub(/\[\/cat\]/,'</div>')
 		clean_tagline = clean_tagline.html_safe
+		clean_tagline
+	end
+
+	def clean_tagline_jp
+		if self.tagline_jp.blank?
+			clean_tagline = nil
+		else
+			clean_tagline = self.tagline_jp.gsub(/\[red\]/,'<span class="red">').gsub(/\[red\]/,'<span class="red">').gsub(/\[\/red\]/,'</span>').gsub(/\[blue\]/,'<span class="blue">').gsub(/\[\/blue\]/,'</span>').gsub(/\[green\]/,'<span class="green">').gsub(/\[\/reen\]/,'</span>').gsub(/\[yellow\]/,'<span class="yellow">').gsub(/\[\/yellow\]/,'</span>').gsub(/\[orange\]/,'<span class="orange">').gsub(/\[\/orange\]/,'</span>').gsub(/\[lgreen\]/,'<span class="lgreen">').gsub(/\[\/lgreen\]/,'</span>').gsub(/\[bold\]/,'<strong>').gsub(/\[\/bold\]/,'</strong>').gsub(/\[i\]/,'<em>').gsub(/\[\/i\]/,'</em>').gsub(/\[u\]/,'<u>').gsub(/\[\/u\]/,'</u>').gsub(/\[br\]/,'<br>').gsub(/\[note\]/,'<div class="inst information_new"><i class="pull-left fa fa-3x fa-info-circle"></i><span information_text>').gsub(/\[\/note\]/,'</span></div>').gsub(/\[cat\]/,'<div class="inst cautiondiv_new"><i class="pull-left fa fa-3x fa-exclamation-triangle"></i>').gsub(/\[\/cat\]/,'</div>')	
+			clean_tagline = clean_tagline.html_safe
+		end
 		clean_tagline
 	end
 
