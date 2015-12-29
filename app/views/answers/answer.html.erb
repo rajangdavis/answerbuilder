@@ -3,7 +3,7 @@
   <% end %>
 
 <div ng-app="answer" style="font-size:150%">
-	<div class="container-fluid" ng-controller="answer as answer_scope">
+	<div class="container-fluid real-answer-container" ng-controller="answer as answer_scope">
 		<div class="container-fluid">
 			<div class="left-series" ng-if="answer_scope.answer.series!= 'None'">
 				<div class="text-center">
@@ -54,11 +54,18 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<br><br><br><br><br>
-	<div class="qsee-bottom-right text-center">
-		<span class="helper hidden-sm hidden-xs"></span>
-		<img src="//i.imgur.com/ruTFeEO.png">
+		<br><br><br><br><br>
+		<br><br><br><br><br>
+		<div class="hidden-lg hidden-md">
+			<br><br><br><br><br>
+			<br><br><br><br><br>
+			<br><br><br><br><br>
+			<br><br><br><br><br>
+		</div>
+		<div class="qsee-bottom-right text-center">
+			<span class="helper hidden-sm hidden-xs"></span>
+			<img src="//i.imgur.com/ruTFeEO.png">
+		</div>
 	</div>
 </div>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
