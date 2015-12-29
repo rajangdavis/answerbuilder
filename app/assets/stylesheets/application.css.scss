@@ -620,3 +620,42 @@ textarea,input, select{
 	position:absolute;
 	right:10px;
 }
+
+@media(min-width:312px) and (max-width:767px){
+	.left-series div .h1{
+		font-size:150%;
+	}
+	.left-series div .h6{
+		font-size:70%;
+		font-weight:100;
+		margin:0 !important;
+		padding:0
+	}
+	.left-series{
+		width:25%
+	}
+	.title-right{
+		width:74%
+	}
+	.title-right h1 span{
+		font-size:42%
+	}
+	.title-right h1{
+		line-height:.5;
+		margin:0;
+		font-weight:100
+	}
+	.left-series div .h6{
+		margin:0%;
+		padding:0%
+	}
+	.container-more{
+		width:100%
+	}
+	.container-fluid.border-grey{
+		border:0
+	}
+	.img_container{
+		margin:auto 3%
+	}
+}

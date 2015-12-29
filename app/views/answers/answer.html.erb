@@ -26,9 +26,10 @@
 		<% if @answer.translation_needed =~ /COMPLETE/ %>
 			<button ng-click="answer_scope.changeLanguage()">change language</button>
 		<% end %>
-		<br><br>
+		<br class="hidden-sm hidden-xs">
+		<br class="hidden-sm hidden-xs">
 		<div class="container-more answer-container" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
-			<div class="clearfix text-uppercase h6 tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
+			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
 				<strong>
 					<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
 					<% if @answer.translation_needed =~ /COMPLETE/ %>
@@ -96,3 +97,8 @@
 </div>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/answer.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		setInterval(function(){$('.title-right').height($('.left-series').height())},500);
+	})
+</script>
