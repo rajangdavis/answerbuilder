@@ -33,14 +33,28 @@ var app = angular.module('answer',['ngSanitize'])
         restrict: 'A',
         link: function(scope, element) {
           $timeout(function(){
-          var imageHeight = element[0].clientHeight;
-          var marginOpt1 = (600 - imageHeight)/2;
-            if(imageHeight<600 && imageHeight>0){
-              element[0].style.margin = marginOpt1+"px auto";
-              element[0].style.display = 'block';
-            }else if(imageHeight==600){
-              element[0].style.height = (imageHeight*.97)+"px"; 
-            }
+              setInterval(function(){
+                var imageHeight = element[0].clientHeight;
+                var winWidth = window.innerWidth;
+                if (winWidth > 768){
+                    var marginOpt1 = (600 - imageHeight)/2;
+                        if(imageHeight<600 && imageHeight>0){
+                          element[0].style.margin = marginOpt1+"px auto";
+                          element[0].style.display = 'block';
+                        }else if(imageHeight==600){
+                          element[0].style.height = (imageHeight*.97)+"px"; 
+                        }
+                }
+                else if (winWidth > 0 && winWidth < 768){
+                    var marginOpt1 = (220 - imageHeight)/2;
+                        if(imageHeight<220 && imageHeight>0){
+                          element[0].style.margin = marginOpt1+"px auto";
+                          element[0].style.display = 'block';
+                        }else if(imageHeight==220){
+                          element[0].style.height = (imageHeight*.97)+"px"; 
+                        }
+                }
+              },100)
           },550); 
         }
     };
