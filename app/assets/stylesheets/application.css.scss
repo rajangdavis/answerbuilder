@@ -621,9 +621,13 @@ textarea,input, select{
 	right:10px;
 }
 
-@media(min-width:312px) and (max-width:767px){
+@media(min-width:0px) and (max-width:767px){
 	.left-series div .h1{
 		font-size:150%;
+	}
+	.tagline{
+		margin:18px;
+		font-size: 70%;
 	}
 	.left-series div .h6{
 		font-size:70%;
@@ -660,9 +664,23 @@ textarea,input, select{
 	}
 	.title-bar{
 		height:220px;
-		font-size:68%;
+		font-size:54%;
+		margin-bottom:15px;
 	}
 	tr{
 		font-size:63%;
+	}
+	.container-more.answer-container div div{
+		max-height: 280px;
+	}
+	.img_container img{
+		max-height:200px;
+	}
+	.qsee-bottom-right{
+		width:25%;
+		height:auto;
+	}
+	.qsee-bottom-right img{
+		max-width:70%;	
 	}
 }

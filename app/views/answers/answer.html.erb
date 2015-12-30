@@ -24,9 +24,11 @@
 			</div>
 		</div>
 		<% if @answer.translation_needed =~ /COMPLETE/ %>
-			<button ng-click="answer_scope.changeLanguage()">change language</button>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+				<img class="pointer English" ng-click="answer_scope.changeLanguage('en')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAM1BMVEX////MAAHNAQL+/v4CApgAAJgBAZbLAQHOAADNAAT///v9/f/+//3//v/+///OAALLAAPNnw2RAAAAYElEQVQImYWMSQ6EQAwD7azdkAb+/1omjMQVW6pT2YhwDzMbvHKcnPDDN9/MVpWuVYqI5TAYOQcn+RqKgirwGklhZn9E1wxVheP3ITJFrjPnH4Ke9Vj3BwClQ3I8yG/jBm1oA1n6IJS7AAAAAElFTkSuQmCC"> | 
+				<img class="pointer Japanese" ng-click="answer_scope.changeLanguage('jp')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
+			</div>
 		<% end %>
-		<br class="hidden-sm hidden-xs">
 		<br>
 		<div class="container-more answer-container" ng-init="answer_scope.answer = <%= @answer.pojo.to_json %>">
 			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
@@ -45,6 +47,14 @@
 					<div class="img_container" ng-repeat="step in answer_scope.answer.steps">
 						<img img-height class="img-responsive" ng-class="{'hidden-image': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" ng-src="{{answer_scope.language == 'en'? step.image : step.image_jp}}">
 					</div>
+				</div>
+				<div class="clearfix text-uppercase h6 hidden-lg hidden-md tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
+					<strong>
+						<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
+						<% if @answer.translation_needed =~ /COMPLETE/ %>
+						<span ng-hide="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline_jp"></span>
+						<% end %>
+					</strong>
 				</div>
 				<div class="steps col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left border-grey container">
 					<table class="table">
@@ -80,25 +90,16 @@
 				</div>
 			</div>
 		</div>
-		<br><br><br><br><br>
-		<br><br><br><br><br>
-		<br><br>
-		<div class="hidden-lg hidden-md">
-			<br><br><br><br><br>
-			<br><br><br><br><br>
-			<br><br><br><br><br>
-			<br><br><br><br><br>
-		</div>
-		<div class="qsee-bottom-right text-center">
-			<span class="helper hidden-sm hidden-xs"></span>
-			<img src="//i.imgur.com/ruTFeEO.png">
-		</div>
 	</div>
 </div>
+<br><br><br><br>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/answer.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		setInterval(function(){$('.title-right').height($('.left-series').height())},500);
+		setInterval(function(){
+			var seriesHeight = $('.left-series').height();
+			$('.title-right').height(seriesHeight);
+		},500);
 	})
 </script>

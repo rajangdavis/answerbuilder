@@ -24,8 +24,8 @@ var app = angular.module('answer',['ngSanitize'])
         return self.currentIndex === index;
     };
 
-    self.changeLanguage = function(){
-        self.language = self.language == 'en'? 'jp' : 'en';
+    self.changeLanguage = function(lan){
+        self.language = lan;
     }
 })
 .directive('imgHeight', function($timeout) {
