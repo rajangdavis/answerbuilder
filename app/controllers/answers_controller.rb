@@ -9,8 +9,11 @@ class AnswersController < ApplicationController
 	end
 
 	def index2
-		@answers = Answer.find(:all, :order => 'title ASC')
-		@answer = Answer.new
+		if params['jp'] == 'true'
+			@answers = Answer.where("translation_needed Like'%COMPLETE%'")
+		else
+			@answers = Answer.find(:all, :order => 'title ASC')
+		end
 	end
 	
 	def translate_index
