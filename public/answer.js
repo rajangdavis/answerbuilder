@@ -85,7 +85,7 @@ var app = angular.module('answer',['ngSanitize'])
                 if(pad30.length){
                     pad30[0].classList.remove('pad30');
                 }
-                if(title.length){
+                if(title    ){
                     title.style.display = 'none';
                 }
             },500)
