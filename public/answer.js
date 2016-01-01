@@ -73,4 +73,18 @@ var app = angular.module('answer',['ngSanitize'])
             },500)
         }
     }
+})
+.directive('removeUpperElems', function($timeout){
+    return {
+        controller: 'answer',
+        link: function(scope, elem, attrs){
+            var self = this;
+            $timeout(function(){
+                var pad30 = document.querySelectorAll('.pad30');
+                if(pad30.length){
+                    pad30.classList.remove('pad30');
+                }
+            },500)
+        }
+    }
 });

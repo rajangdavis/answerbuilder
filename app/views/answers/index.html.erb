@@ -26,9 +26,7 @@
 						<% end %>
 					<% end %>	
 					<%=link_to "Get Code", code_path(answer), :class => "small btn btn-default btn-modified"%> 
-					<%=link_to "<i class='fa fa-fire'></i>".html_safe, angular_path(answer), :class => "small btn btn-default btn-modified"%> 
-					<%=link_to "Preview", preview_path(answer), :class => "small btn btn-default btn-modified"%>
-					<a href="/spreadsheet.xls?id=<%=answer.id%>" class="small btn btn-default btn-modified" download="<%=answer.title%>.xls">Export</a> 
+					<%=link_to "Preview", angular_path(answer), :class => "small btn btn-default btn-modified"%>
 					</span>
 					<br>
 				</div>

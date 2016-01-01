@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
   protect_from_forgery with: :exception
-  helper_method :current_user
+  helper_method :current_user, :render_source
+
+  include ActionView::Helpers::OutputSafetyHelper
 
   	def cors_set_access_control_headers
 	  headers['Access-Control-Allow-Origin'] = '*'
@@ -27,9 +29,10 @@ class ApplicationController < ActionController::Base
 	  end
 	end
 
-  def current_user
-  	@current_user ||= User.where(id: session[:user_id]).first
-  	 	  
-  end
+	def current_user
+  		@current_user ||= User.where(id: session[:user_id]).first
+	end
+
+	
   
 end
