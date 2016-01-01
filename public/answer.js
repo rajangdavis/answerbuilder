@@ -81,8 +81,12 @@ var app = angular.module('answer',['ngSanitize'])
             var self = this;
             $timeout(function(){
                 var pad30 = document.querySelectorAll('.pad30');
+                var title = document.getElementById('rn_PageTitle');
                 if(pad30.length){
                     pad30[0].classList.remove('pad30');
+                }
+                if(title.length){
+                    title.style.display = 'none';
                 }
             },500)
         }
