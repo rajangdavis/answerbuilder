@@ -82,7 +82,7 @@ var app = angular.module('answer',['ngSanitize'])
             $timeout(function(){
                 var pad30 = document.querySelectorAll('.pad30');
                 if(pad30.length){
-                    pad30.classList.remove('pad30');
+                    pad30[0].classList.remove('pad30');
                 }
             },500)
         }
