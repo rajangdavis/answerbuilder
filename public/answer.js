@@ -4,7 +4,13 @@ var app = angular.module('answer',['ngSanitize'])
 	self.currentIndex = 0;
     self.absIndex = 1;
     self.stepLength = 0;
-    self.language = 'en';
+    self.language;
+    if(document.domain == "qsee-jp.custhelp.com"){
+        self.language = 'jp';
+    }else{
+        self.language = 'en';
+    }
+
 
     self.rotateArr = function(i,tn){
         self.absIndex = tn;
