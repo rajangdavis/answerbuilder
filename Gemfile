@@ -12,7 +12,7 @@ gem 'rabl'
 
 gem 'paperclip'
 
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
