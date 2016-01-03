@@ -97,4 +97,17 @@ var app = angular.module('answer',['ngSanitize'])
             },500)
         }
     }
+})
+.directive('titleRight', function($timeout){
+    return{
+        controller: 'answer',
+        link: function(scope,elem, attrs){
+            $timeout(function(){
+                setInterval(function(){
+                    var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
+                    document.querySelectorAll('.title-right')[0].style.height = seriesHeight + 'px';
+                },500)
+            })
+        }
+    }
 });

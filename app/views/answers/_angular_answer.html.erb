@@ -3,14 +3,14 @@
 		<div class="container-fluid">
 			<div class="left-series" ng-if="answer_scope.answer.series!= 'None'">
 				<div class="text-center">
-					<span class="h1">{{answer_scope.answer.series}}</span>
+					<span class="series">{{answer_scope.answer.series}}</span>
 					<br>
 					<span class="h6">
 						{{ answer_scope.language == 'en'? 'SERIES' : 'シリーズ'}}
 					</span>
 				</div>
 			</div>
-			<div class="title-right">
+			<div class="title-right" title-right>
 				<h1 class="text-uppercase">
 					<span ng-show="answer_scope.language =='en'" ng-bind-html=" answer_scope.answer.title"></span>
 					<% if @answer.translation_needed =~ /COMPLETE/ %>
