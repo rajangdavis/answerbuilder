@@ -20,12 +20,14 @@
 			</div>
 		</div>
 		<% if @answer.translation_needed =~ /COMPLETE/ %>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<div class="container-more lang-select">
 				<img class="pointer English" ng-click="answer_scope.changeLanguage('en')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAM1BMVEX////MAAHNAQL+/v4CApgAAJgBAZbLAQHOAADNAAT///v9/f/+//3//v/+///OAALLAAPNnw2RAAAAYElEQVQImYWMSQ6EQAwD7azdkAb+/1omjMQVW6pT2YhwDzMbvHKcnPDDN9/MVpWuVYqI5TAYOQcn+RqKgirwGklhZn9E1wxVheP3ITJFrjPnH4Ke9Vj3BwClQ3I8yG/jBm1oA1n6IJS7AAAAAElFTkSuQmCC"> | 
 				<img class="pointer Japanese" ng-click="answer_scope.changeLanguage('jp')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
 			</div>
 		<% end %>
-		<br>
+		<%if @answer.tagline.blank? == false && @answer.translation_needed =~ /NO/%>
+			<br>
+		<% end %>
 		<div class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo.to_json %>" >
 			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
 				<strong>
@@ -73,7 +75,7 @@
 											{{answer_scope.language == 'en' ? 'IMPORTANT!' : '重要!'}}
 										</span>
 									</strong>
-									<br>
+									<br><br>
 									<span ng-class="{'hidden': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" class="step" >
 										<span ng-show="answer_scope.language=='en'" ng-bind-html="step.step"></span>
 										<% if @answer.translation_needed =~ /COMPLETE/ %>

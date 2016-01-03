@@ -511,7 +511,7 @@ textarea,input, select{
 .title-bar{
 	height:600px;
 	position:relative;
-	background:#F1F1F1;
+	background:#D0D0D0;
 }
 .hidden-image{
 	position:absolute; 
@@ -538,7 +538,7 @@ textarea,input, select{
     line-height: normal;
 }
 .left-series div{
-	padding:10%;
+	padding:5%;
 }
 .left-series div span:last-of-type{
 	display:block;
@@ -622,6 +622,10 @@ textarea,input, select{
 }
 
 @media(min-width:0px) and (max-width:767px){
+	.container-more.lang-select{
+		margin-left:8%;
+	}	
+
 	.left-series div .h1{
 		font-size:150%;
 	}
@@ -682,6 +686,11 @@ textarea,input, select{
 	}
 	.qsee-bottom-right img{
 		max-width:70%;	
+	}
+}
+@media(min-width:768px){
+	.real-answer-container{
+		margin-bottom:100px;
 	}
 }
 @media(min-width:0px) and( max-width: 400px){

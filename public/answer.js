@@ -104,9 +104,34 @@ var app = angular.module('answer',['ngSanitize'])
         link: function(scope,elem, attrs){
             $timeout(function(){
                 setInterval(function(){
+                    var winWidth = window.innerWidth;
                     var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
-                    document.querySelectorAll('.title-right')[0].style.height = seriesHeight + 'px';
-                },500)
+                    var seriesWidth = document.querySelectorAll('.left-series')[0].clientWidth;
+                    var titleRight = document.querySelectorAll('.title-right')[0];
+                    var title = document.querySelectorAll('.title-right h1 span:not(.ng-hide)')[0];
+                    
+                    titleRight.style.height = seriesHeight + 'px';
+
+                    // if (winWidth >768){
+                    //     console.log(winWidth);
+                    //     console.log(seriesHeight);
+                    //     console.log(title.offsetHeight);
+                    // }
+                    // else if(winWidth<768){
+                    //     if(seriesHeight > (title.offsetHeight+30)){
+                    //         var titleSize = parseFloat(window.getComputedStyle(title, null).getPropertyValue('font-size'));
+                    //         title.style.fontSize = (titleSize*1.2)+'px';
+                    //         title.style.lineHeight = (titleSize*1.2)+'px';
+                    //         // var titleMargin = ((seriesHeight - title.offsetHeight)/2)-(title.offsetHeight/3);
+                    //         // title.parentElement.style.marginTop = titleMargin+'px';
+                    //     }
+                    //     else if(seriesHeight < (title.offsetHeight+30)){
+                    //         var titleSize = parseFloat(window.getComputedStyle(title, null).getPropertyValue('font-size'));
+                    //         title.style.fontSize = (titleSize*.8333333333)+'px';
+                    //         title.style.lineHeight = (titleSize*.8333333333)+'px';
+                    //     }
+                    // }
+                },100)
             })
         }
     }
