@@ -103,21 +103,23 @@ var app = angular.module('answer',['ngSanitize'])
         controller: 'answer',
         link: function(scope,elem, attrs){
             $timeout(function(){
+                var initHeight = document.querySelectorAll('.title-right')[0].clientHeight;
                 setInterval(function(){
                     var winWidth = window.innerWidth;
-                    var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
-                    var seriesWidth = document.querySelectorAll('.left-series')[0].clientWidth;
                     var titleRight = document.querySelectorAll('.title-right')[0];
                     var title = document.querySelectorAll('.title-right h1 span:not(.ng-hide)')[0];
                     
-                    titleRight.style.height = seriesHeight + 'px';
-
-                    // if (winWidth >768){
-                    //     console.log(winWidth);
-                    //     console.log(seriesHeight);
-                    //     console.log(title.offsetHeight);
-                    // }
-                    // else if(winWidth<768){
+                    if (winWidth <768){
+                        if(document.querySelectorAll('.left-series').length){
+                            var seriesWidth = document.querySelectorAll('.left-series')[0].clientWidth;
+                            var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
+                            titleRight.style.height = seriesHeight + 'px';
+                        }else{
+                            titleRight.style.height = (title.offsetHeight+15) + 'px';
+                        }
+                    }
+                    else if(winWidth>768){
+                        titleRight.style.height = initHeight + 'px';
                     //     if(seriesHeight > (title.offsetHeight+30)){
                     //         var titleSize = parseFloat(window.getComputedStyle(title, null).getPropertyValue('font-size'));
                     //         title.style.fontSize = (titleSize*1.2)+'px';
@@ -130,7 +132,7 @@ var app = angular.module('answer',['ngSanitize'])
                     //         title.style.fontSize = (titleSize*.8333333333)+'px';
                     //         title.style.lineHeight = (titleSize*.8333333333)+'px';
                     //     }
-                    // }
+                    }
                 },100)
             })
         }
