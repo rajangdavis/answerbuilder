@@ -141,14 +141,14 @@ var app = angular.module('answer',['ngSanitize'])
                     
                     if( titleHeight < titleRightHolder){
                         elem[0].style.marginTop = ((titleRightHolder-titleHeight)/3)+'px';
+                        if(winWidth > 999){
+                            elem[0].style.fontSize = '37px';
+                        }
                     }
                     else if(titleHeight > titleRightHolder){
                         elem[0].style.fontSize = (.70*fontSize)+'px';
                         elem[0].style.paddingLeft = '20px';
                         leftSeries.style.paddingLeft = 0;
-                    }
-                    else if(titleHeight/2 > titleRightHolder){
-                        elem[0].style.fontSize = '37px';
                     }
                 },100)
             })

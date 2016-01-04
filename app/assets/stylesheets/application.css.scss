@@ -735,6 +735,9 @@ body,html{
 		line-height:1;
 		text-align:center;
 	}
+	tr.step-row{
+		font-size: 90%;
+	}
 }
 @media(min-width:501px) and( max-width: 600px){
 	.series{
@@ -745,6 +748,9 @@ body,html{
 		font-size:160%;
 		line-height:1;
 	}
+	tr.step-row{
+		font-size: 90%;
+	}
 }
 @media(min-width:601px) and( max-width: 700px){
 	.series{
@@ -754,6 +760,9 @@ body,html{
 	.title-right h1 span{
 		font-size:170%;
 		line-height:1;
+	}
+	tr.step-row{
+		font-size: 100%;
 	}
 }
 @media(min-width:701px) and( max-width: 800px){
@@ -767,6 +776,9 @@ body,html{
 	.title-right h1 span{
 		font-size:25px;
 		line-height:1;
+	}
+	tr.step-row{
+		font-size: 110%;
 	}
 }
 @media(min-width:801px) and( max-width: 900px){
