@@ -13,8 +13,12 @@ var app = angular.module('answer',['ngSanitize'])
 
 
     self.rotateArr = function(i,tn){
-        self.absIndex = tn;
-        if(i!=0){
+        console.log(tn);
+        if(i!=0 && tn <= self.stepLength){
+            self.absIndex = tn;
+            self.answer.steps = self.answer.steps.slice(i).concat(self.answer.steps.slice(0, i));
+        }else if(tn > self.stepLength){
+            self.absIndex = 1;
             self.answer.steps = self.answer.steps.slice(i).concat(self.answer.steps.slice(0, i));
         }
         document.querySelectorAll('.steps.container')[0].scrollTop = 0;

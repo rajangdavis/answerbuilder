@@ -39,9 +39,6 @@
 			</div>
 			<div class=" container-fluid border-grey">
 				<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right border-grey container" >
-					<div class="right-corner" ng-class="{hidden: answer_scope.answer.steps[0].step_type!='Step'}">
-						{{answer_scope.absIndex}} / {{answer_scope.answer.steps.length}}
-					</div>
 					<div class="img_container" ng-repeat="step in answer_scope.answer.steps">
 						<img img-height class="img-responsive" ng-class="{'hidden-image': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" ng-src="{{answer_scope.language == 'en'? step.image : step.image_jp}}">
 					</div>
@@ -57,8 +54,15 @@
 				<div class="steps col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left border-grey container">
 					<table class="table">
 						<tbody>
-							<tr class="step-row pointer" ng-repeat="step in answer_scope.answer.steps" ng-class="{active_step: answer_scope.currentIndex == $index,'step-row-dashed': answer_scope.isLast(answer_scope.answer.steps,step.true_number+1)}" id="{{'step'+($index+1)}}" ng-click="answer_scope.rotateArr($index,step.true_number+1)" step-height >
-								<td class="text-left no-grey border-grey">
+							<div class="text-center index-nav">
+								<a href="javascript:void(0)" ng-class="{invisible: answer_scope.absIndex==1}" class="arrow fading-In pull-left" ng-click="answer_scope.rotateArr($index-1,answer_scope.absIndex-1)"><i class="fa fa-caret-left white-text fa-2x choose" ></i></a>
+								<span class="step-counter" ng-class="{hidden: answer_scope.answer.steps[0].step_type!='Step'}">
+									{{answer_scope.absIndex}} / {{answer_scope.answer.steps.length}}
+								</span>
+								<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="answer_scope.rotateArr($index+1,answer_scope.absIndex+1)"><i class="fa fa-caret-right white-text fa-2x choose" ></i></a>
+							</div>
+							<tr class="step-row pointer" ng-repeat="step in answer_scope.answer.steps" ng-class="{'active_step': answer_scope.currentIndex == $index,'step-row-dashed': answer_scope.isLast(answer_scope.answer.steps,step.true_number+1)}" id="{{'step'+($index+1)}}" ng-click="answer_scope.rotateArr($index,step.true_number+1)" step-height >
+								<td class="text-left no-grey border-grey container">
 									<strong class="pop-step" ng-if="step.step_type == 'Step'">
 										<span>{{answer_scope.language == 'en'? 'STEP' : 'ステップ'}}</span>
 										<span>{{step.number}}</span>

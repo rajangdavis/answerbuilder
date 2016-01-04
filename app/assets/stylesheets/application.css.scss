@@ -444,11 +444,19 @@ textarea,input, select{
 }
 .arrow:first-of-type{
 	position:relative;
-	left:-45px;
 }
 .arrow:last-of-type{
 	position:relative;
-	right:-45px;
+}
+.index-nav{
+	background:#FFC217;
+	color:white;
+	height:41px;
+}
+
+.step-counter{
+	position:relative;
+	top:5px;
 }
 .arrow_new:first-of-type{
 	position:relative;
@@ -549,6 +557,7 @@ textarea,input, select{
 
 .no-grey{
 	border-color:transparent !important;
+	padding: 8px 20px !important;
 }
 .tagline{
 	margin-left:15px;
