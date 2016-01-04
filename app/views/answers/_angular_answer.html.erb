@@ -55,7 +55,7 @@
 					<table class="table">
 						<tbody>
 							<div class="text-center index-nav">
-								<a href="javascript:void(0)" ng-class="{invisible: answer_scope.absIndex==1}" class="arrow fading-In pull-left" ng-click="answer_scope.rotateArr($index-1,answer_scope.absIndex-1)"><i class="fa fa-caret-left white-text fa-2x choose" ></i></a>
+								<a href="javascript:void(0)" class="arrow fading-In pull-left" ng-click="answer_scope.rotateArr($index-1,answer_scope.absIndex-1)"><i class="fa fa-caret-left white-text fa-2x choose" ></i></a>
 								<span class="step-counter" ng-class="{hidden: answer_scope.answer.steps[0].step_type!='Step'}">
 									{{answer_scope.absIndex}} / {{answer_scope.answer.steps.length}}
 								</span>

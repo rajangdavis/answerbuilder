@@ -13,9 +13,13 @@ var app = angular.module('answer',['ngSanitize'])
 
 
     self.rotateArr = function(i,tn){
-        console.log(tn);
         if(i!=0 && tn <= self.stepLength){
-            self.absIndex = tn;
+            if (tn == 0){
+                self.absIndex = self.stepLength;
+            }
+            else{
+                self.absIndex = tn;
+            }
             self.answer.steps = self.answer.steps.slice(i).concat(self.answer.steps.slice(0, i));
         }else if(tn > self.stepLength){
             self.absIndex = 1;
@@ -107,36 +111,16 @@ var app = angular.module('answer',['ngSanitize'])
         controller: 'answer',
         link: function(scope,elem, attrs){
             $timeout(function(){
-                var initHeight = document.querySelectorAll('.title-right')[0].clientHeight;
                 setInterval(function(){
-                    var winWidth = window.innerWidth;
                     var titleRight = document.querySelectorAll('.title-right')[0];
                     var title = document.querySelectorAll('.title-right h1 span:not(.ng-hide)')[0];
-                    
-                    if (winWidth <768){
-                        if(document.querySelectorAll('.left-series').length){
-                            var seriesWidth = document.querySelectorAll('.left-series')[0].clientWidth;
-                            var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
-                            titleRight.style.height = seriesHeight + 'px';
-                        }else{
-                            titleRight.style.height = (title.offsetHeight+15) + 'px';
-                        }
-                    }
-                    else if(winWidth>768){
-                        titleRight.style.height = initHeight + 'px';
-                    //     if(seriesHeight > (title.offsetHeight+30)){
-                    //         var titleSize = parseFloat(window.getComputedStyle(title, null).getPropertyValue('font-size'));
-                    //         title.style.fontSize = (titleSize*1.2)+'px';
-                    //         title.style.lineHeight = (titleSize*1.2)+'px';
-                    //         // var titleMargin = ((seriesHeight - title.offsetHeight)/2)-(title.offsetHeight/3);
-                    //         // title.parentElement.style.marginTop = titleMargin+'px';
-                    //     }
-                    //     else if(seriesHeight < (title.offsetHeight+30)){
-                    //         var titleSize = parseFloat(window.getComputedStyle(title, null).getPropertyValue('font-size'));
-                    //         title.style.fontSize = (titleSize*.8333333333)+'px';
-                    //         title.style.lineHeight = (titleSize*.8333333333)+'px';
-                    //     }
-                    }
+                    if(document.querySelectorAll('.left-series').length){
+                        var seriesWidth = document.querySelectorAll('.left-series')[0].clientWidth;
+                        var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
+                        titleRight.style.height = seriesHeight + 'px';
+                    }else{
+                        titleRight.style.height = (title.offsetHeight+15) + 'px';
+                    }                    
                 },100)
             })
         }
