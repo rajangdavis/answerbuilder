@@ -478,6 +478,8 @@ textarea,input, select{
 .information_new::-webkit-scrollbar,.cautiondiv_new ::-webkit-scrollbar{
 	display:none;
 }
+
+.information_new, .cautiondiv_new{ -ms-overflow-style: none; overflow: auto; }
 .centered_text{
 	text-align:center;	
 }
