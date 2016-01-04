@@ -17,6 +17,9 @@ class AnswersController < ApplicationController
 	end
 	
 	def translate_index
+		if !current_user
+			redirect_to index2_path
+		end
 		@answers = Answer.where("translation_needed Like'%YES%'")
 	end
 
@@ -151,6 +154,9 @@ class AnswersController < ApplicationController
   	end
 
   	def translate
+  		if !current_user
+			redirect_to index2_path
+		end
   		@answer = Answer.find(params[:id])
   		@steps = Step.where(:answer_id => @answer.id)
   	end
@@ -183,6 +189,9 @@ class AnswersController < ApplicationController
 		@step = Step.new
 		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
 		@steps_count = @steps.length
+		if !current_user
+			redirect_to index2_path
+		end
 	end
 
 	def update
