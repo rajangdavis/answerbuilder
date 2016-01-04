@@ -1,4 +1,4 @@
-<div ng-cloak remove-upper-elems class="container-fluid" style="font-size:150%">
+<div ng-cloak remove-upper-elems class="container-fluid" style="font-size:145%">
 	<div class="container-fluid real-answer-container" ng-controller="answer as answer_scope">
 		<div class="container-fluid">
 			<div class="left-series" ng-if="answer_scope.answer.series!= 'None'">
@@ -79,7 +79,7 @@
 											{{answer_scope.language == 'en' ? 'IMPORTANT!' : '重要!'}}
 										</span>
 									</strong>
-									<br><br>
+									<br>
 									<span ng-class="{'hidden': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" class="step" >
 										<span ng-show="answer_scope.language=='en'" ng-bind-html="step.step"></span>
 										<% if @answer.translation_needed =~ /COMPLETE/ %>
