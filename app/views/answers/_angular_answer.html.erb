@@ -10,7 +10,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="title-right" title-right>
+			<div class="title-right" title-holder-right>
 				<h1 class="text-uppercase">
 					<span ng-show="answer_scope.language =='en'" ng-bind-html=" answer_scope.answer.title"></span>
 					<% if @answer.translation_needed =~ /COMPLETE/ %>
@@ -25,7 +25,7 @@
 				<img class="pointer Japanese" ng-click="answer_scope.changeLanguage('jp')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
 			</div>
 		<% end %>
-		<%if @answer.tagline.blank? == false && @answer.translation_needed =~ /NO/%>
+		<%if @answer.tagline.blank? == true && @answer.translation_needed =~ /NO/%>
 			<br>
 		<% end %>
 		<div class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo.to_json %>" >

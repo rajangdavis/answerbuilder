@@ -106,7 +106,7 @@ var app = angular.module('answer',['ngSanitize'])
         }
     }
 })
-.directive('titleRight', function($timeout){
+.directive('titleHolderRight', function($timeout){
     return{
         controller: 'answer',
         link: function(scope,elem, attrs){

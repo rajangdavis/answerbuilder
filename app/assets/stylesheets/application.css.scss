@@ -442,11 +442,14 @@ textarea,input, select{
 	position:absolute;
 	bottom:0px;	
 }
-.arrow:first-of-type{
+.arrow{
 	position:relative;
 }
+.arrow:first-of-type{
+	padding-right:30px;
+}
 .arrow:last-of-type{
-	position:relative;
+	padding-left:30px;
 }
 .index-nav{
 	background:#FFC217;
