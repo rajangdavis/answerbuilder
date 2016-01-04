@@ -223,22 +223,7 @@ hr{
 .margin{
 	margin:25px 0px 30px 0px;
 }
-.bordered{
-	border-top: 3px solid white;
-	border-right: 3px solid white;
-	border-left: 3px solid white;
-	padding:5px;
-	background:rgba(255,255,255,.6);
-}
-.bordered:last-of-type{
-	border-bottom:3px solid white;
-}
-.border-black{
-	border:1px solid black;
-}
-.border-grey{
-	border:1px solid  rgb(201, 202, 204);
-}
+
 
 .fixed{
 	position:fixed;
@@ -371,12 +356,30 @@ textarea,input, select{
 .pointer:hover{
 	text-decoration:underline;
 }
-.img-container{
-	max-height:400px;
-}
 
 
 /* New answer CSS */
+
+.img-container{
+	max-height:400px;
+}
+.bordered{
+	border-top: 3px solid white;
+	border-right: 3px solid white;
+	border-left: 3px solid white;
+	padding:5px;
+	background:rgba(255,255,255,.6);
+}
+.bordered:last-of-type{
+	border-bottom:3px solid white;
+}
+.border-black{
+	border:1px solid black;
+}
+.border-grey{
+	border:1px solid  rgb(201, 202, 204);
+}
+
 .title_bar .icon{
 	margin-top:2px;
 }

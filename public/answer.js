@@ -100,8 +100,11 @@ var app = angular.module('answer',['ngSanitize'])
                 if(pad30.length){
                     pad30[0].classList.remove('pad30');
                 }
-                if(title    ){
+                if(title){
                     title.style.display = 'none';
+                }
+                if(document.getElementById('rn_MainColumn')){
+                    document.getElementById('rn_MainColumn').className = 'container-fluid';
                 }
             },500)
         }
