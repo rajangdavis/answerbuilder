@@ -479,7 +479,10 @@ textarea,input, select{
 	display:none;
 }
 
-.information_new, .cautiondiv_new{ -ms-overflow-style: none; overflow: auto; }
+body,html{ 
+	-ms-overflow-style: none; 
+	overflow: auto; 
+}
 .centered_text{
 	text-align:center;	
 }
