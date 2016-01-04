@@ -636,7 +636,11 @@ body,html{
 	position:absolute;
 	right:10px;
 }
-
+@media(max-width:999px){
+	.container-more.answer-container div div{
+		max-height:450px;
+	}
+}
 @media(min-width:0px) and (max-width:767px){
 	.container-more.lang-select{
 		padding-left:8%;
@@ -716,6 +720,11 @@ body,html{
 	    font-size: 150%;
 	    font-weight: 600;	
 	}
+	.title-right h1 span{
+		font-size:150%;
+		line-height:1;
+		text-align:center;
+	}
 }
 
 @media(min-width:401px) and( max-width: 500px){
@@ -723,17 +732,30 @@ body,html{
 	    font-size: 160%;
 	    font-weight: 600;	
 	}
+	.title-right h1 span{
+		font-size:160%;
+		line-height:1;
+		text-align:center;
+	}
 }
 @media(min-width:501px) and( max-width: 600px){
 	.series{
 	    font-size: 160%;
 	    font-weight: 600;	
 	}
+	.title-right h1 span{
+		font-size:160%;
+		line-height:1;
+	}
 }
 @media(min-width:601px) and( max-width: 700px){
 	.series{
 	    font-size: 170%;
 	    font-weight: 500;	
+	}
+	.title-right h1 span{
+		font-size:170%;
+		line-height:1;
 	}
 }
 @media(min-width:701px) and( max-width: 800px){
@@ -743,6 +765,10 @@ body,html{
 	}
 	.left-series div span:last-of-type{
 		font-size:86%;
+	}
+	.title-right h1 span{
+		font-size:25px;
+		line-height:1;
 	}
 }
 @media(min-width:801px) and( max-width: 900px){
@@ -765,4 +791,14 @@ body,html{
 span.step.fading-In {
     margin-top: 2px;
     display: block;
+}
+.modal-dialog{
+	width:90%;
+}
+.modal::-webkit-scrollbar{
+	display:none
+}
+
+.pop{
+	cursor:pointer;
 }

@@ -50,12 +50,13 @@ var app = angular.module('answer',['ngSanitize'])
               setInterval(function(){
                 var imageHeight = element[0].clientHeight;
                 var winWidth = window.innerWidth;
+                var titleBarHeight = document.querySelectorAll('.title-bar')[0].offsetHeight;
                 if (winWidth > 768){
-                    var marginOpt1 = (600 - imageHeight)/2;
-                        if(imageHeight<600 && imageHeight>0){
+                    var marginOpt1 = (titleBarHeight - imageHeight)/2;
+                        if(imageHeight<titleBarHeight && imageHeight>0){
                           element[0].style.margin = marginOpt1+"px auto";
                           element[0].style.display = 'block';
-                        }else if(imageHeight==600){
+                        }else if(imageHeight==titleBarHeight){
                           element[0].style.height = (imageHeight*.97)+"px"; 
                         }
                 }
@@ -115,12 +116,40 @@ var app = angular.module('answer',['ngSanitize'])
                     var titleRight = document.querySelectorAll('.title-right')[0];
                     var title = document.querySelectorAll('.title-right h1 span:not(.ng-hide)')[0];
                     if(document.querySelectorAll('.left-series').length){
-                        var seriesWidth = document.querySelectorAll('.left-series')[0].clientWidth;
                         var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
                         titleRight.style.height = seriesHeight + 'px';
                     }else{
                         titleRight.style.height = (title.offsetHeight+15) + 'px';
                     }                    
+                },100)
+            })
+        }
+    }
+})
+.directive('titleRight',function($timeout){
+    return{
+        controller:'answer',
+        link:function(scope,elem,attrs){
+            $timeout(function(){
+                setInterval(function(){
+                    var titleHeight = elem[0].offsetHeight;
+                    var titleRightHolder = document.querySelectorAll('.title-right')[0].clientHeight;
+                    var leftSeries = document.querySelectorAll('.left-series')[0]
+                    var style = window.getComputedStyle(elem[0], null).getPropertyValue('font-size');
+                    var fontSize = parseFloat(style);
+                    var winWidth = window.innerWidth;
+                    
+                    if( titleHeight < titleRightHolder){
+                        elem[0].style.marginTop = ((titleRightHolder-titleHeight)/3)+'px';
+                        if(winWidth > 767){
+                            // elem[0].style.fontSize = '37px';
+                        }
+                    }
+                    else if(titleHeight > titleRightHolder){
+                        elem[0].style.fontSize = (.70*fontSize)+'px';
+                        elem[0].style.paddingLeft = '20px';
+                        leftSeries.style.paddingLeft = 0;
+                    }
                 },100)
             })
         }
