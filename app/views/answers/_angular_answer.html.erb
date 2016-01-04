@@ -45,7 +45,7 @@
 						<img img-height class="img-responsive" ng-class="{'hidden-image': !answer_scope.isCurrentStepIndex($index), 'fading-In':answer_scope.isCurrentStepIndex($index)}" ng-src="{{answer_scope.language == 'en'? step.image : step.image_jp}}">
 					</div>
 				</div>
-				<div class="clearfix text-uppercase h6 hidden-lg hidden-md tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
+				<div class="clearfix text-uppercase h6 hidden-lg hidden-md tagline" ng-class="{hidden: answer_scope.absIndex!=1}">
 					<strong>
 						<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
 						<% if @answer.translation_needed =~ /COMPLETE/ %>
