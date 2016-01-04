@@ -27,7 +27,7 @@
 				<img class="pointer Japanese" ng-click="answer_scope.changeLanguage('jp')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
 			</div>
 		<% end %>
-		<%if @answer.translation_needed !=~ /COMPLETE/%>
+		<%if @answer.translation_needed =~ /NO/%>
 			<br>
 		<% end %>
 		<div class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo.to_json %>" >
