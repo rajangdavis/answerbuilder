@@ -427,7 +427,7 @@ textarea,input, select{
     vertical-align: middle;
 }
 .img_container img{
-	max-height:496px;
+	max-height:450px;
 	display:block;
 }
 .nav_container{
@@ -582,9 +582,7 @@ body,html{
 	height:500px;
 	position:relative;
 }
-.container-more.answer-container div div{
-	max-height:600px;
-}
+
 .steps.container{
 	overflow-y:scroll;
 	background: #DEDEDE;
@@ -636,9 +634,9 @@ body,html{
 	position:absolute;
 	right:10px;
 }
-@media(max-width:999px){
+@media(min-width:999px){
 	.container-more.answer-container div div{
-		max-height:450px;
+		max-height:600px;
 	}
 }
 @media(min-width:0px) and (max-width:767px){
