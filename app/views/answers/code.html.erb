@@ -2,13 +2,14 @@
 	<%= link_to "Back", :back%> |
 	<%= link_to "Edit", edit_answer_path(@answer)%> |
 	<%= link_to "Preview", angular_path(@answer)%>
-		<pre></pre>
+	<br>
+		<textarea style="overflow:scroll;width:100%;height:1000px"></textarea>
 		<code>
 			<%= render 'angular_answer'%>
 		</code>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('pre').text($('code').html());
+			$('textarea').text($('code').html());
 		});
 		function scrollTop(elemSelector){
 		  $('html, body').animate({

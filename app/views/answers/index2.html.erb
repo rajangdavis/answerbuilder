@@ -26,7 +26,7 @@
 						<% end %>
 					<% end %>	
 					</span>
-					<span class="answer_title_length pull-right"></span>
+					<%=link_to 'Get Code', code_path(answer),:class=>'pull-right'%>
 					<br>
 				</div>
 			<% end %>
@@ -40,10 +40,6 @@
 			$('div.answerList '+buttonClass).show();
 			$('div.answerList div:not('+buttonClass+')').hide();
 			$('div.answerList '+buttonClass+':last').parent().parent().css('border-bottom','3px solid lightgrey')
-		});
-		$('.edit_answer_link').each(function(){
-			var len = $(this).text().length;
-			$(this).next().next().text(len);
 		});
 	});
 </script>
