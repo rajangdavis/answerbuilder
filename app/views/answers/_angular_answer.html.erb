@@ -1,4 +1,4 @@
-<div ng-cloak remove-upper-elems class="container-fluid" style="font-size:145%">
+<div ng-cloak ng-app="answer" remove-upper-elems class="container-fluid" style="font-size:145%">
 	<div class="container-fluid real-answer-container" ng-controller="answer as answer_scope">
 		<div class="container-fluid">
 			<div class="left-series">
@@ -112,11 +112,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".pop").on("click", function() {
-   			$('#imagepreview').attr('src', $(this).find("img").attr('src'));   
-   			$('#imagemodal').modal('show'); 
-		});
-	});
-</script>
