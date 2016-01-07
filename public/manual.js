@@ -13,22 +13,8 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
 		    
 		  });
 	}
-  $scope.currentIndex = 0;
-    $scope.absIndex = 1;
-    $scope.stepLength = 0;
-    $scope.language;
-    if(document.domain == "qsee-jp.custhelp.com"){
-        $scope.language = 'jp';
-    }else{
-        $scope.language = 'en';
-    }
-
-
-
-
-    $scope.changeLanguage = function(lan){
-        $scope.language = lan;
-    }
+    
+   
   $rootScope.previousState;
 	$rootScope.currentState;
 	$rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
@@ -81,28 +67,23 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
         $scope.dev_id = $stateParams.dev_id;
         $scope.cat_id = $stateParams.cat_id;
         $scope.ans_id = $stateParams.ans_id;
+
+        $scope.currentIndex = 0;
+        $scope.absIndex = 1;
+        $scope.stepLength = 0;
+        $scope.language;
+
         $timeout(function(){
           $scope.answer = $scope.manual[$scope.dev_id].categories[$scope.cat_id].answers[$scope.ans_id];
           $scope.steps = $scope.answer.steps
         })
-         $scope.rotateArr = function(i,tn){
-          if(i!=0 && tn <= $scope.stepLength){
-              if (tn == 0){
-                  $scope.absIndex = $scope.stepLength;
-              }
-              else{
-                  $scope.absIndex = tn;
-              }
-
-              
-
-              $scope.steps = $scope.steps.slice(i).concat($scope.steps.slice(0, i));
-          }else if(tn > $scope.stepLength){
-              $scope.absIndex = 1;
-              $scope.steps = $scope.steps.slice(i).concat($scope.steps.slice(0, i));
-          }
-          document.querySelectorAll('.steps.container')[0].scrollTop = 0;
-      }
+         $scope.prevStep = function (scope) {    
+             $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : scope.length - 1;   
+         };
+         $scope.nextStep = function (scope) {   
+          $scope.currentIndex = ($scope.currentIndex < scope.length - 1) ? ++$scope.currentIndex : 0;           
+        };    
+          
 
       $scope.isLast = function(arr,i){
           $scope.stepLength = arr.length;
