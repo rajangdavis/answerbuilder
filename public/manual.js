@@ -72,7 +72,6 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
         $scope.absIndex = 1;
         $scope.stepLength = 0;
         $scope.language;
-
         $timeout(function(){
           $scope.answer = $scope.manual[$scope.dev_id].categories[$scope.cat_id].answers[$scope.ans_id];
           $scope.steps = $scope.answer.steps
