@@ -1,33 +1,100 @@
-<a ui-sref='start'>Start   >  </a>
+<a ui-sref='start'>Device Selection   >  </a>
 <a ui-sref='devices({dev_id: dev_id})'>{{manual[dev_id].device}}   >  </a>
 <a ui-sref='categories({dev_id: dev_id,cat_id: cat_id})'>{{manual[dev_id].categories[cat_id].category}}</a>
 <br><br>
-<div class="container" ng-init="setCurrentStepIndex(0)">
-	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 answer_container" ng-repeat='(iden,answer) in manual[dev_id].categories[cat_id].answers[ans_id]'>
-		<div class="title_bar" ng-class="{centered_text:answer.series=='None'}">
-			<span class="icon pull-left" ng-if="answer.series!=='None'">
-				<i class="icon {{answer.series}}"></i>
-			</span>
-			<span class="title">{{answer.title}}</span>
-		</div>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 img_holder" ng-hide="currentIndex[currentIndex.index] == undefined" >
-			<div class="img_container fading-In" ng-repeat="step in answer.steps">
-				<img img-height ng-init="currentIndex[$index] = step.image"class="img-responsive img_height" ng-hide="!isCurrentStepIndex($index)" ng-src="{{step.image}}">
-			</div>
-		</div>
-		<nav class="fixed_nav container">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arrow_container text-center ">
-				<a href="javascript:void(0)" ng-hide="currentIndex.index==0" class="arrow fading-In pull-left" ng-click="nextStep(answer.steps)"><i class="fa fa-caret-left fa-4x choose" ></i></a>
-				<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="prevStep(answer.steps)"><i class="fa fa-caret-right fa-4x choose" ></i></a>
-			</div>
-	        <div class="step_container col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-class="{step_contained: currentIndex[currentIndex.index] != undefined}" ng-repeat="step in answer.steps" ng-hide="!isCurrentStepIndex($index)">
-				<div class="step_counter">
-					<span  ng-if="step_type = 'Step'">{{currentIndex.index+1}} / {{answer.steps.length}}</span>	
+<div remove-upper-elems class="container-fluid" style="font-size:145%">
+	<div class="container-fluid real-answer-container">
+		<div class="container-fluid">
+			<div class="left-series">
+				<div class="text-center">
+					<span class="series">{{answer.series == 'None'? 
+						'All' :
+						answer.series }}</span>
+					<br>
+					<span class="h6">
+						SERIES
+					</span>
 				</div>
-                <span class="step fading-In" ng-bind-html="step.step"></span>
-	        </div>
-	    </nav>
+			</div>
+			<div class="title-right" title-holder-right>
+				<h1 class="text-uppercase" title-right>
+					<span ng-bind-html=" answer.title"></span>
+					
+				</h1>
+			</div>
+		</div>
+		<div class="container-more answer-container">
+			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: absIndex!=1}">
+				<strong>
+					<span ng-show="language =='en'" ng-bind-html="answer.tagline"></span>
+					
+					<span ng-hide="language =='en'" ng-bind-html="answer.tagline_jp"></span>
+				</strong>
+			</div>
+			<div class=" container-fluid border-grey">
+				<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right border-grey container" >
+					<div class="img_container pop" ng-repeat="step in steps">
+						<img img-height class="img-responsive" ng-class="{'hidden-image': !isCurrentStepIndex($index), 'fading-In':isCurrentStepIndex($index)}" ng-src="{{step.image}}">
+					</div>
+				</div>
+				<div class="clearfix text-uppercase h6 hidden-lg hidden-md tagline" ng-class="{hidden: answer.absIndex!=1}">
+					<strong>
+						<span ng-show="language =='en'" ng-bind-html="answer.tagline"></span>
+					</strong>
+				</div>
+				<div class="steps col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left border-grey container">
+					<table class="table">
+						<tbody>
+							<div class="text-center index-nav">
+								<a href="javascript:void(0)" class="arrow fading-In pull-left" ng-click="rotateArr($index-1,absIndex-1)"><i class="fa fa-caret-left white-text fa-2x choose" ></i></a>
+								<span class="step-counter" ng-class="{hidden: answer.steps[0].step_type!='Step'}">
+									{{absIndex}} / {{answer.steps.length}}
+								</span>
+								<a href="javascript:void(0)" class="arrow fading-In pull-right" ng-click="rotateArr($index+1,absIndex+1)"><i class="fa fa-caret-right white-text fa-2x choose" ></i></a>
+							</div>
+							<tr class="step-row pointer" ng-repeat="step in steps" ng-class="{'active_step': currentIndex == $index,'step-row-dashed': isLast(answer.steps,step.true_number+1)}" id="{{'step'+($index+1)}}" ng-click="rotateArr($index,step.true_number+1)" step-height >
+								<td class="text-left no-grey border-grey container">
+									<strong class="pop-step" ng-if="step.step_type == 'Step'">
+										<span>STEP</span>
+										<span>{{step.number}}</span>
+									</strong>
+									<strong ng-if="step.step_type == 'Caution'">
+										<span ng-hide="isCurrentStepIndex($index)"><i class="fa fa-exclamation-triangle"></i></span>
+										<span  ng-hide="!isCurrentStepIndex($index)" class="text-center">
+											WARNING!
+										</span>
+									</strong>
+									<strong ng-if="step.step_type == 'Information'">
+										<span ng-hide="isCurrentStepIndex($index)"><i class="fa fa-info-circle fa-2x"></i></span>
+										<span ng-hide="!isCurrentStepIndex($index)"  class="text-center">
+											IMPORTANT!
+										</span>
+									</strong>
+									<br>
+									<span ng-class="{'hidden': !isCurrentStepIndex($index), 'fading-In':isCurrentStepIndex($index)}" class="step" >
+										<span ng-bind-html="step.step"></span>
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
-</div>	
+</div>
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h4 class="modal-title" id="myModalLabel">Image preview</h4>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" id="imagepreview" class="img-responsive" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

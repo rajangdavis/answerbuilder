@@ -11,7 +11,6 @@ var app = angular.module('answer',['ngSanitize'])
         self.language = 'en';
     }
 
-
     self.rotateArr = function(i,tn){
         if(i!=0 && tn <= self.stepLength){
             if (tn == 0){

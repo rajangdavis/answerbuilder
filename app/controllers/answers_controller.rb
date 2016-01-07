@@ -30,83 +30,83 @@ class AnswersController < ApplicationController
 			"categories"=>[
 				{"category"=>"Firmware Upgrade",
 				 "answers"=>[
-				 	{0=>Answer.find(140).pojo }]
+				 	Answer.find(140).pojo ]
 				}, 
 				{"category"=>"Setup a Schedule",
 				 "answers"=>[
-				 	{0=>Answer.find(109).pojo}, 
-				  	{1=>Answer.find(107).pojo}, 
-				  	{2=>Answer.find(221).pojo }]
+				 	Answer.find(109).pojo, 
+				  	Answer.find(107).pojo, 
+				  	Answer.find(221).pojo ]
 				},
 				{"category"=>"Email Notification",
 				 "answers"=>[
-				 	{0=>Answer.find(194).pojo }]
+				 	Answer.find(194).pojo]
 				},
 				{"category"=>"Playback",
 				 "answers"=>[
-				 	{0=>Answer.find(225).pojo}]
+				 	Answer.find(225).pojo]
 				}, 
 				{"category"=>"Backup",
 				 "answers"=>[
-				 	{0=>Answer.find(228).pojo}]
+				 	Answer.find(228).pojo]
 				}, 
 				{"category"=>"Audio / Mic Setup",
 				 "answers"=>[
-				 	{0=>Answer.find(232).pojo}, 
-				  	{1=>Answer.find(231).pojo}]
+				 	Answer.find(232).pojo, 
+				  	Answer.find(231).pojo]
 				}, 
 			  	{"category"=>"PTZ Setup",
 			  	 "answers"=>[
-			  		{0=>Answer.find(233).pojo}, 
-			  	  	{1=>Answer.find(235).pojo }] 
+			  		Answer.find(233).pojo, 
+			  	  	Answer.find(235).pojo] 
 			  	}]
 			},
 			{"device" => "Instructions using the Browser",
 			 "categories"=>[
 				{"category"=>"Firmware Upgrade",
 				 "answers"=>[
-				 	{0=>Answer.find(121).pojo}, 
-					{1=>Answer.find(117).pojo}, 
-					{2=>Answer.find(13).pojo }]
+				 	Answer.find(121).pojo, 
+					Answer.find(117).pojo, 
+					Answer.find(13).pojo]
 				}, 
 				{"category"=>"Setup a Schedule",
 				 "answers"=>[
-				 	{0=>Answer.find(223).pojo}, 
-				 	{1=>Answer.find(222).pojo}, 
-				 	{2=>Answer.find(224).pojo}]
+				 	Answer.find(223).pojo, 
+				 	Answer.find(222).pojo, 
+				 	Answer.find(224).pojo]
 				}, 
 				{"category"=>"Email Notification","answers"=>[
-					{0=>Answer.find(195).pojo}]
+					Answer.find(195).pojo]
 				}, 
 				{"category"=>"Playback","answers"=>[
-					{0=>Answer.find(226).pojo }]
+					Answer.find(226).pojo]
 				}, 
 				{"category"=>"Backup",
 				 "answers"=>[ 
-				 	{0=>Answer.find(229).pojo}, 
-				 	{1=>Answer.find(230).pojo }]
+				 	Answer.find(229).pojo, 
+				 	Answer.find(230).pojo]
 				}, 
 				{"category"=>"PTZ Setup",
 				 "answers"=>[ 
-					{0=>Answer.find(236).pojo}, 
-				 	{1=>Answer.find(238).pojo}] 
+					Answer.find(236).pojo, 
+				 	Answer.find(238).pojo] 
 				}]
 			},
 			{"device" => "Instructions using the Mobile App", 
 				"categories"=>[
 				{"category"=>"Email Notification",
 				 "answers"=>[
-				 	{0=>Answer.find(199).pojo}, 
-					{1=>Answer.find(196).pojo}, 
-					{2=>Answer.find(197).pojo}, 
-					{3=>Answer.find(196).pojo}]
+				 	Answer.find(199).pojo, 
+					Answer.find(196).pojo, 
+					Answer.find(197).pojo, 
+					Answer.find(196).pojo]
 				},
 				{"category"=>"Playback",
 				"answers"=>[
-				 	{0=>Answer.find(44).pojo}, 
-				 	{1=>Answer.find(46).pojo}, 
-				 	{2=>Answer.find(43).pojo}, 
-				 	{3=>Answer.find(52).pojo}] 	
+				 	Answer.find(44).pojo, 
+				 	Answer.find(46).pojo, 
+				 	Answer.find(43).pojo, 
+				 	Answer.find(52).pojo] 	
 				}]
 			})
 		render json: @qtpojo

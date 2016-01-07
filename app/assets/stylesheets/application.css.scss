@@ -356,8 +356,6 @@ textarea,input, select{
 .pointer:hover{
 	text-decoration:underline;
 }
-
-
 /* New answer CSS */
 
 .img-container{
@@ -642,7 +640,7 @@ body,html{
 		max-height:600px;
 	}
 }
-@media(min-width:0px) and (max-width:767px){
+@media(min-width:0px) and (max-width:768px){
 	.container-more.lang-select{
 		padding-left:8%;
 	}	
@@ -697,7 +695,7 @@ body,html{
 		font-size:63%;
 	}
 	.container-more.answer-container div div{
-		max-height: 280px;
+		max-height: 550px;
 	}
 	.img_container img{
 		max-height:200px;
@@ -814,4 +812,32 @@ span.step.fading-In {
 
 .pop{
 	cursor:pointer;
+}
+select{
+	width:100%;
+}
+@-webkit-keyframes fadeIn{
+	from{
+		opacity:0
+		}
+	to{
+		opacity:1
+	}
+}
+@keyframes fadeIn{
+	from{
+		opacity:0
+	}
+	to{
+		opacity:1
+		}
+	}
+.fading-In,.container:not(ul){
+	-webkit-animation-name:fadeIn;
+	animation-name:fadeIn;
+	-webkit-animation-duration:.5s;
+	animation-duration:.5s;
+	-webkit-animation-fill-mode:both;
+	animation-fill-mode:both;
+	transition:.5s
 }
