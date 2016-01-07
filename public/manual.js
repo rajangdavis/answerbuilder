@@ -77,7 +77,6 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
           $scope.steps = $scope.answer.steps
         },100)
          $scope.rotateArr = function(i,tn){
-          console.log(i);
           if(i!=0 && tn <= $scope.stepLength){
             if (tn == 0){
                   $scope.absIndex = $scope.stepLength;
@@ -157,79 +156,83 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
         }
     }
 })
-// .directive('removeUpperElems', function($timeout){
-//     return {
+.directive('removeUpperElems', function($timeout,$rootScope){
+    return {
         
-//         restrict: 'A',
-//         link: function(scope, elem, attrs){
-//             var $scope = this;
-//             $timeout(function(){
-//                 var pad30 = document.querySelectorAll('.pad30');
-//                 var title = document.getElementById('rn_PageTitle');
-//                 if(pad30.length){
-//                     pad30[0].classList.remove('pad30');
-//                 }
-//                 if(title){
-//                     title.style.display = 'none';
-//                 }
-//                 if(document.getElementById('rn_MainColumn')){
-//                     document.getElementById('rn_MainColumn').className = 'container-fluid';
-//                 }
-//             },500)
-//         }
-//     }
-// })
-// .directive('titleHolderRight', function($timeout){
-//     return{
+        restrict: 'A',
+        link: function(scope, elem, attrs){
+            $timeout(function(){
+              if($rootScope.currentState=='answer'){
+                var pad30 = document.querySelectorAll('.pad30');
+                var title = document.getElementById('rn_PageTitle');
+                if(pad30.length){
+                    pad30[0].classList.remove('pad30');
+                }
+                if(title){
+                    title.style.display = 'none';
+                }
+                if(document.getElementById('rn_MainColumn')){
+                    document.getElementById('rn_MainColumn').className = 'container-fluid';
+                }
+              }
+            },500)
+        }
+    }
+})
+.directive('titleHolderRight', function($timeout,$rootScope){
+    return{
+        restrict: 'A',
+        link: function(scope,elem, attrs){
+            $timeout(function(){
+              if($rootScope.currentState=='answer'){
+                setInterval(function(){
+                    var titleRight = document.querySelectorAll('.title-right')[0];
+                    var title = document.querySelectorAll('.title-right h1 span:not(.ng-hide)')[0];
+                    if(document.querySelectorAll('.left-series').length){
+                        var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
+                        titleRight.style.height = seriesHeight + 'px';
+                    }else{
+                      if(titleRight){
+                        titleRight.style.height = (title.offsetHeight+15) + 'px';
+                      }
+                    }
+                },100)
+              }
+            })
+        }
+    }
+})
+.directive('titleRight',function($timeout,$rootScope){
+    return{
         
-//         restrict: 'A',
-//         link: function(scope,elem, attrs){
-//             $timeout(function(){
-//                 setInterval(function(){
-//                     var titleRight = document.querySelectorAll('.title-right')[0];
-//                     var title = document.querySelectorAll('.title-right h1 span:not(.ng-hide)')[0];
-//                     if(document.querySelectorAll('.left-series').length){
-//                         var seriesHeight = document.querySelectorAll('.left-series')[0].clientHeight;
-//                         titleRight.style.height = seriesHeight + 'px';
-//                     }else{
-//                       if(titleRight){
-//                         titleRight.style.height = (title.offsetHeight+15) + 'px';
-//                       }
-//                     }                    
-//                 },100)
-//             })
-//         }
-//     }
-// })
-// .directive('titleRight',function($timeout){
-//     return{
-        
-//         restrict: 'A',
-//         link:function(scope,elem,attrs){
-//             $timeout(function(){
-//                 setInterval(function(){
-//                     var titleHeight = elem[0].offsetHeight;
-//                     if(document.querySelectorAll('.title-right').length){
-//                       var titleRightHolder = document.querySelectorAll('.title-right')[0].clientHeight;
-//                     }
-//                     var leftSeries = document.querySelectorAll('.left-series')[0]
-//                     var style = window.getComputedStyle(elem[0], null).getPropertyValue('font-size');
-//                     var fontSize = parseFloat(style);
-//                     var winWidth = window.innerWidth;
+        restrict: 'A',
+        link:function(scope,elem,attrs){
+            $timeout(function(){
+              if($rootScope.currentState=='answer'){
+                setInterval(function(){
+                    var titleHeight = elem[0].offsetHeight;
+                    if(document.querySelectorAll('.title-right').length){
+                      var titleRightHolder = document.querySelectorAll('.title-right')[0].clientHeight;
+                    }
+                    var leftSeries = document.querySelectorAll('.left-series')[0]
+                    var style = window.getComputedStyle(elem[0], null).getPropertyValue('font-size');
+                    var fontSize = parseFloat(style);
+                    var winWidth = window.innerWidth;
                     
-//                     if( titleHeight < titleRightHolder){
-//                         elem[0].style.marginTop = ((titleRightHolder-titleHeight)/3)+'px';
-//                         if(winWidth > 999){
-//                             elem[0].style.fontSize = '37px';
-//                         }
-//                     }
-//                     else if(titleHeight > titleRightHolder){
-//                         elem[0].style.fontSize = (.70*fontSize)+'px';
-//                         elem[0].style.paddingLeft = '20px';
-//                         leftSeries.style.paddingLeft = 0;
-//                     }
-//                 },100)
-//             })
-//         }
-//     }
-// });
+                    if( titleHeight < titleRightHolder){
+                        elem[0].style.marginTop = ((titleRightHolder-titleHeight)/3)+'px';
+                        if(winWidth > 999){
+                            elem[0].style.fontSize = '37px';
+                        }
+                    }
+                    else if(titleHeight > titleRightHolder){
+                        elem[0].style.fontSize = (.70*fontSize)+'px';
+                        elem[0].style.paddingLeft = '20px';
+                        leftSeries.style.paddingLeft = 0;
+                    }
+                },100)
+              }
+            })
+        }
+    }
+});

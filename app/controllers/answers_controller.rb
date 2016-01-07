@@ -28,19 +28,11 @@ class AnswersController < ApplicationController
 		@qtpojo.push(
 			{"device" => "Instructions using the NVR/DVR",
 			"categories"=>[
-				{"category"=>"Firmware Upgrade",
-				 "answers"=>[
-				 	Answer.find(140).pojo ]
-				}, 
-				{"category"=>"Setup a Schedule",
+				{"category"=>"Recording Setup and Configuration",
 				 "answers"=>[
 				 	Answer.find(109).pojo, 
 				  	Answer.find(107).pojo, 
 				  	Answer.find(221).pojo ]
-				},
-				{"category"=>"Email Notification",
-				 "answers"=>[
-				 	Answer.find(194).pojo]
 				},
 				{"category"=>"Playback",
 				 "answers"=>[
@@ -59,7 +51,15 @@ class AnswersController < ApplicationController
 			  	 "answers"=>[
 			  		Answer.find(233).pojo, 
 			  	  	Answer.find(235).pojo] 
-			  	}]
+			  	},
+			  	{"category"=>"Firmware Upgrade",
+				 "answers"=>[
+				 	Answer.find(140).pojo ]
+				}, 
+				{"category"=>"Email Notification",
+				 "answers"=>[
+				 	Answer.find(194).pojo]
+				}]
 			},
 			{"device" => "Instructions using the Browser",
 			 "categories"=>[
