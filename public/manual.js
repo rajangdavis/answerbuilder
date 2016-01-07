@@ -58,6 +58,16 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
       controller:function($scope,$stateParams,$timeout,$state,$rootScope){
         $scope.dev_id = $stateParams.dev_id;
         $scope.cat_id = $stateParams.cat_id;
+          $timeout(function(){    
+            answer_length = $scope.manual[$scope.dev_id].categories[$scope.cat_id ].answers.length;   
+            if(answer_length==1){   
+              if($rootScope.previousState!='answer'){   
+                $state.go('answer',{'dev_id': $scope.dev_id, 'cat_id': $scope.cat_id, 'ans_id': 0});    
+              }else{    
+                $state.go('devices',{'dev_id': $scope.dev_id});   
+              }   
+            }   
+          })
       }
     })
     .state('answer', {
