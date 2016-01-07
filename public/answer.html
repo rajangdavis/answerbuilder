@@ -7,7 +7,7 @@
 		<div class="container-fluid">
 			<div class="left-series">
 				<div class="text-center">
-					<span class="series">{{answer.series == 'None'? 
+					<span ng-cloak class="series">{{answer.series == 'None'? 
 						'All' :
 						answer.series }}</span>
 					<br>
@@ -26,13 +26,13 @@
 		<div class="container-more answer-container">
 			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: absIndex!=1}">
 				<strong>
-					<span ng-bind-html="answer.tagline"></span>
+					<span ng-cloak ng-bind-html="answer.tagline"></span>
 				</strong>
 			</div>
 			<div class=" container-fluid border-grey">
 				<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right border-grey container" >
 					<div class="img_container pop" ng-repeat="step in steps">
-						<img img-height class="img-responsive" ng-class="{'hidden-image': !isCurrentStepIndex($index), 'fading-In':isCurrentStepIndex($index)}" ng-src="{{step.image}}">
+						<img img-height class="img-responsive" ng-class="{'hidden-image': !isCurrentStepIndex($index)}" ng-src="{{step.image}}">
 					</div>
 				</div>
 				<div class="clearfix text-uppercase h6 hidden-lg hidden-md tagline" ng-class="{hidden: answer.absIndex!=1}">
@@ -44,11 +44,11 @@
 					<table class="table">
 						<tbody>
 							<div class="text-center index-nav">
-								<a class="arrow fading-In pull-left" ng-click="prevStep(steps)"><i class="fa fa-caret-left white-text fa-2x choose" ></i></a>
+								<a class="arrow  pull-left" ng-click="rotateArr(currentIndex-1,absIndex-1)"><i class="fa fa-caret-left white-text fa-2x choose" ></i></a>
 								<span class="step-counter" ng-class="{hidden: answer.steps[0].step_type!='Step'}">
-									{{currentIndex+1}} / {{answer.steps.length}}
+									{{absIndex}} / {{answer.steps.length}}
 								</span>
-								<a class="arrow fading-In pull-right" ng-click="nextStep(steps)"><i class="fa fa-caret-right white-text fa-2x choose" ></i></a>
+								<a class="arrow  pull-right" ng-click="rotateArr(currentIndex+1,absIndex+1)" ng-click="nextStep(steps)"><i class="fa fa-caret-right white-text fa-2x choose" ></i></a>
 							</div>
 							<tr class="step-row pointer" ng-repeat="step in steps" ng-class="{'active_step': currentIndex == $index,'step-row-dashed': isLast(answer.steps,step.true_number+1)}" id="{{'step'+($index+1)}}" ng-click="rotateArr($index,step.true_number+1)" step-height >
 								<td class="text-left no-grey border-grey container">
@@ -69,7 +69,7 @@
 										</span>
 									</strong>
 									<br>
-									<span ng-class="{'hidden': !isCurrentStepIndex($index), 'fading-In':isCurrentStepIndex($index)}" class="step" >
+									<span ng-class="{'hidden': !isCurrentStepIndex($index), '':isCurrentStepIndex($index)}" class="step" >
 										<span ng-bind-html="step.step"></span>
 									</span>
 								</td>
@@ -80,19 +80,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-      	<h4 class="modal-title" id="myModalLabel">Image preview</h4>
-      </div>
-      <div class="modal-body text-center">
-        <img src="" id="imagepreview" class="img-responsive" >
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>

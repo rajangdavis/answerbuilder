@@ -55,7 +55,7 @@ nav>ul>li:first-of-type{
 @-webkit-keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-.fading-In,.container:not(ul){
+.fading-In{
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 	

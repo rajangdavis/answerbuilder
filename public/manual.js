@@ -75,13 +75,23 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
         $timeout(function(){
           $scope.answer = $scope.manual[$scope.dev_id].categories[$scope.cat_id].answers[$scope.ans_id];
           $scope.steps = $scope.answer.steps
-        })
-         $scope.prevStep = function (scope) {    
-             $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : scope.length - 1;   
-         };
-         $scope.nextStep = function (scope) {   
-          $scope.currentIndex = ($scope.currentIndex < scope.length - 1) ? ++$scope.currentIndex : 0;           
-        };    
+        },100)
+         $scope.rotateArr = function(i,tn){
+          console.log(i);
+          if(i!=0 && tn <= $scope.stepLength){
+            if (tn == 0){
+                  $scope.absIndex = $scope.stepLength;
+              }
+              else{
+                  $scope.absIndex = tn;
+              }
+              $scope.steps = $scope.steps.slice(i).concat($scope.steps.slice(0, i));
+          }else if(tn > $scope.stepLength){
+              $scope.absIndex = 1;
+              $scope.steps = $scope.steps.slice(i).concat($scope.steps.slice(0, i));
+          }
+          document.querySelectorAll('.steps.container')[0].scrollTop = 0;
+      }  
           
 
       $scope.isLast = function(arr,i){
@@ -96,54 +106,57 @@ var app = angular.module('manual',['ui.router','ngSanitize'])
       }
     })
 })
-// .directive('imgHeight', function($timeout) {
-//     return {
-//         restrict: 'A',
-//         link: function(scope, element) {
-//           $timeout(function(){
-//               setInterval(function(){
-//                 var imageHeight = element[0].clientHeight;
-//                 var winWidth = window.innerWidth;
-//                 var titleBarHeight = document.querySelectorAll('.title-bar')[0].offsetHeight;
-//                 if (winWidth > 768){
-//                     var marginOpt1 = (titleBarHeight - imageHeight)/2;
-//                         if(imageHeight<titleBarHeight && imageHeight>0){
-//                           element[0].style.margin = marginOpt1+"px auto";
-//                           element[0].style.display = 'block';
-//                         }else if(imageHeight==titleBarHeight){
-//                           element[0].style.height = (imageHeight*.97)+"px"; 
-//                         }
-//                 }
-//                 else if (winWidth > 0 && winWidth < 768){
-//                     var marginOpt1 = (220 - imageHeight)/2;
-//                         if(imageHeight<220 && imageHeight>0){
-//                           element[0].style.margin = marginOpt1+"px auto";
-//                           element[0].style.display = 'block';
-//                         }else if(imageHeight==220){
-//                           element[0].style.height = (imageHeight*.97)+"px"; 
-//                         }
-//                 }
-//               },100)
-//           },550); 
-//         }
-//     };
-// })
-// .directive('stepHeight', function($timeout){
-//     return {
+.directive('imgHeight', function($timeout,$rootScope) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+          $timeout(function(){
+              setInterval(function(){
+                if($rootScope.currentState=='answer'){
+                  var imageHeight = element[0].clientHeight;
+                  var winWidth = window.innerWidth;
+                  var titleBarHeight = document.querySelectorAll('.title-bar')[0].offsetHeight;
+                  if (winWidth > 768){
+                      var marginOpt1 = (titleBarHeight - imageHeight)/2;
+                          if(imageHeight<titleBarHeight && imageHeight>0){
+                            element[0].style.margin = marginOpt1+"px auto";
+                            element[0].style.display = 'block';
+                          }else if(imageHeight==titleBarHeight){
+                            element[0].style.height = (imageHeight*.97)+"px"; 
+                          }
+                  }
+                  else if (winWidth > 0 && winWidth < 768){
+                      var marginOpt1 = (220 - imageHeight)/2;
+                          if(imageHeight<220 && imageHeight>0){
+                            element[0].style.margin = marginOpt1+"px auto";
+                            element[0].style.display = 'block';
+                          }else if(imageHeight==220){
+                            element[0].style.height = (imageHeight*.97)+"px"; 
+                          }
+                  }
+                }
+              },100)
+          },550); 
+        }
+    };
+})
+.directive('stepHeight', function($timeout,$rootScope){
+    return {
         
-//         restrict: 'A',
-//         link: function(scope, elem, attrs){
-//             var $scope = this;
-//             $timeout(function(){
-//                 var how_many_steps= scope.answer.steps.length;
-//                 var ideal_height = 700/how_many_steps;
-//                 if(how_many_steps < 7){
-//                     elem[0].style.minHeight = ideal_height + 'px';
-//                 }
-//             },500)
-//         }
-//     }
-// })
+        restrict: 'A',
+        link: function(scope, elem, attrs){
+            $timeout(function(){
+              if($rootScope.state=='answer'){
+                var how_many_steps= scope.steps.length;
+                var ideal_height = 700/how_many_steps;
+                if(how_many_steps < 7){
+                    elem[0].style.minHeight = ideal_height + 'px';
+                }
+              }
+            },500)
+        }
+    }
+})
 // .directive('removeUpperElems', function($timeout){
 //     return {
         
