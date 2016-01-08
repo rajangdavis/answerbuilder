@@ -27,18 +27,25 @@ var app = angular.module('manual',['ui.router','ngSanitize','swipe'])
   $urlRouterProvider.otherwise("/devices/0");
 
   $stateProvider
-    .state('start', {
+    .state('menu', {
       url: "/",
-      template:"<div ng-repeat='(dev_id,method) in manual'>"+ 
+      template:"<div class='container'>"+
+            "<h4>Set Device you want to controller your recorder from</h4>"+
+            "<div ng-repeat='(dev_id,method) in manual'>"+ 
               "<a ui-sref='devices({dev_id: dev_id})'>{{method.device}}</a>"+
-            "</div>"
+            "</div>"+
+            "<h4>Set Language</h4>"+
+            "<a class='pointer'>English</a><br>"+
+            "<a class='pointer'>Japanese</a>"+
+          "</div>"
     })
     .state('devices', {
       url: "/devices/:dev_id",
-      template: "<a ui-sref='start'>Device Selection >  </a>"+
+      template: "<div class='container'>"+
+            "<a ui-sref='menu'><i class='fa fa-bars'></i></a>  "+
             "<a ui-sref='devices({dev_id: dev_id})'>{{manual[dev_id].device}}</a>"+
-            "<br><br>"+
-            "<div ng-repeat='(cat_id,category) in manual[dev_id].categories'>"+ 
+            "</div><br>"+
+            "<div class='container' ng-repeat='(cat_id,category) in manual[dev_id].categories'>"+ 
               "<a ui-sref='categories({dev_id: dev_id,cat_id: cat_id})'>{{category.category}}</a>"+
             "</div>", 
       controller:function($scope,$stateParams){
@@ -47,11 +54,12 @@ var app = angular.module('manual',['ui.router','ngSanitize','swipe'])
     })
     .state('categories', {
       url: "/devices/:dev_id/categories/:cat_id",
-      template:"<a ui-sref='start'>Device Selection >  </a>"+
+      template:"<div class='container'>"+
+             "<a ui-sref='menu'><i class='fa fa-bars'></i></a>  "+
              "<a ui-sref='devices({dev_id: dev_id})'>{{manual[dev_id].device}}</a>  >  "+
              "<a ui-sref='categories({dev_id: dev_id,cat_id: cat_id})'>{{manual[dev_id].categories[cat_id].category}}</a>"+
-             "<br><br>"+
-            "<div ng-repeat='answer in manual[dev_id].categories[cat_id].answers'>"+ 
+             "</div><br>"+
+            "<div class='container' ng-repeat='answer in manual[dev_id].categories[cat_id].answers'>"+ 
               "<a ui-sref='answer({dev_id: dev_id, cat_id: cat_id, ans_id: $index})'"+
               ">{{answer.title}}</a>"+
             "</div>",
