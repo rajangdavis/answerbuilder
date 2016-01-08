@@ -11,7 +11,7 @@
 						'All' :
 						answer.series }}</span>
 					<br>
-					<span class="h6">
+				<span class="h6">
 						SERIES
 					</span>
 				</div>
@@ -29,7 +29,7 @@
 					<span ng-cloak ng-bind-html="answer.tagline"></span>
 				</strong>
 			</div>
-			<div class=" container-fluid border-grey">
+			<div class=" container-fluid border-grey" ng-swipe-right="rotateArr(currentIndex-1,absIndex-1)" ng-swipe-left="rotateArr(currentIndex+1,absIndex+1)">
 				<div class="title-bar col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right border-grey container" >
 					<div class="img_container pop" ng-repeat="step in steps">
 						<img img-height class="img-responsive" ng-class="{'hidden-image': !isCurrentStepIndex($index)}" ng-src="{{step.image}}">

@@ -1,4 +1,4 @@
-var app = angular.module('manual',['ui.router','ngSanitize'])
+var app = angular.module('manual',['ui.router','ngSanitize','swipe'])
 .controller('manual',function($http,$scope,$timeout,$rootScope,$sce){
 	$scope.manual;
   $scope.answer;
