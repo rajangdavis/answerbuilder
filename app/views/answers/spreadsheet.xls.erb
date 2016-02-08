@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Author>Rajan</Author>
+    <LastAuthor>Rajan</LastAuthor>
+    <Company>Q-See</Company>
+  </DocumentProperties>
+  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+    <WindowHeight>6795</WindowHeight>
+    <WindowWidth>8460</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>15</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </ExcelWorkbook>
+  <% @answers.each do |answer| %>
+  <Worksheet ss:Name="<%=if answer.series != 'None' then (answer.series + ' ' + answer.title).truncate(20) else answer.title.truncate(20) end%>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Title</Data></Cell>
+        <Cell><Data ss:Type="String"><%= answer.title%></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Series</Data></Cell>
+        <Cell><Data ss:Type="String"><%= answer.series%></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Tagline</Data></Cell>
+        <Cell><Data ss:Type="String"><%= answer.tagline%></Data></Cell>
+      </Row>
+      <Row></Row>
+      <Row>
+        <Cell><Data ss:Type="String">Steps</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Number Position</Data></Cell>
+        <Cell><Data ss:Type="String">Number Offset</Data></Cell>
+        <Cell><Data ss:Type="String">Step Instructions</Data></Cell>
+        <Cell><Data ss:Type="String">Step Type</Data></Cell>
+        <Cell><Data ss:Type="String">Image Link</Data></Cell>
+      </Row>
+      <% @steps.each do |step| %>
+      <% if step.answer_id == answer.id%>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= step.number%></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= step.offset%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= step.step%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= step.step_type%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= if step.image != '' then step.image else step.image_upload end %></Data></Cell>
+      </Row>
+      <% end %>
+      <% end %>
+    </Table>
+  </Worksheet>
+    <% end %>
+</Workbook>

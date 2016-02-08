@@ -1,53 +1,77 @@
-<div class="answer_list col-md-6">
-	<h2>Answers</h2>
-	<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
-      <button type="button" class="btn btn-default" id="QC">QC Series</button>
-      <button type="button" class="btn btn-default" id="QT">QT Series</button>
-      <button type="button" class="btn btn-default" id="None">Other</button>
-    </div>
-    <hr>
-	<div class="answerList">
-		<% @answers.each do |answer| %>
-			<div class="<%= answer.series %>">
-				<span><%=link_to answer.title, edit_answer_path(answer) %> | </span>
-				<%=link_to "Get Code", code_path(answer) %> | 
-				<%=link_to "Preview", preview_path(answer) %><br>
-			</div>
-		<% end %>
+<style type="text/css">
+	body{
+		background:lightgrey;
+	}
+</style>
+<div class="container">
+	<div class="answer_list col-md-8">
+		<h2 class="">Answers</h2>
+		<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+	      <button type="button" class="btn btn-default" id="QC">QC Series</button>
+	      <button type="button" class="btn btn-default" id="QT">QT Series</button>
+	      <button type="button" class="btn btn-default" id="QS">QS Series</button>
+	      <button type="button" class="btn btn-default" id="QR">QR Series</button>
+	      <button type="button" class="btn btn-default" id="None">Other</button>
+	    </div>
+		<div class="answerList margin">
+			<% @answers.each do |answer| %>
+				<div class="<%= answer.series %> small bordered">
+					<span class="icon "><i class="icon <%= answer.series %>"></i></span>
+					<span class="small edit_answer_link"><%=link_to answer.title, edit_answer_path(answer) %></span>
+					<span class="pull-right btn-group">
+					<% if answer.translation_needed.start_with?("YES")%>
+						<img class="pointer Japanese pull-left" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
+						<% if answer.translation_needed.end_with?('COMPLETE)')%>
+							<i class="fa fa-file-image-o pull-left"></i>
+						<% end %>
+					<% end %>	
+					<%=link_to "Get Code", code_path(answer), :class => "small btn btn-default btn-modified"%> 
+					<%=link_to "Preview", angular_path(answer), :class => "small btn btn-default btn-modified"%>
+					</span>
+					<br>
+				</div>
+			<% end %>
+		</div>
 	</div>
+	<div class="new_answer col-md-4 fixed">
+	<%= form_for(@answer) do |f| %>
+		<a id="hide_new_form" class="hidden-lg hidden-md col-sm-12 col-xs-12">X hide</a>
+		<h2 class="">Create a New Answer</h2>
+		<div class="form-group hidden">
+			<%= f.label "Language:  " %>
+		    <%= f.select :language, options_for_select(%w[English]) , :class => "form-control"%>
+	    </div>
+		<div class="form-group">
+			<%= f.label "Series:  " %>
+		    <%= f.select :series, options_for_select(%w[QC QT QS QR None]),{}, {:class => "form-control"}%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Title:  "%><br />
+		    <%= f.text_area :title, :placeholder => "Title", :class => "form-control"%>
+		</div>
+		<div class="form-group">
+			<%= f.label "Tagline:  "%><br />
+		    <%= f.text_area :tagline, :placeholder => "Tagline", :class => "form-control"%>
+		</div>
+		
+		    <%= f.hidden_field :user_id, :value => current_user.id %>
+		    <%= f.hidden_field :translation_needed, :value => 'NO' %>
+		    <%= f.hidden_field :translation_status, :value => 'NOT STARTED' %>
+	<%= f.submit "Create Answer", :class => "btn btn-default" %>
+
+
+	<% end %></div>
 </div>
-<div class="new_answer col-md-6">
-<%= form_for(@answer) do |f| %>
-	<h2>Create a New Answer</h2>
-	<div class="form-group">
-		<%= f.label "Language:  " %>
-	    <%= f.select :language, options_for_select(%w[English Japanese German Portuguese]) %>
-    </div>
-	<div class="form-group">
-		<%= f.label "Series:  " %>
-	    <%= f.select :series, options_for_select(%w[QC QT None]) %>
-	</div>
-	<div class="form-group">
-		<%= f.label "Title:  "%><br />
-	    <%= f.text_area :title, :placeholder => "Title"%>
-	</div>
-	<div class="form-group">
-		<%= f.label "Tagline:  "%><br />
-	    <%= f.text_area :tagline, :placeholder => "Tagline"%>
-	</div>
-	
-	    <%= f.hidden_field :user_id, :value => current_user.id %>
-<%= f.submit %>
-
-
-<% end %></div>
 <script type="text/javascript">
 	$(document).ready(function(){
-
 		$('button.btn').click(function(){
-			var buttonClass = $(this).attr('id');
-			$('div.answerList div.'+buttonClass).show();
-			$('div.answerList div:not(.'+buttonClass+')').hide();
+			var buttonClass = "."+$(this).attr('id');
+			$('div.answerList '+buttonClass).show();
+			$('div.answerList div:not('+buttonClass+')').hide();
+			$('div.answerList '+buttonClass+':last').parent().parent().css('border-bottom','3px solid lightgrey')
 		});
+		$('#hide_new_form').click(function(){
+			$('.new_answer').hide(500)
+		})
 	});
 </script>

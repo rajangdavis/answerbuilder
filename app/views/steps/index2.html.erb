@@ -1,0 +1,22 @@
+<button class="download">Download</button>
+<div class="steplinks">
+	<% @steps.each do |step| %>
+		<img src="//<%= step.image%>" class="img-responsive"><br>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('button.download').click(function(){
+		var imgArray = $('img.img-responsive');
+		     		
+
+		$(imgArray).each(function (i) {
+			
+	        var $this = $(this);
+	        $this.wrap('<a class="temp" href="' + $this.attr('src') + '" download="'+i+'.png" />');
+	        $this.click();   
+	    });
+	});
+});
+</script>

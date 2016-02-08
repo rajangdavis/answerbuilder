@@ -1,304 +1,348 @@
-<%= link_to "Back", answers_path%> |
-<a href="#" class="edit_this">Edit</a> |
-<a href="#" class="add_steps ">Add Step</a> |
-<%= link_to "Get Code", code_path(@answer)%> |
-<%= link_to "Preview", preview_path(@answer)%>
-<div class="edit_form">
-	<%= form_for(@answer) do |f| %>
-		<h2>Edit Answer</h2>
-		<div class="form-group">
-			<%= f.label "Language:  " %>
-		    <%= f.select :language, options_for_select(%w[English Japanese German], f.object.language) %>
-	    </div>
-		<div class="form-group">
-			<%= f.label "Series:  " %>
-		    <%= f.select :series, options_for_select(%w[QC QT None], f.object.series )%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Title:  "%><br />
-		    <%= f.text_area :title, :placeholder => "Title"%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Tagline:  "%><br />
-		    <%= f.text_area :tagline, :placeholder => "Tagline"%>
-		</div>
-		
-		    <%= f.hidden_field :user_id, :value => current_user.id %>
-		<%= f.submit %>
-
-
-	<% end %>
-	<br>
-</div>
-<% if @answer.series=="None"%>
-	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center answer-title">
-			<h1 class="answer"><%= @answer.title%></h1>
-		</div>
-	</div>
-<% else %>
-	<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
-		<div class="col-md-10 col-sm-10  col-xs-9 pull-right answer-title">
-			<h1 class="answer"><%= @answer.title%></h1>
-		</div>
-		<div class="col-md-2 col-sm-2 col-xs-3 pull-left text-center">
-			<div class="col-md-2 col-sm-2 col-xs-4"></div>
-			<% if @answer.series=="QT"%>
-				<img class="qtIcon img-responsive" src="//i.imgur.com/O4AEPmF.png">
-			<% elsif @answer.series=="QC"%>
-				<img class="qcIcon img-responsive" src="//i.imgur.com/LNcBXLp.jpg">
-			<% end %>
-		</div>
-	</div>
-<% end %>
-<div class="tagline">
-	<p class="text-center lead"><%= @answer.tagline%></p>
-</div>
-
-<div class="add_steps_form">
-		<%= form_for(@step,{method: :create}) do |f| %>
-		<h2 >New Step</h2>
-		<div class="form-group">
-			<%= f.label "Step Type:  " %>
-		    <%= f.select :step_type, options_for_select(%w[Step Information Caution]) %>
-	    </div>
-		<div class="form-group">
-			<%= f.label "Step Number:  " %>
-		    <%= f.text_field :number, :value => 0%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Step Instruction:  "%><br />
-			<div class="form-group color-options">
-	            <strong><a class="bold">Bold</a></strong> | 
-	            <em><a class="i">Italic</a></em> | 
-	            <u><a class="u">Underline</a></u> |
-	            <a class="red">Red</a> | 
-	            <a class="blue">Blue</a> | 
-	            <a class="green">Green</a> | 
-	            <a class="lgreen">Light Green</a> | 
-	            <a class="yellow">Yellow</a> |
-	            <a class="orange">Orange</a> |
-	            <a class="br"> Add a Break</a> |
-	            <a class="cat">Caution</a> |
-	            <a class="note" style="float:none">Information</a>
-	        </div><br>
-	            <a class="addLink">Add Link</a>
-		    <%= f.text_area :step, :placeholder => "Write your instructions here"%>
-		</div>
-		<div class="form-group">
-			<%= f.label "Step/Pictures offset  "%><br />
-	    	<%= f.text_field :offset, :value => 0%>
-		</div>
-		<div class="form-group">
-			<input type="file" id="imageLoader" name="imageLoader" />
-			<p class="success green">Image successfully uploaded!</p>
-    		<canvas id="imageCanvas"></canvas> 
-  	    </div>
-		    <%= f.hidden_field :image%>
-		    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
-		<%= f.submit %>
-
-
-	<% end %>
-</div>
-<div class="steps">
-	<% @steps.each do |step|%>
-		<% if step.step_type=="Step"%>
-			
-		<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-			<div class="col-md-6 col-sm-6 col-xs-6">
-				<h2><strong>STEP <%= step.number %></strong></h2>
-				<%= link_to "Edit Step", edit_step_path(step)%> |
-				<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
-				<p class="lead"><%= step.step%></p>
-				<% if step.image!=""%>
-					<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-				<% end %>
+<div class="rn_AnswerDetail answerContainer">
+	<% if @answer.series=="None"%>
+		<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center answer-title">
+				<h1 class="answer"><%= @answer.title%></h1>
 			</div>
-			<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-				<img class="img-responsive" src="//<%= step.image%>">
-				<% if step.image!=""%>
-					<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+		</div>
+	<% else %>
+		<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
+			<div class="col-md-10 col-sm-10  col-xs-9 pull-right answer-title">
+				<h1 class="answer"><%= @answer.title%></h1>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-3 pull-left text-center">
+				<div class="col-md-2 col-sm-2 col-xs-4"></div>
+				<% if @answer.series=="QT"%>
+					<img class="qtIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/O4AEPmF.png">
+				<% elsif @answer.series=="QC"%>
+					<img class="qcIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/LNcBXLp.jpg">
 				<% end %>
 			</div>
 		</div>
-		<% elsif step.step_type=="Information"%>
+	<% end %>
+	<div class="tagline">
+		<p class="text-center lead"><%= @answer.tagline%></p>
+	</div>
+	<div class="steps">
+		<% @steps.each do |step|%>
+			<% if step.step_type=="Step"%>
+				
 			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-				<div class="col-md-5 col-sm-5 col-xs-5 information">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<h2 class="inst answer"><strong>STEP <%= step.number %></strong></h2>
 					<%= link_to "Edit Step", edit_step_path(step)%> |
 					<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
-					<div class="col-md-4 col-sm-5 col-xs-6">
-						<img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png">
-					</div>
-						
-					<h2><strong>NOTE: </strong><span class="lead"><%= step.step%></span></h2>
-					
-					
+					<p class="lead"><%= step.step%></p>
 					<% if step.image!=""%>
+						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+					<% elsif step.image_upload!=""%>
 						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
 					<% end %>
 				</div>
 				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-					<img class="img-responsive" src="//<%= step.image%>">
-					<% if step.image!=""%>
+					<% if step.image!=""%>	
+						<img class="img-responsive" id= "<%=step.id%>" src="//<%= step.image%>">
+					<% elsif step.image_upload!=""%>
+						<%= image_tag(step.image_upload, :class => "img-responsive", :id => step.id) %>
+					<% end %>
+					<% if step.image=""%>
+						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+					<% elsif step.image_upload!=""%>
 						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
 					<% end %>
 				</div>
 			</div>
-		<% elsif step.step_type=="Caution"%>
-			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-				<div class="col-md-6 col-sm-6 col-xs-6 cautiondiv">
-					<%= link_to "Edit Step", edit_step_path(step)%> |
-					<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
-					<div class="col-md-3 col-sm-4 col-xs-5">
-						<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
+			<% elsif step.step_type=="Information"%>
+				<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
+					<div class="col-md-5 col-sm-5 col-xs-5 information">
+						<%= link_to "Edit Step", edit_step_path(step)%> |
+						<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
+						<div class="col-md-4 col-sm-5 col-xs-6">
+							<img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png">
+						</div>
+							
+						<h2><strong>NOTE: </strong><span class="lead"><%= step.step%></span></h2>
+						
+						
+						<% if step.image!=""%>
+							<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+						<% elsif step.image_upload!=""%>
+							<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+						<% end %>
 					</div>
-					<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
-					<% if step.image!=""%>
-						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-					<% end %>
+					<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+						<% if step.image!=""%>	
+							<img class="img-responsive" src="//<%= step.image%>">
+						<% elsif step.image_upload!=""%>
+							<%= image_tag(step.image_upload, :class => "img-responsive") %>
+						<% end %>
+						<% if step.image=""%>
+							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+						<% elsif step.image_upload!=""%>
+							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+						<% end %>
+					</div>
 				</div>
-				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-					<img class="img-responsive" src="//<%= step.image%>">
-					<% if step.image!=""%>
-						<h2 class="red">PICTURE <%= step.number+step.offset %></h2>
-					<% end %>
+			<% elsif step.step_type=="Caution"%>
+				<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
+					<div class="col-md-6 col-sm-6 col-xs-6 cautiondiv">
+						<%= link_to "Edit Step", edit_step_path(step)%> |
+						<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
+						<div class="col-md-3 col-sm-4 col-xs-5">
+							<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
+						</div>
+						<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
+						<% if step.image!=""%>
+							<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
+						<% elsif step.image_upload!=""%>
+							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+						<% end %>
+					</div>
+					<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
+						<% if step.image!=""%>	
+							<img class="img-responsive" src="//<%= step.image%>">
+						<% elsif step.image_upload!=""%>
+							<%= image_tag(step.image_upload, :class => "img-responsive") %>
+						<% end %>
+						<% if step.image=""%>
+							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+						<% elsif step.image_upload!=""%>
+							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
+						<% end %>
+					</div>
 				</div>
-			</div>
+			<% end %>
 		<% end %>
-	<% end %>
-</div>
-	
-	
-<div class="text-center">
-	
-</div>
+	</div>
+	<div class="links container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+		<span class="pointer-hide">X Hide</span>
+		<%= link_to "Back", answers_path%> |
+		<a href="javascript:void(0)" class="edit_this">Edit</a> |
+		<a href="javascript:void(0)" class="add_steps ">Add Step</a> |
+		<%= link_to "Get Code", code_path(@answer)%> |
+		<%= link_to "Preview", preview_path(@answer)%>
+	</div>
+	<div class="edit_form  container">
+		<%= form_for(@answer) do |f| %>
+			<h2>Edit Answer</h2>
+			<div class="form-group hidden">
+				<%= f.label "Language:  " %>
+			    <%= f.select :language, options_for_select(%w[English], f.object.language),{},{:class=>'form-control'} %>
+		    </div>
+			<div class="form-group">
+				<%= f.label "Series:  " %>
+			    <%= f.select :series, options_for_select(%w[QC QT QS QR None], f.object.series ),{},{:class=>'form-control'} %>
+			</div>
+			<div class="form-group">
+				<%= f.label "Title:  "%><br />
+			    <%= f.text_area :title, :placeholder => "Title",:class => "form-control"%>
+			</div>
+			<div class="form-group">
+				<%= f.label "Tagline:  "%><br />
+			    <%= f.text_area :tagline, :placeholder => "Tagline",:class => "form-control"%>
+			</div>
+			<div class="form-group">
+				<%= f.label "Translation Needed?  " %>
+			    <%= f.select :translation_needed, options_for_select(['YES (PICTURES NEEDED)','YES (PICTURES COMPLETE)','NO'], f.object.translation_needed ),{},{:class=>'form-control'} %>
+			</div>
+			    <%= f.hidden_field :user_id, :value => current_user.id %>
+			<%= f.submit "Update Answer", :class => "btn btn-default" %>
 
-<div>
-	<% if @steps.blank? %>
-		<h1 class="text-center">:) You haz no steps</h1>
-	<% end %>
-</div>
 
-<script type="text/javascript">
-$(document).ready(function () {
-	$("p.success").hide();
-	var href = 
-	console.log(href);
-    $("p.lead,span.lead").each(function () {
+		<% end %>
+		<br>
+	</div>
+	<div class="add_steps_form container ">
+		<%= form_for(@step,{method: :create}) do |f| %>
+			<h2 >New Step</h2>
+			<div class="form-group">
+				<%= f.label "Step Type:  " %>
+			    <%= f.select :step_type, options_for_select(%w[Step Information Caution]),{},{:class => "form-control"} %>
+		    </div>
+			<div class="form-group">
+				<%= f.label "Step Number:  " %>
+			    <%= f.text_field :number, :value => @steps_count+1, :class => "form-control"%>
+			</div>
+			<div class="form-group">
+				<%= f.label "Step Instruction:  "%><br />
+				<div class="form-group color-options">
+		            <strong><a class="bold">Bold</a></strong> | 
+		            <em><a class="i">Italic</a></em> | 
+		            <u><a class="u">Underline</a></u> |
+		            <a class="red">Red</a> | 
+		            <a class="blue">Blue</a> | 
+		            <a class="green">Green</a> | 
+		            <a class="lgreen">Light Green</a> | 
+		            <a class="yellow">Yellow</a> |
+		            <a class="orange">Orange</a> |
+		            <a class="br"> Add a Break</a> |
+		            <a class="cat">Caution</a> |
+		            <a class="note" style="float:none">Information</a> | 
+		            <a class="addLink">Add Link</a>
+		        </div><br>
+		            
+			    <%= f.text_area :step, :placeholder => "Write your instructions here", :class => "form-control"%>
+			</div>
+			<div class="form-group">
+				<%= f.label "Step/Pictures offset  "%><br />
+		    	<%= f.text_field :offset, :value => 0, :class => "form-control"%>
+			</div>
+	  	    <div class="form-group">
+				<%= f.label :image_upload %>
+	    		<%= f.file_field :image_upload, :class => "form-control"%>
+	    		<%= f.hidden_field :image %>
+	  	    </div>
+			    <%= f.hidden_field :answer_id, :value => @answer.id %><br>
+			<%= f.submit "Create Step", :class => "form-control"%>
+		<% end %>
+		<br><br><br>
+	</div>
 
-    	
-        // Create code to do key value pair swaps for the different colors and typography
-        var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 information"><div class="col-md-3 col-sm-5 col-xs-7"><img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png"></div><h2 class="inst answer"><strong>NOTE: </strong><span class="inst lead">').replace(/\[\/note\]/g,'</span></h2></div>').replace(/\[cat\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 cautiondiv"><div class="col-md-3 col-sm-5 col-xs-7"><img class="caution img-responsive" src="//i.imgur.com/ejvODER.png"></div><h2><strong>CAUTION: </strong><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
-        
+	<div>
+		<% if @steps.blank? %>
+			<h1 class="text-center">:) You haz no steps</h1>
+		<% end %>
+	</div>
+	<span class="pointer-show">+ Show</span>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$('.pointer-show').hide();
+		function scrollTo(elemSelector){
+			$('html, body').animate({
+		        scrollTop: $(elemSelector).offset().top-80
+		    }, 1000)
+		};
+		$("p.success").hide();
+	    $("p.lead,span.lead").each(function () {
 
-
-        $(this).html(content);
-    });
-    $("em.red").each(function () {
-        var pLead = $(this).prev();
-        $(this).appendTo(pLead);
-    });
-
-
-$("div.edit_form,div.add_steps_form").hide();
-
-$("a.edit_this").click(function () {
-    $("div.edit_form").toggle(1000);
-});
-
-$("a.add_steps").click(function () {
-    $("div.add_steps_form").toggle(1000);
-});
-$('.color-options a').click(function(){
-        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
-        var isBold = $(this)[0].className+']'
-        if ($(this)[0].className=='br'){
-            $('#step_step').val($('#step_step').val()+'['+isBold);
-        } else{
-             $('#step_step').val($('#step_step').val()+'['+notBold);
-        }
-    });
-
-//script for uploading images and converting them into dataURI
-var canvas = new fabric.Canvas('imageCanvas', {
-    backgroundColor: 'rgb(240,240,240)'
-});
-
-var imageLoader = document.getElementById('imageLoader');
-imageLoader.addEventListener('change', handleImage, false);
-
-function handleImage(e) {
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        var img = new Image();
-        img.onload = function () {
-            var imgInstance = new fabric.Image(img, {
-                scaleX: 1,
-                scaleY: 1
-            });
-            canvas.add(imgInstance);
-        };
-        img.src = event.target.result;
-
-        finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
-
-// Ajax call to upload images to imgur for hosting        
-	$.ajax({
-	            url: 'https://api.imgur.com/3/image',
-	            type: 'post',
-	            headers: {
-	                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
-
-	            },
-	            data: {
-	                image: finalURI,
-	                type: 'base64'
-	            },
-	            dataType: 'json',
-	            success: function (response) {
-	                if (response.success) {
-	                   
-	                    $("#step_image").val(response.data.link.replace('http://',''));
-	                    $("p.success").show();
-	                }
-	            },
-	            error: function (request, status, error) {
-	            console.log(error);
-	            console.log(JSON.parse(request.responseText));
-	            }
-	        });
+	    	
+	        // Create code to do key value pair swaps for the different colors and typography
+	        var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 information"><div class="col-md-3 col-sm-5 col-xs-7"><img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png"></div><h2 class="inst answer"><strong>NOTE: </strong><span class="inst lead">').replace(/\[\/note\]/g,'</span></h2></div>').replace(/\[cat\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 cautiondiv"><div class="col-md-3 col-sm-5 col-xs-7"><img class="caution img-responsive" src="//i.imgur.com/ejvODER.png"></div><h2><strong>CAUTION: </strong><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
 	        
-	    };
-	    reader.readAsDataURL(e.target.files[0]);
-	};
-		$(".addLink").on("click", function() {
-		   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
-		   
-		   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
 
-		   $('button.submit').click(function(){
-		    $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
-		     $('input.href,input.text').val("");
-		   });
-		});
 
-});
-</script>
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content ">
-      <div class="modal-header">
-         <h4 class="modal-title" id="myModalLabel">Add Link</h4>
-      </div>
-      <div class="modal-body">
-        <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
-        <input class="text" placeholder="Insert Link Text"><br><br>
-        <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+	        $(this).html(content);
+	    });
+	    $("em.red").each(function () {
+	        var pLead = $(this).prev();
+	        $(this).appendTo(pLead);
+	    });
+
+
+	$("div.edit_form,div.add_steps_form").hide();
+
+	$("a.edit_this").click(function () {
+	    $("div.edit_form").toggle(1000);
+	    $("div.add_steps_form").hide();
+	    scrollTo("div.edit_form");
+	});
+
+	$("a.add_steps").click(function () {
+		$("div.edit_form").hide();
+	    $("div.add_steps_form").toggle(1000);
+	    scrollTo("div.add_steps_form");	
+
+	});
+	$('.color-options a').click(function(){
+	        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
+	        var isBold = $(this)[0].className+']'
+	        if ($(this)[0].className=='br'){
+	            $('#step_step').val($('#step_step').val()+'['+isBold);
+	        } else{
+	             $('#step_step').val($('#step_step').val()+'['+notBold);
+	        }
+	    });
+	$('.pointer-hide,.pointer-show').click(function(){
+		var links = $('.links.container')[0];
+		if(links.style.display == "none"){ 
+			$('.links.container').show(500);
+			$('.pointer-show').hide(500);
+
+		}else{
+			$('.links.container').hide(500);
+			$('.pointer-show').show(500);
+		}
+	})
+	// //script for uploading images and converting them into dataURI
+	// var canvas = new fabric.Canvas('imageCanvas', {
+	//     backgroundColor: 'rgb(240,240,240)'
+	// });
+
+	// var imageLoader = document.getElementById('imageLoader');
+	// imageLoader? imageLoader.addEventListener('change', handleImage, false):console.log();
+
+	// function handleImage(e) {
+	//     var reader = new FileReader();
+	//     reader.onload = function (event) {
+	//         var img = new Image();
+	//         img.onload = function () {
+	//             var imgInstance = new fabric.Image(img, {
+	//                 scaleX: 1,
+	//                 scaleY: 1
+	//             });
+	//             canvas.add(imgInstance);
+	//         };
+	//         img.src = event.target.result;
+
+	//         finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
+
+	// // Ajax call to upload images to imgur for hosting        
+	// 	$.ajax({
+	// 	            url: 'https://api.imgur.com/3/image',
+	// 	            type: 'post',
+	// 	            headers: {
+	// 	                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
+
+	// 	            },
+	// 	            data: {
+	// 	                image: finalURI,
+	// 	                type: 'base64'
+	// 	            },
+	// 	            dataType: 'json',
+	// 	            success: function (response) {
+	// 	                if (response.success) {
+		                   
+	// 	                    $("#step_image").val(response.data.link.replace('http://',''));
+	// 	                    $("p.success").show();
+	// 	                }
+	// 	            },
+	// 	            error: function (request, status, error) {
+	// 	            console.log(error);
+	// 	            window.alert(JSON.parse(request.responseText)["data"]["error"]);
+	// 	            }
+	// 	        });
+		        
+	// 	    };
+	// 	    reader.readAsDataURL(e.target.files[0]);
+	// 	};
+			$(".addLink").on("click", function() {
+			   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
+			   
+			   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+
+			   $('button.submit').click(function(){
+			    $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
+			     $('input.href,input.text').val("");
+			   });
+			});
+
+	});
+	</script>
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content ">
+	      <div class="modal-header">
+	         <h4 class="modal-title" id="myModalLabel">Add Link</h4>
+	      </div>
+	      <div class="modal-body">
+	        <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
+	        <input class="text" placeholder="Insert Link Text"><br><br>
+	        <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>

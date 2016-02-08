@@ -1,0 +1,71 @@
+<div class="rn_AnswerDetail answerContainer">
+  <%=  render 'partial_jp'%>
+</div>
+    <script type="text/javascript" src="/code2.js"></script>
+<script type="text/javascript">
+function scrollTop(elemSelector){
+  $('html, body').animate({
+        scrollTop: $(elemSelector).offset().top-80
+    }, 1000)
+};
+scrollTop("body");
+$('a.hideNav').click(function(){
+	$('nav').hide();
+});
+$(".navbar,button.download").hide();
+$("body").css('margin-top','0px');
+$(".pop").on("click", function() {
+   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
+   
+   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+   var pic_real_width, pic_real_height;
+	// $("<img/>") // Make in memory copy of image to avoid css issues
+	//     .attr("src", $('.pop').find("img").attr('src'))
+	//     .load(function() {
+	//         pic_real_width = this.width;   // Note: $(this).width() will not
+	//         pic_real_height = this.height; // work for in memory images.
+	//         console.log(pic_real_width);
+	//         if(pic_real_width > 1050){
+	//         	$('div.modal-content img,div.modal-dialog').width(pic_real_width/1.3);
+	//         	$('div.modal-content').width(pic_real_width/1.27);
+	//         }
+	//         else{
+ //  				$('div.modal-content').width(pic_real_width*1.05);
+ //  			}
+	//     });
+   
+});
+
+
+ function adjustTitle(){
+        //Check if there is a series icon
+        if($('.qcIcon,.qtIcon').length){
+            //set variables for scope
+            
+            var modH;
+            
+            var winW;
+            
+            //set a timer to constantly check the page every 500 milliseconds
+            
+            window.setInterval(function(){
+            
+                //set variable to get the height of the icon, took out 'var' for global scope
+
+                modH = $('.qcIcon,.qtIcon').height();
+
+                //set variable to get the width of the screen, took out 'var' for global scope
+            
+                winW = $(window).width();
+                
+                //if the window-size is less than 767 pixels, make the margin-top of the title a 3rd of the icon size
+                    //set the font size of the title to be 1.75 times the height of the icon
+                //else this other arbitrary calculation --- honestly, I just mashed in numbers til it looked alright...
+
+                winW>767?$("h1.inst.answer").css("margin-top",((modH/3))+"px").css("font-size",(modH*1.75)+"%"):
+                $("h1.inst.answer").css("margin-top",((modH/4.5))+"px").css("font-size",(modH*1.8)+"%");
+                },500);
+        };
+    };
+    adjustTitle();
+</script>

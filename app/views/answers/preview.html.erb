@@ -1,11 +1,22 @@
-<%= render 'partial' %>
-
-<button class="download">download pictures</button>
-<script type="text/javascript" src="/code.js"></script>
+<div class="rn_AnswerDetail answerContainer">
+  <%= if @partial2==true then render 'partial2' else render 'partial' end%>
+</div>
+<% if @partial2==true %>
+    <script type="text/javascript" src="/code2.js"></script>
+<% else %>
+    <script type="text/javascript" src="/code.js"></script>
+<% end%>
 <script type="text/javascript">
+function scrollTop(elemSelector){
+  $('html, body').animate({
+        scrollTop: $(elemSelector).offset().top-80
+    }, 1000)
+};
+scrollTop("body");
 $('a.hideNav').click(function(){
 	$('nav').hide();
 });
+$(".navbar,button.download").hide();
 $("body").css('margin-top','0px');
 $(".pop").on("click", function() {
    $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
@@ -28,32 +39,39 @@ $(".pop").on("click", function() {
 	//     });
    
 });
-$('button.download').click(function(){
-	var imgArray = $('img.img-responsive:not(img.note):not(img.caution):not(img.qcIcon):not(img.qtIcon):not(:last)');
-	
-        		
 
-	$(imgArray).each(function (i) {
-		
-        var $this = $(this);
-        $this.wrap('<a class="temp" href="' + $this.attr('src') + '" download="'+i+'.png" />');
-        $this.click();   
-    });
-});
+
+ function adjustTitle(){
+        //Check if there is a series icon
+        if($('.qcIcon,.qtIcon').length){
+            //set variables for scope
+            
+            var modH;
+            
+            var winW;
+            
+            //set a timer to constantly check the page every 500 milliseconds
+            
+            window.setInterval(function(){
+            
+                //set variable to get the height of the icon, took out 'var' for global scope
+
+                modH = $('.qcIcon,.qtIcon').height();
+
+                //set variable to get the width of the screen, took out 'var' for global scope
+            
+                winW = $(window).width();
+                
+                //if the window-size is less than 767 pixels, make the margin-top of the title a 3rd of the icon size
+                    //set the font size of the title to be 1.75 times the height of the icon
+                //else this other arbitrary calculation --- honestly, I just mashed in numbers til it looked alright...
+
+                winW>767?$("h1.inst.answer").css("margin-top",((modH/3))+"px").css("font-size",(modH*1.75)+"%"):
+                $("h1.inst.answer").css("margin-top",((modH/4.5))+"px").css("font-size",(modH*1.8)+"%");
+                },500);
+        };
+    };
+    adjustTitle();
 </script>
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content ">
-      <div class="modal-header">
-     	 <h4 class="modal-title" id="myModalLabel">Image preview</h4>
-      </div>
-      <div class="modal-body">
-        <img src="" id="imagepreview" class="img-responsive" >
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 	

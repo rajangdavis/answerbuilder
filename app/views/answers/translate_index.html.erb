@@ -1,0 +1,50 @@
+<style type="text/css">
+	body{
+		background:lightgrey;
+	}
+</style>
+<div class="container">
+    <div class="container-fluid">
+        <a class="strong" href="//2.sendvid.com/jcd25zwy.mp4" target="_new">Not sure what to do? Click here to learn how to use this app</a>
+    </div>
+    <div class="text-center">
+        <span>Total Word Count (no HTML):</span>
+        <span class="word_count"></span>
+    </div>
+	<table class="table margin sortable">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Word Count</th>
+        <th>Word Count (no HTML)</th>
+        <th>Translation Status</th>
+        <th>Image Status</th>
+        <th>Preview Japanese Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @answers.each do |answer| %>
+    	<tr class="bordered">
+	    	<td><span class="edit_answer_link"><%=link_to answer.title, translate_path(answer) %></span></td>
+	    	<td><%= answer.word_count%></td>
+            <td><%= answer.clean_word_count%></td>
+	    	<td><span class="<%=answer.translation_status%>"><%=answer.translation_status%></span></td>
+            <td><span class="<%=answer.translation_needed.gsub(/[()]/,'').gsub(/YES PICTURES/,'')%>"><%=answer.translation_needed.gsub(/[()]/,'').gsub(/YES PICTURES/,'')%></span></td>
+            <td><%=link_to "Click here to preview", angular_path(answer)%></td>
+    	</tr>
+    	<% end %>
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript" src="/sort.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var count = 0;
+
+        $('.bordered td:nth-of-type(3)').each(function(){
+            count += parseInt($(this).text())
+        })
+
+        $('.word_count').html(count)
+    })
+</script>
