@@ -1,126 +1,18 @@
 <div class="rn_AnswerDetail answerContainer">
-	<% if @answer.series=="None"%>
-		<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
-			<div class="col-md-12 col-sm-12 col-xs-12 text-center answer-title">
-				<h1 class="answer"><%= @answer.title%></h1>
-			</div>
-		</div>
-	<% else %>
-		<div class="col-md-12 col-sm-12 col-xs-12 title jumbotron">
-			<div class="col-md-10 col-sm-10  col-xs-9 pull-right answer-title">
-				<h1 class="answer"><%= @answer.title%></h1>
-			</div>
-			<div class="col-md-2 col-sm-2 col-xs-3 pull-left text-center">
-				<div class="col-md-2 col-sm-2 col-xs-4"></div>
-				<% if @answer.series=="QT"%>
-					<img class="qtIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/O4AEPmF.png">
-				<% elsif @answer.series=="QC"%>
-					<img class="qcIcon img-responsive" src="//q-see.s3.amazonaws.com/content/support/howto/LNcBXLp.jpg">
-				<% end %>
-			</div>
-		</div>
+	<% content_for(:body_attributes) do %>
+	    data-no-turbolink="true"
 	<% end %>
-	<div class="tagline">
-		<p class="text-center lead"><%= @answer.tagline%></p>
+	<div>
+		<%= render 'angular_answer'%>
 	</div>
-	<div class="steps">
-		<% @steps.each do |step|%>
-			<% if step.step_type=="Step"%>
-				
-			<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-				<div class="col-md-6 col-sm-6 col-xs-6">
-					<h2 class="inst answer"><strong>STEP <%= step.number %></strong></h2>
-					<%= link_to "Edit Step", edit_step_path(step)%> |
-					<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
-					<p class="lead"><%= step.step%></p>
-					<% if step.image!=""%>
-						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-					<% elsif step.image_upload!=""%>
-						<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-					<% end %>
-				</div>
-				<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-					<% if step.image!=""%>	
-						<img class="img-responsive" id= "<%=step.id%>" src="//<%= step.image%>">
-					<% elsif step.image_upload!=""%>
-						<%= image_tag(step.image_upload, :class => "img-responsive", :id => step.id) %>
-					<% end %>
-					<% if step.image=""%>
-						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-					<% elsif step.image_upload!=""%>
-						<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-					<% end %>
-				</div>
-			</div>
-			<% elsif step.step_type=="Information"%>
-				<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-					<div class="col-md-5 col-sm-5 col-xs-5 information">
-						<%= link_to "Edit Step", edit_step_path(step)%> |
-						<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
-						<div class="col-md-4 col-sm-5 col-xs-6">
-							<img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png">
-						</div>
-							
-						<h2><strong>NOTE: </strong><span class="lead"><%= step.step%></span></h2>
-						
-						
-						<% if step.image!=""%>
-							<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-						<% elsif step.image_upload!=""%>
-							<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-						<% end %>
-					</div>
-					<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-						<% if step.image!=""%>	
-							<img class="img-responsive" src="//<%= step.image%>">
-						<% elsif step.image_upload!=""%>
-							<%= image_tag(step.image_upload, :class => "img-responsive") %>
-						<% end %>
-						<% if step.image=""%>
-							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-						<% elsif step.image_upload!=""%>
-							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-						<% end %>
-					</div>
-				</div>
-			<% elsif step.step_type=="Caution"%>
-				<div class="step-<%=step.number%> col-md-12 col-sm-12 col-xs-12">
-					<div class="col-md-6 col-sm-6 col-xs-6 cautiondiv">
-						<%= link_to "Edit Step", edit_step_path(step)%> |
-						<%= link_to "Delete",url_for(action: :destroy,id: step.id, controller: :steps),method: :delete, data: {confirm: "Are you sure?"} %>
-						<div class="col-md-3 col-sm-4 col-xs-5">
-							<img class="caution img-responsive" src="//i.imgur.com/ejvODER.png">
-						</div>
-						<h2><strong>CAUTION: </strong><span class="lead"><%= step.step%></span></h2>
-						<% if step.image!=""%>
-							<em class="clear lead red"> (picture <%= step.number+step.offset %>)</em>
-						<% elsif step.image_upload!=""%>
-							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-						<% end %>
-					</div>
-					<div class="pull-right col-md-6 col-sm-6 col-xs-6 text-center">
-						<% if step.image!=""%>	
-							<img class="img-responsive" src="//<%= step.image%>">
-						<% elsif step.image_upload!=""%>
-							<%= image_tag(step.image_upload, :class => "img-responsive") %>
-						<% end %>
-						<% if step.image=""%>
-							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-						<% elsif step.image_upload!=""%>
-							<h2 class="red">PICTURE <%=step.number+step.offset%></h2>
-						<% end %>
-					</div>
-				</div>
-			<% end %>
-		<% end %>
-	</div>
+
 	<div class="links container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 		<span class="pointer-hide">X Hide</span>
 		<%= link_to "Back", answers_path%> |
 		<a href="javascript:void(0)" class="edit_this">Edit</a> |
 		<a href="javascript:void(0)" class="add_steps ">Add Step</a> |
 		<%= link_to "Get Code", code_path(@answer)%> |
-		<%= link_to "Preview", preview_path(@answer)%>
+		<%= link_to "Preview", angular_path(@answer)%>
 	</div>
 	<div class="edit_form  container">
 		<%= form_for(@answer) do |f| %>
@@ -204,6 +96,9 @@
 		<% end %>
 	</div>
 	<span class="pointer-show">+ Show</span>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
+	<script type="text/javascript" src="/answer.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
 		$('.pointer-show').hide();

@@ -2,7 +2,7 @@
 	<div class="container-fluid real-answer-container" ng-controller="answer as answer_scope">
 		<div class="container-fluid">
 			<div class="left-series">
-				<div class="text-center">
+				<div class="text-center" ng-cloak>
 					<span class="series">{{answer_scope.answer.series == 'None'? 
 						(answer_scope.language == 'en'? 'All' : 'すべて') :
 						answer_scope.answer.series }}</span>
@@ -30,7 +30,7 @@
 		<%if @answer.translation_needed == "NO"%>
 			<br>
 		<% end %>
-		<div class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo.to_json %>" >
+		<div class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
 			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
 				<strong>
 					<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
@@ -69,6 +69,10 @@
 										<span>{{answer_scope.language == 'en'? 'STEP' : 'ステップ'}}</span>
 										<span>{{step.number}}</span>
 									</strong>
+									<% if 'test'=='test' %> | 
+										<a class="small" href="/steps/{{step.step_id}}/edit/">Edit</a> |
+										<a class="small" data-confirm="Are you sure?" data-method="delete" href="/steps/{{step.step_id}}" rel="nofollow">Delete</a>
+									<% end %>
 									<strong ng-if="step.step_type == 'Caution'">
 										<span ng-hide="answer_scope.isCurrentStepIndex($index)"><i class="fa fa-exclamation-triangle"></i></span>
 										<span  ng-hide="!answer_scope.isCurrentStepIndex($index)" class="text-center">
