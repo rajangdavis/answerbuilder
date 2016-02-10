@@ -2,12 +2,12 @@
 	<div class="container-fluid real-answer-container" ng-controller="answer as answer_scope">
 		<div class="container-fluid">
 			<div class="left-series">
-				<div class="text-center" ng-cloak>
-					<span class="series">{{answer_scope.answer.series == 'None'? 
+				<div class="text-center">
+					<span class="series" ng-cloak>{{answer_scope.answer.series == 'None'? 
 						(answer_scope.language == 'en'? 'All' : 'すべて') :
 						answer_scope.answer.series }}</span>
 					<br>
-					<span class="h6">
+					<span class="h6" ng-cloak>
 						{{ answer_scope.language == 'en'? 'SERIES' : 'シリーズ'}}
 					</span>
 				</div>
