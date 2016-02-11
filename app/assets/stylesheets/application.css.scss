@@ -359,6 +359,19 @@ textarea,input, select{
 .pointer:hover{
 	text-decoration:underline;
 }
+
+/* edit answer CSS */
+
+@media(min-width: 768px){
+	.go-up{
+		margin-top:-100px;
+	}	
+}
+
+
+
+
+
 /* New answer CSS */
 
 .img-container{

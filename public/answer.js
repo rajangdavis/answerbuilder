@@ -1,4 +1,4 @@
-var app = angular.module('answer',['ngSanitize'])
+var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
 .controller('answer', function($timeout){
 	var self = this;
 	self.currentIndex = 0;
@@ -10,6 +10,51 @@ var app = angular.module('answer',['ngSanitize'])
     }else{
         self.language = 'en';
     }
+
+    self.add_steps = false;
+    self.edit_answer = false;
+
+    //tool-tip options
+
+    self.tooltip = {
+        'edit':{
+            title:'Edit this answer',
+            checked:false
+        },
+        'add':{
+            title:'Add a step to this answer',
+            checked:false
+        },
+        'code':{
+            title:'Get the Code for this answer',
+            checked:false
+        },
+        'preview':{
+            title:'Preview this answer',
+            checked:false
+        },
+        'back':{
+            title:'Go Back',
+            checked:false
+        }
+    };
+
+    //functions for the edit page on qseecode
+
+    self.edit_view_page = function(args){
+        if(args == 'add_steps'){
+            self.add_steps = true;
+            self.edit_answer = false;
+        }else if(args == 'edit_answer'){
+            self.edit_answer = true;
+            self.add_steps = false;
+        }else{
+            self.edit_answer = false;
+            self.add_steps = false;
+        }
+    }
+
+    //functions for the answers
 
     self.rotateArr = function(i,tn){
         
@@ -42,12 +87,19 @@ var app = angular.module('answer',['ngSanitize'])
         self.language = lan;
     }
 })
+.config(function($tooltipProvider) {
+  angular.extend($tooltipProvider.defaults, {
+    html: true
+  });
+})
 .directive('imgHeight', function($timeout) {
     return {
         restrict: 'A',
         link: function(scope, element) {
           $timeout(function(){
+              var time = 100;
               setInterval(function(){
+                if(scope.$parent.answer_scope.edit_answer ==false && scope.$parent.answer_scope.add_steps== false)
                 var imageHeight = element[0].clientHeight;
                 var winWidth = window.innerWidth;
                 var titleBarHeight = document.querySelectorAll('.title-bar')[0].offsetHeight;
@@ -69,7 +121,8 @@ var app = angular.module('answer',['ngSanitize'])
                           element[0].style.height = (imageHeight*.97)+"px"; 
                         }
                 }
-              },100)
+                time = time +time;
+              },time)
           },550); 
         }
     };
@@ -157,4 +210,14 @@ var app = angular.module('answer',['ngSanitize'])
             })
         }
     }
-});
+})
+.directive('removeHidden',function($timeout){
+    return{
+        restrict: 'A',
+        link: function(scope, elem, attrs){
+            $timeout(function(){
+                elem[0].className = elem[0].className.replace('hidden','go-up');
+            },550)
+        }
+    }
+})

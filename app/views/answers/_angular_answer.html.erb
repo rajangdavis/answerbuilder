@@ -1,5 +1,5 @@
-<div ng-cloak ng-app="answer" remove-upper-elems class="container-fluid" style="font-size:145%">
-	<div class="container-fluid real-answer-container" ng-controller="answer as answer_scope">
+<div ng-cloak <% if action_name!="edit" %> ng-app="answer"<% end %>remove-upper-elems class="container-fluid" style="font-size:145%">
+	<div class="container-fluid real-answer-container" <% if action_name!="edit" %> ng-controller="answer as answer_scope" <% end %>>
 		<div class="container-fluid">
 			<div class="left-series">
 				<div class="text-center">
@@ -30,7 +30,20 @@
 		<%if @answer.translation_needed == "NO"%>
 			<br>
 		<% end %>
-		<div class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
+		<% if action_name=="edit" %>
+			<div class="container">
+				<div class="container">
+					<div class="btn-group btn-group-lg">
+						<a ng-hide="answer_scope.edit_answer==false && answer_scope.add_steps==false" bs-tooltip="answer_scope.tooltip['back']" ng-click="answer_scope.edit_view_page()" class="btn btn-default  add_steps"><i class="fa fa-chevron-circle-left"></i></a>
+						<a ng-hide="answer_scope.edit_answer== true"  bs-tooltip="answer_scope.tooltip['edit']" ng-click="answer_scope.edit_view_page('edit_answer')" class="btn btn-default "><i class="fa fa-pencil-square"></i></a>
+						<a  ng-hide="answer_scope.add_steps== true" bs-tooltip="answer_scope.tooltip['add']" ng-click="answer_scope.edit_view_page('add_steps')" class="btn btn-default  add_steps"><i class="fa fa-plus-square"></i></a>
+						<a class="btn btn-default" bs-tooltip="answer_scope.tooltip['code']" href="/answers/<%=@answer.id%>/code"><i class="fa fa-file-code-o"></i></a>
+						<a class="btn btn-default" bs-tooltip="answer_scope.tooltip['preview']" href="/answers/<%=@answer.id%>/answer"><i class="fa fa-eye"></i></a>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<div ng-hide="answer_scope.add_steps== true || answer_scope.edit_answer== true" class="container-more answer-container" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
 			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm tagline" ng-class="{invisible: answer_scope.absIndex!=1}">
 				<strong>
 					<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>

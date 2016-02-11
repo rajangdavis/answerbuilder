@@ -1,20 +1,13 @@
-<div class="rn_AnswerDetail answerContainer">
+<div class="rn_AnswerDetail answerContainer" ng-app="answer" ng-controller="answer as answer_scope">
 	<% content_for(:body_attributes) do %>
 	    data-no-turbolink="true"
 	<% end %>
+
 	<div>
 		<%= render 'angular_answer'%>
 	</div>
 
-	<div class="links container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-		<span class="pointer-hide">X Hide</span>
-		<%= link_to "Back", answers_path%> |
-		<a href="javascript:void(0)" class="edit_this">Edit</a> |
-		<a href="javascript:void(0)" class="add_steps ">Add Step</a> |
-		<%= link_to "Get Code", code_path(@answer)%> |
-		<%= link_to "Preview", angular_path(@answer)%>
-	</div>
-	<div class="edit_form  container">
+	<div ng-show="answer_scope.edit_answer == true" remove-hidden class="edit_form hidden container">
 		<%= form_for(@answer) do |f| %>
 			<h2>Edit Answer</h2>
 			<div class="form-group hidden">
@@ -44,7 +37,7 @@
 		<% end %>
 		<br>
 	</div>
-	<div class="add_steps_form container ">
+	<div ng-show="answer_scope.add_steps == true" remove-hidden class="add_steps_form hidden container ">
 		<%= form_for(@step,{method: :create}) do |f| %>
 			<h2 >New Step</h2>
 			<div class="form-group">
@@ -75,10 +68,6 @@
 		            
 			    <%= f.text_area :step, :placeholder => "Write your instructions here", :class => "form-control"%>
 			</div>
-			<div class="form-group">
-				<%= f.label "Step/Pictures offset  "%><br />
-		    	<%= f.text_field :offset, :value => 0, :class => "form-control"%>
-			</div>
 	  	    <div class="form-group">
 				<%= f.label :image_upload %>
 	    		<%= f.file_field :image_upload, :class => "form-control"%>
@@ -89,140 +78,6 @@
 		<% end %>
 		<br><br><br>
 	</div>
-
-	<div>
-		<% if @steps.blank? %>
-			<h1 class="text-center">:) You haz no steps</h1>
-		<% end %>
-	</div>
-	<span class="pointer-show">+ Show</span>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
-	<script type="text/javascript" src="/answer.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function () {
-		$('.pointer-show').hide();
-		function scrollTo(elemSelector){
-			$('html, body').animate({
-		        scrollTop: $(elemSelector).offset().top-80
-		    }, 1000)
-		};
-		$("p.success").hide();
-	    $("p.lead,span.lead").each(function () {
-
-	    	
-	        // Create code to do key value pair swaps for the different colors and typography
-	        var content = $(this).text().replace(/\[red\]/g,'<span class="red">').replace(/\[\/red\]/g,'</span>').replace(/\[blue\]/g,'<span class="blue">').replace(/\[\/blue\]/g,'</span>').replace(/\[green\]/g,'<span class="green">').replace(/\[\/green\]/g,'</span>').replace(/\[yellow\]/g,'<span class="yellow">').replace(/\[\/yellow\]/g,'</span>').replace(/\[orange\]/g,'<span class="orange">').replace(/\[\/orange\]/g,'</span>').replace(/\[lgreen\]/g,'<span class="lgreen">').replace(/\[\/lgreen\]/g,'</span>').replace(/\[bold\]/g,'<strong>').replace(/\[\/bold\]/g,'</strong>').replace(/\[i\]/g,'<em>').replace(/\[\/i\]/g,'</em>').replace(/\[u\]/g,'<u>').replace(/\[\/u\]/g,'</u>').replace(/\[br\]/g,'<br>').replace(/\[note\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 information"><div class="col-md-3 col-sm-5 col-xs-7"><img class="note img-responsive" src="//i.imgur.com/4SIfsGE.png"></div><h2 class="inst answer"><strong>NOTE: </strong><span class="inst lead">').replace(/\[\/note\]/g,'</span></h2></div>').replace(/\[cat\]/g,'<div class="col-md-12 col-sm-12 col-xs-12 cautiondiv"><div class="col-md-3 col-sm-5 col-xs-7"><img class="caution img-responsive" src="//i.imgur.com/ejvODER.png"></div><h2><strong>CAUTION: </strong><span class="lead">').replace(/\[\/cat\]/g,'</span></h2></div>').replace(/\[p\]/g,'<p class="clear inst lead">').replace(/\[\/p\]/g,'</p>');
-	        
-
-
-	        $(this).html(content);
-	    });
-	    $("em.red").each(function () {
-	        var pLead = $(this).prev();
-	        $(this).appendTo(pLead);
-	    });
-
-
-	$("div.edit_form,div.add_steps_form").hide();
-
-	$("a.edit_this").click(function () {
-	    $("div.edit_form").toggle(1000);
-	    $("div.add_steps_form").hide();
-	    scrollTo("div.edit_form");
-	});
-
-	$("a.add_steps").click(function () {
-		$("div.edit_form").hide();
-	    $("div.add_steps_form").toggle(1000);
-	    scrollTo("div.add_steps_form");	
-
-	});
-	$('.color-options a').click(function(){
-	        var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
-	        var isBold = $(this)[0].className+']'
-	        if ($(this)[0].className=='br'){
-	            $('#step_step').val($('#step_step').val()+'['+isBold);
-	        } else{
-	             $('#step_step').val($('#step_step').val()+'['+notBold);
-	        }
-	    });
-	$('.pointer-hide,.pointer-show').click(function(){
-		var links = $('.links.container')[0];
-		if(links.style.display == "none"){ 
-			$('.links.container').show(500);
-			$('.pointer-show').hide(500);
-
-		}else{
-			$('.links.container').hide(500);
-			$('.pointer-show').show(500);
-		}
-	})
-	// //script for uploading images and converting them into dataURI
-	// var canvas = new fabric.Canvas('imageCanvas', {
-	//     backgroundColor: 'rgb(240,240,240)'
-	// });
-
-	// var imageLoader = document.getElementById('imageLoader');
-	// imageLoader? imageLoader.addEventListener('change', handleImage, false):console.log();
-
-	// function handleImage(e) {
-	//     var reader = new FileReader();
-	//     reader.onload = function (event) {
-	//         var img = new Image();
-	//         img.onload = function () {
-	//             var imgInstance = new fabric.Image(img, {
-	//                 scaleX: 1,
-	//                 scaleY: 1
-	//             });
-	//             canvas.add(imgInstance);
-	//         };
-	//         img.src = event.target.result;
-
-	//         finalURI = img.src.replace(/^data:image\/(png|jpg);base64,/, "");
-
-	// // Ajax call to upload images to imgur for hosting        
-	// 	$.ajax({
-	// 	            url: 'https://api.imgur.com/3/image',
-	// 	            type: 'post',
-	// 	            headers: {
-	// 	                Authorization: "Client-ID <%= ENV['IMGUR_KEY'] %>"
-
-	// 	            },
-	// 	            data: {
-	// 	                image: finalURI,
-	// 	                type: 'base64'
-	// 	            },
-	// 	            dataType: 'json',
-	// 	            success: function (response) {
-	// 	                if (response.success) {
-		                   
-	// 	                    $("#step_image").val(response.data.link.replace('http://',''));
-	// 	                    $("p.success").show();
-	// 	                }
-	// 	            },
-	// 	            error: function (request, status, error) {
-	// 	            console.log(error);
-	// 	            window.alert(JSON.parse(request.responseText)["data"]["error"]);
-	// 	            }
-	// 	        });
-		        
-	// 	    };
-	// 	    reader.readAsDataURL(e.target.files[0]);
-	// 	};
-			$(".addLink").on("click", function() {
-			   $('#imagepreview').attr('src', $(this).find("img").attr('src')); // here asign the image to the modal when the user click the enlarge link
-			   
-			   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
-
-			   $('button.submit').click(function(){
-			    $('#step_step').val($('#step_step').val()+'<a href="'+$('input.href').val()+'" target="_blank">'+$('input.text').val()+'</a>');
-			     $('input.href,input.text').val("");
-			   });
-			});
-
-	});
-	</script>
 	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content ">

@@ -6,12 +6,8 @@
 <div class="container">
 	<div class="answer_list col-md-8">
 		<h2 class="">Answers</h2>
-		<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
-	      <button type="button" class="btn btn-default" id="QC">QC Series</button>
-	      <button type="button" class="btn btn-default" id="QT">QT Series</button>
-	      <button type="button" class="btn btn-default" id="QS">QS Series</button>
-	      <button type="button" class="btn btn-default" id="QR">QR Series</button>
-	      <button type="button" class="btn btn-default" id="None">Other</button>
+		<div class="container" role="group">
+	      
 	    </div>
 		<div class="answerList margin">
 			<% @answers.each do |answer| %>
@@ -62,16 +58,3 @@
 
 	<% end %></div>
 </div>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('button.btn').click(function(){
-			var buttonClass = "."+$(this).attr('id');
-			$('div.answerList '+buttonClass).show();
-			$('div.answerList div:not('+buttonClass+')').hide();
-			$('div.answerList '+buttonClass+':last').parent().parent().css('border-bottom','3px solid lightgrey')
-		});
-		$('#hide_new_form').click(function(){
-			$('.new_answer').hide(500)
-		})
-	});
-</script>
