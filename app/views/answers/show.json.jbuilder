@@ -1,1 +1,1 @@
-json.extract! @answer, :series, :title, :tagline, :title_jp, :tagline_jp, :steps
+json.extract! @answer, :id, :series, :title, :tagline, :title_jp, :tagline_jp, :steps
