@@ -19,10 +19,6 @@ class Answer < ActiveRecord::Base
 				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
 				})
 			end
-			answer = {
-				:series => self.series, :title => self.title, :tagline => self.clean_tagline,
-				:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp, :steps => steps
-			}
 		elsif self.translation_needed.match('NO')
 			@steps.each_with_index do |step,i|
 				steps.push({
@@ -31,10 +27,6 @@ class Answer < ActiveRecord::Base
 				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
 				})
 			end
-			answer = {
-				:series => self.series, :title => self.title, :tagline => self.clean_tagline,
-				:steps => steps
-			}
 		end
 		steps
 	end
