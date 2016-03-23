@@ -1,2 +1,1 @@
-json.extract! @answer, :series, :title, :tagline
-json.steps @answer.steps, :step_type, :number, :offset, :clean_step, :image_upload
+json.extract! @answer, :series, :title, :tagline, :title_jp, :tagline_jp, :steps

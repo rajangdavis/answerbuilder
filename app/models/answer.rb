@@ -6,21 +6,65 @@ class Answer < ActiveRecord::Base
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
 	end
 
+	def steps
+		steps = []
+		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
+		if self.translation_needed.match('COMPLETE')
+			@steps.each_with_index do |step,i|
+				steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.step, 
+				:step_id => step.id,
+				:step_jp => if step.step_jp.blank? then nil else step.step_jp end, 
+				:image_jp => step.image_upload_jp,
+				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
+				})
+			end
+			answer = {
+				:series => self.series, :title => self.title, :tagline => self.clean_tagline,
+				:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp, :steps => steps
+			}
+		elsif self.translation_needed.match('NO')
+			@steps.each_with_index do |step,i|
+				steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.step, 
+				:step_id => step.id,
+				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
+				})
+			end
+			answer = {
+				:series => self.series, :title => self.title, :tagline => self.clean_tagline,
+				:steps => steps
+			}
+		end
+		steps
+	end
+
 	def pojo2
 		steps = []
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
-		@steps.each_with_index do |step,i|
-			steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.clean_step, 
-			:step_id => step.id,
-			:step_jp => if step.step_jp.blank? then nil else step.clean_step_jp end, 
-			:image_jp => step.image_upload_jp,
-			:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
-			})
+		if self.translation_needed.match('COMPLETE')
+			@steps.each_with_index do |step,i|
+				steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.clean_step, 
+				:step_id => step.id,
+				:step_jp => if step.step_jp.blank? then nil else step.clean_step_jp end, 
+				:image_jp => step.image_upload_jp,
+				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
+				})
+			end
+			answer = {
+				:series => self.series, :title => self.title, :tagline => self.clean_tagline,
+				:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp, :steps => steps
+			}
+		elsif self.translation_needed.match('NO')
+			@steps.each_with_index do |step,i|
+				steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.clean_step, 
+				:step_id => step.id,
+				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
+				})
+			end
+			answer = {
+				:series => self.series, :title => self.title, :tagline => self.clean_tagline,
+				:steps => steps
+			}
 		end
-		answer = {
-			:series => self.series, :title => self.title, :steps => steps, :tagline => self.clean_tagline,
-			:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp
-		}
 		answer
 	end
 
@@ -35,8 +79,8 @@ class Answer < ActiveRecord::Base
 			})
 		end
 		answer = {
-			:series => self.series, :title => self.title, :steps => steps, :tagline => self.clean_tagline,
-			:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp
+			:series => self.series, :title => self.title, :tagline => self.clean_tagline,
+			:title_jp => self.title_jp, :tagline_jp => self.clean_tagline_jp, :steps => steps
 		}
 		answer
 	end
