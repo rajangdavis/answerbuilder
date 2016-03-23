@@ -11,8 +11,9 @@ class Answer < ActiveRecord::Base
 		@steps = Step.where(:answer_id => self.id).order(:number,:updated_at)
 		if self.translation_needed.match('COMPLETE')
 			@steps.each_with_index do |step,i|
-				steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.step, 
+				steps.push({
 				:step_id => step.id,
+				:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.step, 
 				:step_jp => if step.step_jp.blank? then nil else step.step_jp end, 
 				:image_jp => step.image_upload_jp,
 				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
@@ -24,8 +25,9 @@ class Answer < ActiveRecord::Base
 			}
 		elsif self.translation_needed.match('NO')
 			@steps.each_with_index do |step,i|
-				steps.push({:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.step, 
+				steps.push({
 				:step_id => step.id,
+				:number => step.number, :true_number => i, :step_type => step.step_type, :step => step.step,
 				:image => if step.image_upload.blank? then '//'+step.image else step.image_upload end
 				})
 			end
