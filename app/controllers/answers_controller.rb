@@ -10,8 +10,8 @@ class AnswersController < ApplicationController
 		@answer_id = params['id']
 
 		@API_URL ='https://developer-sandbox.liondemand.com/'
-		@API_ACCESS_KEY ='YOUR ACCESS KEY ID'
-		@API_SECRET ='YOUR SECRET ACCESS KEY'
+		@API_ACCESS_KEY = ENV["API_ACCESS_KEY"]
+		@API_SECRET = ENV["API_SECRET"]
 
 		@resource = URI.parse(@API_URL+"/api/quote/generate")
 
@@ -36,7 +36,8 @@ class AnswersController < ApplicationController
 
 
 		@http = Net::HTTP.new(@resource.host, @resource.port)
-
+		@http.use_ssl = true
+		@http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 		@request = Net::HTTP::Post.new(@resource.request_uri)
 		@request.set_form_data(@requestHeaders)
 
