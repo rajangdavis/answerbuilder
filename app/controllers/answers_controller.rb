@@ -1,24 +1,5 @@
 class AnswersController < ApplicationController
 
-	require 'gengo'
-
-	def test
-
-		@answer_id = params['id']
-
-		@API_ACCESS_KEY = ENV["API_ACCESS_KEY"]
-		@API_SECRET = ENV["API_SECRET"]
-
-		gengo = Gengo::API.new({
-		    :public_key => @API_ACCESS_KEY,
-		    :private_key => @API_SECRET,
-		    :sandbox => true, # Or false, depending on your work
-		    :debug => true
-		})
-
-		render json: gengo.getAccountBalance()
-	end
-
 	def index
 		if !current_user
 			redirect_to index2_path

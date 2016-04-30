@@ -12,8 +12,6 @@ gem 'rabl'
 
 gem 'paperclip'
 
-gem 'gengo'
-
 gem 'aws-sdk', '< 2.0'
 
 # Use SCSS for stylesheets
