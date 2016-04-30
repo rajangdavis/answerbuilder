@@ -1,5 +1,50 @@
 class AnswersController < ApplicationController
 
+	require "base64"
+	require "digest"
+	require "net/http"
+	require "open-uri"
+
+	def test
+
+		@answer_id = params['id']
+
+		@API_URL ='https://developer-sandbox.liondemand.com/'
+		@API_ACCESS_KEY ='YOUR ACCESS KEY ID'
+		@API_SECRET ='YOUR SECRET ACCESS KEY'
+
+		@resource = URI.parse(@API_URL+"/api/quote/generate")
+
+		@dateTime_firstpass = Time.now
+		@dateTime = @dateTime_firstpass.iso8601(10)
+
+		@signature = 'POST:' + @resource.to_s + ':' + @API_SECRET + ':' + @dateTime + ':2014-06-10:application/json'
+		@signature = Base64.encode64(Digest::SHA256.digest @signature)
+		@authorization = 'LOD1-BASE64-SHA256 KeyID=' + @API_ACCESS_KEY + ',Signature=' + @signature + ',SignedHeaders=x-lod-timestampx-lod-versionaccept'
+
+		@requestHeaders = []
+		@requestHeaders.push(
+		    'Accept: application/json',
+		    'Authorization: ' + @authorization,
+		    'Content-Type: text/xml',
+		    'X-LOD-VERSION: 2014-06-10',
+		    'X-LOD-TIMESTAMP: ' + @dateTime
+		)
+
+		@post_body = Answer.find(@answer_id).pojo
+
+
+
+		@http = Net::HTTP.new(@resource.host, @resource.port)
+
+		@request = Net::HTTP::Post.new(@resource.request_uri)
+		@request.set_form_data(@requestHeaders)
+
+		@response = @http.request(@request)
+
+		render json: @response.body
+	end
+
 	def index
 		if !current_user
 			redirect_to index2_path

@@ -20,6 +20,8 @@ Answerbuild::Application.routes.draw do
   get 'stepss' => 'steps#index2',as: :imagedump
   get 'qtpojo' => 'answers#qtpojo'
 
+  get 'answers/:id/test' => 'answers#test'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
