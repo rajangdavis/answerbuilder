@@ -23,13 +23,13 @@ class AnswersController < ApplicationController
 		@authorization = 'LOD1-BASE64-SHA256 KeyID=' + @API_ACCESS_KEY + ',Signature=' + @signature + ',SignedHeaders=x-lod-timestampx-lod-versionaccept'
 
 		@requestHeaders = []
-		@requestHeaders.push({
+		@requestHeaders.push(
 		    'Accept: application/json',
 		    'Authorization: ' + @authorization,
-		    'Content-Type: text/xml',
+		    'Content-Type: application/json',
 		    'X-LOD-VERSION: 2014-06-10',
 		    'X-LOD-TIMESTAMP: ' + @dateTime
-		})
+		)
 
 		@post_body = Answer.find(@answer_id).pojo
 
