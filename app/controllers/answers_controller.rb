@@ -1,55 +1,22 @@
 class AnswersController < ApplicationController
 
-	require "base64"
-	require "digest"
-
-	require "open-uri"
+	require 'gengo'
 
 	def test
 
 		@answer_id = params['id']
 
-		@API_URL ='https://developer-sandbox.liondemand.com/'
 		@API_ACCESS_KEY = ENV["API_ACCESS_KEY"]
 		@API_SECRET = ENV["API_SECRET"]
 
-		@resource = URI.parse(@API_URL+"api/quote/generate")
-		@url = @resource.scheme + @resource.host + @resource.path
+		gengo = Gengo::API.new({
+		    :public_key => @API_ACCESS_KEY,
+		    :private_key => @API_SECRET,
+		    :sandbox => true, # Or false, depending on your work
+		    :debug => true
+		})
 
-		@dateTime_firstpass = Time.now
-		@dateTime = @dateTime_firstpass.iso8601(10)
-
-
-		@signature_before = 'POST:' + @url + ':' + @API_SECRET + ':' + @dateTime + ':2014-06-10:application/json'
-		
-		@signature_base = Digest::SHA256.digest @signature_before
-
-		@signature = Base64.encode64(@signature_base)
-		
-
-		@authorization = 'LOD1-BASE64-SHA256 KeyID=' + @API_ACCESS_KEY + ',Signature=' + @signature + ',SignedHeaders=x-lod-timestamp;x-lod-version:accept'
-
-		
-		@requestHeaders = []
-		
-		
-		@requestHeaders.push(
-		    'Accept: application/json',
-		    'Authorization: ' + @authorization,
-		    'Content-Type: application/json',
-		    'X-LOD-VERSION: 2014-06-10',
-		    'X-LOD-TIMESTAMP: ' + @dateTime
-		)
-
-		@post_body = Answer.find(@answer_id).pojo
-
-		@c = Curl::Easy.http_post(@resource.host + @resource.path , Curl::PostField.content('POSTFIELDS',@post_body))
-		# @c.version = Curl::HTTP_2_0
-		@c.headers = @requestHeaders
-
-		@c.perform
-
-		render json: @c.body_str
+		render json: gengo.getAccountBalance()
 	end
 
 	def index
