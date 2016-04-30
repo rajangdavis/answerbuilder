@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
 
 	require "base64"
 	require "digest"
-	require "net/http"
+
 	require "open-uri"
 
 	def test
@@ -13,16 +13,26 @@ class AnswersController < ApplicationController
 		@API_ACCESS_KEY = ENV["API_ACCESS_KEY"]
 		@API_SECRET = ENV["API_SECRET"]
 
-		@resource = URI.parse(@API_URL+"/api/quote/generate")
+		@resource = URI.parse(@API_URL+"api/quote/generate")
+		@url = @resource.scheme + @resource.host + @resource.path
 
 		@dateTime_firstpass = Time.now
 		@dateTime = @dateTime_firstpass.iso8601(10)
 
-		@signature = 'POST:' + @resource.to_s + ':' + @API_SECRET + ':' + @dateTime + ':2014-06-10:application/json'
-		@signature = Base64.encode64(Digest::SHA256.digest @signature)
-		@authorization = 'LOD1-BASE64-SHA256 KeyID=' + @API_ACCESS_KEY + ',Signature=' + @signature + ',SignedHeaders=x-lod-timestampx-lod-versionaccept'
 
+		@signature_before = 'POST:' + @url + ':' + @API_SECRET + ':' + @dateTime + ':2014-06-10:application/json'
+		
+		@signature_base = Digest::SHA256.digest @signature_before
+
+		@signature = Base64.encode64(@signature_base)
+		
+
+		@authorization = 'LOD1-BASE64-SHA256 KeyID=' + @API_ACCESS_KEY + ',Signature=' + @signature + ',SignedHeaders=x-lod-timestamp;x-lod-version:accept'
+
+		
 		@requestHeaders = []
+		
+		
 		@requestHeaders.push(
 		    'Accept: application/json',
 		    'Authorization: ' + @authorization,
@@ -33,17 +43,13 @@ class AnswersController < ApplicationController
 
 		@post_body = Answer.find(@answer_id).pojo
 
+		@c = Curl::Easy.http_post(@resource.host + @resource.path , Curl::PostField.content('POSTFIELDS',@post_body))
+		# @c.version = Curl::HTTP_2_0
+		@c.headers = @requestHeaders
 
+		@c.perform
 
-		@http = Net::HTTP.new(@resource.host, @resource.port)
-		@http.use_ssl = true
-		@http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		@request = Net::HTTP::Post.new(@resource.request_uri)
-		@request.set_form_data(@requestHeaders)
-
-		@response = @http.request(@request)
-
-		render json: @response.body
+		render json: @c.body_str
 	end
 
 	def index

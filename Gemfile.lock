@@ -46,6 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    curb (0.9.3)
     erubis (2.7.0)
     execjs (2.6.0)
     hike (1.2.3)
@@ -140,6 +141,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
   coffee-rails (~> 4.0.0)
+  curb
   jbuilder (~> 1.2)
   jquery-rails
   paperclip
