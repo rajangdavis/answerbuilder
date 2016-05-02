@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
 
 	def test
 
-		@answer_id = params['id']
+		# @answer_id = params['id']
   		  
   		@GENGO_PUBLIC = ENV["GENGO_PUBLIC"]		
   		@GENGO_PRIVATE = ENV["GENGO_PRIVATE"]		  		
@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
  			:debug => true
  		 })
 
- 		render json: @gengo
+ 		render json: @gengo.getAccountBalance()
 
 	end
 
