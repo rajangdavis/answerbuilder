@@ -10,6 +10,8 @@ gem 'pg'
 
 gem 'rabl'
 
+gem 'gengo'
+
 gem 'paperclip'
 
 gem 'aws-sdk', '< 2.0'
