@@ -12,6 +12,10 @@ gem 'rabl'
 
 gem 'gengo'
 
+group :development do
+  gem "better_errors"
+end
+
 gem 'paperclip'
 
 gem 'aws-sdk', '< 2.0'
