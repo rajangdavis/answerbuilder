@@ -495,6 +495,10 @@ textarea,input, select{
 	position:relative;
 	top:7px;
 }
+.information_new span{
+	top: 18px;
+    position: relative;
+}
 .information_new::-webkit-scrollbar,.cautiondiv_new ::-webkit-scrollbar{
 	display:none;
 }

@@ -16,21 +16,18 @@
 				</div>
 			</div>
 		<% end %>
-		<div class="container" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
-			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm">
-				<strong>
-					<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
-				</strong>
-			</div>
-			<div ng-repeat="step in answer_scope.answer.steps">
-				<div class"col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<br><br>
-					<h2 ng-if="step.step_type=='Step'" class="inst answer text-uppercase"><strong>Step {{step.number}}</strong></h2>
-					<p ng-bind-html="step.step"></p>
-					<p class="text-center">
-						<img class="img-responsive" style="max-height:400px" ng-src="{{step.image}}">
-					</p>
-				</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
+			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<span ng-show="answer_scope.language =='en'" style="font-size:large" ng-bind-html="answer_scope.answer.tagline"></span>
+			</strong>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="step in answer_scope.answer.steps">
+				<br class="hidden-xs hidden-sm" ng-if="$index!==0"><br ng-if="$index!==0">
+				<h2 ng-if="step.step_type=='Step'" class="inst answer text-uppercase"><strong>Step {{step.number}}</strong></h2>
+				<p ng-bind-html="step.step"></p>
+				<br>
+				<p class="text-center">
+					<img class="img-responsive" style="max-height:400px" ng-src="{{step.image}}">
+				</p>
 			</div>
 		</div>
 	</div>
