@@ -17,7 +17,7 @@
 			</div>
 		<% end %>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
-			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<strong ng-if="answer_scope.answer.tagline" class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<span ng-show="answer_scope.language =='en'" style="font-size:large" ng-bind-html="answer_scope.answer.tagline"></span>
 			</strong>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="step in answer_scope.answer.steps">
