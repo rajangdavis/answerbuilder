@@ -36,7 +36,7 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
           },
 
           //Set up the data accordingly
-          data:{a_id:a_id,content:content}
+          data:{a_id:a_id,content:encodeURIComponent(content)}
         }).then(function successCallback(response) {
            
               
