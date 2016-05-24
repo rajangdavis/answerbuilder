@@ -22,12 +22,12 @@
 				</h1>
 			</div>
 		</div>
-		<% end %>
 		<% if @answer.translation_needed =~ /COMPLETE/ %>
 			<div class="container-more lang-select">
 				<img class="pointer English" ng-click="answer_scope.changeLanguage('en')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAM1BMVEX////MAAHNAQL+/v4CApgAAJgBAZbLAQHOAADNAAT///v9/f/+//3//v/+///OAALLAAPNnw2RAAAAYElEQVQImYWMSQ6EQAwD7azdkAb+/1omjMQVW6pT2YhwDzMbvHKcnPDDN9/MVpWuVYqI5TAYOQcn+RqKgirwGklhZn9E1wxVheP3ITJFrjPnH4Ke9Vj3BwClQ3I8yG/jBm1oA1n6IJS7AAAAAElFTkSuQmCC"> | 
 				<img class="pointer Japanese" ng-click="answer_scope.changeLanguage('jp')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
 			</div>
+		<% end %>
 		<% end %>
 		<%if @answer.translation_needed == "NO"%>
 			<br>
