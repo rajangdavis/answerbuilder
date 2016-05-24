@@ -1,10 +1,10 @@
-<div ng-app="answer" class="container" ng-controller="answer as answer_scope">
+<div class="container">
 	<%= link_to "Back", :back%> |
 	<%= link_to "Edit", edit_answer_path(@answer)%> |
 	<%= link_to "Preview", angular_path(@answer)%>
 	<br><br>
 	<div style="margin:0;padding:0" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<div class="input-group">
+		<div class="input-group" ng-app="answer" ng-controller="answer as answer_scope">
 			<input class="form-control" type="text" ng-model="answer_scope.a_id">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"ng-click="answer_scope.postAnswer('YES',answer_scope.a_id)">Update Answer</button>
@@ -20,7 +20,9 @@
 	// <script type="text/javascript" src="/answer.js"></script> -->
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('textarea').text($('code').html());
+			setTimeout(function(){
+				$('textarea').text($('code').html());
+			},1000)
 		});
 		function scrollTop(elemSelector){
 		  $('html, body').animate({
