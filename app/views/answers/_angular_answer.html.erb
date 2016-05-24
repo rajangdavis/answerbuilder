@@ -1,5 +1,28 @@
 <div ng-cloak <% if action_name!="edit" %> ng-app="answer"<% end %>remove-upper-elems class="container-fluid less-margin" style="font-size:145%">
 	<div class="container-fluid less-margin real-answer-container" <% if action_name!="edit" %> ng-controller="answer as answer_scope" <% end %>>
+		<% if current_user && current_user.username!='rajan'%>
+		<div class="container-fluid">
+			<div class="left-series">
+				<div class="text-center">
+					<span class="series">{{answer_scope.answer.series == 'None'? 
+						(answer_scope.language == 'en'? 'All' : 'すべて') :
+						answer_scope.answer.series }}</span>
+					<br>
+					<span class="h6">
+						{{ answer_scope.language == 'en'? 'SERIES' : 'シリーズ'}}
+					</span>
+				</div>
+			</div>
+			<div class="title-right" title-holder-right>
+				<h1 class="text-uppercase" title-right>
+					<span ng-show="answer_scope.language =='en'" ng-bind-html=" answer_scope.answer.title"></span>
+					<% if @answer.translation_needed =~ /COMPLETE/ %>
+					<span ng-hide="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.title_jp"></span>
+					<% end %>
+				</h1>
+			</div>
+		</div>
+		<% end %>
 		<% if @answer.translation_needed =~ /COMPLETE/ %>
 			<div class="container-more lang-select">
 				<img class="pointer English" ng-click="answer_scope.changeLanguage('en')" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAM1BMVEX////MAAHNAQL+/v4CApgAAJgBAZbLAQHOAADNAAT///v9/f/+//3//v/+///OAALLAAPNnw2RAAAAYElEQVQImYWMSQ6EQAwD7azdkAb+/1omjMQVW6pT2YhwDzMbvHKcnPDDN9/MVpWuVYqI5TAYOQcn+RqKgirwGklhZn9E1wxVheP3ITJFrjPnH4Ke9Vj3BwClQ3I8yG/jBm1oA1n6IJS7AAAAAElFTkSuQmCC"> | 
