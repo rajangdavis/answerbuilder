@@ -16,11 +16,12 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
     self.edit_answer = false;
 
     self.postAnswer = function(testOrNaw,a_id){
-        if(a_id != undefined){
 
         var whichOne = testOrNaw =='YES' ? 'qsee--tst' : 'qsee';
 
         var content = document.querySelectorAll('[get-code]')[0].innerHTML;
+
+        console.log('Fired');
 
         $http({
           method: 'POST',
@@ -38,14 +39,13 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
           //Set up the data accordingly
           data:{a_id:a_id,content:content}
         }).then(function successCallback(response) {
-           
+           console.log(response);
               
           }, function errorCallback(response) {  
           //if there is an error, tell me what it is
             console.log(response);
           
         });
-        }
     }
 
     //tool-tip options
