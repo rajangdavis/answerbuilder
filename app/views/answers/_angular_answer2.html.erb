@@ -1,0 +1,37 @@
+<div ng-cloak <% if action_name!="edit" %> ng-app="answer"<% end %>remove-upper-elems class="container-fluid less-margin" style="font-size:145%">
+	<div class="container-fluid less-margin real-answer-container" <% if action_name!="edit" %> ng-controller="answer as answer_scope" <% end %>>
+		<%if @answer.translation_needed == "NO"%>
+			<br>
+		<% end %>
+		<% if action_name=="edit" %>
+			<div class="container">
+				<div class="container">
+					<div class="btn-group btn-group-lg">
+						<a ng-hide="answer_scope.edit_answer==false && answer_scope.add_steps==false" bs-tooltip="answer_scope.tooltip['back']" ng-click="answer_scope.edit_view_page()" class="btn btn-default  add_steps"><i class="fa fa-chevron-circle-left"></i></a>
+						<a ng-hide="answer_scope.edit_answer== true"  bs-tooltip="answer_scope.tooltip['edit']" ng-click="answer_scope.edit_view_page('edit_answer')" class="btn btn-default "><i class="fa fa-pencil-square"></i></a>
+						<a  ng-hide="answer_scope.add_steps== true" bs-tooltip="answer_scope.tooltip['add']" ng-click="answer_scope.edit_view_page('add_steps')" class="btn btn-default  add_steps"><i class="fa fa-plus-square"></i></a>
+						<a class="btn btn-default" bs-tooltip="answer_scope.tooltip['code']" href="/answers/<%=@answer.id%>/code"><i class="fa fa-file-code-o"></i></a>
+						<a class="btn btn-default" bs-tooltip="answer_scope.tooltip['preview']" href="/answers/<%=@answer.id%>/answer"><i class="fa fa-eye"></i></a>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<div class="container" ng-init="answer_scope.answer=<%=@answer.pojo2.to_json %>" >
+			<div class="clearfix text-uppercase h6 hidden-xs hidden-sm">
+				<strong>
+					<span ng-show="answer_scope.language =='en'" ng-bind-html="answer_scope.answer.tagline"></span>
+				</strong>
+			</div>
+			<div ng-repeat="step in answer_scope.answer.steps">
+				<div class"col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<br><br>
+					<h2 ng-if="step.step_type=='Step'" class="inst answer text-uppercase"><strong>Step {{step.number}}</strong></h2>
+					<p ng-bind-html="step.step"></p>
+					<p class="text-center">
+						<img class="img-responsive" style="max-height:400px" ng-src="{{step.image}}">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
