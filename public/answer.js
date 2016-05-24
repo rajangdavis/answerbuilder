@@ -1,5 +1,6 @@
 var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
-.controller('answer', function($timeout){
+.controller('answer', function($timeout,$http){
+    console.log('connected');
 	var self = this;
 	self.currentIndex = 0;
     self.absIndex = 1;
@@ -13,6 +14,39 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
 
     self.add_steps = false;
     self.edit_answer = false;
+
+    self.postAnswer = function(testOrNaw,a_id){
+        if(a_id != undefined){
+
+        var whichOne = testOrNaw =='YES' ? 'qsee--tst' : 'qsee';
+
+        var content = document.querySelectorAll('[get-code]')[0].innerHTML;
+
+        $http({
+          method: 'POST',
+          url: 'https://'+whichOne+'.custhelp.com/cc/answers/update_answer',
+
+          //set the headers to be the in the correct format for doing a POST request
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          transformRequest: function(obj) {
+              var str = [];
+              for(var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+              return str.join("&");
+          },
+
+          //Set up the data accordingly
+          data:{a_id:a_id,content:content}
+        }).then(function successCallback(response) {
+           
+              
+          }, function errorCallback(response) {  
+          //if there is an error, tell me what it is
+            console.log(response);
+          
+        });
+        }
+    }
 
     //tool-tip options
 
