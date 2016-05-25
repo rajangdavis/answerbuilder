@@ -23,14 +23,6 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
 
         console.log(content);
 
-        function test(obj) {
-          var str = [];
-          for(var p in obj)
-          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          return str.join("&");
-        }
-        console.log(test(content));        
-
         $http({
           method: 'POST',
           url: 'https://'+whichOne+'.custhelp.com/cc/answers/update_answer',
