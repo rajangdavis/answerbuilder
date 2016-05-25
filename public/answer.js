@@ -21,7 +21,15 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
 
         var content = document.querySelectorAll('[get-code]')[0].innerHTML;
 
-        console.log('Fired');
+        console.log(content);
+
+        function test(obj) {
+          var str = [];
+          for(var p in obj)
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          return str.join("&");
+        }
+        console.log(test(content));        
 
         $http({
           method: 'POST',
