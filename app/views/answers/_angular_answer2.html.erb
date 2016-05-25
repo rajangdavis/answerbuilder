@@ -33,7 +33,7 @@
 				<p><%= step.clean_step%></p>
 				<br>
 				<p class="text-center">
-					<img class="img-responsive" style="max-height:400px" src="//<%= if step.image_upload.blank? then step.image else step.image_upload end%>">
+					<img class="img-responsive" style="max-height:400px" src="<%= if step.image_upload.blank? then "//"+step.image else step.image_upload end%>">
 				</p>
 			</div>
 			<% end %>
