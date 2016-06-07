@@ -18,8 +18,8 @@
 		<% end %>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<% if !@answer.tagline.blank? %>
-			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<span ng-show="answer_scope.language ==&#39;en&#39;" style="font-size:large"><%=@answer.tagline%></span>
+			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+				<span ng-show="answer_scope.language ==&#39;en&#39;" style="font-size:large"><%=@answer.clean_tagline%></span>
 			</strong>
 			<% end %>
 			<% @steps.each_with_index do |step,index|%>
@@ -38,5 +38,29 @@
 			</div>
 			<% end %>
 		</div>
+		<% if @answer.translation_needed.end_with?('COMPLETE)')%>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<% if !@answer.tagline_jp.blank? %>
+			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<span ng-show="answer_scope.language ==&#39;jp&#39;" style="font-size:large"><%=@answer.clean_tagline_jp%></span>
+			</strong>
+			<% end %>
+			<% @steps.each_with_index do |step,index|%>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<% if index!=0%>
+				<br class="hidden-xs hidden-sm"><br>
+				<% end %>
+				<% if step.step_type=='Step' %>
+				<h2 class="inst answer text-uppercase"><strong>Step <%= step.step_number%></strong></h2>
+				<% end %>
+				<p><%= step.clean_step_jp%></p>
+				<br>
+				<p class="text-center">
+					<img class="img-responsive" style="max-height:400px" src="<%= step.image_upload_jp%>">
+				</p>
+			</div>
+			<% end %>
+		</div>
+		<% end %>
 	</div>
 </div>

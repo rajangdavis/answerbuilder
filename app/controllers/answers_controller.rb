@@ -1,23 +1,5 @@
 class AnswersController < ApplicationController
 
-	def test
-
-		# @answer_id = params['id']
-  		  
-  		@GENGO_PUBLIC = ENV["GENGO_PUBLIC"]		
-  		@GENGO_PRIVATE = ENV["GENGO_PRIVATE"]		  		
-  		  
- 		@gengo = Gengo::API.new({
- 			:public_key => @GENGO_PUBLIC,
- 		 	:private_key => @GENGO_PRIVATE,
- 			:sandbox => true, # Or false, depending on your work
- 			:debug => true
- 		 })
-
- 		render json: @gengo.getAccountBalance()
-
-	end
-
 	def index
 		if !current_user
 			redirect_to index2_path
@@ -146,6 +128,12 @@ class AnswersController < ApplicationController
 	end
 
 	def answer
+		@hideMe = true
+		@answer = Answer.find(params[:id])
+		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
+	end
+
+	def alt_answer
 		@hideMe = true
 		@answer = Answer.find(params[:id])
 		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)

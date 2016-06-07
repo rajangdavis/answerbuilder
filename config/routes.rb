@@ -11,6 +11,7 @@ Answerbuild::Application.routes.draw do
   get 'answers/:id/code' => 'answers#code', as: :code
   get 'answers/:id/code2' => 'answers#code2', as: :code2
   get 'answers/:id/answer' => 'answers#answer', as: :angular
+  get 'answers/:id/alt_answer' => 'answers#alt_answer', as: :alt_angular
   get 'answers/:id/answer_jp' => 'answers#answer_jp', as: :angular_jp
   get 'strings' => 'answers#strings', as: :strings
   get 'translate/:id' => 'answers#translate', as: :translate
