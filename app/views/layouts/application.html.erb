@@ -6,10 +6,9 @@
   <link href="//fonts.googleapis.com/css?family=Roboto:400,700,300,500|Roboto+Condensed:400,300,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="//qsee.custhelp.com/euf/assets/themes/qsee/bootstrap3.css">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <% if action_name != 'qsee_updates' then javascript_include_tag 'application', 'data-turbolinks-track' => true end %>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
-  
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <% if action_name == 'manual' || action_name == 'answer' ||action_name == 'qsee_updates'%>
@@ -18,22 +17,22 @@
   <body >
 <% end %>
 <% if !@hideMe%>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<ul class="nav nav-pills container" role="tablist">
-  <% if current_user %>
-  <li role="presentation pull-right">
-    <a href="<%= if current_user.role=='ADMIN' then '/answers' else '/translation_portal' end%>">
-      <img src='//i.imgur.com/2S6kiqI.png'>
-    </a>
-  </li>
-  <li class="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
-  <li class="presentation pull-left"><%= if current_user.role=='ADMIN' then link_to "Translations Portal", translate_index_path end%></li>
-    <% if action_name != 'qsee_updates'%>
-      <span class="presentation"><%= if current_user.role=='ADMIN' then link_to "Q-See Support Updates", qsee_updates_path end%></span>
-    <% end %>
-  <% end %>
-</ul>
-    </nav>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <ul class="nav nav-pills container" role="tablist">
+      <% if current_user %>
+      <li role="presentation pull-right">
+        <a href="<%= if current_user.role=='ADMIN' then '/answers' else '/translation_portal' end%>">
+          <img src='//i.imgur.com/2S6kiqI.png'>
+        </a>
+      </li>
+      <li class="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
+      <li class="presentation pull-left"><%= if current_user.role=='ADMIN' then link_to "Translations Portal", translate_index_path end%></li>
+        <% if action_name != 'qsee_updates'%>
+          <span class="presentation"><%= if current_user.role=='ADMIN' then link_to "Q-See Support Updates", qsee_updates_path end%></span>
+        <% end %>
+      <% end %>
+    </ul>
+  </nav>
 <% end %>
 
 <%= yield %>
@@ -52,5 +51,5 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.js"></script>
     <script type="text/javascript" src="//cdn.rawgit.com/sachinchoolur/angular-trix/master/dist/angular-trix.min.js"></script>
     <script type="text/javascript" src="/qsee_updates.js"></script>  
-  <% end %>
+  <% end %>  
 </html>
