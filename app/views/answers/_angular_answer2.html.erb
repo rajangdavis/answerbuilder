@@ -68,9 +68,26 @@
 				<br class="hidden-xs hidden-sm"><br>
 				<% end %>
 				<% if step.step_type=='Step' %>
-				<h2 class="inst answer text-uppercase"><strong>Step <%= step.step_number%></strong></h2>
-				<% end %>
+				<h2 class="inst answer text-uppercase"><strong>Step <%= step.step_number + step.offset%></strong></h2>
 				<p><%= step.clean_step_jp%></p>
+				<% else%>
+				<div class="text-center">
+					<% if step.step_type=='Caution' %>
+					<div class="inst information_new text-center">
+						<i class="fa fa-3x fa-exclamation-triangle"></i>
+						<%= step.clean_step_jp%>
+					</div>
+					<% elsif step.step_type=='Information' %>
+					<div class="inst cautiondiv_new text-center">
+						<i class="fa fa-3x fa-info-circle"></i>
+						</i>
+						<span information_text>
+							<%= step.clean_step_jp%>
+						</span>
+					</div>
+					<% end %>
+				</div>
+				<% end %>
 				<br>
 				<p class="text-center">
 					<img class="img-responsive" style="max-height:400px" src="<%= step.image_upload_jp%>">
