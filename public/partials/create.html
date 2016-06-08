@@ -1,0 +1,19 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<h3 class="text-center">Create a Post</h3>
+	<form class="form panel">
+		<div class="form-group">
+			<input ng-model="title" placeholder="Title" class="form-control"/>
+		</div>
+		<br>
+		<div class="form-group">
+			<trix-editor ng-model="content" angular-trix></trix-editor>
+		</div>
+		<br>
+		<div class="form-group">
+			<button login-button ng-click="createPost(title,content)" class="btn btn-default">Create New Post</button>
+		</div>
+		<div class="error">
+			{{creationError}}
+		</div>
+	</form>
+</div>

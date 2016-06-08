@@ -1,8 +1,12 @@
-<div ng-app="qsee_updates" ng-controller="qsee_updates_ctrl" class="container">
+<div ng-app="qsee_updates" ng-controller="qsee_updates_ctrl" class="container" ng-cloak>
 	<div ng-if="loggedIn">
 		<span>Logged in as {{authData.auth.token.email}}</span>
 		<span> | </span>
 		<a class="cursor" ng-click="logOut()"> Log out</a>
-	</div>
+		<span> | </span>
+		<a ui-sref="new">Create a new post</a>
+		<span> | </span>
+		<a class="cursor" ui-sref="home"> Home </a>
+	</div><br>
 	<ui-view></ui-view>
 </div>
