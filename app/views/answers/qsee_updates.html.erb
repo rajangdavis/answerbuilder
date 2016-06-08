@@ -1,0 +1,8 @@
+<div ng-app="qsee_updates" ng-controller="qsee_updates_ctrl" class="container">
+	<div ng-if="loggedIn">
+		<span>Logged in as {{authData.auth.token.email}}</span>
+		<span> | </span>
+		<a class="cursor" ng-click="logOut()"> Log out</a>
+	</div>
+	<ui-view></ui-view>
+</div>

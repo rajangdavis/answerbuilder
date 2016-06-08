@@ -15,6 +15,9 @@ class AnswersController < ApplicationController
 			@answers = Answer.find(:all, :order => 'title ASC')
 		end
 	end
+
+	def qsee_updates
+	end
 	
 	def translate_index
 		if !current_user

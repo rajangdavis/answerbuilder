@@ -12,7 +12,7 @@
   
   <%= csrf_meta_tags %>
 </head>
-<% if action_name == 'manual' || 'answer'%>
+<% if action_name == 'manual' || 'answer' || 'qsee_updates'%>
   <body data-no-turbolink="true" class="<%= if !@hideMe then 'preview' elsif action_name == 'answer' then 'no_marg_top' end%>">
 <% else %>
   <body >
@@ -26,12 +26,16 @@
       <img src='//i.imgur.com/2S6kiqI.png'>
     </a>
   </li>
-  <li role="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
-  <li role="presentation pull-left"><%= if current_user.role=='ADMIN' then link_to "Translations Portal", translate_index_path end%></li>
+  <li class="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
+  <li class="presentation pull-left"><%= if current_user.role=='ADMIN' then link_to "Translations Portal", translate_index_path end%></li>
+    <% if action_name != 'qsee_updates'%>
+      <span class="presentation"><%= if current_user.role=='ADMIN' then link_to "Q-See Support Updates", qsee_updates_path end%></span>
+    <% end %>
   <% end %>
 </ul>
     </nav>
 <% end %>
+
 <%= yield %>
 
 </body>
@@ -39,5 +43,12 @@
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-sanitize.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.7/angular-strap.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.7/angular-strap.tpl.min.js"></script>
-  <script type="text/javascript" src="/answer.js"></script>  
+  <% if action_name!='qsee_updates'%>
+    <script type="text/javascript" src="/answer.js"></script>  
+  <% else %>
+    <script src="//cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
+    <script src="//cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/qsee_updates.js"></script>  
+  <% end %>
 </html>
