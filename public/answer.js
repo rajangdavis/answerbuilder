@@ -17,7 +17,7 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
 
     self.postAnswer = function(testOrNaw,a_id){
 
-        var whichOne = testOrNaw =='YES' ? 'qsee--tst' : 'qsee';
+        var whichOne = testOrNaw =='YES' ? 'qsee--tst1' : 'qsee';
 
         var content = document.querySelectorAll('[get-code]')[0].innerHTML;
 
