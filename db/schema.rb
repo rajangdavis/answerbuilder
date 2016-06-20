@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117033058) do
+ActiveRecord::Schema.define(version: 20160620210607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151117033058) do
     t.string   "translation_needed"
     t.string   "title_jp"
     t.text     "tagline_jp"
+    t.integer  "rightnow_answer_id"
   end
 
   add_index "answers", ["user_id"], name: "index_user_id", using: :btree

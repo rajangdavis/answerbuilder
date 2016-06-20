@@ -19,6 +19,10 @@ class AnswersController < ApplicationController
 	def qsee_updates
 	end
 	
+	def qsee_rn
+		@answers = Answer.all
+	end
+
 	def translate_index
 		if !current_user
 			redirect_to index2_path
