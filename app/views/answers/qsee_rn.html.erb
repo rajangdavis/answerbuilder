@@ -1,6 +1,8 @@
 <div style="margin:100px 15px 0px 15px">	
-	<%= if @site.blank? then 'You done goofed, please set a site' else @site_final end%>
 	<% @answers.each do |answer| %>
-		<%= answer.id%> | <%= answer.series%> <%= answer.title%><br>
+		<div class="answers">
+			<span class="answer_id"><%= answer.id%></span> | <span class='title'><%= answer.series%> <%= answer.title%></span>
+			<span><%= render 'angular_answer2', :locals => {@answer => answer}%></span><br>
+		</div>
 	<% end %>
 </div>

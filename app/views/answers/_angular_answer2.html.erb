@@ -1,6 +1,6 @@
 <div ng-cloak <% if action_name!="edit" %> ng-app="answer"<% end %> class="container-fluid less-margin" style="font-size:145%">
 	<div class="container-fluid less-margin real-answer-container" <% if action_name!="edit" %> ng-controller="answer as answer_scope" <% end %>>
-		<%if @answer.translation_needed == "NO"%>
+		<%if !@answer.translation_needed.blank? && @answer.translation_needed == "NO"%>
 			<br>
 		<% end %>
 		<% if action_name=="edit" %>
