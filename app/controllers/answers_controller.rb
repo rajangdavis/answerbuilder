@@ -23,6 +23,7 @@ class AnswersController < ApplicationController
 	
 	def qsee_rn
 		@answers = Answer.where('rightnow_answer_id IS NOT NULL')
+		render json: @answers
 	end
 
 	def translate_index

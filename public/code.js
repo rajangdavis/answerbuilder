@@ -1,4 +1,4 @@
-sess	
+
 	$(document).ready(function() {  
 		$("p.lead,span.lead").each(function(){
 			
