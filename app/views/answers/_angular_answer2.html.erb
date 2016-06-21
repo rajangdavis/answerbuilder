@@ -16,7 +16,7 @@
 				</div>
 			</div>
 		<% end %>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="answer_scope.language =='en'">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='en'">
 			<% if !@answer.tagline.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 				<span ng-show="answer_scope.language ==&#39;en&#39;" style="font-size:large"><%=@answer.clean_tagline%></span>
@@ -56,7 +56,7 @@
 			<% end %>
 		</div>
 		<% if @answer.translation_needed.end_with?('COMPLETE)')%>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="answer_scope.language =='jp'">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='jp'">
 			<% if !@answer.tagline_jp.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 				<span ng-show="answer_scope.language ==&#39;jp&#39;" style="font-size:large"><%=@answer.clean_tagline_jp%></span>
