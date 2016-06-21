@@ -1,4 +1,5 @@
 <div style="margin:100px 15px 0px 15px">	
+	<%= if @site.blank? then 'You done goofed, please set a site' else @site_final end%>
 	<% @answers.each do |answer| %>
 		<%= answer.id%> | <%= answer.series%> <%= answer.title%><br>
 	<% end %>

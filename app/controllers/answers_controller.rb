@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
 
+	require 'net/http'
+
 	def index
 		if !current_user
 			redirect_to index2_path
@@ -20,7 +22,26 @@ class AnswersController < ApplicationController
 	end
 	
 	def qsee_rn
-		@answers = Answer.all
+		@answers = Answer.where('rightnow_answer_id IS NOT NULL')
+
+		@site = params['site']
+
+		if !@site.blank?
+			@site_final = "https://" + @site + ".custhelp.com/cc/answers/update_answer"
+			uri = URI.parse(@site_final)
+		
+
+		
+		@answers.each do |answer|
+
+		# # Shortcut
+		@response = Net::HTTP.post_form(uri, {"a_id" => answer.rightnow_answer_id, "content" => render_to_string(partial: angular_answer2.html.erb, locals: {@answer => answer})})
+
+		@response = http.request(request)
+		render :json => @response
+		end
+
+		end
 	end
 
 	def translate_index
