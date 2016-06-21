@@ -1,7 +1,5 @@
 class AnswersController < ApplicationController
 
-	require 'net/http'
-
 	def index
 		if !current_user
 			redirect_to index2_path
@@ -21,9 +19,16 @@ class AnswersController < ApplicationController
 	def qsee_updates
 	end
 	
-	def qsee_rn
+	def qsee_rn_array
 		@answers = Answer.where('rightnow_answer_id IS NOT NULL')
-		render json: @answers
+	end
+
+	def qsee_rn_partial
+		@answer = Answer.find(params[:id])
+		@steps = Step.where(:answer_id => @answer.id).order(:number,:updated_at)
+		render json: { 
+	       content: (render_to_string partial: 'angular_answer2', locals: {answer: answer}, layout: false )  
+	    } 
 	end
 
 	def translate_index

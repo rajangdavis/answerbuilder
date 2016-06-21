@@ -1,8 +1,0 @@
-<div style="margin:100px 15px 0px 15px">	
-	<% @answers.each do |answer| %>
-		<div class="answers">
-			<span class="answer_id"><%= answer.id%></span> | <span class='title'><%= answer.series%> <%= answer.title%></span>
-			<span><%= render 'angular_answer2', :locals => {@answer => answer}%></span><br>
-		</div>
-	<% end %>
-</div>
