@@ -1,0 +1,13 @@
+<form ng-show="updated!=true" name="editForm" class="container-fluid">
+	<label>Title:</label>
+	<input name="post.title" ng-model="post.title">
+	<br><br>
+	<label>Content:</label>
+	<trix-editor name="post.content" ng-model="post.content" angular-trix></trix-editor>
+	<br><br>
+	<button ng-click="updatePost(editForm.$valid,post.id,post.title,post.content)">Update</button>
+</form>
+<div ng-show="updated==true" class="text-center">
+	<h3>The support news has been updated successfully!</h3>
+	<h4><a ui-sref="show({id: post.id})">Click here to review your updates</a></h4>
+</div>

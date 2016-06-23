@@ -1,4 +1,9 @@
-<div ng-repeat="post in posts">
-	<a ui-sref="show({id: post.id})">{{post.title}}</a>
+<div ng-cloak ng-repeat="post in posts">
+	<a ui-sref="show({id: post.id})">{{post.title}}</a>&nbsp;&nbsp;<a class="pointer" ui-sref="edit({id:post.id})"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="pointer" ng-click="remove(post.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
 	<br><br>
+	<div style="margin-left:20px">
+		<div>Post Created: {{post.created_time | dateTime}}</div>  
+		<div ng-if="post.updated"><i>Post Updated: {{post.updated | dateTime}}</i></div>   
+	</div>
+	<br>
 </div>

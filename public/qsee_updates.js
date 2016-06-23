@@ -3,7 +3,7 @@ var firebase = new Firebase(url);
 var posts = new Firebase(url+"posts");
 
 var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
-.controller('qsee_updates_ctrl',function($scope,$timeout,$state,$firebaseArray){
+.controller('qsee_updates_ctrl',function($scope,$timeout,$state,$firebaseArray,$rootScope){
 
 	function _init(){
 		$scope.authData = firebase.getAuth();
@@ -63,6 +63,12 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
 	};
         //logs people out
 
+    $scope.updateTime = function(){
+    	firebase.update({
+			updated: Firebase.ServerValue.TIMESTAMP
+		})
+    }
+
 	$scope.logOut = function(){
 		firebase.unauth()
         $scope.loggedIn = false;
@@ -74,15 +80,43 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
 		newPost.set({
 			title: title,
 			content: content,
-			id:newPost.path.o[1]
+			id:newPost.path.o[1],
+			created_time:Firebase.ServerValue.TIMESTAMP
 		}, function(error) {
 			if (error) {
 				console.log("Data could not be saved." + error);
 			} else {
 				$state.go('show',{id:newPost.path.o[1]});
+				$scope.updateTime()
 			}
 		});
 	}
+	$scope.updatePost = function(isValid,id,title,content){
+		if(isValid){
+			var post = posts.child(id);
+			post.update({
+				title: title,
+				content: content,
+				updated: Firebase.ServerValue.TIMESTAMP
+			}, function(error) {
+				if (error) {
+					console.log("Data could not be saved." + error);
+				} else {
+					$scope.updated = true;
+					$scope.updateTime()
+				}
+			});
+		}
+	}
+
+	$scope.remove = function(id){
+		var post = posts.child(id);
+		post.remove();
+	}
+
+	$rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+		$scope.updated = false;
+	})
 
 })
 .config(function($stateProvider, $urlRouterProvider) {
@@ -122,6 +156,17 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
     		}
     	}
 	})
+	.state('edit', {
+    	url: "/edit?id",
+    	templateUrl:'partials/edit.html',
+    	controller: function($scope,$state,$timeout,$stateParams,$firebaseObject){
+    		$scope.checkIfLoggedIn()
+    		if($stateParams.id){
+    			var postUrl = $firebaseObject(posts.child($stateParams.id));
+    			$scope.post = postUrl.$$conf.binding.rec;
+    		}
+    	}
+	})
 })
 .directive('dynamic', function ($compile,$timeout) {
   return {
@@ -143,3 +188,20 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
     }
   };
 })
+.filter('dateTime', function(){
+	return function(input){
+    	if(input == null){ return ""; } 
+
+    	var options = {
+		    weekday: "long", year: "numeric", month: "short",
+		    day: "numeric", hour: "2-digit", minute: "2-digit"
+		};
+ 
+  		var _date = new Date(input);
+ 
+  		_date = _date.toLocaleTimeString("en-us", options)
+
+  		return _date;
+
+ 	};
+});
