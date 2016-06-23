@@ -5,7 +5,13 @@
 	<label>Content:</label>
 	<trix-editor name="post.content" ng-model="post.content" angular-trix></trix-editor>
 	<br><br>
-	<button ng-click="updatePost(editForm.$valid,post.id,post.title,post.content)">Update</button>
+	<label>Type of notification:</label>
+	<select ng-model="post.type_of_notice">
+		<option>Normal Update</option>
+		<option>Service Down</option>
+		<option>Holiday</option>
+	</select><br><br>
+	<button ng-click="updatePost(editForm.$valid,post.id,post.title,post.content,post.type_of_notice)">Update</button>
 </form>
 <div ng-show="updated==true" class="text-center">
 	<h3>The support news has been updated successfully!</h3>

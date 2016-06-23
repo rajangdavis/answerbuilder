@@ -75,11 +75,12 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
         $state.go('login');
 	}    
 
-	$scope.createPost = function(title,content){
+	$scope.createPost = function(title,content,type_of_notice){
 		var newPost = posts.push();
 		newPost.set({
 			title: title,
 			content: content,
+			type_of_notice:type_of_notice,
 			id:newPost.path.o[1],
 			created_time:Firebase.ServerValue.TIMESTAMP
 		}, function(error) {
@@ -94,12 +95,13 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
 			}
 		});
 	}
-	$scope.updatePost = function(isValid,id,title,content){
+	$scope.updatePost = function(isValid,id,title,content,type_of_notice){
 		if(isValid){
 			var post = posts.child(id);
 			post.update({
 				title: title,
 				content: content,
+				type_of_notice:type_of_notice,
 				updated: Firebase.ServerValue.TIMESTAMP
 			}, function(error) {
 				if (error) {

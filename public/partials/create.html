@@ -10,7 +10,15 @@
 		</div>
 		<br>
 		<div class="form-group">
-			<button login-button ng-click="createPost(title,content)" class="btn btn-default">Create New Post</button>
+			<select ng-model="type_of_notice">
+				<option>Normal Update</option>
+				<option>Service Down</option>
+				<option>Holiday</option>
+			</select>
+		</div>
+		{{type_of_notice}}
+		<div class="form-group">
+			<button login-button ng-click="createPost(title,content,type_of_notice)" class="btn btn-default">Create New Post</button>
 		</div>
 		<div class="error">
 			{{creationError}}
