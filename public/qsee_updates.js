@@ -3,7 +3,7 @@ var firebase = new Firebase(url);
 var posts = new Firebase(url+"posts");
 
 var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
-.controller('qsee_updates_ctrl',function($scope,$timeout,$state,$firebaseArray,$rootScope){
+.controller('qsee_updates_ctrl',function($scope,$timeout,$state,$firebaseArray,$rootScope,$firebaseObject){
 
 	function _init(){
 		$scope.authData = firebase.getAuth();
@@ -63,9 +63,9 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
 	};
         //logs people out
 
-    $scope.updateTime = function(){
+    $scope.updateTime = function(last_post_updated_time){
     	firebase.update({
-			updated: Firebase.ServerValue.TIMESTAMP
+			updated: last_post_updated_time
 		})
     }
 
@@ -86,8 +86,11 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
 			if (error) {
 				console.log("Data could not be saved." + error);
 			} else {
-				$state.go('show',{id:newPost.path.o[1]});
-				$scope.updateTime()
+				var createdPost = $firebaseObject(posts.child(newPost.path.o[1]));
+				createdPost.$loaded().then(function(){
+					$scope.updateTime(createdPost.created_time)
+					$state.go('show',{id:newPost.path.o[1]});
+				})
 			}
 		});
 	}
@@ -102,8 +105,11 @@ var app = angular.module('qsee_updates',['ui.router','firebase','angularTrix'])
 				if (error) {
 					console.log("Data could not be saved." + error);
 				} else {
-					$scope.updated = true;
-					$scope.updateTime()
+					var updatedPost = $firebaseObject(post);
+					updatedPost.$loaded().then(function(){
+						$scope.updated = true;
+						$scope.updateTime(updatedPost.updated);
+					})
 				}
 			});
 		}
