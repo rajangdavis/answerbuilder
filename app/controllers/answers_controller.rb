@@ -235,6 +235,6 @@ class AnswersController < ApplicationController
 	private
 
 	  def answer_params   
-	    params.require(:answer).permit(:language, :series, :tagline, :title, :image, :user_id, :image_upload, :translation_needed, :translation_status, :title_jp, :tagline_jp)
+	    params.require(:answer).permit(:language, :series, :tagline, :title, :image, :user_id, :image_upload, :translation_needed, :translation_status, :title_jp, :tagline_jp, :rightnow_answer_id)
 	  end
 end

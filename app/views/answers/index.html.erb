@@ -51,6 +51,10 @@
 			<%= f.label "Tagline:  "%><br />
 		    <%= f.text_area :tagline, :placeholder => "Tagline", :class => "form-control"%>
 		</div>
+		<div class="form-group">
+			<label>RightNow Answer ID:  </label><br />
+		    <%= f.text_field :rightnow_answer_id, :placeholder => "RightNow Answer ID", :class => "form-control"%>
+		</div>
 		
 		    <%= f.hidden_field :user_id, :value => current_user.id %>
 		    <%= f.hidden_field :translation_needed, :value => 'NO' %>
