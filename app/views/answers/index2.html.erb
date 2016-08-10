@@ -17,7 +17,7 @@
 		<div class="answerList margin">
 			<% @answers.each do |answer| %>
 				<div class="<%= answer.series %> small bordered">
-					<span class="icon "><i class="icon <%= if answer.title.match(/QT NEW/) then 'QT_NEW' else answer.series end%>"></i></span>
+					<span class="icon "><i class="icon <%= if answer.title.match(/NEW QT/) then 'QT_NEW' else answer.series end%>"></i></span>
 					<span class="small edit_answer_link"><%=link_to answer.title, alt_angular_path(answer) %></span>
 					<span class=" btn-group">
 					<% if answer.translation_needed.start_with?("YES")%>
