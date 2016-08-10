@@ -11,6 +11,8 @@ class AnswersController < ApplicationController
 	def index2
 		if params['jp'] == 'true'
 			@answers = Answer.where("translation_needed Like'%COMPLETE%'")
+		elsif params['series'] =='newqt'
+			@answers = Answer.where("title Like '%NEW QT%'")
 		else
 			@answers = Answer.find(:all, :order => 'title ASC')
 		end
