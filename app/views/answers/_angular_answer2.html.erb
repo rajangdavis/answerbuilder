@@ -17,6 +17,12 @@
 			</div>
 		<% end %>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='en'">
+			<%if action_name=='alt_answer'%>
+				<div class="container-fluid text-center text-uppercase">
+					<h1><strong><%= @answer.title%></strong></h1>
+					<br>
+				</div>
+			<% end %>
 			<% if !@answer.tagline.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 				<span ng-show="answer_scope.language ==&#39;en&#39;" style="font-size:large"><%=@answer.clean_tagline%></span>
