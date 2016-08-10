@@ -9,6 +9,7 @@
 		<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
 	      <button type="button" class="btn btn-default" id="QC">QC Series</button>
 	      <button type="button" class="btn btn-default" id="QT">QT Series</button>
+	      <button type="button" class="btn btn-default" id="QT_NEW">QT (NEW) Series</button>
 	      <button type="button" class="btn btn-default" id="QS">QS Series</button>
 	      <button type="button" class="btn btn-default" id="QR">QR Series</button>
 	      <button type="button" class="btn btn-default" id="None">Other</button>
@@ -16,8 +17,8 @@
 		<div class="answerList margin">
 			<% @answers.each do |answer| %>
 				<div class="<%= answer.series %> small bordered">
-					<span class="icon "><i class="icon <%= answer.series %>"></i></span>
-					<span class="small edit_answer_link"><%=link_to answer.title, angular_path(answer) %></span>
+					<span class="icon "><i class="icon <%= if answer.title.match(/QT NEW/) then 'QT_NEW' else answer.series end%>"></i></span>
+					<span class="small edit_answer_link"><%=link_to answer.title, alt_angular_path(answer) %></span>
 					<span class=" btn-group">
 					<% if answer.translation_needed.start_with?("YES")%>
 						<img class="pointer Japanese pull-left" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAANCAMAAABxTNVSAAAAM1BMVEX///+/v7/iCRa4goWtJi66kZS4BxK0Y2jv7++5FyDKoaSvNTzNwMGzVFmqBxGgoKCPj48z3lukAAAAP0lEQVQYlWNgxAYYGBkwAbIoIwemKCsLExs7uigzEwhwookyQQAFolxgQW50N/Dw8rEwY3Evdl8gi/JjCQYBAIMdAQwzbOq2AAAAAElFTkSuQmCC">
@@ -26,7 +27,7 @@
 						<% end %>
 					<% end %>	
 					</span>
-					<%=link_to 'Get Code', code_path(answer),:class=>'pull-right'%>
+					<%=link_to 'Get Code', alt_code_path(answer),:class=>'pull-right'%>
 					<br>
 				</div>
 			<% end %>
