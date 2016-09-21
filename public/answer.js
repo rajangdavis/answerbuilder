@@ -12,6 +12,10 @@ var app = angular.module('answer',['ngSanitize','mgcrea.ngStrap'])
         self.language = 'en';
     }
 
+    self.changeLanguage = function(lan){
+        self.language = lan;
+    }
+
     self.add_steps = false;
     self.edit_answer = false;
 

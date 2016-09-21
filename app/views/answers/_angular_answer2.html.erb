@@ -16,12 +16,22 @@
 				</div>
 			</div>
 		<% end %>
+		<div class="container">
+			<a class="pointer" ng-click="answer_scope.changeLanguage('en')" ng-class="{'h6':answer_scope.language=='en'}">en</a>
+			<% if @answer.translation_needed.end_with?('COMPLETE)')%> | 
+			<a class="pointer" ng-click="answer_scope.changeLanguage('jp')" ng-class="{'h6':answer_scope.language=='jp'}">jp</a>
+			<% end %>
+			 | 
+			<a class="pointer" ng-click="answer_scope.changeLanguage('fr')" ng-class="{'h6':answer_scope.language=='fr'}">fr</a>
+		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='en'">
 			<%if action_name=='alt_answer'%>
 				<div class="container-fluid text-center text-uppercase">
 					<h1><strong><%= @answer.title%></strong></h1>
 					<br>
 				</div>
+				<% if @answer.translation_needed != "NO" %>
+				<% end %>
 			<% end %>
 			<% if !@answer.tagline.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -99,6 +109,49 @@
 				<br>
 				<p class="text-center">
 					<img class="img-responsive" style="max-height:400px" src="<%= step.image_upload_jp%>">
+				</p>
+			</div>
+			<% end %>
+		</div>
+		<% end %>
+		<% if @answer.title_fr!=nil%>
+
+		<%=@answer.title_fr%>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='fr'">
+			<% if !@answer.tagline_fr.blank? %>
+			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+				<span ng-show="answer_scope.language ==&#39;fr&#39;" style="font-size:large"><%=@answer.clean_tagline_fr%></span>
+			</strong>
+			<% end %>
+			<% @steps.each_with_index do |step,index|%>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<% if index!=0%>
+				<br class="hidden-xs hidden-sm"><br>
+				<% end %>
+				<% if step.step_type=='Step' %>
+				<h2 class="inst answer text-uppercase"><strong>Étape <%= step.step_number + step.offset%></strong></h2>
+				<p><%= step.clean_step_fr%></p>
+				<% else%>
+				<div class="text-center">
+					<% if step.step_type=='Caution' %>
+					<div class="inst information_new text-center">
+						<i class="fa fa-3x fa-exclamation-triangle"></i>
+						<%= step.clean_step_fr%>
+					</div>
+					<% elsif step.step_type=='Information' %>
+					<div class="inst cautiondiv_new text-center">
+						<i class="fa fa-3x fa-info-circle"></i>
+						</i>
+						<span information_text>
+							<%= step.clean_step_fr%>
+						</span>
+					</div>
+					<% end %>
+				</div>
+				<% end %>
+				<br>
+				<p class="text-center">
+					<img class="img-responsive" style="max-height:400px" src="<%= step.image_upload%>">
 				</p>
 			</div>
 			<% end %>

@@ -95,6 +95,15 @@ class Answer < ActiveRecord::Base
 		clean_tagline
 	end
 
+	def clean_tagline_fr
+		if self.tagline_fr.blank?
+			clean_tagline = nil
+		else
+			clean_tagline = self.tagline_fr.gsub(/\[red\]/,'<span class="red">').gsub(/\[red\]/,'<span class="red">').gsub(/\[\/red\]/,'</span>').gsub(/\[blue\]/,'<span class="blue">').gsub(/\[\/blue\]/,'</span>').gsub(/\[green\]/,'<span class="green">').gsub(/\[\/reen\]/,'</span>').gsub(/\[yellow\]/,'<span class="yellow">').gsub(/\[\/yellow\]/,'</span>').gsub(/\[orange\]/,'<span class="orange">').gsub(/\[\/orange\]/,'</span>').gsub(/\[lgreen\]/,'<span class="lgreen">').gsub(/\[\/lgreen\]/,'</span>').gsub(/\[bold\]/,'<strong>').gsub(/\[\/bold\]/,'</strong>').gsub(/\[i\]/,'<em>').gsub(/\[\/i\]/,'</em>').gsub(/\[u\]/,'<u>').gsub(/\[\/u\]/,'</u>').gsub(/\[br\]/,'<br>').gsub(/\[note\]/,'<div class="inst information_new"><i class="fa fa-3x fa-info-circle"></i><span information_text>').gsub(/\[\/note\]/,'</span></div>').gsub(/\[cat\]/,'<div class="inst cautiondiv_new"><i class="fa fa-3x fa-exclamation-triangle"></i>').gsub(/\[\/cat\]/,'</div>').gsub(/(https|http):\/\/qsee.custhelp.com/,'')	
+			clean_tagline = clean_tagline.html_safe
+		end
+		clean_tagline
+	end
 
 	def word_count
 		# count = 0
