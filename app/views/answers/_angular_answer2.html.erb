@@ -21,7 +21,7 @@
 			<% if @answer.translation_needed.end_with?('COMPLETE)')%> | 
 			<a class="pointer" ng-click="answer_scope.changeLanguage('jp')" ng-class="{'h6':answer_scope.language=='jp'}">jp</a>
 			<% end %>
-			<%!@answer.tagline_fr.blank?%>
+			<%if !@answer.tagline_fr.blank?%>
 			 | 
 			<a class="pointer" ng-click="answer_scope.changeLanguage('fr')" ng-class="{'h6':answer_scope.language=='fr'}">fr</a>
 			<% end %>
@@ -32,6 +32,8 @@
 					<h1><strong><%= @answer.title%></strong></h1>
 					<br>
 				</div>
+				<% if @answer.translation_needed != "NO" %>
+				<% end %>
 			<% end %>
 			<% if !@answer.tagline.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -75,12 +77,6 @@
 		</div>
 		<% if @answer.translation_needed.end_with?('COMPLETE)')%>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='jp'">
-			<%if action_name=='alt_answer'%>
-				<div class="container-fluid text-center text-uppercase">
-					<h1><strong><%= @answer.title_jp%></strong></h1>
-					<br>
-				</div>
-			<% end %>
 			<% if !@answer.tagline_jp.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 				<span ng-show="answer_scope.language ==&#39;jp&#39;" style="font-size:large"><%=@answer.clean_tagline_jp%></span>
@@ -124,12 +120,6 @@
 
 		<%=@answer.title_fr%>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='fr'">
-			<%if action_name=='alt_answer'%>
-				<div class="container-fluid text-center text-uppercase">
-					<h1><strong><%= @answer.title_jp%></strong></h1>
-					<br>
-				</div>
-			<% end %>
 			<% if !@answer.tagline_fr.blank? %>
 			<strong class="clearfix text-uppercase h6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 				<span ng-show="answer_scope.language ==&#39;fr&#39;" style="font-size:large"><%=@answer.clean_tagline_fr%></span>
