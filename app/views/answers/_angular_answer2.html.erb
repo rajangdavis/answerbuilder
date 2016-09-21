@@ -21,8 +21,10 @@
 			<% if @answer.translation_needed.end_with?('COMPLETE)')%> | 
 			<a class="pointer" ng-click="answer_scope.changeLanguage('jp')" ng-class="{'h6':answer_scope.language=='jp'}">jp</a>
 			<% end %>
+			<%!@answer.tagline_fr.blank?%>
 			 | 
 			<a class="pointer" ng-click="answer_scope.changeLanguage('fr')" ng-class="{'h6':answer_scope.language=='fr'}">fr</a>
+			<% end %>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 less-margin" ng-if="answer_scope.language =='en'">
 			<%if action_name=='alt_answer'%>
