@@ -27,6 +27,9 @@
 							<i class="fa fa-file-image-o pull-left"></i>
 						<% end %>
 					<% end %>	
+					<% if !answer.title_fr.blank?%>
+						<img class="pointer Japanese pull-left" style="height:13px;width:21px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MDAgNjAwIj4NCjxwYXRoIGZpbGw9IiNlZDI5MzkiIGQ9Im0wLDBoOTAwdjYwMGgtOTAweiIvPg0KPHBhdGggZmlsbD0iI2ZmZiIgZD0ibTAsMGg2MDB2NjAwaC02MDB6Ii8+DQo8cGF0aCBmaWxsPSIjMDAyMzk1IiBkPSJtMCwwaDMwMHY2MDBoLTMwMHoiLz4NCjwvc3ZnPg0K">
+					<% end %>	
 					</span>
 					<%=link_to 'Get Code', code2_path(answer),:class=>'pull-right'%>
 					<br>
