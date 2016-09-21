@@ -10,7 +10,7 @@ Dir.glob('*.json') do |json_file|
 	answer.save!
 	puts '#{answer.id} was updated'
 	data_hash['steps'].each do |step_|
-		step = Step.find(step_['id'])
+		step = Step.find(step_['step_id'])
 		step.step_fr = step_['step']
 		step.image_upload_fr = step_['image']
 		step.save!
