@@ -8,6 +8,7 @@ Answerbuild::Application.routes.draw do
 
 
   get 'answers_' => 'answers#index2', as: :index2
+  get 'automate' => 'answers#automate', as: :automate
   get 'qsee_updates' => 'answers#qsee_updates', as: :qsee_updates
   get 'answers/:id/code' => 'answers#code', as: :code
   get 'answers/:id/code2' => 'answers#code2', as: :code2

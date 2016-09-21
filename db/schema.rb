@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620210607) do
+ActiveRecord::Schema.define(version: 20160921004314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20160620210607) do
     t.string   "title_jp"
     t.text     "tagline_jp"
     t.integer  "rightnow_answer_id"
+    t.string   "title_fr"
+    t.string   "tagline_fr"
   end
 
   add_index "answers", ["user_id"], name: "index_user_id", using: :btree
@@ -52,6 +54,11 @@ ActiveRecord::Schema.define(version: 20160620210607) do
     t.string   "image_upload_jp_content_type"
     t.integer  "image_upload_jp_file_size"
     t.datetime "image_upload_jp_updated_at"
+    t.text     "step_fr"
+    t.string   "image_upload_fr_file_name"
+    t.string   "image_upload_fr_content_type"
+    t.integer  "image_upload_fr_file_size"
+    t.datetime "image_upload_fr_updated_at"
   end
 
   add_index "steps", ["answer_id"], name: "index_answer_id", using: :btree

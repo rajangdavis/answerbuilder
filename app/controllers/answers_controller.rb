@@ -8,6 +8,11 @@ class AnswersController < ApplicationController
 		@answer = Answer.new
 	end
 
+	def automate
+		@answer = Answer.new
+		@answer.automate_answers
+	end
+
 	def index2
 		if params['jp'] == 'true'
 			@answers = Answer.where("translation_needed Like'%COMPLETE%'")
