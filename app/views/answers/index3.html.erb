@@ -1,9 +1,12 @@
 <br><br><br><br>
-<div class="container">
+<div class="container answerList margin">
 	<% @answers.each do |answer|%>
-	<%=link_to answer.title, alt_angular_path(answer)%><% if !answer.rightnow_answer_id.blank?%> | 
-	<a href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=answer.rightnow_answer_id%>">RightNow Link</a>
-	<% end%>
+	<div class="<%= answer.series %> small bordered">
+		<span class="icon "><i class="icon <%= answer.series %>"></i></span>
+		<%=link_to answer.title, alt_angular_path(answer)%><% if !answer.rightnow_answer_id.blank?%> | 
+		<a href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=answer.rightnow_answer_id%>">RightNow Link</a>
+		<% end%>
+	</div>
 	<br>
 	<% end %>
 </div>
