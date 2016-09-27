@@ -23,6 +23,10 @@ class AnswersController < ApplicationController
 		end
 	end
 
+	def index3
+		@answers = Answer.find(:all, :order => 'title ASC')
+	end
+
 	def qsee_updates
 	end
 	

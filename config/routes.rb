@@ -6,7 +6,7 @@ Answerbuild::Application.routes.draw do
   resources :answers, except: :destroy
   resources :steps
 
-
+  get 'answers__' => 'answers#index3', as: :index3
   get 'answers_' => 'answers#index2', as: :index2
   get 'automate' => 'answers#automate', as: :automate
   get 'qsee_updates' => 'answers#qsee_updates', as: :qsee_updates
