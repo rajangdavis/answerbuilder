@@ -24,7 +24,11 @@ class AnswersController < ApplicationController
 	end
 
 	def index3
-		@answers = Answer.find(:all, :order => 'title ASC')
+		@qc_answers = Answer.where("series = 'QC'", :order => 'title ASC')
+		@qt_answers = Answer.where("series = 'QT'", :order => 'title ASC')
+		@qr_answers = Answer.where("series = 'QR'", :order => 'title ASC')
+		@qs_answers = Answer.where("series = 'QS'", :order => 'title ASC')
+		@none_answers = Answer.where("series = 'None'", :order => 'title ASC')
 	end
 
 	def qsee_updates
