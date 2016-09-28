@@ -6,7 +6,7 @@
 		<input type="checkbox">
 		<span class="icon "><i class="icon <%= qc_answer.series %>"></i></span>
 		<%=link_to qc_answer.title, alt_angular_path(qc_answer), :target => "_blank"%><% if !qc_answer.rightnow_answer_id.blank?%> | 
-		<a target="_blank" href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=qc_answer.rightnow_answer_id%>">RightNow Link</a>
+		<a target="_blank" href="//qsee--tst1.custhelp.com/app/answers/detail/a_id/<%=qc_answer.rightnow_answer_id%>">RightNow Link</a>
 		<% end%>
 	</div>
 	<br>
@@ -18,7 +18,7 @@
 		<input type="checkbox">
 		<span class="icon "><i class="icon <%= qt_answer.series %>"></i></span>
 		<%=link_to qt_answer.title, alt_angular_path(qt_answer), :target => "_blank"%><% if !qt_answer.rightnow_answer_id.blank?%> | 
-		<a target="_blank" href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=qt_answer.rightnow_answer_id%>">RightNow Link</a>
+		<a target="_blank" href="//qsee--tst1.custhelp.com/app/answers/detail/a_id/<%=qt_answer.rightnow_answer_id%>">RightNow Link</a>
 		<% end%>
 	</div>
 	<br>
@@ -30,7 +30,7 @@
 		<input type="checkbox">
 		<span class="icon "><i class="icon <%= qr_answer.series %>"></i></span>
 		<%=link_to qr_answer.title, alt_angular_path(qr_answer), :target => "_blank"%><% if !qr_answer.rightnow_answer_id.blank?%> | 
-		<a target="_blank" href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=qr_answer.rightnow_answer_id%>">RightNow Link</a>
+		<a target="_blank" href="//qsee--tst1.custhelp.com/app/answers/detail/a_id/<%=qr_answer.rightnow_answer_id%>">RightNow Link</a>
 		<% end%>
 	</div>
 	<br>
@@ -42,7 +42,7 @@
 			<input type="checkbox">
 			<span class="icon "><i class="icon <%= qs_answer.series %>"></i></span>
 			<%=link_to qs_answer.title, alt_angular_path(qs_answer), :target => "_blank"%><% if !qs_answer.rightnow_answer_id.blank?%> | 
-			<a target="_blank" href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=qs_answer.rightnow_answer_id%>">RightNow Link</a>
+			<a target="_blank" href="//qsee--tst1.custhelp.com/app/answers/detail/a_id/<%=qs_answer.rightnow_answer_id%>">RightNow Link</a>
 			<% end%>
 		</div>
 		<br>
@@ -55,7 +55,7 @@
 		<input type="checkbox">
 		<span class="icon "><i class="icon <%= none_answer.series %>"></i></span>
 		<%=link_to none_answer.title, alt_angular_path(none_answer), :target => "_blank"%><% if !none_answer.rightnow_answer_id.blank?%> | 
-		<a target="_blank" href="//qsee--tst1.custhelp.com/#/answer?a_id=<%=none_answer.rightnow_answer_id%>">RightNow Link</a>
+		<a target="_blank" href="//qsee--tst1.custhelp.com/app/answers/detail/a_id/<%=none_answer.rightnow_answer_id%>">RightNow Link</a>
 		<% end%>
 	</div>
 	<br>
