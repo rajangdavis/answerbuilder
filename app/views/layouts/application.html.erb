@@ -4,7 +4,11 @@
   <title>Answerbuild</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="//fonts.googleapis.com/css?family=Roboto:400,700,300,500|Roboto+Condensed:400,300,700" rel="stylesheet" type="text/css">
+  <% if action_name == 'alt_answer'%>
+  <link rel="stylesheet" type="text/css" href="//qsee.custhelp.com/euf/assets/themes/qsee/qsee.min.css">
+  <% else %>
   <link rel="stylesheet" type="text/css" href="//qsee.custhelp.com/euf/assets/themes/qsee/bootstrap3.css">
+  <% end %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
@@ -14,7 +18,7 @@
 <% if action_name == 'manual' || action_name == 'answer' ||action_name == 'qsee_updates'%>
   <body data-no-turbolink="true" class="<%= if !@hideMe then 'preview' elsif action_name == 'answer' then 'no_marg_top' end%>">
 <% else %>
-  <body >
+  <body style="background:white">
 <% end %>
 <% if !@hideMe%>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
