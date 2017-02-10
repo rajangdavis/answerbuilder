@@ -8,6 +8,11 @@ class AnswersController < ApplicationController
 		@answer = Answer.new
 	end
 
+	def inspect_all
+		@steps = Step.select('DISTINCT answer_id').where("image_upload_file_name is NULL").order('answer_id')
+		render json: @steps
+	end
+
 	def inspect
 		@answer = Answer.find(params[:id])
 		@steps = Step.where('answer_id = ?',params[:id])

@@ -14,6 +14,7 @@ Answerbuild::Application.routes.draw do
   get 'answers/:id/code2' => 'answers#code2', as: :code2
   get 'answers/:id/answer' => 'answers#answer', as: :angular
   get 'answers/:id/inspect' => 'answers#inspect', as: :inspect
+  get 'inspect_all' => 'answers#inspect_all', as: :inspect_all
   get 'qsee_rn_array' => 'answers#qsee_rn_array', as: :qsee_rn_array
   get 'qsee_rn_partial/:id' => 'answers#qsee_rn_partial', as: :qsee_rn_partial
   get 'answers/:id/alt_answer' => 'answers#alt_answer', as: :alt_angular
