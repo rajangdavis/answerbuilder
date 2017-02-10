@@ -8,6 +8,17 @@ class AnswersController < ApplicationController
 		@answer = Answer.new
 	end
 
+	def inspect
+		@answer = Answer.find(params[:id])
+		@steps = Step.where('answer_id = ?',params[:id])
+		@hash = {}
+		@answer.attributes.each do |k,v|
+			@hash[k] = v
+		end
+		@hash['steps'] = @steps
+		render json: @hash
+	end
+
 	def automate
 		@answer = Answer.new
 		@answer.automate_answers
