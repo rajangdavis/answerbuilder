@@ -29,11 +29,8 @@
           <img src='//i.imgur.com/2S6kiqI.png'>
         </a>
       </li>
-      <li class="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user), method: :delete %></li>
+      <li class="presentation pull-right"><%= link_to "Sign Out", logout_path(current_user) %></li>
       <li class="presentation pull-left"><%= if current_user.role=='ADMIN' then link_to "Translations Portal", translate_index_path end%></li>
-        <% if action_name != 'qsee_updates'%>
-          <span class="presentation"><%= if current_user.role=='ADMIN' then link_to "Q-See Support Updates", qsee_updates_path end%></span>
-        <% end %>
       <% end %>
     </ul>
   </nav>

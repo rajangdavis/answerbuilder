@@ -1,6 +1,6 @@
 Answerbuild::Application.routes.draw do
   root "sessions#new" 
-  delete '/logout' => 'sessions#destroy', as: :logout
+  get 'logout' => 'sessions#destroy', as: :logout
   resources :sessions
   resources :users, except: :destroy
   resources :answers, except: :destroy
