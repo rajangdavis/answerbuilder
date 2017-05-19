@@ -1,13 +1,21 @@
+<br><br><br><br>
 <div class="rn_AnswerDetail answerContainer" ng-app="answer" ng-controller="answer as answer_scope">
 	<% content_for(:body_attributes) do %>
 	    data-no-turbolink="true"
 	<% end %>
-
-	<div>
-		<%= render 'angular_answer'%>
+	<div id="editor" class="container" style="position:relative;z-index:10000000000000;">
+		<div class="container" style="position:absolute;z-index:10000000000000;left:0;top:0">
+			<div class="btn-group btn-group-lg">
+				<a ng-hide="answer_scope.edit_answer==false && answer_scope.add_steps==false" bs-tooltip="answer_scope.tooltip['back']" ng-click="answer_scope.edit_view_page()" class="btn btn-default  add_steps"><i class="fa fa-chevron-circle-left"></i></a>
+				<a ng-hide="answer_scope.edit_answer== true"  bs-tooltip="answer_scope.tooltip['edit']" ng-click="answer_scope.edit_view_page('edit_answer')" class="btn btn-default "><i class="fa fa-pencil-square"></i></a>
+				<a bs-tooltip="answer_scope.tooltip['add']" ng-click="answer_scope.edit_view_page('add_steps')" class="btn btn-default  add_steps"><i class="fa fa-plus-square"></i></a>
+				<a class="btn btn-default" bs-tooltip="answer_scope.tooltip['code']" href="/answers/<%=@answer.id%>/code"><i class="fa fa-file-code-o"></i></a>
+				<a class="btn btn-default" bs-tooltip="answer_scope.tooltip['preview']" href="/answers/<%=@answer.id%>/answer"><i class="fa fa-eye"></i></a>
+			</div>
+		</div>
 	</div>
-
 	<div ng-show="answer_scope.edit_answer == true" remove-hidden class="edit_form hidden container">
+		<br><br><br><br><br><br><br><br><br>
 		<%= form_for(@answer) do |f| %>
 			<h2>Edit Answer</h2>
 			<div class="form-group hidden">
@@ -38,6 +46,7 @@
 		<br>
 	</div>
 	<div ng-show="answer_scope.add_steps == true" remove-hidden class="add_steps_form hidden container ">
+		<br><br><br><br><br><br><br><br><br>
 		<%= form_for(@step,{method: :create}) do |f| %>
 			<h2 >New Step</h2>
 			<div class="form-group">
@@ -82,21 +91,8 @@
 		<% end %>
 		<br><br><br>
 	</div>
-	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content ">
-	      <div class="modal-header">
-	         <h4 class="modal-title" id="myModalLabel">Add Link</h4>
-	      </div>
-	      <div class="modal-body">
-	        <input class="href" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" value="//"><br><br>
-	        <input class="text" placeholder="Insert Link Text"><br><br>
-	        <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit</button>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
+	<div>
+		<%= render 'angular_answer2'%>
 	</div>
+
 </div>

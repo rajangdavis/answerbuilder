@@ -78,11 +78,11 @@ Answerbuild::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   config.paperclip_defaults = {
-  :storage => :s3,
-  :s3_credentials => {
-    :bucket => ENV['QSee_Bucket'],
-    :access_key_id => ENV['QSee_Key'],
-    :secret_access_key => ENV['QSee_Secret']
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['QSee_Bucket'],
+      :access_key_id => ENV['QSee_Key'],
+      :secret_access_key => ENV['QSee_Secret']
+    }
   }
-}
 end
