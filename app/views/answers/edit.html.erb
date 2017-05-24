@@ -94,5 +94,15 @@
 	<div>
 		<%= render 'angular_answer2'%>
 	</div>
-
+	<script type="text/javascript">
+	$('.color-options a').click(function(){
+          var notBold = $(this)[0].className+'][/'+$(this)[0].className+']';
+          var isBold = $(this)[0].className+']'
+          if ($(this)[0].className=='br'){
+              $('#step_step').val($('#step_step').val()+'['+isBold);
+          } else{
+               $('#step_step').val($('#step_step').val()+'['+notBold);
+          }
+      });
+</script>
 </div>
