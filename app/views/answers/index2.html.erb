@@ -18,7 +18,7 @@
 			<% @answers.each do |answer| %>
 				<div class="<%= if answer.title.match(/NEW QT/) then 'QT_NEW' else answer.series end %> small bordered">
 					<span class="icon "><i class="icon <%= answer.series%>"></i></span>
-					<span class="small edit_answer_link"><%=link_to answer.title, alt_angular_path(answer) %></span> | 
+					<span class="small edit_answer_link"><%=link_to answer.title, angular_path(answer) %></span> | 
 					<strong><%=link_to 'JSON format', answer_path(answer,:format=>:json) %></strong>
 					<span class=" btn-group">
 					<% if answer.translation_needed.start_with?("YES")%>
@@ -31,7 +31,7 @@
 						<img class="pointer Japanese pull-left" style="height:13px;width:21px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MDAgNjAwIj4NCjxwYXRoIGZpbGw9IiNlZDI5MzkiIGQ9Im0wLDBoOTAwdjYwMGgtOTAweiIvPg0KPHBhdGggZmlsbD0iI2ZmZiIgZD0ibTAsMGg2MDB2NjAwaC02MDB6Ii8+DQo8cGF0aCBmaWxsPSIjMDAyMzk1IiBkPSJtMCwwaDMwMHY2MDBoLTMwMHoiLz4NCjwvc3ZnPg0K">
 					<% end %>	
 					</span>
-					<%=link_to 'Get Code', code2_path(answer),:class=>'pull-right'%>
+					<%=link_to 'Get Code', code_path(answer),:class=>'pull-right'%>
 					<br>
 				</div>
 			<% end %>
